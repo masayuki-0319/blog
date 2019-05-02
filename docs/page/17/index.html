@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,41 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201107311431/"> jQuery Proven Performance Tips And Tricks (翻訳)</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2011 Jul 31, 14:31</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [javascript] : jQuery Proven Performance Tips And Tricks (翻訳) http://addyosmani.com/jqprovenperformance/
-このサイトに書いてある内容をまとめます。英語は苦手なんで適当な意訳が多いです。
-Performancetip1 バージョンのお話   可能な限り常に最新バージョンを利用する。 アップデートする前にはかならずregression testを行う事。 最新のバージョンは1.6.2や1.7で、この秋にリリースされる予定。 twitterなどもjquery1.3.0を利用している。 1.6はパフォーマンス改善や 新しい特徴が組み込まれている。 1.6.2はバグのパッチやregressionが修正される。 古いバージョンではこれらお手軽なパフォーマンスを受けることができない。 47%の有名なサイトがJqueryを使っているが、バージョン変更にテストが大変。 アップデートは通常、大変ではないプロセスである。 1.4.2、1.4.4と1.6.2のSelectorを比較してもパフォーマンスの違いは明らか。 .attr( 'value' ), .val()(get)なども1.6でパフォーマンスが改善されている。 しかし特定のselectorは1.4.xより遅くなっている。 使っているselectorのパフォーマンスに注意すれば、大丈夫。    Performancetip2 Selector   全てのSelectorは平等に作られない。 Selectorの生成方法は沢山あるし、それぞれのSelectorは同一のパフォーマンスを出さない。 最速と最遅いSelectorがどれか知っていますか？ IDとElementのSelectorは最速。$( '#Element, form, input' )  IDとElementでの指定は裏側でnativeDOMの操作を利用している。(getElementById())  Class Selectorは遅い。#( '.element' )  getElementsByClassNameはIE5-8ではサポートしていない Firefox3、Safari4、Chrome4、Opera10.10以上はこれは速い。  最も遅いのは正しくない指定とattributeでのselector。$( ':visible, :hidden' ); $( '[attribute=value]' );  上のselectorはnative関数を呼び出す事ができない。 最新のブラウザーにはquerySelector()やquerySelectorAll()などサポートされている。  querySelectorAll()はCSSベースでのSelectorとなる要素をDOMとして検索できる。  JQueryはquerySelectorAll()の利用を試みている。 querySelectorAllを使うSelectorの最適化と:first,:last,:eq等ではないSelectorの最適化との比較。 有効なSelectorこれをより利用する機会がある。  曖昧なselectorは有効ではあるが、使う時には注意が必要。 :hiddenを指定した要素が100個あったとき、JQueryは100個のアイテムをコールする。 :hiddenは有効であるが全ての曖昧な指定は全ての要素に対して実行を試みる。 できれば上の事は避けたい。 jQuery1.
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201107311431/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -603,6 +568,41 @@ sudo port install p5-app-ack  2.コマンド作る 自分のローカルフォ�
   
   <footer>
     <a href="https://yutakikuchi.github.io/post/201105051042/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201104180831/">MYSQL INDEXのまとめ</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Apr 18, 08:31</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+  [Mysql] : MYSQL INDEXのまとめ 概要   大規模なデータを管理するためのMYSQL-INDEXについて必要な情報をまとめてみます    PRIMARYKEY / UNIQKEY / INDEXについて   PRIMARYKEYとはそのテーブル内において重複が許されないもので、自動的にINDEXが張られる。 UNIQKEYとはそのテーブル内に置いて重複を許さない。ただし、NOT NULLにしなければNULLの重複は認める。 INDEXとは特定の値を持つレコードを高速に検索するための木構造データ。INDEXを張らないとテーブル全体のデータを検索してしまう。最適化されたINDEXを利用するとテーブルデータを全く参照せずにデータを返却できる。 まとめるとPRIMARYKEY = UNIQKEY + INDEX    複合INDEXについて   複数のカラムに対してのINDEXを作成する事。単一のINDEXより高速な検索ができる。 複合INDEXを利用する場合はカラム順番が重要。例えば複合INDEXの第一KEYがカラムA,第二KEYがカラムBとなっている時、検索条件にAが含まれない場合は当然ながらINDEXは使用されない。これは複合INDEXの数が3つ以上の場合にも同じ事が言え、A,B,Cの順番の複合INDEXの場合、A,Cしか検索条件に含まれない場合はAを指定した時のみのパフォーマンスと同等になる。    部分INDEX   INDEXのデータ容量が気になる場合は部分INDEXを用いることができる。たとえば文字列の前から数ByteまでをINDEXとして利用するなど。 部分INDEXの場合、部分一致した複数のレコードが一致してしまう可能性がある。    INDEXのデータ構造  INDEXの木構造にもいくつか種類がある。InnoDBではBtree,MyISAMでもデフォルトではBtreeを採用。
+ BtreeINDEX : 一般的なINDEX構造。データのバランスが取れている木構造。 HashINDEX : Hashを利用したINDEX構造 RtreeINDEX : 幾何データ型専用のINDEX構造    INDEXが使われるケース  参考:http://slashdot.jp/journal.pl?op=display&uid=4&id=26710
+ フィールド値を定数と比較するとき (where name = 'hogehoge') フィールド値でJOINするとき (where a.
+  </p>
+
+  
+  <footer>
+    <a href="https://yutakikuchi.github.io/post/201104180831/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

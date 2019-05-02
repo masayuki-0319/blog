@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,45 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201306100845/">MongoDBのAggregation Framework/MapReduceを使ってより賢く集計を行うためのまとめ</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2013 Jun 10, 08:45</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [MongoDB] : MongoDBのAggregation Framework/MapReduceを使ってより賢く集計を行うためのまとめ 
-Mogodb集計  MongoDBの集計機能が便利過ぎて泣けてくるお話し - Yuta.Kikuchiの日記 
-1月程前にMongoDBを使った集計機能の紹介をさせていただいた@yutakikucです。内容は全く大した事無かったのですが、タイトルで誘導を引っ張って200近いbookmarkを集める事ができました笑。みなさんの参考にしていただけたこと、大変嬉しく思います。今日はMongoDBの集計をもう一歩踏み込んだ内容を紹介して行きたいと思います。題材としてはAggregation FrameworkとMapReduceについてです。因に今回試してみたMongoDB-Versionは2.2.3です。Versionによって挙動が変わると思うので注意してください。
-$ mongo --version MongoDB shell version: 2.2.3   Aggregation Framework  Aggregation ― MongoDB Manual 2.4.4 
-SQL to Aggregation Framework Mapping Chart ― MongoDB Manual 2.4.4 
-Aggregation FrameworkはRDBMSのSQLに備わっている便利機能をMongoDBに付与したFrameworkという説明が分かりやすいと思います。MongodbのVerson2.2以降に備わった機能です。以下はMongodbのAggregation OperatorとRDBMSのSQLの対応表になります。一つずつのOperatorはFilterに近いイメージで、Chainをしてパイプライン処理とすることができます。最終的にはChainした結果を取得します。
-   MongoDB Aggregation Operator   SQL Term,Function,Concepts     $match   WHERE     $group   GROUP BY     $project   SELECT     $sort   ORDER BY     $limit   LIMIT     $sum   SUM(),COUNT()    $avg   AVERAGE()   CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する - Yuta.
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201306100845/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -623,6 +584,51 @@ $ sudo service mysqld start Starting mysqld: [ OK ] $ sudo service httpd start S
   <footer>
     <a href="https://yutakikuchi.github.io/post/201304100545/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201304040851/">Yahoo!を退職します。</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Apr 04, 08:51</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+   [起業] : Yahoo!を退職します。 
+4/30で退職します。  いつもWeb技術のネタでお世話になっています、菊池佑太(@yutakikuc)です。
+この度、新卒入社以来6年間お世話になったYahoo!を4月30日付けで退職することになりました。昨日が最終出社日でした。
+在籍中はモバイルプラットフォーム開発と行動ターゲティング広告の精度向上を目的とした研究開発に努めました。これと言って特に秀でた能力が無い私でも沢山の案件で責任者を担当させていただき、お世話になったYahoo!の皆様に対しては言葉では言い表せないほどの感謝の気持ちでいっぱいです。僕の最後を見送って頂いた方々、Officeの天井に何度も激突するような胴上げを2回もして頂き本当にありがとうございました。
+  Yahoo!は今どんな会社か？  Yahoo!はとても良い会社だと断言出来ます。ここではYahoo!に興味を持たれている方も沢山いらっしゃると思うので個人の見解の一部を紹介します。軽い参考程度に。
+2012年の途中から経営陣が新体制となり、社内の状況も大きく変わりつつあります。新体制でとても魅力的なところは社長に宮坂学さんが就いたところです。会社全体の目指すべきところを定期的に社員にわかりやすく説明してくれますし、社員一人一人を大切にして少しでも働きやすい環境を目指そうとする心意気がとても強く伝わって来ます。確かに過去においてはYahoo!の成長に必要な超有力人材を失ってしまったことは否めませんが、宮坂さんが目指す会社は確実に良い方向に変わっています。これにより社内の人達の働く意識が向上し、社外からもどんどん優秀な人が集まって素晴らしいサービスを爆速で開発していくことに強く期待しています。
+ヤフー新経営陣「スマホ時代のNext Big Thingを作るため、”ならず者”たちを解き放つ」【キーパーソンインタビュー】 - エンジニアtype 
+『Yahoo! JAPAN』CMO村上臣に聞く、「爆速」を生む組織マネジメントの極意【連載:BizHack】 - エンジニアtype 
+本人の希望を考慮した配属を慎重に考えてくれる良い会社だと思います。少なくとも僕はやりたいことを的確に伝えていたこともあって、新卒配属/異動希望の両方を専門に携わるチームレベルで正確に配属していただきました。他の会社ではここまでは叶えてくれないという事をよく聞き、人事部の方々へは改めてお礼を述べたいと思っています。本当にありがとうございました。
+超優秀な人材が会社を引っ張っています。一緒にお仕事をさせていただいた中では広告配信研究部門/Yahoo!研究所の方々のポテンシャルが凄まじく、成果物に対する数値の伸びもビックリするものでYahoo!のレベルの高さを再確認しました。同じチームだった2つ年下の上司は僕と比較できないほどの判断力/統率力/信頼力といったリーダシップの素養を持った素晴らしい方でした。このような方に会えたことは人生の貴重な財産です。広告配信以外にもYahoo!は誇れる技術が沢山あり、個人的に今後も注目したいのは日本語処理、検索PF、YOLP(地図)といった部門です。これらの部門はYahoo!デベロッパーネットワークでAPI外部公開も積極的に進めています。Yahoo!デベロッパーネットワーク 
+当然課題もあります。サービス面ではスマートフォンポータルとしての苦戦。組織や経営面では技術やチームマネジメントをできる人が圧倒的に不足している状況であること、注力点を絞れず常にリソース不足になってしまうこと、不必要な社外テクノロジーの買いに走ること等。でも、きっとこれら問題の解決方法を導き出し今後も素晴らしい課題解決エンジンYahoo!を提供し続けてくれることを信じています。
+  僕と一緒にWebの未来を考えませんか？  僕の今後について書きます。
+Yahoo!を辞めるのは個人の力でWeb業界の道を切り拓きたいと考えたからです。他に理由はありません。コンペで何度かアイディア賞を頂いた新サービスの発想力と高度なエンジニアリングを活かし、Userには使いやすく喜ばれるサービスを、情報提供者に様々な面でおいしいサービスを。この2つを徹底的に追求して行きたいと考えています。その一つのサービスの方向性としてはユーザの行動履歴からの興味推定や生活圏の特定を行い、それにマッチした情報を配信する仕組みを作っていこうとしています。履歴やコンテンツはFacebook上のものを利用する予定です。Userの位置情報って本当に大切ですよね。Graph API - Facebook開発者 
+急な話の展開になりますが、ここで一番強く訴えたいこと、それは一緒にWebの未来を考えてくれる仲間を絶賛大募集中というお知らせです。最初に積極的に関わりたいのは学生さん達です。今までも大学院生の研究開発の支援をしていて、将来有望な人材への投資や協力が重要だということを常々感じていましたし、何よりも僕は今若い人たちの積極的な意見が欲しい！ 今後は実際のWebサービスを一緒に作り、お互いの良いところを出し合いながら双方にメリットがある形を目指して行きたいと思っています。
+まだ新しく作る社名すら決まっていないような準備段階なので、新サービスネタと基盤技術以外はゼロからのスタートアップということになります。本当に駄目元で書きますが、もしそれでも僕のやりたいことについてもっと詳しく知りたいという方はgmail.com"yuta.kikuchigmail.com(を@にして)、@yutakikuc、Facebookまで超気軽にご連絡ください。Webを通して価値あるものを世の中に提供して行きましょう。
+新しい会社ではチャレンジングな事、生きるためにお金を稼ぐ事の２つを並行して進めなければいけないと考えており、今日は前者に対する考えだけを紹介させていただきました。別の機会にお金を稼ぐ点についても考えを書きたいと思います。
+  
+  </p>
+
   
 </article>
 

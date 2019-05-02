@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,43 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201207090829/">R言語のことは知らん。だがCRANパッケージのrimageを使ってLennaタン全身画像を解析してみる</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2012 Jul 09, 08:29</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [CentOs] : R言語のことは知らん。だがCRANパッケージのrimageを使ってLennaタン全身画像を解析してみる 
-はじめに  前回R言語の導入について記事を書いたらそこそこ反応があったので今日も書きます。CentOSでR言語を使ってみたことのまとめ - Yuta.Kikuchiの日記 
-10代の頃はmatlabを使って画像の特徴抽出ということをやっていました。特徴とは輝度やフィルターを通して取得可能なエッジの事です。今日はR言語のrimageを使って画像処理をしてみたいと思います。
-  環境設定  fftw,fftw-develのinstall R言語のrimageを使う前にCentOSのfftw,fftw-develのパッケージをinstallします。yumレポジトリに無いようなのでrpmforgeから取得します。rpmforge.repoを修正してrpmforgeからの取得を有効化します。有効化したら再度yum installします。
-$ sudo yum install fffw-devel -y 0 packages excluded due to repository priority protections Setting up Install Process No package fffw-devel available. Nothing to do $ sudo vim /etc/yum.repos.d/rpmforge.repo [rpmforge] name = RHEL $releasever - RPMforge.net - dag baseurl = http://apt.sw.be/redhat/el5/en/$basearch/rpmforge mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge #mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge enabled = 1 protect = 0 gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag gpgcheck = 1 $ sudo yum install fftw-devel 110 packages excluded due to repository priority protections Setting up Install Process Resolving Dependencies -- Running transaction check --- Package fftw-devel.
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201207090829/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -618,6 +581,44 @@ $ man echo オプション -n 行末の改行を行わない。 -e string 中の
   
   <footer>
     <a href="https://yutakikuchi.github.io/post/201205280833/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201205210841/">PHPのマルチスレッドプログラミングを使ってシステム処理を爆速化するお話し</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 May 21, 08:41</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+  [PHP] : PHPのマルチスレッドプログラミングを使ってシステム処理を爆速化するお話し パーフェクトPHP (PERFECT SERIES 3)
+作者: 小川雄大,柄沢聡太郎,橋口誠出版社/メーカー: 技術評論社発売日: 2010/11/12メディア: 大型本購入: 32人 クリック: 1,065回この商品を含むブログ (60件) を見る
+Intro  会社に入社して5年が経ち、4月から新しい部署で働いています。最近はプログラミング言語の学習としてC++/JAVA/Perl/R言語、理論の勉強として機械学習をやっています。平行して少しずつ勉強しているのでblogの記事内容も多種多様になってきています(笑)。新しい事をやる時は一つの事に集中して勉強したいのですが、直近は業務で成果を残さないと相手にされないので学習がforkします。ということで強引な繋ですが今日はforkの話をします。業務で必要になったPHPの処理爆即化に向けてマルチスレッドプログラミングを試してみました。pcntlにより親プロセスから子プロセスを作成してforkさせます。出来たところまでの成果を以下にまとめました。
+PHP: PCNTL - Manual 
+  Source Build  pcntlというPHPのマルチスレッドプログラミングはdefaultでは使えないようです。phpソースをbuildする時に--enable-pcntlを付ける必要があります。以前にmcrypt関数を使う時にもオプションをつけて--with-mcrypt=/usr/local/libを付けたりlibmcryptをインストールしないといけないことがあったので、標準で使えるようにして欲しいですね。
+ $pid = pcntl_fork(); if ($pid == -1) { die('fork できません'); } else if ($pid) { // 親プロセスの場合 echo "parent process \n"; pcntl_wait($status); // ゾンビプロセスから守る } else { // 子プロセスの場合 echo "child process \n"; } $ php pcntl.php Fatal error: Call to undefined function pcntl_fork()次にphpソース取得とコンパイル、インストール手順を書きます。
+  </p>
+
+  
+  <footer>
+    <a href="https://yutakikuchi.github.io/post/201205210841/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

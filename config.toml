@@ -23,8 +23,8 @@ publishDir="docs"
   dateFormat = "2006 Jan 02, 15:04"
   # Include any custom CSS and/or JS files
   # (relative to /static folder)
-  custom_css = ["css/my.css"]
-  custom_js = ["js/my.js"]
+  custom_css = ["blog/css/my.css"]
+  custom_js = ["blog/js/my.js"]
   # canonicalurl
   canonicalurl = "http://yut.hatenablog.com"
 

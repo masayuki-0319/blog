@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,45 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201009300201/">Observerパターン</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2010 Sep 30, 02:01</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [design pattern] : Observerパターン 概要 このパターンは監視するクラス/監視されるクラスから成り立ち、監視されるクラスで特定の処理が入ったときに
-監視クラスにメッセージを送信することができるというもの。例えば監視されるクラスで処理が終わったときに
-監視クラスに通知を行ない、監視側で処理を動かしたい時になど利用出来る。ここで重要なことは監視されるクラスは
-監視クラスの状態を知る必要はなく、自身の状態を監視クラスに伝えることのみを行えばよいためクラス関係は疎結合
-になる。
- 監視クラス  //監視を行うクラスinterface interface Observer { public static function update( $subject, $args ); } //監視クラスの実装 class ObserverClass implements Observer { public static function update( $subject, $args ) { echo( "$subjectis update . args = $args" ); } } 監視するクラスは監視されるクラス側から呼び出される通知用のメソッドのみを用意してあげます。
- 監視されるクラス  //監視をされるクラスinterface interface Subject { public static function addObserver( Observer $observer ); } //監視をされるクラスの実装 class TestSubject implements Subject { private static $_observers = array(); //メソッドが呼び出される度に監視クラスに通知 public static function addCustomer( $name ) { foreach( self::$_observers as $obs ) { $obs::update( __CLASS__, $name ); } } //監視クラスの追加 public static function addObserver( Observer $observer ) { self::$_observers[] = $observer; } } 監視されるクラスは監視するObserverクラスを登録するようにします。登録している監視クラス全てに対して
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201009300201/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>

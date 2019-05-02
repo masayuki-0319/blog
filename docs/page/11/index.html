@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,42 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201210090830/">線形予測の機械学習ツールliblinearで効果最大化のための最適な定数Cを探る</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2012 Oct 09, 08:30</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [機械学習] : 線形予測の機械学習ツールliblinearで効果最大化のための最適な定数Cを探る Machine Learning for Hackers
-作者: Drew Conway,John Myles White出版社/メーカー: Oreilly & Associates Inc発売日: 2012/02/28メディア: ペーパーバック クリック: 63回この商品を含むブログを見る
-liblinear   LIBLINEAR -- A Library for Large Linear Classification  10秒で設定可能なlibsvmで機械学習を行う - Yuta.Kikuchiの日記  R言語でSVM(Support Vector Machine)による分類学習 - Yuta.Kikuchiの日記  今日はliblinearを用いた機会学習の話です。今まではSVMを利用するときはkernelオプション付きのR言語のSVM/libsvm/svm-lightを利用していましたが、学習データが多い時に計算時間が何時間も掛かる事に不便を感じていました。そこでSVMのツールについて色々と調べてみたところ、線形予測に特化したliblinearの存在を知りました。公式のDocumentにもlibsvmとliblinearでの線形予測での処理時間が桁違いにliblinearの方が優れていることが記述されています。以下にliblinearの特徴を記述します。
- liblinearはinstanceや特徴が100万桁のデータを線形分離するためのtoolであり以下をサポートしています。  L2正則化の分類  L2-loss linear SVM, L1-loss linear SVM, and logistic regression (LR)  L1正則化の分類  L2-loss linear SVM and logistic regression (LR)  Support Vechtor RegressionのL2正則化  L2-loss linear SVR and L1-loss linear SVR   正則化とはOverfittingを回避するために罰則項を与える事です。種類としてはL1,L2,L1L2の3つが良く利用されるもので精度とスパース性によって異なります。L1は精度が低くスパース性が高い、L2は精度が高くスパース性が低い、L1L2は両方を取り入れ精度を高く保ちながらスパース性を高くすることです。
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201210090830/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -610,6 +574,43 @@ JSONを見やすく表示する  WebツールやExtension  JSONLint - The JSON V
   
   <footer>
     <a href="https://yutakikuchi.github.io/post/201207110838/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201207090829/">R言語のことは知らん。だがCRANパッケージのrimageを使ってLennaタン全身画像を解析してみる</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Jul 09, 08:29</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+  [CentOs] : R言語のことは知らん。だがCRANパッケージのrimageを使ってLennaタン全身画像を解析してみる 
+はじめに  前回R言語の導入について記事を書いたらそこそこ反応があったので今日も書きます。CentOSでR言語を使ってみたことのまとめ - Yuta.Kikuchiの日記 
+10代の頃はmatlabを使って画像の特徴抽出ということをやっていました。特徴とは輝度やフィルターを通して取得可能なエッジの事です。今日はR言語のrimageを使って画像処理をしてみたいと思います。
+  環境設定  fftw,fftw-develのinstall R言語のrimageを使う前にCentOSのfftw,fftw-develのパッケージをinstallします。yumレポジトリに無いようなのでrpmforgeから取得します。rpmforge.repoを修正してrpmforgeからの取得を有効化します。有効化したら再度yum installします。
+$ sudo yum install fffw-devel -y 0 packages excluded due to repository priority protections Setting up Install Process No package fffw-devel available. Nothing to do $ sudo vim /etc/yum.repos.d/rpmforge.repo [rpmforge] name = RHEL $releasever - RPMforge.net - dag baseurl = http://apt.sw.be/redhat/el5/en/$basearch/rpmforge mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge #mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge enabled = 1 protect = 0 gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag gpgcheck = 1 $ sudo yum install fftw-devel 110 packages excluded due to repository priority protections Setting up Install Process Resolving Dependencies -- Running transaction check --- Package fftw-devel.
+  </p>
+
+  
+  <footer>
+    <a href="https://yutakikuchi.github.io/post/201207090829/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>
