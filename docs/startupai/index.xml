@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Startup,AI on Y&#39;s note</title>
-    <link>https://yutakikuchi.github.io/startupai/</link>
+    <link>https://yutakikuchi.github.io/blog/startupai/</link>
     <description>Recent content in Startup,AI on Y&#39;s note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&amp;copy; 2019. All rights reserved.</copyright>
     
-	<atom:link href="https://yutakikuchi.github.io/startupai/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yutakikuchi.github.io/blog/startupai/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

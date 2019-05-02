@@ -1,4 +1,4 @@
-baseurl = "https://yutakikuchi.github.io/" # Make sure to end baseurl with a '/'
+baseurl = "https://yutakikuchi.github.io/blog/" # Make sure to end baseurl with a '/'
 languageCode = "ja-jp"
 title = "Y's note"
 author = "菊池佑太"
@@ -23,8 +23,8 @@ publishDir="docs"
   dateFormat = "2006 Jan 02, 15:04"
   # Include any custom CSS and/or JS files
   # (relative to /static folder)
-  custom_css = ["blog/css/my.css"]
-  custom_js = ["blog/js/my.js"]
+  custom_css = ["css/my.css"]
+  custom_js = ["js/my.js"]
   # canonicalurl
   canonicalurl = "http://yut.hatenablog.com"
 
@@ -39,19 +39,19 @@ publishDir="docs"
     pre = "<i class='fa fa-home fa-fw'></i>"
     weight = 1
     identifier = "home"
-    url = "/blog/"
+    url = "/"
   [[menu.main]]
     name = "Posts"
     pre = "<i class='fa fa-list fa-fw'></i>"
     weight = 2
     identifier = "post"
-    url = "/blog/post/"
+    url = "/post/"
   [[menu.main]]
     name = "About"
     pre = "<i class='fa fa-user fa-fw'></i>"
     weight = 3
     identifier = "about"
-    url = "/blog/about/"
+    url = "/about/"
   #[[menu.main]]
   #  name = "Contact"
   #  pre = "<i class='fa fa-phone fa-fw'></i>"
