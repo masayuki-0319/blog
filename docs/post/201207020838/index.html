@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120702/1341185909" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Makefileの書き方 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Makefileの書き方</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Jul 02, 08:38</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="c-makefileの書き方">[C++] : Makefileの書き方</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873112699/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51DDBD5ZDFL._SL160_.jpg" class="hatena-asin-detail-image" alt="GNU Make 第3版" title="GNU Make 第3版"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873112699/yutakikuchi-22/">GNU Make 第3版</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Robert Mecklenburg,矢吹道郎(監訳),菊池彰</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2005/12/01</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 4人 <span class="hatena-asin-detail-label">クリック</span>: 115回</li><li><a href="http://d.hatena.ne.jp/asin/4873112699/yutakikuchi-22" target="_blank">この商品を含むブログ (33件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>利用するケース</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/C/C%2B%2B">C/C++</a>を書いた時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>ファイルから実行ファイルを生成するときやライブラリをIncludeする場合<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>のオプションが複雑になります。複雑なオプションを毎回<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>で入力するのではなく、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>という<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>のオプションルールを記載してmake/gmakeコマンドにて実行ファイルを生成すると便利です。今回は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>の簡単なルールについて紹介します。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>の基本</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>基本ルール</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>ソースの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>にはg++を利用します。例えばhello.cppというファイルを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>する場合は$ g++ hello.cpp -o helloと実行するとhelloという実行ファイルが生成されます。これを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>を使って書くと次のようになります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>を作成したらgmakeとコマンドを実行するだけです。</p>
+<pre class="code" data-lang="" data-unlink>hello: hello.cpp  #ターゲット: 依存ファイル
+g++ -Wall hello.cpp -o hello  #実行コマンド
+clean:
+rm -f *.o hello</pre><p>書式を簡単に説明すると、1行目に生成したいターゲットファイル名: 依存ファイル、2行目に生成するための実行コマンドを記載します。実行コマンドの先頭にはTabを入力する必要があります。viなどではControl-V、Tabとして入力すると識別されると思います。<span class="deco" style="color:#FF0000;">Tabではなくspaceを入れてしまうと「<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>:2: *** 分離記号を欠いています.  中止.」とエラーが出力されてしまうので注意が必要です。</span><br />
+上の<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>をgmakeコマンドで実行するとhelloという実行ファイルが生成されます。生成された実行ファイルを消去したい場合はgmake cleanと実行するとrm -f *.o helloの箇所が実行されます。g++の-Wallオプションですが、全ての警告オプションを結合してくれるもので一番厳密に文法をチェックします。</p>
+<pre class="code" data-lang="" data-unlink>$ ls 
+drwxr-xr-x 2 yuta yuta 4096  6月 30 11:40 .
+drwxr-xr-x 6 yuta yuta 4096  6月 30 11:20 ..
+-rw-r--r-- 1 yuta yuta   71  6月 30 11:32 Makefile
+-rw-r--r-- 1 yuta yuta   91  6月 30 11:17 hello.cpp
+$ gmake
+g++ -Wall hello.cpp -o hello
+$ ls
+drwxr-xr-x 2 yuta yuta 4096  6月 30 11:40 .
+drwxr-xr-x 6 yuta yuta 4096  6月 30 11:20 ..
+-rw-r--r-- 1 yuta yuta   71  6月 30 11:32 Makefile
+-rwxr-xr-x 1 yuta yuta 8548  6月 30 11:40 hello
+-rw-r--r-- 1 yuta yuta   91  6月 30 11:17 hello.cpp
+$ gmake clean
+rm -f *.o hello
+$ ls
+drwxr-xr-x 2 yuta yuta 4096  6月 30 11:41 .
+drwxr-xr-x 6 yuta yuta 4096  6月 30 11:20 ..
+-rw-r--r-- 1 yuta yuta   71  6月 30 11:32 Makefile
+-rw-r--r-- 1 yuta yuta   91  6月 30 11:17 hello.cpp</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>ファイルの結合</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>のターゲットファイル名:依存ファイルという書式の依存ファイル名を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>指定してみます。新たにprint.cppというファイルを定義して以下のような<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>に書き換えます。main処理をhello.cppに、mainの中で利用したい関数をprint.cppに記述しています。</p>
+<pre class="code" data-lang="" data-unlink>hello: hello.cpp print.cpp
+g++ -Wall hello.cpp print.cpp -o hello
+clean:
+rm -f *.o hello</pre><p>実は上の書き方はあまり推奨されません。というのも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>の実行が毎回両方のファイルに適用されてしまいます。片方だけupdateを掛けたい時もあり、次の例のように各生成ファイル毎に記述を分離するのが一般的です。gmakeを実行すると修正された各cppからオブジェクトコードを生成し、最後に実行ファイルにまとめます。</p>
+<pre class="code" data-lang="" data-unlink>hello: hello.o print.o
+g++ -Wall -o hello hello.o print.o 
+print.o: print.cpp
+g++ -Wall -c print.cpp 
+hello.o: hello.cpp
+g++ -Wall -c hello.cpp
+clean:
+rm -f *.o hello</pre><pre class="code" data-lang="" data-unlink>$ gmake
+g++ -Wall -c hello.cpp
+g++ -Wall -c print.cpp 
+g++ -Wall -o hello hello.o print.o </pre>
+</div>
+<div class="section">
+<h5>シンボル</h5>
+<p>複雑な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>オプションやファイルをincludeする指定などはmakeのシンボルを利用します。良く利用するシンボル一覧は次のものになります。またシンボルの定義等で利用する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>についても一覧にまとめます。</p>
+
+<table>
+<tr>
+<th> シンボル </th>
+<th> 説明 </th>
+<th> default </th>
+</tr>
+<tr>
+<td> CC </td>
+<td> C<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>コマンド </td>
+<td> cc </td>
+</tr>
+<tr>
+<td> CXX </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>コマンド </td>
+<td> g++ </td>
+</tr>
+<tr>
+<td> CFLAGS </td>
+<td> C<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>オプション </td>
+<td> 無し </td>
+<td> </td>
+</tr>
+<tr>
+<td> CXXFLAGS </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>オプション </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> CPPFLAGS </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%EA%A5%D7%A5%ED%A5%BB%A5%C3%A5%B5">プリプロセッサ</a>用オプション </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> LDFLAGS </td>
+<td> ldというリンクを呼び出すコマンドのリンクオプション </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> INCLUDES </td>
+<td> includeするheaderのディレクトリを指定する </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> LIBS </td>
+<td> 利用するライブラリを指定する </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> TARGET </td>
+<td> 生成するターゲットファイル名 </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> SRCS </td>
+<td> ターゲットファイルを生成するために利用する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a> </td>
+<td> 無し </td>
+<td> </td>
+</tr>
+<tr>
+<td> OBJS </td>
+<td> ターゲットファイルを生成するために利用するオブジェクトファイル </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> RM </td>
+<td> ファイル削除コマンド </td>
+<td> rm -f </td>
+</tr>
+</table>
+<table>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a> </th>
+<th> 説明 </th>
+</tr>
+<tr>
+<td> := </td>
+<td> 右辺を即時に評価 </td>
+</tr>
+<tr>
+<td> = </td>
+<td> 使用される度に右辺を再評価 </td>
+</tr>
+<tr>
+<td> ?= </td>
+<td> 条件代入。値を持ってない場合に利用 </td>
+</tr>
+<tr>
+<td> += </td>
+<td> 追加代入 </td>
+<td> </td>
+</tr>
+</table><p><br />
+特に重要なのがCXXFLAGSとLDFLAGSかと思います。CXXFLAGSにはエラーオプション、CPU情報、最適化レベル、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>高速化オプションなどが設定できます。LDFLAGSについてはダイナミックリンクを貼る設定が定義可能です。<br />
+その他書き方の注意点としてINCLUDES、LIBSなどでディレクトリを指定する場合は-I,-Lといったハイフンと大文字のIとLを連結します。さらにLIBSでは指定したディレクトリ以下のどのライブラリを使うかも指定しますが、その際は-lといったハイフンと小文字のLを利用します。以下に簡単な例を記載します。</p>
+<pre class="code" data-lang="" data-unlink>INCLUDES = -I/usr/local/include -I../libmisc -I.
+# /usr/loca/include, ../libmisc, . の3つのディレクトリからincludeする。
+LIBS    = -L../libmisc -lmisc -lX11 -lGL -lGLU -lm
+# ../libmiscディレクトリの misc, X11, GL, GLU, mをライブラリとして指定する。</pre>
+</div>
+<div class="section">
+<h5>自動変数</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>中に記号の組み合わせで変数を表すものがあります。以下に一覧で示します。</p>
+
+<table>
+<tr>
+<th> 変数 </th>
+<th> 説明 </th>
+</tr>
+<tr>
+<td>  $@ </td>
+<td> ターゲットファイル名 </td>
+</tr>
+<tr>
+<td> $< </td>
+<td> 最初の依存ファイル名 </td>
+</tr>
+<tr>
+<td> $? </td>
+<td> ターゲットより新しい全ての依存ファイル名 </td>
+</tr>
+<tr>
+<td> $^ </td>
+<td> 全ての依存ファイル名 </td>
+</tr>
+<tr>
+<td> $+ </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>と同じ順番の依存ファイル名 </td>
+</tr>
+<tr>
+<td> $* </td>
+<td> suffixを除いたターゲット名 </td>
+</tr>
+<tr>
+<td> $% </td>
+<td> アーカイブだった時のターゲットメンバ名 </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h5>シンボルと自動変数を使用した<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a></h5>
+<p>上で紹介したシンボルと自動変数を使った<a class="keyword" href="http://d.hatena.ne.jp/keyword/Makefile">Makefile</a>の例を以下に示します。CXXFLAGSで指定している-O2と-pipeは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>最適化レベルと<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>を高速にするオプションです。-O0で最適化をしないもので、通常は-O2を指定するようです。その他CXXFLAGSには-m32や-march=<a class="keyword" href="http://d.hatena.ne.jp/keyword/i386">i386</a>を指定する事があります。これは64bit環境でも-m32を指定すると<span class="deco" style="color:#FF0000;">32bit用に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a></span>、-marchでど<span class="deco" style="color:#FF0000;">のCPUに向けた<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>なのか</span>定義できます。下ではgmakeの実行例も記載します。</p>
+<pre class="code" data-lang="" data-unlink>CXX = g++
+TARGET = hello
+CXXFLAGS = -Wall -O2 -pipe
+SRCS = hello.cpp print.cpp
+
+$(TARGET): $(OBJS)
+$(CXX) -o $@ $(OBJS)
+
+clean:
+rm -f $(TARGET) $(OBJS)</pre><pre class="code" data-lang="" data-unlink>$ ls 
+drwxr-xr-x 2 yuta yuta 4096  7月  1 12:24 .
+drwxr-xr-x 6 yuta yuta 4096  6月 30 11:20 ..
+-rw-r--r-- 1 yuta yuta  178  7月  1 12:18 Makefile
+-rw-r--r-- 1 yuta yuta   83  6月 30 12:00 hello.cpp
+-rw-r--r-- 1 yuta yuta  107  6月 30 12:15 print.cpp
+$ gmake 
+g++ -Wall -O2 -pipe   -c -o hello.o hello.cpp
+g++ -Wall -O2 -pipe   -c -o print.o print.cpp
+g++ -o hello hello.o print.o</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Links</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://www.gentoo.org/doc/ja/gcc-optimization.xml">Gentoo Linux ドキュメント -- コンパイル最適化ガイド</a> <a href="http://b.hatena.ne.jp/entry/www.gentoo.org/doc/ja/gcc-optimization.xml"><img src="http://b.hatena.ne.jp/entry/image/http://www.gentoo.org/doc/ja/gcc-optimization.xml" alt="はてなブックマーク - Gentoo Linux ドキュメント -- コンパイル最適化ガイド" border="0" /></a></li>
+<li><a href="http://www.ecoop.net/coop/translated/GNUMake3.77/make_10.jp.html">GNU make 日本語訳(Coop編) - 暗黙ルールの利用</a> <a href="http://b.hatena.ne.jp/entry/www.ecoop.net/coop/translated/GNUMake3.77/make_10.jp.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.ecoop.net/coop/translated/GNUMake3.77/make_10.jp.html" alt="はてなブックマーク - GNU make 日本語訳(Coop編) - 暗黙ルールの利用" border="0" /></a></li>
+<li><a href="http://www.02.246.ne.jp/~torutk/cxx/make/gnumake.html">ＧＮＵ makeの使い方</a> <a href="http://b.hatena.ne.jp/entry/www.02.246.ne.jp/~torutk/cxx/make/gnumake.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.02.246.ne.jp/~torutk/cxx/make/gnumake.html" alt="はてなブックマーク - ＧＮＵ makeの使い方" border="0" /></a></li>
+</ul>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201206260841/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201206260841/">C&#43;&#43;でマルチスレッドプログラミングを試してみたことのまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201207030838/">これだけ覚えれば安心！ネット広告に関する重要指標と算出方法のまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201207030838/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

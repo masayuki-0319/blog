@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130215/1360884220" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Mecab Pythonを使ったTF・IDFによるWikipediaの重要単語抽出 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Mecab Pythonを使ったTF・IDFによるWikipediaの重要単語抽出</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Feb 15, 08:23</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="自然言語処理-mecab-pythonを使ったtf-idfによるwikipediaの重要単語抽出">[自然言語処理] : Mecab Pythonを使ったTF・IDFによるWikipediaの重要単語抽出</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114705/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51EoFqAGo1L._SL160_.jpg" class="hatena-asin-detail-image" alt="入門 自然言語処理" title="入門 自然言語処理"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114705/yutakikuchi-22/">入門 自然言語処理</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Steven Bird,Ewan Klein,Edward Loper,萩<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%B6%C0%B5%BF%CD">原正人</a>,中山敬広,水野貴明</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2010/11/11</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 20人 <span class="hatena-asin-detail-label">クリック</span>: 639回</li><li><a href="http://d.hatena.ne.jp/asin/4873114705/yutakikuchi-22" target="_blank">この商品を含むブログ (44件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>TF・IDF計算</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C1%B3%B8%C0%B8%EC%BD%E8%CD%FD">自然言語処理</a>の勉強としてTF・IDFによる重要単語の抽出を<a class="keyword" href="http://d.hatena.ne.jp/keyword/wikipedia">wikipedia</a>のデータに対して試してみます。TF・IDFを一言でまとめると、とある単語の重要度を出現頻度から計算する手法です。計算結果は重みを表します。TFは単語の出現数(Term Frequency)、IDFは総文書数 / 単語が出現する文書の総数の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C2%D0%BF%F4">対数</a>(Inverted Document Frequency)、TFIDFはその積になります。数式にすると以下のようになりますが、Webを検索してみると人によって計算の仕方が異なっています。思想としてはTFは大きい値であればあるほど重みが大きくなるし、IDFは出現頻度がドキュメント総数に対して少なければ価値のある単語となります。</p><br />
+<p><img src="http://chart.apis.google.com/chart?cht=tx&chl=W_%7Bi%2Cj%7D%20%3D%20TF_%7Bi%2Cj%7D%20%2A%20LOG%28%20N%20%2F%20DF_%7Bi%7D%29%20" alt="W_{i,j} = TF_{i,j} * LOG( N / DF_{i}) "/><br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=TF_%7Bi%2Cj%7D" alt="TF_{i,j}"/> : Number Of Occurrences Of i In j<br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=DF_%7Bi%7D" alt="DF_{i}"/> : Number Of Documents Containing i<br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=N" alt="N"/> : Total Number Of Documents</p><br />
+<p>今回は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mecab">Mecab</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>を使って自力でTF・IDFを計算します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>のNLTKライブラリを利用するとTF・IDFの計算を簡単に出力してくれたりもします。てっとり早くやりたい人はそちらを使ってみると良いでしょう。<br />
+<a href="http://nltk.googlecode.com/svn/trunk/doc/api/nltk.text.TextCollection-class.html">nltk.text.TextCollection</a> <a href="http://b.hatena.ne.jp/entry/nltk.googlecode.com/svn/trunk/doc/api/nltk.text.TextCollection-class.html"><img src="http://b.hatena.ne.jp/entry/image/http://nltk.googlecode.com/svn/trunk/doc/api/nltk.text.TextCollection-class.html" alt="はてなブックマーク - nltk.text.TextCollection" border="0" /></a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mecab">Mecab</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a></h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7%B2%F2%C0%CF">形態素解析</a>器で有名な<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mecab">Mecab</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>から利用できるようにします。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mecab">Mecab</a>本体、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mecab">Mecab</a>-ipadic、<a class="keyword" href="http://d.hatena.ne.jp/keyword/mecab">mecab</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>の3つをinstallします。<a class="keyword" href="http://d.hatena.ne.jp/keyword/mecab">mecab</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>のinstallの時に"<a class="keyword" href="http://d.hatena.ne.jp/keyword/mecab">mecab</a>-config: コマンドが見つかりません"のように怒られたらsetup.pyの<a class="keyword" href="http://d.hatena.ne.jp/keyword/mecab">mecab</a>-configを<a class="keyword" href="http://d.hatena.ne.jp/keyword/mecab">mecab</a>をinstallした時のlocalディレクトリを指定するように修正するとinstallできます。</p>
+<pre class="code" data-lang="" data-unlink>// mecab本体
+$ wget http://mecab.googlecode.com/files/mecab-0.99.tar.gz
+$ tar -xzf mecab-0.99.tar.gz
+$ cd mecab-0.99
+$ ./configure --with-charset=utf8
+$ make && sudo make install
+
+// mecab-ipadic
+$ wget http://sourceforge.net/projects/mecab/files/mecab-ipadic/2.7.0-20070801/mecab-ipadic-2.7.0-20070801.tar.gz/download
+$ tar -xzf mecab-ipadic-2.7.0-20070801.tar.gz
+$ cd mecab-ipadic-2.7.0-20070801
+$ ./configure --with-charset=utf8
+$ make && sudo make install
+
+// mecab-python
+$ wget http://mecab.googlecode.com/files/mecab-python-0.993.tar.gz
+$ tar -xzf mecab-python-0.993.tar.gz
+$ cd mecab-python-0.993
+$ python setup.py build
+$ sudo python setup.py install</pre>
+<div class="section">
+<h5>libmecab.so.2の読み込み</h5>
+<p>上の設定が完了しただけではまだ<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>から<a class="keyword" href="http://d.hatena.ne.jp/keyword/MeCab">MeCab</a>が読み出せません。libmecab.so.2のエラーが出てしまうのでそれを回避するために設定ファイルに/usr/local/libを追記してldconfigの再読み込みを行います。これで<a class="keyword" href="http://d.hatena.ne.jp/keyword/mecab">mecab</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>が起動できる準備が整いました。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo vim /etc/ld.so.conf.d/lib.conf
+/usr/local/lib  //追記
+
+// 再読み込み
+$ sudo ldconfig
+
+// mecab-pythonの起動
+$ python
+Python 2.6.6 (r266:84292, Sep 11 2012, 08:34:23) 
+[GCC 4.4.6 20120305 (Red Hat 4.4.6-4)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import MeCab</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7%B2%F2%C0%CF">形態素解析</a>のサンプル</h5>
+<p>下は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Chasen">Chasen</a>の互換モードと<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%AC%A4%AB%A4%C1%BD%F1%A4%AD">分かち書き</a>の出力になります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MeCab">MeCab</a>.<a class="keyword" href="http://d.hatena.ne.jp/keyword/Tagger">Tagger</a>の引数を変えるとデータの出力形式を変えることができます。引数の候補としては-Ochasen,-Owakati,-Oyomi,mecabrcといったものがあります。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/bin/env python</span>
+<span class="synComment">#coding:utf-8</span>
+
+<span class="synPreProc">import</span> MeCab
+tagger = MeCab.Tagger(<span class="synConstant">"-Ochasen"</span>)
+<span class="synIdentifier">print</span> tagger.parse(<span class="synConstant">"MecabPythonのサンプルデータを入れてみます"</span>)
+</pre><pre class="code" data-lang="" data-unlink>$ python mecab-sample.py
+MecabPython MecabPython MecabPython 名詞-固有名詞-組織      
+の   ノ   の   助詞-連体化      
+サンプル    サンプル    サンプル    名詞-一般       
+データ データ データ 名詞-一般       
+を   ヲ   を   助詞-格助詞-一般       
+入れ  イレ  入れる 動詞-自立   一段  連用形
+て   テ   て   助詞-接続助詞     
+み   ミ   みる  動詞-非自立  一段  連用形
+ます  マス  ます  助動詞 特殊・マス   基本形
+EOS</pre><pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/bin/env python</span>
+<span class="synComment">#coding:utf-8</span>
+
+<span class="synPreProc">import</span> MeCab
+tagger = MeCab.Tagger(<span class="synConstant">"-Owakati"</span>)
+<span class="synIdentifier">print</span> tagger.parse(<span class="synConstant">"MecabPythonのサンプルデータを入れてみます"</span>)
+</pre><pre class="code" data-lang="" data-unlink>$ python mecab-sample.py
+MecabPython の サンプル データ を 入れ て み ます </pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>TF・IDF計算</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>WikipediaData Download</h5>
+<p>WikipediaPageDataの<a class="keyword" href="http://d.hatena.ne.jp/keyword/XML">XML</a>を取得します。以下のページにダウンロードできるデータが沢山置いてありますが、今回は<a class="keyword" href="http://d.hatena.ne.jp/keyword/jawiki">jawiki</a>-latest-pages-articles.<a class="keyword" href="http://d.hatena.ne.jp/keyword/xml">xml</a>.bz2を利用します。<a href="http://dumps.wikimedia.org/jawiki/latest/">Index of /jawiki/latest/</a> <a href="http://b.hatena.ne.jp/entry/dumps.wikimedia.org/jawiki/latest/"><img src="http://b.hatena.ne.jp/entry/image/http://dumps.wikimedia.org/jawiki/latest/" alt="はてなブックマーク - Index of /jawiki/latest/" border="0" /></a></p>
+<pre class="code" data-lang="" data-unlink>$ wget "http://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pages-articles.xml.bz2"
+$ bunzip2  jawiki-latest-pages-articles.xml.bz2</pre>
+</div>
+<div class="section">
+<h5>Document総数Nの計算</h5>
+<p>Page数をカウントします。<a class="keyword" href="http://d.hatena.ne.jp/keyword/XML">XML</a>の<page>タグの総数になります。結果は1675757でした。</p>
+<pre class="code" data-lang="" data-unlink>$ grep "<page>" jawiki-latest-pages-articles.xml | wc -l
+1675757</pre>
+</div>
+<div class="section">
+<h5>TF・IDF計算</h5>
+<p>出現頻度が上位100件のデータのみTF・IDFを計算します。そのためにはまず各単語のTFを計算します。今回単語は名詞だけに限定しました。上のMecabPythonを利用して単語/出現頻度のKey/Valueデータを作成し、ValueでSortをして上位100件取得します。取得した100件に対してTF・IDFを計算し値の降順で出力しています。以下はコードのサンプルと出力結果になります。(<a class="keyword" href="http://d.hatena.ne.jp/keyword/jawiki">jawiki</a>-latest-pages-articles.<a class="keyword" href="http://d.hatena.ne.jp/keyword/xml">xml</a>は7GByteの大量なデータで計算が半日で終わりませんでした。よってInputのデータをここから10万行サンプリングして結果を出しています。これにより本当はNの値が変わるので、そこは気をつけて下さい。全データで実行した結果は後日記載したいと思います。)<br />
+TFの上位100件を基に出力しているので結構ありきたりな単語が出てしまっています。(当たり前といえば当たり前ですが)その辺は本当は絞らずに全データに対してやってみると良いと思います。また記号や数値のゴミデータが目立つので、重要単語抽出という考え方ではそれらは削る方が得策だと思いました。今後は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Wikipedia">Wikipedia</a>以外のデータに対しても実行してみて、比較してみたいと思います。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/bin/env python</span>
+<span class="synComment">#coding:utf-8</span>
+
+<span class="synPreProc">import</span> MeCab,re
+<span class="synPreProc">from</span> xml.dom.minidom <span class="synPreProc">import</span> parse
+<span class="synPreProc">from</span> math <span class="synPreProc">import</span> log
+
+<span class="synStatement">def</span> <span class="synIdentifier">getNoun</span>(words):
+   noun = []
+   tagger = MeCab.Tagger( <span class="synConstant">"-Ochasen"</span> )
+   node = tagger.parseToNode( words.encode( <span class="synConstant">"utf-8"</span> ) )
+   <span class="synStatement">while</span> node:
+  <span class="synStatement">if</span> node.feature.split(<span class="synConstant">","</span>)[<span class="synConstant">0</span>] == <span class="synConstant">"名詞"</span>:
+     replace_node = re.sub( re.<span class="synIdentifier">compile</span>( <span class="synConstant">"[!-/:-@[-`{-~]"</span> ), <span class="synConstant">""</span>, node.surface )
+     <span class="synStatement">if</span> replace_node != <span class="synConstant">""</span> <span class="synStatement">and</span> replace_node != <span class="synConstant">" "</span>:
+        noun.append( replace_node )
+  node = node.<span class="synIdentifier">next</span>
+   <span class="synStatement">return</span> noun
+
+<span class="synStatement">def</span> <span class="synIdentifier">getTopKeywords</span>(TF,n):
+   <span class="synIdentifier">list</span> = <span class="synIdentifier">sorted</span>( TF.items(), key=<span class="synStatement">lambda</span> x:x[<span class="synConstant">1</span>], reverse=<span class="synIdentifier">True</span> )
+   <span class="synStatement">return</span> <span class="synIdentifier">list</span>[<span class="synConstant">0</span>:n]
+
+<span class="synStatement">def</span> <span class="synIdentifier">calcTFIDF</span>( N,TF, DF ):
+   tfidf = TF * log( N / DF )
+   <span class="synStatement">return</span> tfidf
+
+<span class="synStatement">if</span> __name__ == <span class="synConstant">"__main__"</span>:
+   N = <span class="synConstant">1675757</span>
+   tf = {}
+   df = {}
+   dom = parse( <span class="synConstant">"jawiki-latest-pages-articles.xml"</span> )
+   text = dom.getElementsByTagName( <span class="synConstant">"text"</span> )
+   <span class="synStatement">for</span> i, text <span class="synStatement">in</span> <span class="synIdentifier">enumerate</span>( text ):
+  df_list = []
+  noun = getNoun( text.childNodes[<span class="synConstant">0</span>].data )
+  <span class="synStatement">for</span> word <span class="synStatement">in</span> noun:
+     <span class="synStatement">try</span>:
+        tf[word] = tf[word] + <span class="synConstant">1</span>
+     <span class="synStatement">except</span> <span class="synType">KeyError</span>:
+        tf[word] = <span class="synConstant">1</span>
+  <span class="synStatement">for</span> word <span class="synStatement">in</span> noun:
+     <span class="synStatement">try</span>:
+        <span class="synStatement">if</span> word <span class="synStatement">in</span> df_list: 
+           <span class="synStatement">continue</span>
+        df[word] = df[word] + <span class="synConstant">1</span>
+     <span class="synStatement">except</span> <span class="synType">KeyError</span>:
+        df[word] = <span class="synConstant">1</span>
+   tfidf = {}
+   <span class="synStatement">for</span> k,v <span class="synStatement">in</span> getTopKeywords( tf, <span class="synConstant">100</span> ):
+  tfidf[k] = calcTFIDF(N,tf[k],df[k])
+   <span class="synStatement">for</span> k,v <span class="synStatement">in</span> getTopKeywords( tfidf, <span class="synConstant">100</span>):
+  <span class="synIdentifier">print</span> k,v
+</pre><pre class="code" data-lang="" data-unlink>年 66613.1601091
+（ 60811.5789562
+月 41064.7265812
+市 38793.2058157
+、 35897.1092786
+県 35531.6062785
+ref 32550.5063022
+1 27219.3962586
+ 26629.1034504
+2 26010.7570077
+） 24975.2229491
+日 24845.8575948
+こと 24338.4726683
+br 23043.4252839
+町 21117.4815875
+的 20149.8364309
+4 19529.5668477
+3 18483.5610773
+者 16357.2448111
+。 15986.9689403
+人 14562.1441206
+日本 14473.0081316
+語 13842.7697899
+8 13603.5545074
+国 13283.6854812
+5 13259.0075252
+よう 13063.2902642
+曲 12769.6075236
+6 12728.3569169
+ため 12525.1298452
+style 12443.6880405
+http 12187.5587885
+漫画 11705.4284901
+郡 11523.5422818
+7 11523.5422818
+? 11422.3624209
+学 11404.8366163
+もの 11327.6198548
+Wikipedia 10952.491378
+号 10538.9477452
+9 10358.5046488
+12 10177.4888257
+著作 9665.1650733
+『 9444.90629238
+言語 9396.02171528
+www 9389.90041411
+10 9334.70225252
+の 9273.14817053
+地域 9260.80946614
+name 8981.71851206
+0 8957.5269733
+』 8932.37257793
+地方 8696.0202828
+版 8407.6132549
+家 8351.54449379
+ファイル 8313.26438084
+平成 8301.00136659
+中 8225.64193053
+P 8225.64193053
+jp 8124.31472923
+作品 7985.4170126
+利用 7985.4170126
+Category 7972.85146367
+align 7877.2070575
+場合 7864.54560108
+放送 7864.54560108
+権 7851.87256853
+」 7788.33504843
+「 7718.4425015
+局 7641.44759679
+ 7404.26942518
+一覧 7365.59145365
+村 7359.32987476
+11 7333.66598997
+都市 7294.79040945
+一 7288.49177514
+人口 7236.84584191
+ゲーム 7217.84800941
+化 7210.95003018
+時代 7204.60782799
+en 6997.71764181
+社会 6939.01187354
+現在 6932.53010674
+日本語 6861.01218133
+ 6782.54238294
+： 6775.98233098
+right 6704.08453262
+圏 6632.24592806
+部 6553.76901633
+万 6540.41749413
+区 6507.42721569
+ISBN 6468.07593104
+世界 6468.07593104
+記事 6408.80781899
+これ 6369.13715631
+テレビ 6342.89723226
+px 6243.76275419
+jpg 6144.20369991
+後 6097.5637075
+性 5957.66273408</pre>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201302100932/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201302100932/">業種別企業名辞書データを公開しました</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201302200824/">CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201302200824/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

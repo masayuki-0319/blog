@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20140807/1407398732" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>ブラウザ識別用Cookieを生成する「mod_oreore(仮)」を作ったった &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>ブラウザ識別用Cookieを生成する「mod_oreore(仮)」を作ったった</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2014 Aug 07, 17:05</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="apache-ブラウザ識別用cookieを生成する-mod-oreore-仮-を作ったった">[Apache] : ブラウザ識別用Cookieを生成する「mod_oreore(仮)」を作ったった</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113814/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/515t-Vj3AAL._SL160_.jpg" class="hatena-asin-detail-image" alt="Apacheクックブック 第2版 ―Webサーバ管理者のためのレシピ集" title="Apacheクックブック 第2版 ―Webサーバ管理者のためのレシピ集"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113814/yutakikuchi-22/">Apacheクックブック 第2版 ―Webサーバ管理者のためのレシピ集</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Ken Coar,Rich Bowen,笹井崇司</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2008/09/26</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 6人 <span class="hatena-asin-detail-label">クリック</span>: 144回</li><li><a href="http://d.hatena.ne.jp/asin/4873113814/yutakikuchi-22" target="_blank">この商品を含むブログ (32件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>mod_oreore(仮)</h4>
+
+<blockquote>
+    <p>ネーミングセンスが糞すぎる<a href="https://twitter.com/yutakikuc">@yutakikuc</a>です。<br />
+アクセス履歴をLogに落として行動履歴を追いたい時は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>に識別子を設定するのが一般的かと思います。一般的にある<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>識別子の設定のタイミングはFWやアプリケーションのでやるというように様々パターンを見かけますが、今回は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のレイヤーで自動的に付与してくれるModuleを作ってみました。因に同じようなApacheModuleは幾つか存在しますが、完全なる一意性が保証されていないことや<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のVersionで使えなかったり等、ちょっとイケテナイ感じがしたので自作してみました。※mod_oreoreとはユーザー視点で「俺だよ！俺！」っというLogに自ら足跡を残す意味で、決して<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%EC%A5%AA%A5%EC%BA%BE%B5%BD">オレオレ詐欺</a>とは関係ありません。<br />
+<a href='http://httpd.apache.org/docs/trunk/mod/mod_usertrack.html'>mod_usertrack</a> ※ 一意性に問題あり<br />
+<a href='http://httpd.apache.org/docs/trunk/mod/mod_session_cookie.html'>mod_session_cookie</a> ※ apache2.3以降で利用可能</p><br />
+<p><a href='https://github.com/yutakikuchi/apache_module/tree/master/mod_oreore'>github : mod_oreore(仮)</a><br />
+識別子の値にはRequestを受け付けた<span class="deco" style="font-weight:bold;color:#FF0000;">サーバーの<a class="keyword" href="http://d.hatena.ne.jp/keyword/IP%A5%A2%A5%C9%A5%EC%A5%B9">IPアドレス</a>、リクエスト時刻(タイムスタンプ:マイクロ秒)、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のプロセスID、コネクションID</span>を重ね合わせ、最終的な出力は<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>のURLSafeな形でencodeしています。<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>する前に生成した識別子を暗号化しようと思ったのですが、処理が冗長的な気がして辞めました(ソースには暗号化をそのまま残しております)。また<a class="keyword" href="http://d.hatena.ne.jp/keyword/DOS%B9%B6%B7%E2">DOS攻撃</a>を防ぐ処理は入れていません。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>設定と確認</h4>
+
+<blockquote>
+    <pre class="hljs sh" data-lang="sh" data-unlink>$ sudo yum <span class="synStatement">install</span> httpd httpd-devel openssl openssl-devel
+$ git clone https://github.com/yutakikuchi/apache_module.git
+$ <span class="synStatement">cd</span> apache_module/mod_oreore
+$ sudo apxs <span class="synSpecial">-i</span> <span class="synSpecial">-a</span> <span class="synSpecial">-c</span> <span class="synSpecial">-I</span>/usr/include/openssl <span class="synSpecial">-L</span>/usr/lib64 <span class="synSpecial">-lcrypto</span> mod_oreore.c
+$ sudo cp conf/oreore.conf /etc/httpd/conf.d/
+$ sudo vim /etc/httpd/conf.d/oreore.conf
+
+<span class="synStatement"><</span>IfModule mod_oreore.c<span class="synStatement">></span>
+<span class="synComment">#NameパラメータでCookie名を指定する(ここは自由に書き換える)</span>
+Name OREORE
+<span class="synComment">#Domainパラメータの先頭は.で始める(ここは自由に書き換える)</span>
+Domain .cookie-test.com
+<span class="synComment">#Expiresパラメータで有効期間を指定する(指定可能なのはyears,months,weeks,days,hours,minutes,seconds)</span>
+Expires <span class="synStatement">"</span><span class="synConstant">2 years</span><span class="synStatement">"</span>
+<span class="synStatement"><</span>/IfModule<span class="synStatement">></span>
+
+$ sudo vim /etc/httpd/conf/httpd.conf
+<span class="synComment">#以下をcombinedログに指定</span>
+LogFormat <span class="synStatement">"</span><span class="synConstant">domain:%V</span><span class="synSpecial">\t</span><span class="synConstant">host:%h</span><span class="synSpecial">\t</span><span class="synConstant">server:%A</span><span class="synSpecial">\t</span><span class="synConstant">ident:%l</span><span class="synSpecial">\t</span><span class="synConstant">user:%u</span><span class="synSpecial">\t</span><span class="synConstant">time:%{\%d/%b/%Y:%H:%M:%S %z}t</span><span class="synSpecial">\t</span><span class="synConstant">method:%m</span><span class="synSpecial">\t</span><span class="synConstant">path:%U%q</span><span class="synSpecial">\t</span><span class="synConstant">protocol:%H</span><span class="synSpecial">\t</span><span class="synConstant">status:%>s</span><span class="synSpecial">\t</span><span class="synConstant">size:%b</span><span class="synSpecial">\t</span><span class="synConstant">referer:%{Referer}i</span><span class="synSpecial">\t</span><span class="synConstant">agent:%{User-Agent}i</span><span class="synSpecial">\t</span><span class="synConstant">response_time:%D</span><span class="synSpecial">\t</span><span class="synConstant">oreore_cookie:%{OREORE}C</span><span class="synStatement">"</span> combined
+
+$ sudo /etc/init.d/httpd <span class="synStatement">restart</span>
+$ <span class="synComment">#Webブラウザで2回アクセスしてみる</span>
+$ <span class="synStatement">tail</span> <span class="synSpecial">-f</span> /var/log/httpd/access_log
+
+domain:cookie-test.com  host:XXXXXXX    server:YYYYYYY  ident:- user:-  <span class="synStatement">time</span>:<span class="synConstant">07</span>/Aug/<span class="synConstant">2014</span>:<span class="synConstant">16</span>:<span class="synConstant">37</span>:<span class="synConstant">09</span> <span class="synSpecial">+090method</span>:GET path:/index.html    protocol:HTTP/1.1   <span class="synStatement">status</span>:<span class="synConstant">304</span>   size:-  referer:-   agent:Mozilla/5.0 <span class="synPreProc">(</span><span class="synSpecial">Macintosh</span><span class="synStatement">;</span><span class="synSpecial"> Intel Mac OS X 10_9_4</span><span class="synPreProc">)</span> AppleWebKit/537.36 <span class="synPreProc">(</span><span class="synSpecial">KHTML, like Gecko</span><span class="synPreProc">)</span> Chrome/36.0.1985.125 Safari/537.36    response_time:<span class="synConstant">5588</span> oreore_cookie:<span class="synIdentifier">id</span>=<span class="synStatement"><</span>ここに設定された識別子が入る<span class="synStatement">></span>&<span class="synIdentifier">v</span>=<span class="synConstant">1</span>
+
+$ sudo vim /etc/httpd/conf/httpd.conf 
+<span class="synComment">#消したい場合は以下を削除orコメントアウト</span>
+LoadModule oreore_module      /usr/lib64/httpd/modules/mod_oreore.so
+</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>側で全て自動的に処理をしてくれるので楽ですね。(^o^)/<br />
+後は識別子毎にLog行をsortしたりするとブラウザ毎にどんな行動があったかが纏められて把握できますね。(^o^)/(^o^)/</p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201408011325/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201408011325/">常駐型受託開発の経験から</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201408120030/">類似度計算と転置Indexとb-Bit Minwise Hashing</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201408120030/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

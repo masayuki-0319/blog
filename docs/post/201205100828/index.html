@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120510/1336606109" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Hadoop MapReduceのExamplesで分散grep、WordCount、randomwriter、sort、join、数独、円周率計算を試してみる &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Hadoop MapReduceのExamplesで分散grep、WordCount、randomwriter、sort、join、数独、円周率計算を試してみる</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 May 10, 08:28</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="hadoop-hadoop-mapreduceのexamplesで分散grep-wordcount-randomwriter-sort-join-数独-円周率計算を試してみる">[Hadoop] : Hadoop MapReduceのExamplesで分散grep、WordCount、randomwriter、sort、join、数独、円周率計算を試してみる</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798122335/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51zdLLO3HcL._SL160_.jpg" class="hatena-asin-detail-image" alt="Hadoop徹底入門" title="Hadoop徹底入門"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798122335/yutakikuchi-22/">Hadoop徹底入門</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> 太田一樹,下垣徹,山下真一,猿田浩輔,藤井達朗,濱野賢一朗</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%E6%C6%B1%CB%BC%D2">翔泳社</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2011/01/28</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 14人 <span class="hatena-asin-detail-label">クリック</span>: 668回</li><li><a href="http://d.hatena.ne.jp/asin/4798122335/yutakikuchi-22" target="_blank">この商品を含むブログ (43件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>Try</h4>
+
+<blockquote>
+    <p>この記事は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a> examples.tarで以下の事を試した記録です。とても初歩的な事を書いています。</p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/sudoku">sudoku</a> ： <a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%F4%C6%C8">数独</a></li>
+<li>Pi Estimator ： 円周率計算 </li>
+<li>WordCount ： 単語数カウント</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a> ： 文字列検索</li>
+<li>randomwriter ： 文字列生成</li>
+<li>sort ： sorting</li>
+<li>join ： データ結合</li>
+</ul><p>この記事では以下のサイトを参考にしました。中でも<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>入門 <a class="keyword" href="http://d.hatena.ne.jp/keyword/IBM">IBM</a>が一番詳しくて分かりやすいと思います。</p>
+
+<ul>
+<li><a href="http://hadoop.apache.org/common/docs/r0.20.2/api/">Overview (Hadoop 0.20.2 API)</a> <a href="http://b.hatena.ne.jp/entry/hadoop.apache.org/common/docs/r0.20.2/api/"><img src="http://b.hatena.ne.jp/entry/image/http://hadoop.apache.org/common/docs/r0.20.2/api/" alt="はてなブックマーク - Overview (Hadoop 0.20.2 API)" border="0" /></a></li>
+<li><a href="http://wiki.apache.org/hadoop/FrontPage">FrontPage - Hadoop Wiki</a> <a href="http://b.hatena.ne.jp/entry/wiki.apache.org/hadoop/FrontPage"><img src="http://b.hatena.ne.jp/entry/image/http://wiki.apache.org/hadoop/FrontPage" alt="はてなブックマーク - FrontPage - Hadoop Wiki" border="0" /></a></li>
+<li><a href="https://ccp.cloudera.com/download/attachments/6553613/CDH3_Quick_Start_Guide_u3.pdf?version=1&modificationDate=1327713706000">CDH3_Quick_Start_Guide_u3.pdf</a></li>
+<li><a href="http://www-06.ibm.com/jp/domino01/mkt/cnpages7.nsf/ec7481a5abd4ed3149256f9400478d7d/4925797c0021cf54492576870041751b/$FILE/Hadoop_Introduction_v1_8.pdf">Hadoop入門 IBM</a></li>
+</ul><p>また今まで<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>に関連した以下の記事を書きました。何かの参考にしていただければと思います。</p>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/yutakikuchi/20111205/1323041424">CentOSでHadoopを使ってみる - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20111205/1323041424"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20111205/1323041424" alt="はてなブックマーク - CentOSでHadoopを使ってみる - Yuta.Kikuchiの日記" border="0" /></a></li>
+<li><a href="http://d.hatena.ne.jp/yutakikuchi/20111219/1324251034">Hadoopをより便利に使う！HiveでのMapReduceまとめ - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20111219/1324251034"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20111219/1324251034" alt="はてなブックマーク - Hadoopをより便利に使う！HiveでのMapReduceまとめ - Yuta.Kikuchiの日記" border="0" /></a></li>
+<li><a href="http://d.hatena.ne.jp/yutakikuchi/20120403/1333409284">「魔法少女まどか☆マギカ」の台詞をJavaScriptでMapReduceしてGoogle Chart APIでグラフ出力したよ！ - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20120403/1333409284"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20120403/1333409284" alt="はてなブックマーク - 「魔法少女まどか☆マギカ」の台詞をJavaScriptでMapReduceしてGoogle Chart APIでグラフ出力したよ！ - Yuta.Kikuchiの日記" border="0" /></a></li>
+<li><a href="http://d.hatena.ne.jp/yutakikuchi/20120503/1336031972">Apache Mahout 機械学習Libraryを使って「魔法少女まどか☆マギカ」の台詞をテキストマイニングしてみた - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20120503/1336031972"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20120503/1336031972" alt="はてなブックマーク - Apache Mahout 機械学習Libraryを使って「魔法少女まどか☆マギカ」の台詞をテキストマイニングしてみた - Yuta.Kikuchiの日記" border="0" /></a></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Beginning</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Env</h5>
+<p>以下は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a> 0.20.2-cdh3u3が設定されている事を前提に記述しています。</p>
+
+</div>
+<div class="section">
+<h5>Streaming</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>は通常Streamingという<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B3%C8%C4%A5%B5%A1%C7%BD">拡張機能</a>を利用して標準入出力形式の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>を行います。Streamingにより<a class="keyword" href="http://d.hatena.ne.jp/keyword/Java">Java</a>以外の標準入出力が可能な言語であれば記述ができます。上の<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a> OverViewのorg.<a class="keyword" href="http://d.hatena.ne.jp/keyword/apache">apache</a>.<a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a>.streamingという項目を参照すると標準入出力の仕様が読み取れると思います。この記事ではStreamingを使う前のステップとして、HadoopMapReduceのSampleプログラムの動作と実装を見てみます。</p>
+
+</div>
+<div class="section">
+<h5>FilePath & Sources</h5>
+<p>/usr/lib/<a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a>-0.20/<a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a>-examples.jar jarファイルは以下のパスに設置されており、jarの中に各種サンプルclassファイルが設定されていると思います。Sourceは本家のDownloadサイトから圧縮ファイルを取ってきて解凍してみます。<br />
+<a href="http://ftp.jaist.ac.jp/pub/apache/hadoop/common/hadoop-0.20.2/">http://ftp.jaist.ac.jp/pub/apache/hadoop/common/hadoop-0.20.2/</a><br />
+Sourceの<a class="keyword" href="http://d.hatena.ne.jp/keyword/Grep">Grep</a>、Join、Sort、WordCount、RandomWriter、PiEstimator、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Sudoku">Sudoku</a>.<a class="keyword" href="http://d.hatena.ne.jp/keyword/java">java</a>を利用します。</p>
+<pre class="code" data-lang="" data-unlink>$ wget http://ftp.jaist.ac.jp/pub/apache/hadoop/common/hadoop-0.20.2/hadoop-0.20.2.tar.gz
+$ tar xf hadoop-0.20.2.tar
+$ tree hadoop-0.20.2/src/examples/org/apache/hadoop/examples/ 
+hadoop-0.20.2/src/examples/org/apache/hadoop/examples/
+|-- AggregateWordCount.java
+|-- AggregateWordHistogram.java
+|-- DBCountPageView.java
+|-- ExampleDriver.java
+|-- Grep.java
+|-- Join.java
+|-- MultiFileWordCount.java
+|-- PiEstimator.java
+|-- RandomTextWriter.java
+|-- RandomWriter.java
+|-- SecondarySort.java
+|-- SleepJob.java
+|-- Sort.java
+|-- WordCount.java
+|-- dancing
+|   |-- DancingLinks.java
+|   |-- DistributedPentomino.java
+|   |-- OneSidedPentomino.java
+|   |-- Pentomino.java
+|   |-- Sudoku.java
+|   |-- package.html
+|   `-- puzzle1.dta
+|-- package.html
+`-- terasort
+|-- TeraGen.java
+|-- TeraInputFormat.java
+|-- TeraOutputFormat.java
+|-- TeraSort.java
+|-- TeraValidate.java
+|-- job_history_summary.py
+`-- package.html</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Sudoku">Sudoku</a></h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%F4%C6%C8">数独</a>問題を解く単純な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a>です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>とはあまり関係無いですがExampleに設置されている面白いネタです。上で展開した<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>にpuzzle1.dtaというサンプルデータが入っているのでそれを基に実行します。</p>
+
+<div class="section">
+<h5>Source</h5>
+<p>一部を貼っています。</p>
+<pre class="hljs java" data-lang="java" data-unlink>  <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> Set up a puzzle board to the given size.</span>
+<span class="synComment">   * Boards may be asymmetric, but the squares will always be divided to be</span>
+<span class="synComment">   * more cells wide than they are tall. For example, a 6x6 puzzle will make </span>
+<span class="synComment">   * sub-squares that are 3x2 (3 cells wide, 2 cells tall). Clearly that means</span>
+<span class="synComment">   * the board is made up of 2x3 sub-squares.</span>
+<span class="synComment">   * </span><span class="synSpecial">@param</span><span class="synIdentifier"> stream</span><span class="synComment"> The input stream to read the data from</span>
+<span class="synComment">   */</span>
+  <span class="synType">public</span> Sudoku(InputStream stream) <span class="synType">throws</span> IOException {
+BufferedReader file = <span class="synStatement">new</span> BufferedReader(<span class="synStatement">new</span> InputStreamReader(stream));
+String line = file.readLine();
+List<<span class="synType">int</span>[]> result = <span class="synStatement">new</span> ArrayList<<span class="synType">int</span>[]>();
+<span class="synStatement">while</span> (line != <span class="synConstant">null</span>) {
+  StringTokenizer tokenizer = <span class="synStatement">new</span> StringTokenizer(line);
+  <span class="synType">int</span> size = tokenizer.countTokens();
+  <span class="synType">int</span>[] col = <span class="synStatement">new</span> <span class="synType">int</span>[size];
+  <span class="synType">int</span> y = <span class="synConstant">0</span>;
+  <span class="synStatement">while</span>(tokenizer.hasMoreElements()) {
+    String word = tokenizer.nextToken();
+    <span class="synStatement">if</span> (<span class="synConstant">"?"</span>.equals(word)) {
+      col[y] = - <span class="synConstant">1</span>;
+    } <span class="synStatement">else</span> {
+      col[y] = Integer.parseInt(word);
+    }   
+    y += <span class="synConstant">1</span>;
+  }   
+  result.add(col);
+  line = file.readLine();
+}   
+size = result.size();
+board = (<span class="synType">int</span>[][]) result.toArray(<span class="synStatement">new</span> <span class="synType">int</span> [size][]);
+squareYSize = (<span class="synType">int</span>) Math.sqrt(size);
+squareXSize = size / squareYSize;
+file.close();
+  }
+</pre>
+</div>
+<div class="section">
+<h5>Execution</h5>
+<pre class="code" data-lang="" data-unlink>$ cat hadoop-0.20.2/src/examples/org/apache/hadoop/examples/dancing/puzzle1.dta
+8 5 ? 3 9 ? ? ? ?
+? ? 2 ? ? ? ? ? ?
+? ? 6 ? 1 ? ? ? 2
+? ? 4 ? ? 3 ? 5 9
+? ? 8 9 ? 1 4 ? ?
+3 2 ? 4 ? ? 8 ? ?
+9 ? ? ? 8 ? 5 ? ?
+? ? ? ? ? ? 2 ? ?
+? ? ? ? 4 5 ? 7 8
+
+$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar sudoku hadoop-0.20.2/src/examples/org/apache/hadoop/examples/dancing/puzzle1.dta
+Solving hadoop-0.20.2/src/examples/org/apache/hadoop/examples/dancing/puzzle1.dta
+8 5 1 3 9 2 6 4 7 
+4 3 2 6 7 8 1 9 5 
+7 9 6 5 1 4 3 8 2 
+6 1 4 8 2 3 7 5 9 
+5 7 8 9 6 1 4 2 3 
+3 2 9 4 5 7 8 1 6 
+9 4 7 2 8 6 5 3 1 
+1 8 5 7 3 9 2 6 4 
+2 6 3 1 4 5 9 7 8 
+
+Found 1 solutions</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Pi Estimator</h4>
+<p>円周率を計算します。残念ながら小数点以下の精度があまり高くありません。</p>
+
+<blockquote>
+    
+<div class="section">
+<h5>Source</h5>
+<p>MapperClassのmapとReducerClassのreduce処理とmainで動かすrun<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>について抜き出しています。<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a>-0.20.2/src/examples/org/<a class="keyword" href="http://d.hatena.ne.jp/keyword/apache">apache</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a>/examples/PiEstimator.<a class="keyword" href="http://d.hatena.ne.jp/keyword/java">java</a></p>
+<pre class="hljs java" data-lang="java" data-unlink>  <span class="synComment">/**</span><span class="synSpecial"> </span>
+<span class="synComment">   *</span><span class="synSpecial"> Parse arguments and then runs a map/reduce job.</span>
+<span class="synComment">   * Print output in standard out.</span>
+<span class="synComment">   * </span>
+<span class="synComment">   * </span><span class="synSpecial">@return</span><span class="synComment"> a non-zero if there is an error.  Otherwise, return 0.  </span>
+<span class="synComment">   */</span>
+  <span class="synType">public</span> <span class="synType">int</span> run(String[] args) <span class="synType">throws</span> Exception {
+<span class="synStatement">if</span> (args.length != <span class="synConstant">2</span>) {
+  System.err.println(<span class="synConstant">"Usage: "</span>+getClass().getName()+<span class="synConstant">" <nMaps> <nSamples>"</span>);
+  ToolRunner.printGenericCommandUsage(System.err);
+  <span class="synStatement">return</span> -<span class="synConstant">1</span>; 
+}   
+
+<span class="synType">final</span> <span class="synType">int</span> nMaps = Integer.parseInt(args[<span class="synConstant">0</span>]);
+<span class="synType">final</span> <span class="synType">long</span> nSamples = Long.parseLong(args[<span class="synConstant">1</span>]);
+
+System.out.println(<span class="synConstant">"Number of Maps  = "</span> + nMaps);
+System.out.println(<span class="synConstant">"Samples per Map = "</span> + nSamples);
+
+<span class="synType">final</span> JobConf jobConf = <span class="synStatement">new</span> JobConf(getConf(), getClass());
+System.out.println(<span class="synConstant">"Estimated value of Pi is "</span>
+    + estimate(nMaps, nSamples, jobConf));
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+  }
+
+  <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> Mapper class for Pi estimation.</span>
+<span class="synComment">   * Generate points in a unit square</span>
+<span class="synComment">   * and then count points inside/outside of the inscribed circle of the square.</span>
+<span class="synComment">   */</span>
+  <span class="synType">public</span> <span class="synType">static</span> <span class="synType">class</span> PiMapper <span class="synType">extends</span> MapReduceBase
+<span class="synType">implements</span> Mapper<LongWritable, LongWritable, BooleanWritable, LongWritable> {
+
+<span class="synComment">/**</span><span class="synSpecial"> Map method.</span>
+<span class="synComment">     * </span><span class="synSpecial">@param</span><span class="synIdentifier"> offset</span><span class="synComment"> samples starting from the (offset+1)th sample.</span>
+<span class="synComment">     * </span><span class="synSpecial">@param</span><span class="synIdentifier"> size</span><span class="synComment"> the number of samples for this map</span>
+<span class="synComment">     * </span><span class="synSpecial">@param</span><span class="synIdentifier"> out</span><span class="synComment"> output {ture-</span><span class="synError">></span><span class="synComment">numInside, false-</span><span class="synError">></span><span class="synComment">numOutside}</span>
+<span class="synComment">     * </span><span class="synSpecial">@param</span><span class="synIdentifier"> reporter</span>
+<span class="synComment">     */</span>
+<span class="synType">public</span> <span class="synType">void</span> map(LongWritable offset,
+                LongWritable size,
+                OutputCollector<BooleanWritable, LongWritable> out,
+                Reporter reporter) <span class="synType">throws</span> IOException {
+
+  <span class="synType">final</span> HaltonSequence haltonsequence = <span class="synStatement">new</span> HaltonSequence(offset.get());
+  <span class="synType">long</span> numInside = <span class="synConstant">0L</span>;
+  <span class="synType">long</span> numOutside = <span class="synConstant">0L</span>;
+
+  <span class="synStatement">for</span>(<span class="synType">long</span> i = <span class="synConstant">0</span>; i < size.get(); ) {
+    <span class="synComment">//generate points in a unit square</span>
+    <span class="synType">final</span> <span class="synType">double</span>[] point = haltonsequence.nextPoint();
+
+    <span class="synComment">//count points inside/outside of the inscribed circle of the square</span>
+    <span class="synType">final</span> <span class="synType">double</span> x = point[<span class="synConstant">0</span>] - <span class="synConstant">0.5</span>;
+    <span class="synType">final</span> <span class="synType">double</span> y = point[<span class="synConstant">1</span>] - <span class="synConstant">0.5</span>;
+    <span class="synStatement">if</span> (x*x + y*y > <span class="synConstant">0.25</span>) {
+      numOutside++;
+    } <span class="synStatement">else</span> {
+      numInside++;
+    }
+
+    <span class="synComment">//report status</span>
+    i++;
+    <span class="synStatement">if</span> (i % <span class="synConstant">1000</span> == <span class="synConstant">0</span>) {
+      reporter.setStatus(<span class="synConstant">"Generated "</span> + i + <span class="synConstant">" samples."</span>);
+    }
+  }
+
+  <span class="synComment">//output map results</span>
+  out.collect(<span class="synStatement">new</span> BooleanWritable(<span class="synConstant">true</span>), <span class="synStatement">new</span> LongWritable(numInside));
+  out.collect(<span class="synStatement">new</span> BooleanWritable(<span class="synConstant">false</span>), <span class="synStatement">new</span> LongWritable(numOutside));
+}
+  }
+
+
+   <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> Reducer class for Pi estimation.</span>
+<span class="synComment">   * Accumulate points inside/outside results from the mappers.</span>
+<span class="synComment">   */</span>
+<span class="synType">public</span> <span class="synType">static</span> <span class="synType">class</span> PiReducer <span class="synType">extends</span> MapReduceBase
+<span class="synType">implements</span> Reducer<BooleanWritable, LongWritable, WritableComparable<?>, Writable> {
+
+<span class="synType">private</span> <span class="synType">long</span> numInside = <span class="synConstant">0</span>;
+<span class="synType">private</span> <span class="synType">long</span> numOutside = <span class="synConstant">0</span>;
+<span class="synType">private</span> JobConf conf; <span class="synComment">//configuration for accessing the file system</span>
+  
+<span class="synComment">/**</span><span class="synSpecial"> Store job configuration.</span><span class="synComment"> */</span>
+<span class="synPreProc">@Override</span>
+<span class="synType">public</span> <span class="synType">void</span> configure(JobConf job) {
+  conf = job;
+}
+
+<span class="synComment">/**</span>
+<span class="synComment">     *</span><span class="synSpecial"> Accumulate number of points inside/outside results from the mappers.</span>
+<span class="synComment">     * </span><span class="synSpecial">@param</span><span class="synIdentifier"> isInside</span><span class="synComment"> Is the points inside? </span>
+<span class="synComment">     * </span><span class="synSpecial">@param</span><span class="synIdentifier"> values</span><span class="synComment"> An iterator to a list of point counts</span>
+<span class="synComment">     * </span><span class="synSpecial">@param</span><span class="synIdentifier"> output</span><span class="synComment"> dummy, not used here.</span>
+<span class="synComment">     * </span><span class="synSpecial">@param</span><span class="synIdentifier"> reporter</span>
+<span class="synComment">     */</span>
+<span class="synType">public</span> <span class="synType">void</span> reduce(BooleanWritable isInside,
+                   Iterator<LongWritable> values,
+                   OutputCollector<WritableComparable<?>, Writable> output,
+                   Reporter reporter) <span class="synType">throws</span> IOException {
+  <span class="synStatement">if</span> (isInside.get()) {
+    <span class="synStatement">for</span>(; values.hasNext(); numInside += values.next().get());
+  } <span class="synStatement">else</span> {
+    <span class="synStatement">for</span>(; values.hasNext(); numOutside += values.next().get());
+  }
+}
+</pre>
+</div>
+<div class="section">
+<h5>Execution</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a>-examples.jarに対してpi(PiEstimator)、map数、sample数の3つの引数を与えます。しかし以下を実行するとエラーが出てしまいました。どこかに掲載されていた方法で <a href="http://localhost:50070">http://localhost:50070</a> <a href="http://localhost:50030">http://localhost:50030</a> の管理<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>にアクセスすると以前は直ったことは確認したのですが、今回はアクセスしただけでは直りませんでした。</p>
+<pre class="code" data-lang="" data-unlink>$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar pi 10 200
+Number of Maps  = 10
+Samples per Map = 200
+12/05/08 10:26:58 WARN hdfs.DFSClient: DataStreamer Exception: org.apache.hadoop.ipc.RemoteException: java.io.IOException: File /user/yuta/PiEstimator_TMP_3_141592654/in/part0 could only be replicated to 0 nodes, instead of 1
+(略)
+12/05/08 10:26:58 WARN hdfs.DFSClient: Error Recovery for block null bad datanode[0] nodes == null
+12/05/08 10:26:58 WARN hdfs.DFSClient: Could not get block locations. Source file "/user/yuta/PiEstimator_TMP_3_141592654/in/part0" - Aborting...</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>のファイル容量が膨らんでいる場合も上記のエラーが発生するようなのでデータ容量を見てみましたが、結果として容量は対した事ありませんでした。</p>
+<pre class="code" data-lang="" data-unlink>$ hdfs -du   
+Found 4 items
+310146      hdfs://localhost/user/yuta/madmagi_in
+919862      hdfs://localhost/user/yuta/madmagi_out_ma
+2560696     hdfs://localhost/user/yuta/madmagi_out_ma_test
+41180       hdfs://localhost/user/yuta/samples</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a> namenodeの再formatを実行します。またsafemodeをOFFにします。<span class="deco" style="color:#FF0000;font-weight:bold;">※この作業は危険です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>が使えなくなります。</span></p>
+<pre class="code" data-lang="" data-unlink>$ su
+$ stop-all.sh
+$ hadoop namenode -format
+$ start-all.sh
+$ hadoop dfsadmin -safemode leave
+Safe mode is OFF</pre><p>ここで再度実行してみましたが、同じエラーがでました。またどうやら再formatが原因でついに<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>上のファイル操作が全てできなくなり<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>を一度resetすることにしました。結果としてはこの作業で直りましたが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>のバックアップが面倒なのともっと良い解決方法がおそらくありそうなのでこれはおすすめできません。</p>
+<pre class="code" data-lang="" data-unlink>$ su
+$ rm -rf /var/log/hadoop-0.20
+$ rm -rf /usr/lib/hadoop*
+$ rm -rf /var/log/hadoop
+$ rm -rf /var/lib/alternatives/hadoop-*
+$ yum remove yum install hadoop-0.20 -y
+$ yum install hadoop-0.20-conf-pseudo hadoop-0.20 -y
+$ /etc/init.d/hadoop-0.20-datanode start
+$ /etc/init.d/hadoop-0.20-namenode start
+$ /etc/init.d/hadoop-0.20-tasktracker start
+$ /etc/init.d/hadoop-0.20-jobtracker start</pre><p>再度円周率計算を実行します。今度は成功しました。</p>
+<pre class="code" data-lang="" data-unlink>$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar pi 10 200
+Number of Maps  = 10
+Samples per Map = 200
+Wrote input for Map #0
+Wrote input for Map #1
+Wrote input for Map #2
+Wrote input for Map #3
+Wrote input for Map #4
+Wrote input for Map #5
+Wrote input for Map #6
+Wrote input for Map #7
+Wrote input for Map #8
+Wrote input for Map #9
+Starting Job
+12/05/09 12:04:28 INFO mapred.FileInputFormat: Total input paths to process : 10
+12/05/09 12:04:29 INFO mapred.JobClient: Running job: job_201205091151_0002
+12/05/09 12:04:30 INFO mapred.JobClient:  map 0% reduce 0%
+12/05/09 12:04:44 INFO mapred.JobClient:  map 10% reduce 0%
+12/05/09 12:04:45 INFO mapred.JobClient:  map 20% reduce 0%
+12/05/09 12:05:00 INFO mapred.JobClient:  map 40% reduce 0%
+12/05/09 12:05:08 INFO mapred.JobClient:  map 40% reduce 13%
+12/05/09 12:05:11 INFO mapred.JobClient:  map 50% reduce 13%
+12/05/09 12:05:12 INFO mapred.JobClient:  map 60% reduce 13%
+12/05/09 12:05:20 INFO mapred.JobClient:  map 60% reduce 20%
+12/05/09 12:05:21 INFO mapred.JobClient:  map 70% reduce 20%
+12/05/09 12:05:24 INFO mapred.JobClient:  map 80% reduce 20%
+12/05/09 12:05:30 INFO mapred.JobClient:  map 80% reduce 26%
+12/05/09 12:05:32 INFO mapred.JobClient:  map 90% reduce 26%
+12/05/09 12:05:33 INFO mapred.JobClient:  map 100% reduce 26%
+12/05/09 12:05:36 INFO mapred.JobClient:  map 100% reduce 33%
+12/05/09 12:05:38 INFO mapred.JobClient:  map 100% reduce 100%
+12/05/09 12:05:41 INFO mapred.JobClient: Job complete: job_201205091151_0002
+12/05/09 12:05:41 INFO mapred.JobClient: Counters: 27
+12/05/09 12:05:41 INFO mapred.JobClient:   Job Counters 
+12/05/09 12:05:41 INFO mapred.JobClient:     Launched reduce tasks=1
+12/05/09 12:05:41 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=119740
+12/05/09 12:05:41 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+12/05/09 12:05:41 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+12/05/09 12:05:41 INFO mapred.JobClient:     Launched map tasks=10
+12/05/09 12:05:41 INFO mapred.JobClient:     Data-local map tasks=10
+12/05/09 12:05:41 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=53325
+12/05/09 12:05:41 INFO mapred.JobClient:   FileSystemCounters
+12/05/09 12:05:41 INFO mapred.JobClient:     FILE_BYTES_READ=226
+12/05/09 12:05:41 INFO mapred.JobClient:     HDFS_BYTES_READ=2340
+12/05/09 12:05:41 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=602824
+12/05/09 12:05:41 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=215
+12/05/09 12:05:41 INFO mapred.JobClient:   Map-Reduce Framework
+12/05/09 12:05:41 INFO mapred.JobClient:     Map input records=10
+12/05/09 12:05:41 INFO mapred.JobClient:     Reduce shuffle bytes=280
+12/05/09 12:05:41 INFO mapred.JobClient:     Spilled Records=40
+12/05/09 12:05:41 INFO mapred.JobClient:     Map output bytes=180
+12/05/09 12:05:41 INFO mapred.JobClient:     CPU time spent (ms)=7620
+12/05/09 12:05:41 INFO mapred.JobClient:     Total committed heap usage (bytes)=1309446144
+12/05/09 12:05:41 INFO mapred.JobClient:     Map input bytes=240
+12/05/09 12:05:41 INFO mapred.JobClient:     Combine input records=0
+12/05/09 12:05:41 INFO mapred.JobClient:     SPLIT_RAW_BYTES=1160
+12/05/09 12:05:41 INFO mapred.JobClient:     Reduce input records=20
+12/05/09 12:05:41 INFO mapred.JobClient:     Reduce input groups=2
+12/05/09 12:05:41 INFO mapred.JobClient:     Combine output records=0
+12/05/09 12:05:41 INFO mapred.JobClient:     Physical memory (bytes) snapshot=1720111104
+12/05/09 12:05:41 INFO mapred.JobClient:     Reduce output records=0
+12/05/09 12:05:41 INFO mapred.JobClient:     Virtual memory (bytes) snapshot=5607768064
+12/05/09 12:05:41 INFO mapred.JobClient:     Map output records=20
+Job Finished in 73.637 seconds
+Estimated value of Pi is 3.14400000000000000000</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>WordCount</h4>
+
+<blockquote>
+    <p>単語と単語の出現数を記録します。</p>
+
+<div class="section">
+<h5>Source</h5>
+<pre class="hljs java" data-lang="java" data-unlink><span class="synPreProc">package</span> org.apache.hadoop.examples;
+
+<span class="synPreProc">import</span> java.io.IOException;
+<span class="synPreProc">import</span> java.util.StringTokenizer;
+
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configuration;
+<span class="synPreProc">import</span> org.apache.hadoop.fs.Path;
+<span class="synPreProc">import</span> org.apache.hadoop.io.IntWritable;
+<span class="synPreProc">import</span> org.apache.hadoop.io.Text;
+<span class="synPreProc">import</span> org.apache.hadoop.mapreduce.Job;
+<span class="synPreProc">import</span> org.apache.hadoop.mapreduce.Mapper;
+<span class="synPreProc">import</span> org.apache.hadoop.mapreduce.Reducer;
+<span class="synPreProc">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+<span class="synPreProc">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+<span class="synPreProc">import</span> org.apache.hadoop.util.GenericOptionsParser;
+
+<span class="synType">public</span> <span class="synType">class</span> WordCount {
+
+  <span class="synType">public</span> <span class="synType">static</span> <span class="synType">class</span> TokenizerMapper 
+   <span class="synType">extends</span> Mapper<Object, Text, Text, IntWritable>{
+
+<span class="synType">private</span> <span class="synType">final</span> <span class="synType">static</span> IntWritable one = <span class="synStatement">new</span> IntWritable(<span class="synConstant">1</span>);
+<span class="synType">private</span> Text word = <span class="synStatement">new</span> Text();
+  
+<span class="synType">public</span> <span class="synType">void</span> map(Object key, Text value, Context context
+                ) <span class="synType">throws</span> IOException, InterruptedException {
+  StringTokenizer itr = <span class="synStatement">new</span> StringTokenizer(value.toString());
+  <span class="synStatement">while</span> (itr.hasMoreTokens()) {
+    word.set(itr.nextToken());
+    context.write(word, one);
+  }
+}
+  }
+  
+  <span class="synType">public</span> <span class="synType">static</span> <span class="synType">class</span> IntSumReducer 
+   <span class="synType">extends</span> Reducer<Text,IntWritable,Text,IntWritable> {
+<span class="synType">private</span> IntWritable result = <span class="synStatement">new</span> IntWritable();
+
+<span class="synType">public</span> <span class="synType">void</span> reduce(Text key, Iterable<IntWritable> values, 
+                   Context context
+                   ) <span class="synType">throws</span> IOException, InterruptedException {
+  <span class="synType">int</span> sum = <span class="synConstant">0</span>;
+  <span class="synStatement">for</span> (IntWritable val : values) {
+    sum += val.get();
+  }
+  result.set(sum);
+  context.write(key, result);
+}
+  }
+
+  <span class="synType">public</span> <span class="synType">static</span> <span class="synType">void</span> main(String[] args) <span class="synType">throws</span> Exception {
+Configuration conf = <span class="synStatement">new</span> Configuration();
+String[] otherArgs = <span class="synStatement">new</span> GenericOptionsParser(conf, args).getRemainingArgs();
+<span class="synStatement">if</span> (otherArgs.length != <span class="synConstant">2</span>) {
+  System.err.println(<span class="synConstant">"Usage: wordcount <in> <out>"</span>);
+  System.exit(<span class="synConstant">2</span>);
+}
+Job job = <span class="synStatement">new</span> Job(conf, <span class="synConstant">"word count"</span>);
+job.setJarByClass(WordCount.<span class="synType">class</span>);
+job.setMapperClass(TokenizerMapper.<span class="synType">class</span>);
+job.setCombinerClass(IntSumReducer.<span class="synType">class</span>);
+job.setReducerClass(IntSumReducer.<span class="synType">class</span>);
+job.setOutputKeyClass(Text.<span class="synType">class</span>);
+job.setOutputValueClass(IntWritable.<span class="synType">class</span>);
+FileInputFormat.addInputPath(job, <span class="synStatement">new</span> Path(otherArgs[<span class="synConstant">0</span>]));
+FileOutputFormat.setOutputPath(job, <span class="synStatement">new</span> Path(otherArgs[<span class="synConstant">1</span>]));
+System.exit(job.waitForCompletion(<span class="synConstant">true</span>) ? <span class="synConstant">0</span> : <span class="synConstant">1</span>);
+  }
+}
+</pre>
+</div>
+<div class="section">
+<h5>Execution</h5>
+<pre class="code" data-lang="" data-unlink>$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar wordcount madmagi_in madmagi_out_wordcount    
+
+$ hdfs -text madmagi_out_wordcount/part-r-00000
+12/05/10 08:07:31 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+12/05/10 08:07:31 WARN snappy.LoadSnappy: Snappy native library not loaded
+10  2
+100 2
+25  1
+4   1
+69  1
+―   1
+――  18
+…   330
+　   4
+、   1014
+。   484
+々   1
+『   3
+』   3
+〜   1
+ぁ   2
+ぁぁ  1
+ぁぁぁ 1
+ぁぁぁん    1
+ぁぁっ 1
+ぁあぁあ    1
+ぁっ  2
+ぁはは 1
+あ   28
+あぁ  1
+ああ  11
+あいつ 5
+あくまで    1
+あけみ 1
+あげ  4
+あげる 4
+あげれ 2
+あそば 1
+あたし 14</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a></h4>
+
+<blockquote>
+    <p>分散環境で文字列を検索します。日本語検索もできます。</p>
+
+<div class="section">
+<h5>Source</h5>
+<pre class="hljs java" data-lang="java" data-unlink><span class="synPreProc">package</span> org.apache.hadoop.examples;
+
+<span class="synPreProc">import</span> java.util.Random;
+
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configuration;
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configured;
+<span class="synPreProc">import</span> org.apache.hadoop.fs.FileSystem;
+<span class="synPreProc">import</span> org.apache.hadoop.fs.Path;
+<span class="synPreProc">import</span> org.apache.hadoop.io.LongWritable;
+<span class="synPreProc">import</span> org.apache.hadoop.io.Text;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.*;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.lib.*;
+<span class="synPreProc">import</span> org.apache.hadoop.util.Tool;
+<span class="synPreProc">import</span> org.apache.hadoop.util.ToolRunner;
+
+<span class="synComment">/* Extracts matching regexs from input files and counts them. */</span>
+<span class="synType">public</span> <span class="synType">class</span> Grep <span class="synType">extends</span> Configured <span class="synType">implements</span> Tool {
+  <span class="synType">private</span> Grep() {}                               <span class="synComment">// singleton</span>
+
+  <span class="synType">public</span> <span class="synType">int</span> run(String[] args) <span class="synType">throws</span> Exception {
+<span class="synStatement">if</span> (args.length < <span class="synConstant">3</span>) {
+  System.out.println(<span class="synConstant">"Grep <inDir> <outDir> <regex> [<group>]"</span>);
+  ToolRunner.printGenericCommandUsage(System.out);
+  <span class="synStatement">return</span> -<span class="synConstant">1</span>;
+}
+
+Path tempDir =
+  <span class="synStatement">new</span> Path(<span class="synConstant">"grep-temp-"</span>+
+      Integer.toString(<span class="synStatement">new</span> Random().nextInt(Integer.MAX_VALUE)));
+
+JobConf grepJob = <span class="synStatement">new</span> JobConf(getConf(), Grep.<span class="synType">class</span>);
+
+<span class="synStatement">try</span> {
+  
+  grepJob.setJobName(<span class="synConstant">"grep-search"</span>);
+
+  FileInputFormat.setInputPaths(grepJob, args[<span class="synConstant">0</span>]);
+
+  grepJob.setMapperClass(RegexMapper.<span class="synType">class</span>);
+  grepJob.set(<span class="synConstant">"mapred.mapper.regex"</span>, args[<span class="synConstant">2</span>]);
+  <span class="synStatement">if</span> (args.length == <span class="synConstant">4</span>)
+    grepJob.set(<span class="synConstant">"mapred.mapper.regex.group"</span>, args[<span class="synConstant">3</span>]);
+
+  grepJob.setCombinerClass(LongSumReducer.<span class="synType">class</span>);
+  grepJob.setReducerClass(LongSumReducer.<span class="synType">class</span>);
+
+  FileOutputFormat.setOutputPath(grepJob, tempDir);
+  grepJob.setOutputFormat(SequenceFileOutputFormat.<span class="synType">class</span>);
+  grepJob.setOutputKeyClass(Text.<span class="synType">class</span>);
+  grepJob.setOutputValueClass(LongWritable.<span class="synType">class</span>);
+
+  JobClient.runJob(grepJob);
+
+  JobConf sortJob = <span class="synStatement">new</span> JobConf(Grep.<span class="synType">class</span>);
+  sortJob.setJobName(<span class="synConstant">"grep-sort"</span>);
+
+  FileInputFormat.setInputPaths(sortJob, tempDir);
+  sortJob.setInputFormat(SequenceFileInputFormat.<span class="synType">class</span>);
+
+  sortJob.setMapperClass(InverseMapper.<span class="synType">class</span>);
+
+  sortJob.setNumReduceTasks(<span class="synConstant">1</span>);                 <span class="synComment">// write a single file</span>
+  FileOutputFormat.setOutputPath(sortJob, <span class="synStatement">new</span> Path(args[<span class="synConstant">1</span>]));
+  sortJob.setOutputKeyComparatorClass           <span class="synComment">// sort by decreasing freq</span>
+  (LongWritable.DecreasingComparator.<span class="synType">class</span>);
+
+  JobClient.runJob(sortJob);
+}
+<span class="synStatement">finally</span> {
+  FileSystem.get(grepJob).delete(tempDir, <span class="synConstant">true</span>);
+}
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+  }
+
+  <span class="synType">public</span> <span class="synType">static</span> <span class="synType">void</span> main(String[] args) <span class="synType">throws</span> Exception {
+<span class="synType">int</span> res = ToolRunner.run(<span class="synStatement">new</span> Configuration(), <span class="synStatement">new</span> Grep(), args);
+System.exit(res);
+  }
+}
+</pre>
+</div>
+<div class="section">
+<h5>Execution</h5>
+<p>日本語の「まどか」と「さやか」を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>で指定します。</p>
+<pre class="code" data-lang="" data-unlink>$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar grep madmagi_in madmagi_out_grep '(まどか|さやか)'
+
+$ hdfs -text madmagi_out_grep/part-00000
+12/05/10 07:54:47 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+12/05/10 07:54:47 WARN snappy.LoadSnappy: Snappy native library not loaded
+112 さやか
+75  まどか</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>randomwriter</h4>
+
+<blockquote>
+    <p>ランダムなテキストデータを生成します。</p>
+
+<div class="section">
+<h5>Source</h5>
+<p>一部を抜き出して載せています。</p>
+<pre class="hljs java" data-lang="java" data-unlink><span class="synPreProc">package</span> org.apache.hadoop.examples;
+
+<span class="synPreProc">import</span> java.io.IOException;
+<span class="synPreProc">import</span> java.util.Date;
+<span class="synPreProc">import</span> java.util.Random;
+
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configuration;
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configured;
+<span class="synPreProc">import</span> org.apache.hadoop.fs.Path;
+<span class="synPreProc">import</span> org.apache.hadoop.io.BytesWritable;
+<span class="synPreProc">import</span> org.apache.hadoop.io.Text;
+<span class="synPreProc">import</span> org.apache.hadoop.io.Writable;
+<span class="synPreProc">import</span> org.apache.hadoop.io.WritableComparable;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.ClusterStatus;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.FileOutputFormat;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.FileSplit;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.InputFormat;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.InputSplit;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.JobClient;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.JobConf;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.MapReduceBase;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.Mapper;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.OutputCollector;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.RecordReader;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.Reporter;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.SequenceFileOutputFormat;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.lib.IdentityReducer;
+<span class="synPreProc">import</span> org.apache.hadoop.util.GenericOptionsParser;
+<span class="synPreProc">import</span> org.apache.hadoop.util.Tool;
+<span class="synPreProc">import</span> org.apache.hadoop.util.ToolRunner;
+
+<span class="synType">public</span> <span class="synType">class</span> RandomWriter <span class="synType">extends</span> Configured <span class="synType">implements</span> Tool {
+  
+  <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> User counters</span>
+<span class="synSpecial">   </span><span class="synComment">*/</span>
+  <span class="synType">static</span> <span class="synType">enum</span> Counters { RECORDS_WRITTEN, BYTES_WRITTEN }
+  
+  <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> A custom input format that creates virtual inputs of a single string</span>
+<span class="synComment">   *</span><span class="synSpecial"> for each map.</span>
+<span class="synComment">   */</span>
+  <span class="synType">static</span> <span class="synType">class</span> RandomInputFormat <span class="synType">implements</span> InputFormat<Text, Text> {
+
+<span class="synComment">/**</span><span class="synSpecial"> </span>
+<span class="synComment">     *</span><span class="synSpecial"> Generate the requested number of file splits, with the filename</span>
+<span class="synComment">     *</span><span class="synSpecial"> set to the filename of the output file.</span>
+<span class="synComment">     */</span>
+<span class="synType">public</span> InputSplit[] getSplits(JobConf job, 
+                              <span class="synType">int</span> numSplits) <span class="synType">throws</span> IOException {
+  InputSplit[] result = <span class="synStatement">new</span> InputSplit[numSplits];
+  Path outDir = FileOutputFormat.getOutputPath(job);
+  <span class="synStatement">for</span>(<span class="synType">int</span> i=<span class="synConstant">0</span>; i < result.length; ++i) {
+    result[i] = <span class="synStatement">new</span> FileSplit(<span class="synStatement">new</span> Path(outDir, <span class="synConstant">"dummy-split-"</span> + i), <span class="synConstant">0</span>, <span class="synConstant">1</span>, 
+                              (String[])<span class="synConstant">null</span>);
+  }
+  <span class="synStatement">return</span> result;
+}
+
+<span class="synComment">/**</span>
+<span class="synComment">     *</span><span class="synSpecial"> Return a single record (filename, "") where the filename is taken from</span>
+<span class="synComment">     *</span><span class="synSpecial"> the file split.</span>
+<span class="synComment">     */</span>
+<span class="synType">static</span> <span class="synType">class</span> RandomRecordReader <span class="synType">implements</span> RecordReader<Text, Text> {
+  Path name;
+  <span class="synType">public</span> RandomRecordReader(Path p) {
+    name = p;
+  }
+  <span class="synType">public</span> <span class="synType">boolean</span> next(Text key, Text value) {
+    <span class="synStatement">if</span> (name != <span class="synConstant">null</span>) {
+      key.set(name.getName());
+      name = <span class="synConstant">null</span>;
+      <span class="synStatement">return</span> <span class="synConstant">true</span>;
+    }
+    <span class="synStatement">return</span> <span class="synConstant">false</span>;
+  }
+  <span class="synType">public</span> Text createKey() {
+    <span class="synStatement">return</span> <span class="synStatement">new</span> Text();
+  }
+  <span class="synType">public</span> Text createValue() {
+    <span class="synStatement">return</span> <span class="synStatement">new</span> Text();
+  }
+  <span class="synType">public</span> <span class="synType">long</span> getPos() {
+    <span class="synStatement">return</span> <span class="synConstant">0</span>;
+  }
+  <span class="synType">public</span> <span class="synType">void</span> close() {}
+  <span class="synType">public</span> <span class="synType">float</span> getProgress() {
+    <span class="synStatement">return</span> <span class="synConstant">0.0f</span>;
+  }
+}
+
+<span class="synType">public</span> RecordReader<Text, Text> getRecordReader(InputSplit split,
+                                    JobConf job, 
+                                    Reporter reporter) <span class="synType">throws</span> IOException {
+  <span class="synStatement">return</span> <span class="synStatement">new</span> RandomRecordReader(((FileSplit) split).getPath());
+}
+  }
+
+  <span class="synType">static</span> <span class="synType">class</span> Map <span class="synType">extends</span> MapReduceBase
+<span class="synType">implements</span> Mapper<WritableComparable, Writable,
+                  BytesWritable, BytesWritable> {
+
+<span class="synType">private</span> <span class="synType">long</span> numBytesToWrite;
+<span class="synType">private</span> <span class="synType">int</span> minKeySize;
+<span class="synType">private</span> <span class="synType">int</span> keySizeRange;
+<span class="synType">private</span> <span class="synType">int</span> minValueSize;
+<span class="synType">private</span> <span class="synType">int</span> valueSizeRange;
+<span class="synType">private</span> Random random = <span class="synStatement">new</span> Random();
+<span class="synType">private</span> BytesWritable randomKey = <span class="synStatement">new</span> BytesWritable();
+<span class="synType">private</span> BytesWritable randomValue = <span class="synStatement">new</span> BytesWritable();
+
+<span class="synType">private</span> <span class="synType">void</span> randomizeBytes(<span class="synType">byte</span>[] data, <span class="synType">int</span> offset, <span class="synType">int</span> length) {
+  <span class="synStatement">for</span>(<span class="synType">int</span> i=offset + length - <span class="synConstant">1</span>; i >= offset; --i) {
+    data[i] = (<span class="synType">byte</span>) random.nextInt(<span class="synConstant">256</span>);
+  }
+}
+
+<span class="synComment">/**</span>
+<span class="synComment">     *</span><span class="synSpecial"> Given an output filename, write a bunch of random records to it.</span>
+<span class="synComment">     */</span>
+<span class="synType">public</span> <span class="synType">void</span> map(WritableComparable key, 
+                Writable value,
+                OutputCollector<BytesWritable, BytesWritable> output, 
+                Reporter reporter) <span class="synType">throws</span> IOException {
+  <span class="synType">int</span> itemCount = <span class="synConstant">0</span>;
+  <span class="synStatement">while</span> (numBytesToWrite > <span class="synConstant">0</span>) {
+    <span class="synType">int</span> keyLength = minKeySize + 
+      (keySizeRange != <span class="synConstant">0</span> ? random.nextInt(keySizeRange) : <span class="synConstant">0</span>);
+    randomKey.setSize(keyLength);
+    randomizeBytes(randomKey.getBytes(), <span class="synConstant">0</span>, randomKey.getLength());
+    <span class="synType">int</span> valueLength = minValueSize +
+      (valueSizeRange != <span class="synConstant">0</span> ? random.nextInt(valueSizeRange) : <span class="synConstant">0</span>);
+    randomValue.setSize(valueLength);
+    randomizeBytes(randomValue.getBytes(), <span class="synConstant">0</span>, randomValue.getLength());
+    output.collect(randomKey, randomValue);
+    numBytesToWrite -= keyLength + valueLength;
+    reporter.incrCounter(Counters.BYTES_WRITTEN, keyLength + valueLength);
+    reporter.incrCounter(Counters.RECORDS_WRITTEN, <span class="synConstant">1</span>);
+    <span class="synStatement">if</span> (++itemCount % <span class="synConstant">200</span> == <span class="synConstant">0</span>) {
+      reporter.setStatus(<span class="synConstant">"wrote record "</span> + itemCount + <span class="synConstant">". "</span> + 
+                         numBytesToWrite + <span class="synConstant">" bytes left."</span>);
+    }
+  }
+  reporter.setStatus(<span class="synConstant">"done with "</span> + itemCount + <span class="synConstant">" records."</span>);
+}
+  }
+  
+  <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> This is the main routine for launching a distributed random write job.</span>
+<span class="synComment">   * It runs 10 maps/node and each node writes 1 gig of data to a DFS file.</span>
+<span class="synComment">   * The reduce doesn't do anything.</span>
+<span class="synComment">   * </span>
+<span class="synComment">   * </span><span class="synSpecial">@throws</span><span class="synIdentifier"> IOException</span><span class="synComment"> </span>
+<span class="synComment">   */</span>
+  <span class="synType">public</span> <span class="synType">int</span> run(String[] args) <span class="synType">throws</span> Exception {    
+<span class="synStatement">if</span> (args.length == <span class="synConstant">0</span>) {
+  System.out.println(<span class="synConstant">"Usage: writer <out-dir>"</span>);
+  ToolRunner.printGenericCommandUsage(System.out);
+  <span class="synStatement">return</span> -<span class="synConstant">1</span>;
+}
+
+Path outDir = <span class="synStatement">new</span> Path(args[<span class="synConstant">0</span>]);
+JobConf job = <span class="synStatement">new</span> JobConf(getConf());
+
+job.setJarByClass(RandomWriter.<span class="synType">class</span>);
+job.setJobName(<span class="synConstant">"random-writer"</span>);
+FileOutputFormat.setOutputPath(job, outDir);
+
+job.setOutputKeyClass(BytesWritable.<span class="synType">class</span>);
+job.setOutputValueClass(BytesWritable.<span class="synType">class</span>);
+
+job.setInputFormat(RandomInputFormat.<span class="synType">class</span>);
+job.setMapperClass(Map.<span class="synType">class</span>);        
+job.setReducerClass(IdentityReducer.<span class="synType">class</span>);
+job.setOutputFormat(SequenceFileOutputFormat.<span class="synType">class</span>);
+
+JobClient client = <span class="synStatement">new</span> JobClient(job);
+ClusterStatus cluster = client.getClusterStatus();
+<span class="synType">int</span> numMapsPerHost = job.getInt(<span class="synConstant">"test.randomwriter.maps_per_host"</span>, <span class="synConstant">10</span>);
+<span class="synType">long</span> numBytesToWritePerMap = job.getLong(<span class="synConstant">"test.randomwrite.bytes_per_map"</span>,
+                                         <span class="synConstant">1</span>*<span class="synConstant">1024</span>*<span class="synConstant">1024</span>*<span class="synConstant">1024</span>);
+<span class="synStatement">if</span> (numBytesToWritePerMap == <span class="synConstant">0</span>) {
+  System.err.println(<span class="synConstant">"Cannot have test.randomwrite.bytes_per_map set to 0"</span>);
+  <span class="synStatement">return</span> -<span class="synConstant">2</span>;
+}
+<span class="synType">long</span> totalBytesToWrite = job.getLong(<span class="synConstant">"test.randomwrite.total_bytes"</span>, 
+     numMapsPerHost*numBytesToWritePerMap*cluster.getTaskTrackers());
+<span class="synType">int</span> numMaps = (<span class="synType">int</span>) (totalBytesToWrite / numBytesToWritePerMap);
+<span class="synStatement">if</span> (numMaps == <span class="synConstant">0</span> && totalBytesToWrite > <span class="synConstant">0</span>) {
+  numMaps = <span class="synConstant">1</span>;
+  job.setLong(<span class="synConstant">"test.randomwrite.bytes_per_map"</span>, totalBytesToWrite);
+}
+
+job.setNumMapTasks(numMaps);
+System.out.println(<span class="synConstant">"Running "</span> + numMaps + <span class="synConstant">" maps."</span>);
+
+<span class="synComment">// reducer NONE</span>
+job.setNumReduceTasks(<span class="synConstant">0</span>);
+
+Date startTime = <span class="synStatement">new</span> Date();
+System.out.println(<span class="synConstant">"Job started: "</span> + startTime);
+JobClient.runJob(job);
+Date endTime = <span class="synStatement">new</span> Date();
+System.out.println(<span class="synConstant">"Job ended: "</span> + endTime);
+System.out.println(<span class="synConstant">"The job took "</span> + 
+                   (endTime.getTime() - startTime.getTime()) /<span class="synConstant">1000</span> + 
+                   <span class="synConstant">" seconds."</span>);
+
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+  }
+ 
+}
+</pre>
+</div>
+<div class="section">
+<h5>Execution</h5>
+<p>10MByteのランダムな16進数データを2つ作ります。</p>
+<pre class="code" data-lang="" data-unlink>$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar randomwriter -D test.randomwrite.bytes_per_map=10000000 -D test.randomwriter.maps_per_host=2 random-data
+
+$ hdfs -du random-data
+Found 4 items
+0           hdfs://localhost/user/yuta/random-data/_SUCCESS
+59570       hdfs://localhost/user/yuta/random-data/_logs
+10045460    hdfs://localhost/user/yuta/random-data/part-00000
+10042286    hdfs://localhost/user/yuta/random-data/part-00001
+
+$ hdfs -text random-data/part-00000
+f aa b9 bc 94 4d bc af ac c0 9a 1c c9 24 31 8d 85 a6 80 5b 62 65 56 37 8a 95 6c a5 33 39 5c ac ab 38 53 67 55 92
+f9 04 6c 86 cd 39 9d 13 63 8b 00 b7 0c 03 61 38 0a bc 0a af 92 17 63 f1 eb b1 89 57 03 12 56 1a 1c 87 c7 40 2c
+4d 94 02 16 73 da 73 9f 72 ee de f1 17 0e b1 f6 cf 76 1d 17 d4 11 5d 65 c1 f0 d6 c3 af 38 fb 24 75 69 f9 01 54 52
+c6 fc fa dd 98 18 a7 be e9 4f 66 51 9a b2 46 37 d6 e1 95 f1 2e 8c 02 c9 e1 02 a2 e1 c7 ff 70</pre><p>同じようなプログラムでrandomtextwriterというものがあり、これは10MByteのデータを10個作成します。</p>
+<pre class="code" data-lang="" data-unlink>$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar randomtextwriter -D test.randomtextwrite.bytes_per_map=10000000 -D test.randomtextwriter.maps_per_host=2 random-text-data
+
+$ hdfs -du random-text-data
+10265269    hdfs://localhost/user/yuta/random-text-data/part-00000
+10265294    hdfs://localhost/user/yuta/random-text-data/part-00001
+10265824    hdfs://localhost/user/yuta/random-text-data/part-00002
+10265560    hdfs://localhost/user/yuta/random-text-data/part-00003
+10267562    hdfs://localhost/user/yuta/random-text-data/part-00004
+10266170    hdfs://localhost/user/yuta/random-text-data/part-00005
+10265334    hdfs://localhost/user/yuta/random-text-data/part-00006
+10265731    hdfs://localhost/user/yuta/random-text-data/part-00007
+10266359    hdfs://localhost/user/yuta/random-text-data/part-00008
+10265977    hdfs://localhost/user/yuta/random-text-data/part-00009
+
+$ hdfs -text random-text-data/part-00000
+
+bromate michigan ploration prospectiveness mendacity pyxie edificator posttraumatic oratorize
+constitutor silverhead critically schoolmasterism unlapsing Mormyrus chooser licitness undinted
+sangaree vinegarish precostal uncontradictableness warriorwise embryotic repealableness alen
+catabaptist comprovincial archididascalian returnability giantly unachievable pope calabazilla
+topsail epidymides palaeotheriodont hemimelus</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>sort</h4>
+
+<blockquote>
+    <p>上randomwriterで生成したrandom-dataを利用してsortします。sort結果の確認が微妙ですが、一応結果を載せておきます。</p>
+
+<div class="section">
+<h5>Source</h5>
+<pre class="hljs java" data-lang="java" data-unlink><span class="synPreProc">package</span> org.apache.hadoop.examples;
+
+<span class="synPreProc">import</span> java.io.IOException;
+<span class="synPreProc">import</span> java.net.URI;
+<span class="synPreProc">import</span> java.util.*;
+
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configuration;
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configured;
+<span class="synPreProc">import</span> org.apache.hadoop.filecache.DistributedCache;
+<span class="synPreProc">import</span> org.apache.hadoop.fs.Path;
+<span class="synPreProc">import</span> org.apache.hadoop.io.BytesWritable;
+<span class="synPreProc">import</span> org.apache.hadoop.io.Writable;
+<span class="synPreProc">import</span> org.apache.hadoop.io.WritableComparable;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.*;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.lib.IdentityMapper;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.lib.IdentityReducer;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.lib.InputSampler;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.lib.TotalOrderPartitioner;
+<span class="synPreProc">import</span> org.apache.hadoop.util.Tool;
+<span class="synPreProc">import</span> org.apache.hadoop.util.ToolRunner;
+
+<span class="synType">public</span> <span class="synType">class</span> Sort<K,V> <span class="synType">extends</span> Configured <span class="synType">implements</span> Tool {
+  <span class="synType">private</span> RunningJob jobResult = <span class="synConstant">null</span>;
+
+  <span class="synType">static</span> <span class="synType">int</span> printUsage() {
+System.out.println(<span class="synConstant">"sort [-m <maps>] [-r <reduces>] "</span> +
+                   <span class="synConstant">"[-inFormat <input format class>] "</span> +
+                   <span class="synConstant">"[-outFormat <output format class>] "</span> + 
+                   <span class="synConstant">"[-outKey <output key class>] "</span> +
+                   <span class="synConstant">"[-outValue <output value class>] "</span> +
+                   <span class="synConstant">"[-totalOrder <pcnt> <num samples> <max splits>] "</span> +
+                   <span class="synConstant">"<input> <output>"</span>);
+ToolRunner.printGenericCommandUsage(System.out);
+<span class="synStatement">return</span> -<span class="synConstant">1</span>;
+  }
+
+  <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> The main driver for sort program.</span>
+<span class="synComment">   * Invoke this method to submit the map/reduce job.</span>
+<span class="synComment">   * </span><span class="synSpecial">@throws</span><span class="synIdentifier"> IOException</span><span class="synComment"> When there is communication problems with the </span>
+<span class="synComment">   *                     job tracker.</span>
+<span class="synComment">   */</span>
+  <span class="synType">public</span> <span class="synType">int</span> run(String[] args) <span class="synType">throws</span> Exception {
+
+JobConf jobConf = <span class="synStatement">new</span> JobConf(getConf(), Sort.<span class="synType">class</span>);
+jobConf.setJobName(<span class="synConstant">"sorter"</span>);
+
+jobConf.setMapperClass(IdentityMapper.<span class="synType">class</span>);        
+jobConf.setReducerClass(IdentityReducer.<span class="synType">class</span>);
+
+JobClient client = <span class="synStatement">new</span> JobClient(jobConf);
+ClusterStatus cluster = client.getClusterStatus();
+<span class="synType">int</span> num_reduces = (<span class="synType">int</span>) (cluster.getMaxReduceTasks() * <span class="synConstant">0.9</span>);
+String sort_reduces = jobConf.get(<span class="synConstant">"test.sort.reduces_per_host"</span>);
+<span class="synStatement">if</span> (sort_reduces != <span class="synConstant">null</span>) {
+   num_reduces = cluster.getTaskTrackers() * 
+                   Integer.parseInt(sort_reduces);
+}
+Class<? <span class="synType">extends</span> InputFormat> inputFormatClass = 
+  SequenceFileInputFormat.<span class="synType">class</span>;
+Class<? <span class="synType">extends</span> OutputFormat> outputFormatClass = 
+  SequenceFileOutputFormat.<span class="synType">class</span>;
+Class<? <span class="synType">extends</span> WritableComparable> outputKeyClass = BytesWritable.<span class="synType">class</span>;
+Class<? <span class="synType">extends</span> Writable> outputValueClass = BytesWritable.<span class="synType">class</span>;
+List<String> otherArgs = <span class="synStatement">new</span> ArrayList<String>();
+InputSampler.Sampler<K,V> sampler = <span class="synConstant">null</span>;
+<span class="synStatement">for</span>(<span class="synType">int</span> i=<span class="synConstant">0</span>; i < args.length; ++i) {
+  <span class="synStatement">try</span> {
+    <span class="synStatement">if</span> (<span class="synConstant">"-m"</span>.equals(args[i])) {
+      jobConf.setNumMapTasks(Integer.parseInt(args[++i]));
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-r"</span>.equals(args[i])) {
+      num_reduces = Integer.parseInt(args[++i]);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-inFormat"</span>.equals(args[i])) {
+      inputFormatClass = 
+        Class.forName(args[++i]).asSubclass(InputFormat.<span class="synType">class</span>);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-outFormat"</span>.equals(args[i])) {
+      outputFormatClass = 
+        Class.forName(args[++i]).asSubclass(OutputFormat.<span class="synType">class</span>);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-outKey"</span>.equals(args[i])) {
+      outputKeyClass = 
+        Class.forName(args[++i]).asSubclass(WritableComparable.<span class="synType">class</span>);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-outValue"</span>.equals(args[i])) {
+      outputValueClass = 
+        Class.forName(args[++i]).asSubclass(Writable.<span class="synType">class</span>);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-totalOrder"</span>.equals(args[i])) {
+      <span class="synType">double</span> pcnt = Double.parseDouble(args[++i]);
+      <span class="synType">int</span> numSamples = Integer.parseInt(args[++i]);
+      <span class="synType">int</span> maxSplits = Integer.parseInt(args[++i]);
+      <span class="synStatement">if</span> (<span class="synConstant">0</span> >= maxSplits) maxSplits = Integer.MAX_VALUE;
+      sampler =
+        <span class="synStatement">new</span> InputSampler.RandomSampler<K,V>(pcnt, numSamples, maxSplits);
+    } <span class="synStatement">else</span> {
+      otherArgs.add(args[i]);
+    }
+  } <span class="synStatement">catch</span> (NumberFormatException except) {
+    System.out.println(<span class="synConstant">"ERROR: Integer expected instead of "</span> + args[i]);
+    <span class="synStatement">return</span> printUsage();
+  } <span class="synStatement">catch</span> (ArrayIndexOutOfBoundsException except) {
+    System.out.println(<span class="synConstant">"ERROR: Required parameter missing from "</span> +
+        args[i-<span class="synConstant">1</span>]);
+    <span class="synStatement">return</span> printUsage(); <span class="synComment">// exits</span>
+  }
+}
+
+<span class="synComment">// Set user-supplied (possibly default) job configs</span>
+jobConf.setNumReduceTasks(num_reduces);
+
+jobConf.setInputFormat(inputFormatClass);
+jobConf.setOutputFormat(outputFormatClass);
+
+jobConf.setOutputKeyClass(outputKeyClass);
+jobConf.setOutputValueClass(outputValueClass);
+
+<span class="synComment">// Make sure there are exactly 2 parameters left.</span>
+<span class="synStatement">if</span> (otherArgs.size() != <span class="synConstant">2</span>) {
+  System.out.println(<span class="synConstant">"ERROR: Wrong number of parameters: "</span> +
+      otherArgs.size() + <span class="synConstant">" instead of 2."</span>);
+  <span class="synStatement">return</span> printUsage();
+}
+FileInputFormat.setInputPaths(jobConf, otherArgs.get(<span class="synConstant">0</span>));
+FileOutputFormat.setOutputPath(jobConf, <span class="synStatement">new</span> Path(otherArgs.get(<span class="synConstant">1</span>)));
+
+<span class="synStatement">if</span> (sampler != <span class="synConstant">null</span>) {
+  System.out.println(<span class="synConstant">"Sampling input to effect total-order sort..."</span>);
+  jobConf.setPartitionerClass(TotalOrderPartitioner.<span class="synType">class</span>);
+  Path inputDir = FileInputFormat.getInputPaths(jobConf)[<span class="synConstant">0</span>];
+  inputDir = inputDir.makeQualified(inputDir.getFileSystem(jobConf));
+  Path partitionFile = <span class="synStatement">new</span> Path(inputDir, <span class="synConstant">"_sortPartitioning"</span>);
+  TotalOrderPartitioner.setPartitionFile(jobConf, partitionFile);
+  InputSampler.<K,V>writePartitionFile(jobConf, sampler);
+  URI partitionUri = <span class="synStatement">new</span> URI(partitionFile.toString() +
+                             <span class="synConstant">"#"</span> + <span class="synConstant">"_sortPartitioning"</span>);
+  DistributedCache.addCacheFile(partitionUri, jobConf);
+  DistributedCache.createSymlink(jobConf);
+}
+
+System.out.println(<span class="synConstant">"Running on "</span> +
+    cluster.getTaskTrackers() +
+    <span class="synConstant">" nodes to sort from "</span> + 
+    FileInputFormat.getInputPaths(jobConf)[<span class="synConstant">0</span>] + <span class="synConstant">" into "</span> +
+    FileOutputFormat.getOutputPath(jobConf) +
+    <span class="synConstant">" with "</span> + num_reduces + <span class="synConstant">" reduces."</span>);
+Date startTime = <span class="synStatement">new</span> Date();
+System.out.println(<span class="synConstant">"Job started: "</span> + startTime);
+jobResult = JobClient.runJob(jobConf);
+Date end_time = <span class="synStatement">new</span> Date();
+System.out.println(<span class="synConstant">"Job ended: "</span> + end_time);
+System.out.println(<span class="synConstant">"The job took "</span> + 
+    (end_time.getTime() - startTime.getTime()) /<span class="synConstant">1000</span> + <span class="synConstant">" seconds."</span>);
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+  }
+
+  <span class="synType">public</span> <span class="synType">static</span> <span class="synType">void</span> main(String[] args) <span class="synType">throws</span> Exception {
+<span class="synType">int</span> res = ToolRunner.run(<span class="synStatement">new</span> Configuration(), <span class="synStatement">new</span> Sort(), args);
+System.exit(res);
+  }
+
+  <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> Get the last job that was run using this instance.</span>
+<span class="synComment">   * </span><span class="synSpecial">@return</span><span class="synComment"> the results of the last job that was run</span>
+<span class="synComment">   */</span>
+  <span class="synType">public</span> RunningJob getResult() {
+<span class="synStatement">return</span> jobResult;
+  }
+}
+</pre>
+</div>
+<div class="section">
+<h5>Execution</h5>
+<pre class="code" data-lang="" data-unlink>$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar sort random-data sorted-data
+
+$ hdfs -du sorted-data
+Found 3 items
+0           hdfs://localhost/user/yuta/sorted-data/_SUCCESS
+63175       hdfs://localhost/user/yuta/sorted-data/_logs
+20088639    hdfs://localhost/user/yuta/sorted-data/part-00000
+
+$ hdfs -text sorted-data/part-00000
+ac 93 31 14 e3 36 6a bb 43 2b 51 2f 4c 50 5e a4 fd 28 7c 34 2b bc 92 b3 f5 0f e2 95 c6 96 3f 0a d1 
+ac 90 80 ac 4d 4d de 67 9c bd 0b 6b 14 1c ed fb 38 c2 51 c0 d7 42 9d 0b ab ea 2e ae fc c7 aa 6b 17 
+9a cf 25 b9 74 e2 93 b0 47 c0 18 5a fc 1f 58 3d 3a b7 c8 c8 e5 1d 30 eb 52 b4 f5 9e 80 9c 23 51 a9 
+7a 37 95 97 6e 1a 76 4a e7 60 67 fe e8 f2 00 3f d3 05 2d e1 57 00 1c 7c b1 9b 20 2b ba 1a 8e 9b 3a 
+92 e6 65 56 13 f6 cd db b8 ed 24 1d d8 e4 da c5 f5 fb 20 1a cb 3f df a9 fe f4 2b aa f2 87 00 67 02 f6 
+5f 32 a9 e1 4d 0e a4 05 15 91 38 34 cc a0 a7 43 9d 88 7a 9c ec 33 ad 2a 1e c3 08 18 61 fb 1f 5c 82 ed fb e1 0f da 1d</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>join</h4>
+
+<blockquote>
+    <p>分割データの結合を行います。</p>
+
+<div class="section">
+<h5>Source</h5>
+<pre class="hljs java" data-lang="java" data-unlink><span class="synPreProc">package</span> org.apache.hadoop.examples;
+
+<span class="synPreProc">import</span> java.io.IOException;
+<span class="synPreProc">import</span> java.util.*;
+
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configuration;
+<span class="synPreProc">import</span> org.apache.hadoop.conf.Configured;
+<span class="synPreProc">import</span> org.apache.hadoop.fs.Path;
+<span class="synPreProc">import</span> org.apache.hadoop.io.BytesWritable;
+<span class="synPreProc">import</span> org.apache.hadoop.io.Writable;
+<span class="synPreProc">import</span> org.apache.hadoop.io.WritableComparable;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.*;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.join.*;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.lib.IdentityMapper;
+<span class="synPreProc">import</span> org.apache.hadoop.mapred.lib.IdentityReducer;
+<span class="synPreProc">import</span> org.apache.hadoop.util.Tool;
+<span class="synPreProc">import</span> org.apache.hadoop.util.ToolRunner;
+
+<span class="synType">public</span> <span class="synType">class</span> Join <span class="synType">extends</span> Configured <span class="synType">implements</span> Tool {
+
+  <span class="synType">static</span> <span class="synType">int</span> printUsage() {
+System.out.println(<span class="synConstant">"join [-m <maps>] [-r <reduces>] "</span> +
+                   <span class="synConstant">"[-inFormat <input format class>] "</span> +
+                   <span class="synConstant">"[-outFormat <output format class>] "</span> + 
+                   <span class="synConstant">"[-outKey <output key class>] "</span> +
+                   <span class="synConstant">"[-outValue <output value class>] "</span> +
+                   <span class="synConstant">"[-joinOp <inner|outer|override>] "</span> +
+                   <span class="synConstant">"[input]* <input> <output>"</span>);
+ToolRunner.printGenericCommandUsage(System.out);
+<span class="synStatement">return</span> -<span class="synConstant">1</span>;
+  }
+
+  <span class="synComment">/**</span>
+<span class="synComment">   *</span><span class="synSpecial"> The main driver for sort program.</span>
+<span class="synComment">   * Invoke this method to submit the map/reduce job.</span>
+<span class="synComment">   * </span><span class="synSpecial">@throws</span><span class="synIdentifier"> IOException</span><span class="synComment"> When there is communication problems with the </span>
+<span class="synComment">   *                     job tracker.</span>
+<span class="synComment">   */</span>
+  <span class="synType">public</span> <span class="synType">int</span> run(String[] args) <span class="synType">throws</span> Exception {
+JobConf jobConf = <span class="synStatement">new</span> JobConf(getConf(), Sort.<span class="synType">class</span>);
+jobConf.setJobName(<span class="synConstant">"join"</span>);
+
+jobConf.setMapperClass(IdentityMapper.<span class="synType">class</span>);        
+jobConf.setReducerClass(IdentityReducer.<span class="synType">class</span>);
+
+JobClient client = <span class="synStatement">new</span> JobClient(jobConf);
+ClusterStatus cluster = client.getClusterStatus();
+<span class="synType">int</span> num_maps = cluster.getTaskTrackers() * 
+               jobConf.getInt(<span class="synConstant">"test.sort.maps_per_host"</span>, <span class="synConstant">10</span>);
+<span class="synType">int</span> num_reduces = (<span class="synType">int</span>) (cluster.getMaxReduceTasks() * <span class="synConstant">0.9</span>);
+String sort_reduces = jobConf.get(<span class="synConstant">"test.sort.reduces_per_host"</span>);
+<span class="synStatement">if</span> (sort_reduces != <span class="synConstant">null</span>) {
+   num_reduces = cluster.getTaskTrackers() * 
+                   Integer.parseInt(sort_reduces);
+}
+Class<? <span class="synType">extends</span> InputFormat> inputFormatClass = 
+  SequenceFileInputFormat.<span class="synType">class</span>;
+Class<? <span class="synType">extends</span> OutputFormat> outputFormatClass = 
+  SequenceFileOutputFormat.<span class="synType">class</span>;
+Class<? <span class="synType">extends</span> WritableComparable> outputKeyClass = BytesWritable.<span class="synType">class</span>;
+Class<? <span class="synType">extends</span> Writable> outputValueClass = TupleWritable.<span class="synType">class</span>;
+String op = <span class="synConstant">"inner"</span>;
+List<String> otherArgs = <span class="synStatement">new</span> ArrayList<String>();
+<span class="synStatement">for</span>(<span class="synType">int</span> i=<span class="synConstant">0</span>; i < args.length; ++i) {
+  <span class="synStatement">try</span> {
+    <span class="synStatement">if</span> (<span class="synConstant">"-m"</span>.equals(args[i])) {
+      num_maps = Integer.parseInt(args[++i]);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-r"</span>.equals(args[i])) {
+      num_reduces = Integer.parseInt(args[++i]);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-inFormat"</span>.equals(args[i])) {
+      inputFormatClass = 
+        Class.forName(args[++i]).asSubclass(InputFormat.<span class="synType">class</span>);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-outFormat"</span>.equals(args[i])) {
+      outputFormatClass = 
+        Class.forName(args[++i]).asSubclass(OutputFormat.<span class="synType">class</span>);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-outKey"</span>.equals(args[i])) {
+      outputKeyClass = 
+        Class.forName(args[++i]).asSubclass(WritableComparable.<span class="synType">class</span>);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-outValue"</span>.equals(args[i])) {
+      outputValueClass = 
+        Class.forName(args[++i]).asSubclass(Writable.<span class="synType">class</span>);
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (<span class="synConstant">"-joinOp"</span>.equals(args[i])) {
+      op = args[++i];
+    } <span class="synStatement">else</span> {
+      otherArgs.add(args[i]);
+    }
+  } <span class="synStatement">catch</span> (NumberFormatException except) {
+    System.out.println(<span class="synConstant">"ERROR: Integer expected instead of "</span> + args[i]);
+    <span class="synStatement">return</span> printUsage();
+  } <span class="synStatement">catch</span> (ArrayIndexOutOfBoundsException except) {
+    System.out.println(<span class="synConstant">"ERROR: Required parameter missing from "</span> +
+        args[i-<span class="synConstant">1</span>]);
+    <span class="synStatement">return</span> printUsage(); <span class="synComment">// exits</span>
+  }
+}
+
+<span class="synComment">// Set user-supplied (possibly default) job configs</span>
+jobConf.setNumMapTasks(num_maps);
+jobConf.setNumReduceTasks(num_reduces);
+
+<span class="synStatement">if</span> (otherArgs.size() < <span class="synConstant">2</span>) {
+  System.out.println(<span class="synConstant">"ERROR: Wrong number of parameters: "</span>);
+  <span class="synStatement">return</span> printUsage();
+}
+
+FileOutputFormat.setOutputPath(jobConf, 
+  <span class="synStatement">new</span> Path(otherArgs.remove(otherArgs.size() - <span class="synConstant">1</span>)));
+List<Path> plist = <span class="synStatement">new</span> ArrayList<Path>(otherArgs.size());
+<span class="synStatement">for</span> (String s : otherArgs) {
+  plist.add(<span class="synStatement">new</span> Path(s));
+}
+
+jobConf.setInputFormat(CompositeInputFormat.<span class="synType">class</span>);
+jobConf.set(<span class="synConstant">"mapred.join.expr"</span>, CompositeInputFormat.compose(
+      op, inputFormatClass, plist.toArray(<span class="synStatement">new</span> Path[<span class="synConstant">0</span>])));
+jobConf.setOutputFormat(outputFormatClass);
+
+jobConf.setOutputKeyClass(outputKeyClass);
+jobConf.setOutputValueClass(outputValueClass);
+
+Date startTime = <span class="synStatement">new</span> Date();
+System.out.println(<span class="synConstant">"Job started: "</span> + startTime);
+JobClient.runJob(jobConf);
+Date end_time = <span class="synStatement">new</span> Date();
+System.out.println(<span class="synConstant">"Job ended: "</span> + end_time);
+System.out.println(<span class="synConstant">"The job took "</span> + 
+    (end_time.getTime() - startTime.getTime()) /<span class="synConstant">1000</span> + <span class="synConstant">" seconds."</span>);
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+  }
+
+  <span class="synType">public</span> <span class="synType">static</span> <span class="synType">void</span> main(String[] args) <span class="synType">throws</span> Exception {
+<span class="synType">int</span> res = ToolRunner.run(<span class="synStatement">new</span> Configuration(), <span class="synStatement">new</span> Join(), args);
+System.exit(res);
+  }
+
+}
+</pre>
+</div>
+<div class="section">
+<h5>Execution</h5>
+<pre class="code" data-lang="" data-unlink>$ hadoop jar /usr/lib/hadoop-0.20/hadoop-examples.jar join random-data joined-data
+
+$ hdfs -du joined-data                                                            
+Found 3 items
+0           hdfs://localhost/user/yuta/joined-data/_SUCCESS
+63015       hdfs://localhost/user/yuta/joined-data/_logs
+20158803    hdfs://localhost/user/yuta/joined-data/part-00000
+
+$ hdfs -text joined-data/part-00000
+
+[84 0d 6a 97 fc c7 fa f8 3d 32 a3 b9 e7 85 09 e4 43 ca 8a 56 d9 6d 74 7c ba 04 18
+71 51 f7 c2 7b 03 89 84 0a ce 4a 27 7a 23 ee 3e 84 ef a7 3d e3 e8 6e 61 15 6a c8 e0 b1 9e 89 78 e9 10 f3 13 c7 a7 19
+b4 09 2e 09 a8 f1 8e 9e 50 70 84 8d e2 85 95 27 87 88 16 eb 80 3e 22 40 82 da f3 a4 9f e0 8f 6c e6 82 16 f7 88 06 51
+96 ef f2 32 ac e2 c9 7c 9d c2 6e 45 60 db b3 05 a5]</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Tips</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Config File</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>の設定ファイルは以下の箇所に設置されます。</p>
+<pre class="code" data-lang="" data-unlink>$ ree /usr/lib/hadoop-0.20/conf/
+/usr/lib/hadoop-0.20/conf/
+|-- README
+|-- capacity-scheduler.xml
+|-- configuration.xsl
+|-- core-site.xml
+|-- fair-scheduler.xml
+|-- hadoop-env.sh
+|-- hadoop-metrics.properties
+|-- hadoop-policy.xml
+|-- hdfs-site.xml
+|-- log4j.properties
+|-- mapred-queue-acls.xml
+|-- mapred-site.xml
+|-- masters
+|-- org-xerial-snappy.properties
+|-- slaves
+|-- ssl-client.xml.example
+|-- ssl-server.xml.example
+`-- taskcontroller.cfg</pre>
+</div>
+<div class="section">
+<h5>log</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>システムのログは以下の箇所に記録されます。</p>
+<pre class="code" data-lang="" data-unlink>$ tree /usr/lib/hadoop-0.20/logs
+|-- hadoop-hadoop-datanode-localhost.localdomain.log.YYYY-MM-DD
+|-- hadoop-hadoop-jobtracker-localhost.localdomain.log.YYYY-MM-DD
+|-- hadoop-hadoop-namenode-localhost.localdomain.log.YYYY-MM-DD
+|-- hadoop-hadoop-secondarynamenode-localhost.localdomain.log.YYYY-MM-DD
+|-- hadoop-hadoop-tasktracker-localhost.localdomain.log.YYYY-MM-DD</pre>
+</div>
+<div class="section">
+<h5>SequenceFileとは</h5>
+<p>Binary型のKey-Valueレコードをまとめたファイルです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a> fs -text SequenceFile と実行するとテキストとして読めます。ただし独自に圧縮をかけたSequenceFileなども存在するため、その場合はDecode処理書く必要がありそうです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>実行中に以下のように怒られる時がありますが、それはinputFileがSequenceFile形式になっていないためです。</p>
+<pre class="code" data-lang="" data-unlink>12/05/10 10:09:58 INFO mapred.JobClient: Task Id : attempt_201205100725_0022_m_000000_0, Status : FAILED
+java.io.IOException: hdfs://localhost/user/yuta/madmagi_out_wordcount/part-r-00000 not a SequenceFile</pre>
+</div>
+<div class="section">
+<h5>Tool</h5>
+<p>何か困った時は以下の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>でチェックします。</p>
+
+<ul>
+<li>Namenode   <a href="http://localhost:50070/">http://localhost:50070/</a></li>
+<li>JobTracker <a href="http://lcoalhost:50030/">http://lcoalhost:50030/</a></li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201205031659/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201205031659/">Apache Mahout 機械学習Libraryを使って「魔法少女まどか☆マギカ」の台詞をテキストマイニングしてみた</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201205140829/">魔法少女まどか☆マギカN-Gram</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201205140829/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

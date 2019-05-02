@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110302/1298993924" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>ギャル文字変換Bookmarklet &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>ギャル文字変換Bookmarklet</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Mar 02, 00:38</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="javascript-ギャル文字変換bookmarklet">[javascript] : ギャル文字変換Bookmarklet</h2>
+
+<div class="section">
+<h4>概要</h4>
+
+<blockquote>
+    <p>ギャル文字も新しい日本語表記の一つだと勝手に思っています。<br />
+<span style="color:#FF0000;">「ギャル文字の方が断然読みやすいです！」</span>ギャルの中でも少数派だとは思っていますが、<br />
+そんな方のためにWebページのコンテンツをギャル文字に変換する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>を書いてみました。<br />
+変換機能は<a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>として提供します。方法は閲覧中のWebページで<a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>を実行するだけです。<br />
+<span style="color:#FF0000;">※利用は自己責任でお願いします。また何かしら問題が発生したら提供を即中止します。</span></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Bookmarklet">Bookmarklet</a></h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>ブックマーク</h5>
+<p><a href="http://mobiles-proxy.appspot.com/bookmarklet">ギャル文字変換bookmarklet</a><br />
+<span style="color:#FF0000;">※上のリンク先に遷移し、表示されているリンクをbookmarkしてください。</span><br />
+</p>
+
+</div>
+<div class="section">
+<h5>bookmarkソース</h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink>javascript:void((<span class="synIdentifier">function</span>()<span class="synIdentifier">{var</span>%20s=<span class="synStatement">document</span>.createElement(<span class="synConstant">'script'</span>);s.setAttribute(<span class="synConstant">'src'</span>,<span class="synConstant">'http://mobiles-proxy.appspot.com/statics/js/v1/gmbookmarklet.js'</span>);s.setAttribute(<span class="synConstant">'id'</span>,<span class="synConstant">'gmbookmark'</span>);<span class="synStatement">document</span>.body.appendChild(s)<span class="synIdentifier">}</span>)());
+</pre><p>上のソースをそのままbookmarkに貼付けてもらっても大丈夫です。</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>変換後イメージ</h4>
+<p>某サイトのTopics(<a class="keyword" href="http://d.hatena.ne.jp/keyword/iPhone">iPhone</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/Safari">Safari</a>)<br />
+<img src="http://mobiles-proxy.appspot.com/statics/images/topics.png" style="width:250px;height:370px;"/><br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>のstatus(<a class="keyword" href="http://d.hatena.ne.jp/keyword/safari">safari</a>)<br />
+<img src="http://mobiles-proxy.appspot.com/statics/images/twitter.png" style="width:370px;height:250px;"/><br />
+</p>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/GitHub">GitHub</a></h4>
+
+<blockquote>
+    <p><a href="https://github.com/yutakikuchi/JS/tree/master/gmconv">https://github.com/yutakikuchi/JS/tree/master/gmconv</a><br />
+JSに詳しい方、修正点などありましたらご指摘いただけると助かります。<br />
+マルチバイトkeyのhashテーブルを基に変換処理をしているだけです。</p><p>ソースも一部blogに張っておきます。</p>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>から呼び出されるscript</h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synStatement">if</span>( !GM ) <span class="synIdentifier">var</span> GM = <span class="synIdentifier">{}</span>;
+<span class="synStatement">if</span>( !IE ) <span class="synIdentifier">var</span> IE = ( <span class="synComment">/*@cc_on!@*/</span>0 ) ? <span class="synConstant">true</span> : <span class="synConstant">false</span>;
+<span class="synStatement">if</span>( !JS ) <span class="synIdentifier">var</span> JS = <span class="synIdentifier">{}</span>;
+(<span class="synIdentifier">function</span>()<span class="synIdentifier">{</span>
+JS.util = <span class="synIdentifier">{}</span>;
+JS.util.getTagName = <span class="synIdentifier">function</span>( tag ) <span class="synIdentifier">{</span>
+    <span class="synStatement">return</span> <span class="synStatement">document</span>.getElementsByTagName( tag );
+<span class="synIdentifier">}</span>
+JS.util.$ = <span class="synIdentifier">function</span>( id ) <span class="synIdentifier">{</span>
+    <span class="synStatement">return</span> <span class="synStatement">document</span>.getElementById( id );
+<span class="synIdentifier">}</span>
+JS.util.createElem = <span class="synIdentifier">function</span>( elem ) <span class="synIdentifier">{</span>
+    <span class="synStatement">return</span> <span class="synStatement">document</span>.createElement( elem );
+<span class="synIdentifier">}</span>
+<span class="synIdentifier">}</span>)();
+
+<span class="synIdentifier">var</span> meta = JS.util.getTagName( <span class="synConstant">'meta'</span> );
+<span class="synIdentifier">var</span> charset = <span class="synConstant">'utf-8'</span>;
+<span class="synIdentifier">var</span> content,chars,reg;
+<span class="synStatement">for</span>(<span class="synIdentifier">var</span> i=0; i<meta.length; i++ )<span class="synIdentifier">{</span>
+chars = meta<span class="synIdentifier">[</span>i<span class="synIdentifier">]</span>.getAttribute( <span class="synConstant">'charset'</span> );
+<span class="synStatement">if</span>( chars !== <span class="synStatement">null</span> ) <span class="synIdentifier">{</span>
+    charset = chars;
+    <span class="synStatement">break</span>;
+<span class="synIdentifier">}</span>
+content = meta<span class="synIdentifier">[</span>i<span class="synIdentifier">]</span>.getAttribute( <span class="synConstant">'content'</span> );
+<span class="synStatement">if</span>( content !== <span class="synStatement">null</span> ) <span class="synIdentifier">{</span>
+    reg = <span class="synConstant">/charset=(.*?)$/gi</span>;
+    content.match( reg );
+    <span class="synStatement">if</span>( <span class="synType">RegExp</span>.$1 != <span class="synConstant">''</span> && <span class="synType">RegExp</span>.$1 != <span class="synStatement">null</span> ) <span class="synIdentifier">{</span>
+        charset =  <span class="synType">RegExp</span>.$1;
+        <span class="synStatement">break</span>;
+    <span class="synIdentifier">}</span>
+<span class="synIdentifier">}</span>
+<span class="synIdentifier">}</span>
+<span class="synStatement">if</span>( charset=<span class="synConstant">'t'</span> ) charset = <span class="synConstant">'utf-8'</span>;
+<span class="synIdentifier">var</span> script = JS.util.createElem( <span class="synConstant">'script'</span> );
+<span class="synComment">//script.setAttribute( 'src', 'gmconv_' + charset.toLowerCase() + '.js' );</span>
+script.setAttribute( <span class="synConstant">'src'</span>, <span class="synConstant">'http://mobiles-proxy.appspot.com/statics/js/v1/gmconv_'</span> + charset.toLowerCase() + <span class="synConstant">'.js'</span> );
+script.setAttribute( <span class="synConstant">'charset'</span>, charset );
+script.setAttribute( <span class="synConstant">'id'</span>, <span class="synConstant">'gmconv'</span> );
+<span class="synStatement">document</span>.body.appendChild( script );
+</pre>
+</div>
+<div class="section">
+<h5>変換<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a></h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synStatement">if</span>( !GM ) <span class="synIdentifier">var</span> GM = <span class="synIdentifier">{}</span>;
+(<span class="synIdentifier">function</span>()<span class="synIdentifier">{</span>
+GM.convert = <span class="synIdentifier">function</span>( data ) <span class="synIdentifier">{</span>
+<span class="synIdentifier">var</span> hash = <span class="synIdentifier">{}</span>;
+hash<span class="synIdentifier">[</span> <span class="synConstant">'あ'</span> <span class="synIdentifier">]</span> = <span class="synConstant">'†の'</span>;
+hash<span class="synIdentifier">[</span> <span class="synConstant">'ア'</span> <span class="synIdentifier">]</span> = <span class="synConstant">'了'</span>;
+hash<span class="synIdentifier">[</span> <span class="synConstant">'い'</span> <span class="synIdentifier">]</span> = <span class="synConstant">'ﾚヽ'</span>; 
+hash<span class="synIdentifier">[</span> <span class="synConstant">'イ'</span> <span class="synIdentifier">]</span> = <span class="synConstant">'ィ'</span>;
+hash<span class="synIdentifier">[</span> <span class="synConstant">'う'</span> <span class="synIdentifier">]</span> = <span class="synConstant">'ぅ'</span>;
+hash<span class="synIdentifier">[</span> <span class="synConstant">'ウ'</span> <span class="synIdentifier">]</span> = <span class="synConstant">'宀'</span>;
+hash<span class="synIdentifier">[</span> <span class="synConstant">'え'</span> <span class="synIdentifier">]</span> = <span class="synConstant">'ぇ'</span>; 
+
+(略)
+
+<span class="synStatement">for</span>( <span class="synIdentifier">var</span> i <span class="synStatement">in</span> hash ) <span class="synIdentifier">{</span>
+    <span class="synIdentifier">var</span> reg = <span class="synStatement">new</span> <span class="synType">RegExp</span>( i, <span class="synConstant">'g'</span> );
+    data = data.replace( reg, hash<span class="synIdentifier">[</span>i<span class="synIdentifier">]</span> );
+<span class="synIdentifier">}</span>
+<span class="synStatement">return</span> data;
+<span class="synIdentifier">}</span>
+<span class="synIdentifier">}</span>)();
+<span class="synIdentifier">var</span> body  = JS.util.getTagName( <span class="synConstant">'body'</span> );
+<span class="synStatement">if</span>( <span class="synStatement">typeof</span>( body<span class="synIdentifier">[</span>0<span class="synIdentifier">]</span>.innerHTML ) !== <span class="synConstant">'undefined'</span> ) <span class="synIdentifier">{</span>
+body<span class="synIdentifier">[</span>0<span class="synIdentifier">]</span>.innerHTML = GM.convert( body<span class="synIdentifier">[</span>0<span class="synIdentifier">]</span>.innerHTML );
+<span class="synIdentifier">}</span>
+</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>対応文字</h4>
+
+<blockquote>
+    
+<ol>
+<li>カタカナ</li>
+<li>ひらがな</li>
+<li>漢字(一部)</li>
+</ol>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a></h4>
+
+<blockquote>
+    <p>変換したい元のページの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>が以下のものであれば変換可能としています。</p>
+
+<ol>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/EUC">EUC</a>-JP</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/ISO-2022-JP">ISO-2022-JP</a></li>
+</ol>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>対応ブラウザ</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mac">Mac</a>のブラウザでテストをしています。以下のブラウザではほとんどのページが変換可能であることを確かめました。</p>
+
+<ol>
+<li>Mobile <a class="keyword" href="http://d.hatena.ne.jp/keyword/Safari">Safari</a>(<a class="keyword" href="http://d.hatena.ne.jp/keyword/iPhone">iPhone</a>)</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Safari">Safari</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/FireFox">FireFox</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Chrome">Chrome</a>　<span style="color:#FF0000;">※2011/2/28 動作が微妙です</span></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Opera">Opera</a></li>
+</ol>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>参考</h4>
+
+<blockquote>
+    <p><a href="http://ja.wikipedia.org/wiki/">http://ja.wikipedia.org/wiki/</a>ギャル文字<br />
+<a href="http://staffblog.baidu.jp/2010/12/20/baidu-type-029/">http://staffblog.baidu.jp/2010/12/20/baidu-type-029/</a></p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201102160833/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201102160833/">iPhoneのwindow.getSelection()について</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201103040151/">Hashの用語まとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201103040151/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130415/1365956662" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>地域データの構造化テキストを公開しました。 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>地域データの構造化テキストを公開しました。</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Apr 15, 01:24</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="python-地域データの構造化テキストを公開しました">[Python] : 地域データの構造化テキストを公開しました。</h2>
+
+<p><a href="http://d.hatena.ne.jp/asin/B003VWCBXI/yutakikuchi-22">[asin:B003VWCBXI:detail]</a></p><p></p>
+
+<div class="section">
+<h4>はじめに</h4>
+
+<blockquote>
+    <p><a href="http://www.post.japanpost.jp/zipcode/dl/kogaki-zip.html">読み仮名データの促音・拗音を小書きで表記するもの - zip圧縮形式 日本郵便</a> <a href="http://b.hatena.ne.jp/entry/www.post.japanpost.jp/zipcode/dl/kogaki-zip.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.post.japanpost.jp/zipcode/dl/kogaki-zip.html" alt="はてなブックマーク - 読み仮名データの促音・拗音を小書きで表記するもの - zip圧縮形式 日本郵便" border="0" /></a><br />
+<a href="http://www.ekidata.jp/">駅データ 無料ダウンロード 『駅データ.jp』</a> <a href="http://b.hatena.ne.jp/entry/www.ekidata.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://www.ekidata.jp/" alt="はてなブックマーク - 駅データ 無料ダウンロード 『駅データ.jp』" border="0" /></a></p><br />
+<p>最近は専らデータの整形屋になっている<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。今日は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C6%FC%CB%DC%CD%B9%CA%D8">日本郵便</a>株式会社と駅データ.jpに掲載されているデータを利用して、地域データを構造化テキストとして作成します。ここでの目的は上のリンクで公開されている地域データの形式が<a class="keyword" href="http://d.hatena.ne.jp/keyword/CSV">CSV</a>だったり、WebAPIの<a class="keyword" href="http://d.hatena.ne.jp/keyword/XML">XML</a>だったり、データが1箇所にまとめられていなかったりと少し不便を感じたので構造化テキストを作成することにしました。出力形式は名前ベースの<a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a>です。尚、下で公開したデータの利用は全て自己責任でお願い致します。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>PyYAMLの利用</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a>形式をGenerateする言語は<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>を利用します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a>ライブラリのPyYAMLを使うのでその設定方法を書いておきます。import <a class="keyword" href="http://d.hatena.ne.jp/keyword/yaml">yaml</a>が実行出来れば設定が完了しています。</p>
+<pre class="code" data-lang="" data-unlink>$ wget "http://pyyaml.org/download/pyyaml/PyYAML-3.10.zip"
+
+$ unzip PyYAML-3.10.zip
+
+$ cd PyYAML-3.10
+
+$ sudo python setup.py install
+
+$ python
+Python 2.6.6 (r266:84292, Sep 11 2012, 08:34:23) 
+[GCC 4.4.6 20120305 (Red Hat 4.4.6-4)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import yaml
+>>></pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>地域名データ/郵便番号の<a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a>化</h4>
+
+<blockquote>
+    <p>県名、市区町村のデータの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BE%E9%C4%B9%B2%BD">冗長化</a>を防ぐために<a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a>のkeyとして設定しデータに重複が発生しないようにしています。以下が簡単なDataFormatとSampleDataです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C6%FC%CB%DC%CD%B9%CA%D8">日本郵便</a>のサイトからDataをDownloadして<a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a>ファイルを生成するのを下の<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>で自動的にやってくれますが、僕が試しに実行してみたところ処理に5分程掛かってしまい少し重たく感じます。生成したファイルを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Github">Github</a>に上げました。</p>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Github">Github</a></h5>
+
+<ul>
+<li><a href="https://github.com/yutakikuchi/Data/blob/master/zipcode.yaml">Data/zipcode.yaml at master · yutakikuchi/Data · GitHub</a> <a href="http://b.hatena.ne.jp/entry/s/github.com/yutakikuchi/Data/blob/master/zipcode.yaml"><img src="http://b.hatena.ne.jp/entry/image/https://github.com/yutakikuchi/Data/blob/master/zipcode.yaml" alt="はてなブックマーク - Data/zipcode.yaml at master · yutakikuchi/Data · GitHub" border="0" /></a></li>
+<li>Fileサイズが大きくて<a class="keyword" href="http://d.hatena.ne.jp/keyword/Github">Github</a>のWebViewでは見ることが出来ません。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ git clone git@github.com:yutakikuchi/Data.git</pre>
+</div>
+<div class="section">
+<h5>DataFormat/SampleData</h5>
+<pre class="hljs yaml" data-lang="yaml" data-unlink>県名:
+  市名:
+ 町村名:
+   city_kana:市名のカナ表記
+   prefecture_kana:県名のカナ表記
+   town_kana:町村名のカナ表記
+   zipcode:郵便番号
+</pre><pre class="hljs yaml" data-lang="yaml" data-unlink>新潟県:
+  三島郡出雲崎町:
+上中条:
+  <span class="synIdentifier">city_kana</span><span class="synSpecial">:</span> ｻﾝﾄｳｸﾞﾝｲｽﾞﾓｻﾞｷﾏﾁ
+  <span class="synIdentifier">prefecture_kana</span><span class="synSpecial">:</span> ﾆｲｶﾞﾀｹﾝ
+  <span class="synIdentifier">town_kana</span><span class="synSpecial">:</span> ｶﾐﾅｶｼﾞｮｳ
+  <span class="synIdentifier">zipcode</span><span class="synSpecial">:</span> <span class="synConstant">'9494341'</span>
+上野山:
+  <span class="synIdentifier">city_kana</span><span class="synSpecial">:</span> ｻﾝﾄｳｸﾞﾝｲｽﾞﾓｻﾞｷﾏﾁ
+  <span class="synIdentifier">prefecture_kana</span><span class="synSpecial">:</span> ﾆｲｶﾞﾀｹﾝ
+  <span class="synIdentifier">town_kana</span><span class="synSpecial">:</span> ｳｴﾉﾔﾏ
+  <span class="synIdentifier">zipcode</span><span class="synSpecial">:</span> <span class="synConstant">'9494346'</span>
+中山:  
+  <span class="synIdentifier">city_kana</span><span class="synSpecial">:</span> ｻﾝﾄｳｸﾞﾝｲｽﾞﾓｻﾞｷﾏﾁ
+  <span class="synIdentifier">prefecture_kana</span><span class="synSpecial">:</span> ﾆｲｶﾞﾀｹﾝ
+  <span class="synIdentifier">town_kana</span><span class="synSpecial">:</span> ﾅｶﾔﾏ
+  <span class="synIdentifier">zipcode</span><span class="synSpecial">:</span> <span class="synConstant">'9494345'</span>
+久田:  
+  <span class="synIdentifier">city_kana</span><span class="synSpecial">:</span> ｻﾝﾄｳｸﾞﾝｲｽﾞﾓｻﾞｷﾏﾁ
+  <span class="synIdentifier">prefecture_kana</span><span class="synSpecial">:</span> ﾆｲｶﾞﾀｹﾝ
+  <span class="synIdentifier">town_kana</span><span class="synSpecial">:</span> ｸｯﾀ
+  <span class="synIdentifier">zipcode</span><span class="synSpecial">:</span> <span class="synConstant">'9494301'</span>
+</pre>
+</div>
+<div class="section">
+<h5>generate <a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a></h5>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+<span class="synComment"># 地域情報のYAML化 </span>
+
+<span class="synPreProc">import</span> sys,re,urllib,zipfile,os,yaml
+zip_url = <span class="synConstant">'http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip'</span>;
+urllib.urlretrieve( zip_url,  <span class="synConstant">'./ken_all.zip'</span> )
+zf = zipfile.ZipFile( <span class="synConstant">'./ken_all.zip'</span>, <span class="synConstant">'r'</span> )
+dict_data = {}
+non_string = <span class="synConstant">u'以下に掲載がない場合'</span>
+<span class="synStatement">for</span> f <span class="synStatement">in</span> zf.namelist():
+   <span class="synStatement">if</span> <span class="synStatement">not</span> os.path.basename(f):
+  <span class="synStatement">break</span>
+   <span class="synStatement">else</span>:
+  <span class="synStatement">try</span>:
+     data = <span class="synIdentifier">open</span>( f, <span class="synConstant">'r'</span> )
+     <span class="synStatement">for</span> line <span class="synStatement">in</span> data:
+        <span class="synStatement">try</span>:
+           line =  line.decode( <span class="synConstant">'cp932'</span> ).replace( <span class="synConstant">'"'</span>, <span class="synConstant">''</span> )
+           nodes = line.split(<span class="synConstant">','</span>)
+           zipcode = nodes[<span class="synConstant">2</span>] <span class="synStatement">if</span> nodes[<span class="synConstant">2</span>] <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span> <span class="synStatement">and</span> nodes[<span class="synConstant">2</span>] != <span class="synConstant">''</span> <span class="synStatement">and</span> nodes[<span class="synConstant">2</span>] != non_string <span class="synStatement">else</span> <span class="synConstant">'N/A'</span>
+           prefecture_kana = nodes[<span class="synConstant">3</span>] <span class="synStatement">if</span> nodes[<span class="synConstant">3</span>] <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span> <span class="synStatement">and</span> nodes[<span class="synConstant">3</span>] != <span class="synConstant">''</span> <span class="synStatement">and</span> nodes[<span class="synConstant">3</span>] != non_string <span class="synStatement">else</span> <span class="synConstant">'N/A'</span>
+           city_kana = nodes[<span class="synConstant">4</span>] <span class="synStatement">if</span> nodes[<span class="synConstant">4</span>] <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span> <span class="synStatement">and</span> nodes[<span class="synConstant">4</span>] != <span class="synConstant">''</span> <span class="synStatement">and</span> nodes[<span class="synConstant">4</span>] != non_string <span class="synStatement">else</span> <span class="synConstant">'N/A'</span>
+           town_kana = nodes[<span class="synConstant">5</span>] <span class="synStatement">if</span> nodes[<span class="synConstant">5</span>] <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span> <span class="synStatement">and</span> nodes[<span class="synConstant">5</span>] != <span class="synConstant">''</span> <span class="synStatement">and</span> nodes[<span class="synConstant">5</span>] != non_string <span class="synStatement">else</span> <span class="synConstant">'N/A'</span>
+           prefecture = nodes[<span class="synConstant">6</span>] <span class="synStatement">if</span> nodes[<span class="synConstant">6</span>] <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span> <span class="synStatement">and</span> nodes[<span class="synConstant">6</span>] != <span class="synConstant">''</span> <span class="synStatement">and</span> nodes[<span class="synConstant">6</span>] != non_string <span class="synStatement">else</span> <span class="synConstant">'N/A'</span>
+           city = nodes[<span class="synConstant">7</span>] <span class="synStatement">if</span> nodes[<span class="synConstant">7</span>] <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span> <span class="synStatement">and</span> nodes[<span class="synConstant">7</span>] != <span class="synConstant">''</span> <span class="synStatement">and</span> nodes[<span class="synConstant">7</span>] != non_string <span class="synStatement">else</span> <span class="synConstant">'N/A'</span>
+           town = nodes[<span class="synConstant">8</span>] <span class="synStatement">if</span> nodes[<span class="synConstant">8</span>] <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span> <span class="synStatement">and</span> nodes[<span class="synConstant">8</span>] != <span class="synConstant">''</span> <span class="synStatement">and</span> nodes[<span class="synConstant">8</span>] != non_string <span class="synStatement">else</span> <span class="synConstant">'N/A'</span>
+           dict_data.setdefault( prefecture, {} ).setdefault( city, {} ).setdefault( town, {} )
+           dict_data[prefecture][city][town][<span class="synConstant">'zipcode'</span>]  = zipcode.encode( <span class="synConstant">'utf-8'</span> )  
+           dict_data[prefecture][city][town][<span class="synConstant">'prefecture_kana'</span>] = prefecture_kana
+           dict_data[prefecture][city][town][<span class="synConstant">'city_kana'</span>] = city_kana
+           dict_data[prefecture][city][town][<span class="synConstant">'town_kana'</span>] = town_kana
+        <span class="synStatement">except</span> <span class="synType">UnicodeEncodeError</span>:
+           <span class="synStatement">continue</span>
+  <span class="synStatement">except</span> <span class="synType">Exception</span>, e:
+     <span class="synIdentifier">print</span> <span class="synIdentifier">str</span>(e) 
+     <span class="synStatement">continue</span>
+savefile = <span class="synIdentifier">open</span>( <span class="synConstant">'zipcode.yaml'</span>, <span class="synConstant">'w'</span> )
+yaml.dump( dict_data, savefile, default_flow_style=<span class="synIdentifier">False</span>, encoding=<span class="synConstant">'utf8'</span>, allow_unicode=<span class="synIdentifier">True</span> )
+</pre><pre class="code" data-lang="" data-unlink>$ python zipcode.py</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>駅データの<a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a>化</h4>
+
+<blockquote>
+    <p><a href="http://www.ekidata.jp/agreement.php">利用規約 | 駅データ 無料ダウンロード 『駅データ.jp』</a> <a href="http://b.hatena.ne.jp/entry/www.ekidata.jp/agreement.php"><img src="http://b.hatena.ne.jp/entry/image/http://www.ekidata.jp/agreement.php" alt="はてなブックマーク - 利用規約 | 駅データ 無料ダウンロード 『駅データ.jp』" border="0" /></a><br />
+<a href="http://www.codeplus.co.jp/">CodePlus</a> <a href="http://b.hatena.ne.jp/entry/www.codeplus.co.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://www.codeplus.co.jp/" alt="はてなブックマーク - CodePlus" border="0" /></a>さんが提供している駅データ.jpですが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CD%F8%CD%D1%B5%AC%CC%F3">利用規約</a>に書かれている第4条 (利用)/第5条 (加工)/第6条 (第三者提供)の項目が利用者フレンドリーで素晴らしく思います。敬意を表したいと思います。こちらも生成した<a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a>ファイルを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Github">Github</a>に上げました。</p>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Github">Github</a></h5>
+
+<ul>
+<li><a href="https://github.com/yutakikuchi/Data/blob/master/transit.yaml">Data/transit.yaml at master · yutakikuchi/Data · GitHub</a> <a href="http://b.hatena.ne.jp/entry/s/github.com/yutakikuchi/Data/blob/master/transit.yaml"><img src="http://b.hatena.ne.jp/entry/image/https://github.com/yutakikuchi/Data/blob/master/transit.yaml" alt="はてなブックマーク - Data/transit.yaml at master · yutakikuchi/Data · GitHub" border="0" /></a></li>
+<li><a href="https://raw.github.com/yutakikuchi/Data/master/transit.yaml">RawData/transit.yaml at master · yutakikuchi/Data · GitHub</a> <a href="http://b.hatena.ne.jp/entry/s/raw.github.com/yutakikuchi/Data/master/transit.yaml"><img src="http://b.hatena.ne.jp/entry/image/https://raw.github.com/yutakikuchi/Data/master/transit.yaml" alt="はてなブックマーク - " border="0" /></a></li>
+</ul><pre class="code" data-lang="" data-unlink>$ git clone git@github.com:yutakikuchi/Data.git</pre>
+</div>
+<div class="section">
+<h5>DataFormat/SampleData</h5>
+<pre class="hljs yaml" data-lang="yaml" data-unlink>県名:
+  路線名:
+ 駅名:
+   station_code:駅名コード
+   station_lat:駅の緯度
+   station_lon:駅の経度
+</pre><pre class="hljs yaml" data-lang="yaml" data-unlink>新潟県: 
+  JR上越線: 
+上牧: 
+  <span class="synIdentifier">station_code</span><span class="synSpecial">:</span> <span class="synConstant">1134213</span>
+  <span class="synIdentifier">station_lat</span><span class="synSpecial">:</span> <span class="synConstant">36.735616</span>
+  <span class="synIdentifier">station_lon</span><span class="synSpecial">:</span> <span class="synConstant">138.984533</span>
+上越国際スキー場前: 
+  <span class="synIdentifier">station_code</span><span class="synSpecial">:</span> <span class="synConstant">1134223</span>
+  <span class="synIdentifier">station_lat</span><span class="synSpecial">:</span> <span class="synConstant">37.028754999999997</span>
+  <span class="synIdentifier">station_lon</span><span class="synSpecial">:</span> <span class="synConstant">138.82797299999999</span>
+五日町: 
+  <span class="synIdentifier">station_code</span><span class="synSpecial">:</span> <span class="synConstant">1134226</span>
+  <span class="synIdentifier">station_lat</span><span class="synSpecial">:</span> <span class="synConstant">37.119900000000001</span>
+  <span class="synIdentifier">station_lon</span><span class="synSpecial">:</span> <span class="synConstant">138.90834599999999</span>
+井野: 
+  <span class="synIdentifier">station_code</span><span class="synSpecial">:</span> <span class="synConstant">1134203</span>
+  <span class="synIdentifier">station_lat</span><span class="synSpecial">:</span> <span class="synConstant">36.357456999999997</span>
+  <span class="synIdentifier">station_lon</span><span class="synSpecial">:</span> <span class="synConstant">139.023247</span>
+</pre>
+</div>
+<div class="section">
+<h5>generate <a class="keyword" href="http://d.hatena.ne.jp/keyword/YAML">YAML</a></h5>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+<span class="synComment"># 地域情報のYAML化</span>
+<span class="synComment"># transit.pyとして保存する</span>
+
+<span class="synPreProc">import</span> time,urllib,urllib2,zipfile,os,yaml,xml.dom.minidom
+base_url = <span class="synConstant">'http://www.ekidata.jp/api/'</span>
+base_pref_url = base_url + <span class="synConstant">'p/'</span>
+base_line_url = base_url + <span class="synConstant">'l/'</span>
+opener = urllib2.build_opener()
+ua = <span class="synConstant">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/    534.51.22'</span>
+referer = <span class="synConstant">'http://www.ekidata.jp/'</span>
+opener.addheaders = [( <span class="synConstant">'User-Agent'</span>, ua ),( <span class="synConstant">'Referer'</span>, referer )]
+dict_data = {}
+<span class="synStatement">for</span> i <span class="synStatement">in</span> <span class="synIdentifier">range</span>(<span class="synConstant">1</span>,<span class="synConstant">48</span>):
+   pref_url = base_pref_url + <span class="synIdentifier">str</span>( i ) + <span class="synConstant">'.xml'</span>
+   <span class="synStatement">try</span>: 
+  pref_content = opener.<span class="synIdentifier">open</span>( pref_url ).read()
+  pref_dom = xml.dom.minidom.parseString( pref_content )
+  pref = pref_dom.getElementsByTagName( <span class="synConstant">'pref'</span> )[<span class="synConstant">0</span>]
+  pref_code = pref.getElementsByTagName( <span class="synConstant">'code'</span> )[<span class="synConstant">0</span>].firstChild.data
+  pref_name = pref.getElementsByTagName( <span class="synConstant">'name'</span> )[<span class="synConstant">0</span>].firstChild.data 
+  lines = pref_dom.getElementsByTagName( <span class="synConstant">'line'</span> )
+  <span class="synStatement">for</span> line_data <span class="synStatement">in</span> lines:
+     <span class="synStatement">try</span>:
+        time.sleep(<span class="synConstant">0.5</span>)
+        line_code = line_data.getElementsByTagName( <span class="synConstant">'line_cd'</span> )[<span class="synConstant">0</span>].firstChild.data
+        line_name = line_data.getElementsByTagName( <span class="synConstant">'line_name'</span> )[<span class="synConstant">0</span>].firstChild.data
+        line_url = base_line_url + <span class="synIdentifier">str</span>( line_code ) + <span class="synConstant">'.xml'</span>
+        line_content = opener.<span class="synIdentifier">open</span>( line_url ).read()
+        line_dom = xml.dom.minidom.parseString( line_content )
+        stations = line_dom.getElementsByTagName( <span class="synConstant">'station'</span> )
+        <span class="synStatement">for</span> station <span class="synStatement">in</span> stations:
+           station_code = station.getElementsByTagName( <span class="synConstant">'station_cd'</span> )[<span class="synConstant">0</span>].firstChild.data
+           station_name = station.getElementsByTagName( <span class="synConstant">'station_name'</span> )[<span class="synConstant">0</span>].firstChild.data
+           station_lat  = station.getElementsByTagName( <span class="synConstant">'lat'</span> )[<span class="synConstant">0</span>].firstChild.data
+           station_lon  = station.getElementsByTagName( <span class="synConstant">'lon'</span> )[<span class="synConstant">0</span>].firstChild.data
+           dict_data.setdefault( pref_name, {} ).setdefault( line_name, {} ).setdefault( station_name, {} )
+           dict_data[pref_name][line_name][station_name][ <span class="synConstant">'station_code'</span> ] = <span class="synIdentifier">int</span>( station_code.encode( <span class="synConstant">'utf-8'</span> ) )
+           dict_data[pref_name][line_name][station_name][ <span class="synConstant">'station_lat'</span> ] = <span class="synIdentifier">float</span>( station_lat.encode( <span class="synConstant">'utf-8'</span> ) )
+           dict_data[pref_name][line_name][station_name][ <span class="synConstant">'station_lon'</span> ] = <span class="synIdentifier">float</span>( station_lon.encode( <span class="synConstant">'utf-8'</span> ) )
+     <span class="synStatement">except</span> <span class="synType">Exception</span>, e:
+        <span class="synIdentifier">print</span> <span class="synIdentifier">str</span>(e)
+        <span class="synStatement">continue</span>
+   <span class="synStatement">except</span> <span class="synType">Exception</span>, e:
+  <span class="synIdentifier">print</span> <span class="synIdentifier">str</span>(e) 
+  <span class="synStatement">continue</span>
+savefile = <span class="synIdentifier">open</span>( <span class="synConstant">'transit.yaml'</span>, <span class="synConstant">'w'</span> )
+yaml.dump( dict_data, savefile, default_flow_style=<span class="synIdentifier">False</span>, encoding=<span class="synConstant">'utf8'</span>, allow_unicode=<span class="synIdentifier">True</span> )
+</pre><pre class="code" data-lang="" data-unlink>$ python transit.py</pre>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201304100545/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201304100545/">カッコイイWordPressを構築するためのたった3つの手順</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201304190433/">TinyCDB vs QDBM vs MemcachedのPerformance比較</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201304190433/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

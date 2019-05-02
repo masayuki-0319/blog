@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120222/1329867794" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>継続的インテグレーション(CI)ツールJenkinsを導入するためのまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>継続的インテグレーション(CI)ツールJenkinsを導入するためのまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Feb 22, 08:43</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="web-継続的インテグレーション-ci-ツールjenkinsを導入するためのまとめ">[Web] : 継続的インテグレーション(CI)ツールJenkinsを導入するためのまとめ</h2>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20120222011249" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20120222/20120222011249.png" alt="f:id:yutakikuchi:20120222011249p:image" title="f:id:yutakikuchi:20120222011249p:image" class="hatena-fotolife" itemprop="image"></a></span></p>
+
+<div class="section">
+<h4>概要</h4>
+
+<blockquote>
+    <p>誰もがSorceビルドや開発debugは面倒と思う作業。これらの作業を少しでも手間を掛からないようにするために<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%D1%C2%B3%C5%AA%A5%A4%A5%F3%A5%C6%A5%B0%A5%EC%A1%BC%A5%B7%A5%E7%A5%F3">継続的インテグレーション</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>のjenkinsというものがあります。jenkinsはテストおよびビルドの自動化やバグの早期発見に使われます。主に<a class="keyword" href="http://d.hatena.ne.jp/keyword/Java">Java</a>開発者向けの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>のようですが、他言語でも利用が出来るようです。今回の記事では主に導入周りの情報を整理したいと思います。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>導入のメリット</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%40IT">@IT</a>にJenkinsの特徴が書いてあります。<a href="http://www.atmarkit.co.jp/fjava/rensai4/devtool21/devtool21_1.html">「Hudson」改め「Jenkins」で始めるCI（継続的インテグレーション）入門 (1/4) - ＠IT</a> <a href="http://b.hatena.ne.jp/entry/www.atmarkit.co.jp/fjava/rensai4/devtool21/devtool21_1.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.atmarkit.co.jp/fjava/rensai4/devtool21/devtool21_1.html" alt="はてなブックマーク - 「Hudson」改め「Jenkins」で始めるCI（継続的インテグレーション）入門 (1/4) - ＠IT" border="0" /></a></p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>の自動ビルド バグの早期発見レポート</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>解析、統計</li>
+<li>テストの自動化</li>
+<li>様々な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%E9%A5%B0%A5%A4%A5%F3">プラグイン</a>による機能拡張</li>
+</ul><p>日本語版のJenkins <a class="keyword" href="http://d.hatena.ne.jp/keyword/wiki">wiki</a>にも色々と書いてあります。<a href="https://wiki.jenkins-ci.org/display/JA/Meet+Jenkins">Meet Jenkins - 日本語 - Jenkins Wiki</a> <a href="http://b.hatena.ne.jp/entry/s/wiki.jenkins-ci.org/display/JA/Meet+Jenkins"><img src="http://b.hatena.ne.jp/entry/image/https://wiki.jenkins-ci.org/display/JA/Meet+Jenkins" alt="はてなブックマーク - Meet Jenkins - 日本語 - Jenkins Wiki" border="0" /></a></p>
+
+<ul>
+<li>差分サポート</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%CA%C2%B3%A5%EA%A5%F3%A5%AF">永続リンク</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/RSS">RSS</a>/Eメール/IM との連携</li>
+<li>ビルド後のタグ</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/JUnit">JUnit</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/TestNG">TestNG</a>によるテスト結果のレポート</li>
+<li>分散ビルド</li>
+<li>ファイル指紋</li>
+</ul><p>infoQのJenkins開発者のコラムに流行った理由が書いてありました。<a href="http://www.infoq.com/jp/news/2011/09/jenkins_20110908">InfoQ: Jenkinsによる継続的インテグレーションのススメ(1)</a> <a href="http://b.hatena.ne.jp/entry/www.infoq.com/jp/news/2011/09/jenkins_20110908"><img src="http://b.hatena.ne.jp/entry/image/http://www.infoq.com/jp/news/2011/09/jenkins_20110908" alt="はてなブックマーク - InfoQ: Jenkinsによる継続的インテグレーションのススメ(1)" border="0" /></a></p>
+
+<ul>
+<li>インストールや設定がWebUIから行える</li>
+<li>拡張性の高い<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%E9%A5%B0%A5%A4%A5%F3">プラグイン</a></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>対応OS</h4>
+
+<blockquote>
+    <p>本家サイトにもあるように各種OSに対応したパッケージがあるようです。<a href="http://jenkins-ci.org/">Welcome to Jenkins CI! | Jenkins CI</a> <a href="http://b.hatena.ne.jp/entry/jenkins-ci.org/"><img src="http://b.hatena.ne.jp/entry/image/http://jenkins-ci.org/" alt="はてなブックマーク - Welcome to Jenkins CI! | Jenkins CI" border="0" /></a></p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Windows">Windows</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Ubuntu">Ubuntu</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Debian">Debian</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Red%20Hat">Red Hat</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Fedora">Fedora</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/CentOS">CentOS</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mac%20OS%20X">Mac OS X</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/openSUSE">openSUSE</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/FreeBSD">FreeBSD</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/OpenBSD">OpenBSD</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Solaris">Solaris</a>/OpenIndiana</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Gentoo">Gentoo</a></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>導入</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>環境</h5>
+<p>私が設定する環境は<a class="keyword" href="http://d.hatena.ne.jp/keyword/MacOSX">MacOSX</a> Version10.6.8です。</p>
+
+</div>
+<div class="section">
+<h5>installer download</h5>
+<p><a href="http://jenkins-ci.org/content/thank-you-downloading-os-x-installer">http://jenkins-ci.org/content/thank-you-downloading-os-x-installer</a> ここから<a class="keyword" href="http://d.hatena.ne.jp/keyword/OSX">OSX</a>のinstallerをダウンロードします。落としてきたjenkins-1.451.pkgというpkgをクリックもしくはinstallerコマンドにてインストールします。</p>
+
+</div>
+<div class="section">
+<h5>起動確認</h5>
+<p>インストールが終わるとJenkinsプロセスは立ち上がっている事が確認できます。</p>
+<pre class="code" data-lang="" data-unlink>$ ps auxww | grep jenkins
+daemon     509   0.0  4.2  2945708 177352   ??  Ss    1:58AM   0:12.45 /usr/bin/java -jar /Applications/Jenkins/jenkins.war</pre><p>インストールが終わるといきなり <a href="http://localhost:8080/">http://localhost:8080/</a> にアクセスしますが、エラーが表示されるだけです。私の場合このエラーは<span class="deco" style="color:#FF0000;">Jenkinsの再起動</span>で直りました。Jenkinsの起動/停止は下に示します。</p>
+
+</div>
+<div class="section">
+<h5>停止、起動コマンド</h5>
+<p>自動で起動されても停止や自分で再起動できないと困るので操作方法を記します。LaunchDaemonで<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C6%B0%B5%AF%C6%B0">自動起動</a>を管理しているようです。</p>
+
+<ul>
+<li>起動</li>
+</ul><pre class="code" data-lang="" data-unlink>$ udo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist</pre>
+<ul>
+<li>停止</li>
+</ul><pre class="code" data-lang="" data-unlink>$ sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist</pre>
+</div>
+<div class="section">
+<h5>設定ファイル</h5>
+<p>/Library/LaunchDaemons/org.jenkins-ci.plist　は以下のような<a class="keyword" href="http://d.hatena.ne.jp/keyword/xml">xml</a>ファイルでjenkinsの起動設定を知る事ができます。/Users/Shared/Jenkins/Home/がJenkinsファイルの置き場となっていて、大量のpluginファイルなんかがあります。</p>
+<pre class="hljs xml" data-lang="xml" data-unlink>?xml version="1.0" encoding="UTF-8"?>
+<span class="synIdentifier"><!</span><span class="synStatement">DOCTYPE</span> plist <span class="synStatement">PUBLIC</span> <span class="synConstant">"-//Apple//DTD PLIST 1.0//EN"</span> <span class="synConstant">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><plist </span><span class="synType">version</span>=<span class="synConstant">"1.0"</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><dict></span>
+  <span class="synIdentifier"><key></span>EnvironmentVariables<span class="synIdentifier"></key></span>
+  <span class="synIdentifier"><dict></span>
+<span class="synIdentifier"><key></span>JENKINS_HOME<span class="synIdentifier"></key></span>
+<span class="synIdentifier"><string></span>/Users/Shared/Jenkins/Home<span class="synIdentifier"></string></span>
+  <span class="synIdentifier"></dict></span>
+  <span class="synIdentifier"><key></span>GroupName<span class="synIdentifier"></key></span>
+  <span class="synIdentifier"><string></span>daemon<span class="synIdentifier"></string></span>
+  <span class="synIdentifier"><key></span>KeepAlive<span class="synIdentifier"></key></span>
+  <span class="synIdentifier"><true/></span>
+  <span class="synIdentifier"><key></span>Label<span class="synIdentifier"></key></span>
+  <span class="synIdentifier"><string></span>org.jenkins-ci<span class="synIdentifier"></string></span>
+  <span class="synIdentifier"><key></span>ProgramArguments<span class="synIdentifier"></key></span>
+  <span class="synIdentifier"><array></span>
+            <span class="synIdentifier"><string></span>/bin/bash<span class="synIdentifier"></string></span>
+<span class="synIdentifier"><string></span>/Library/Application Support/Jenkins/jenkins-runner.sh<span class="synIdentifier"></string></span>
+  <span class="synIdentifier"></array></span>
+  <span class="synIdentifier"><key></span>RunAtLoad<span class="synIdentifier"></key></span>
+  <span class="synIdentifier"><true/></span>
+  <span class="synIdentifier"><key></span>UserName<span class="synIdentifier"></key></span>
+  <span class="synIdentifier"><string></span>daemon<span class="synIdentifier"></string></span>
+<span class="synIdentifier"></dict></span>
+<span class="synIdentifier"></plist></span>
+</pre>
+</div>
+<div class="section">
+<h5>起動Port変更</h5>
+<p>8080をJenkinsのdefaultポートとしているようですが、私はGAE開発で8080を使うので別のポートに変更します。58080を使うように修正します。</p>
+<pre class="code" data-lang="" data-unlink>$ defaults write /Library/Preferences/org.jenkins-ci httpPort 58080
+$ sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist
+$ sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist</pre>
+</div>
+<div class="section">
+<h5>WebUI</h5>
+<p>以下のような画面が出力されていればインストールは成功です。<br />
+<span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20120222022535" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20120222/20120222022535.png" alt="f:id:yutakikuchi:20120222022535p:image" title="f:id:yutakikuchi:20120222022535p:image" class="hatena-fotolife" itemprop="image"></a></span></p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>リンク</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://jenkins-ci.org/">本家サイト</a></li>
+<li><a href="http://matome.naver.jp/odai/2131289143045666901">Naverまとめ</a></li>
+</ul>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201202050219/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201202050219/">PHPのHash/暗号化関数の使用方法まとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201202251904/">JavaScript Ajax : XmlHttpRequestのLevel2でSameOriginPolicyを回避する</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201202251904/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

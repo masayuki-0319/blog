@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/2018/08/04/081223" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>見えない人工知能を売ることの難しさ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>見えない人工知能を売ることの難しさ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2018 Aug 04, 08:12</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="etc-見えない人工知能を売ることの難しさ">[etc] : 見えない人工知能を売ることの難しさ</h2>
+
+<blockquote><h3>結果が見えない<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a></h3>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a>をCustomerに販売することは難しいとされる。その要因は何か。</p>
+
+<p>一番のポイントはCustomerへの販売を担当するSales担当者も<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a>を開発することにより、Customerの課題が解決できるかが受注のタイミングでは分からないということである。結果が見えないというのは受注のタイミングの話である。</p>
+
+<p>Machine Learning・DeepLearningのどちらの手法を基にしたとしても、Customerの課題に対してデータを集め、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a>のモデルを作り、その後に評価を行う。このプロセスを踏まえないと、そもそもCustomerが求めるKPIに対して成功・失敗するということが分かりにくい点である。</p>
+
+<p>経験を持った技術者であれば先行研究の内容から特定の課題に対して、どういったデータ量と質、更にはMachine Learning・Deeplearningの手法を採用、モデルのチューニングをすると予測精度◯◯%ぐらいは出るかも、というざっくりした見積もりは可能である。ただし、この経験を持った技術者が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a>を提供する側にはいたとしても、Customerの中に存在するとは限らない。むしろ存在する可能性は低い。提供側が精度◯◯%出ますのでご安心をという説明が出来たとしても、Customer側は何故そのような結果になるか、という点が理解しづらいはずである。</p>
+
+<p>対して、一般的なWebシステムを開発する場合は、Inputのデータを与えてApplicationのlayerで演算をし、DBに格納・結果の可視化しOutputする一連の流れは、このシステムの業務手続きのフローを明確化したり、結果の出力サンプルをSales担当でもおそらく作成はできるであろうし、そしてこれらの内容を受注の前にイメージの共有がCustomerにでき、おそらく理解も可能なはずである。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a>のように上記評価プロセスを実施しなくても、結果までがある程度見えてしまうという点が大きい。</p>
+
+<p>最近は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a>の評価プロセスを回す前、具体的には受注の前のタイミングで簡易的に評価プロセスを回すツールなども多く出てきている。今後これらのニーズは高まっていくであろうが、下記にまとめるように売ることを難しくしている要因全てを解消できるわけではないので、これらは業界の課題としてまだ残り続ける。</p>
+
+<h3>難しい要因のまとめ</h3>
+
+<ul>
+<li>売ることが難しい要因① : Sales担当者が受注の前にどれほど顧客課題を解決できるかの見積もりが難しい。</li>
+<li>売ることが難しい要因② : データを集めて、モデルを構築し、その後に評価を行うプロセスを入れないとプロジェクトの成功・失敗が正確に分からない。</li>
+<li>売ることが難しい要因③ : 一般的なシステムと異なり、InputとOutputまでの業務ロジック、更には演算(途中結果を含む)の可視化が難しい。</li>
+<li>売ることが難しい要因④ : <a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a>が得意とする、もしくは課題解決可能なものは日々広がりを見せているが、まだまだ人間の能力を大きく超えることが出来ていない。それをCustomerの期待値に合わせて説明するということも難しい。</li>
+</ul>
+
+
+<p>売る側の人間からのレポートは以上です。</p></blockquote>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201807230022/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201807230022/">何を問題とし、どのように解くか</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201808051306/">RPAとAIの違い</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201808051306/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

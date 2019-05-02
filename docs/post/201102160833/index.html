@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110216/1297812828" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>iPhoneのwindow.getSelection()について &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>iPhoneのwindow.getSelection()について</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Feb 16, 08:33</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="javascript-iphoneのwindow-getselection-について">[javascript] : iPhoneのwindow.getSelection()について</h2>
+
+<div class="section">
+<h4>値の取得</h4>
+
+<blockquote>
+    <p>window.getSelection(document.getSelection)は画面のドラッグにより選択した文字列を読み取る<a class="keyword" href="http://d.hatena.ne.jp/keyword/javascript">javascript</a>の関数です。<br />
+以前は<a class="keyword" href="http://d.hatena.ne.jp/keyword/safari">safari</a>などで利用できなかったようですが、現在はほとんどのブラウザで読み取ることが可能です。<br />
+(<a class="keyword" href="http://d.hatena.ne.jp/keyword/safari">safari</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/firefox">firefox</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/chrome">chrome</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/opera">opera</a>では動作を確認しています。2011/2/15日現在)<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/iphone">iphone</a>でwindow.getSelectionを利用するときに少しハマったので、メモしておきます。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>browser-<a class="keyword" href="http://d.hatena.ne.jp/keyword/javascript">javascript</a></h4>
+
+<blockquote>
+    <p>HTMLに仕込んだ<a class="keyword" href="http://d.hatena.ne.jp/keyword/javascript">javascript</a>のwindow.getSelection()は<a class="keyword" href="http://d.hatena.ne.jp/keyword/iphone">iphone</a>でも動作します。<br />
+HTMLを読み込んだ時点で<a class="keyword" href="http://d.hatena.ne.jp/keyword/javascript">javascript</a>が正しく設定されていると値が取得できるようです。<br />
+以下は選択肢た文字列を<a class="keyword" href="http://d.hatena.ne.jp/keyword/google">google</a>検索結果に自動的に飛ばす処理を書いています。</p>
+<pre class="hljs html" data-lang="html" data-unlink><span class="synComment"><!DOCTYPE html></span>
+<span class="synIdentifier"><</span><span class="synStatement">html</span><span class="synIdentifier">><</span><span class="synStatement">head</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><</span><span class="synStatement">meta</span><span class="synIdentifier"> </span><span class="synType">http-equiv</span><span class="synIdentifier">=</span><span class="synConstant">"content-type"</span><span class="synIdentifier"> </span><span class="synType">content</span><span class="synIdentifier">=</span><span class="synConstant">"text/html; charset=UTF-8"</span><span class="synIdentifier">/></span>
+<span class="synIdentifier"><</span><span class="synStatement">meta</span><span class="synIdentifier"> </span><span class="synType">http-equiv</span><span class="synIdentifier">=</span><span class="synConstant">"Pragma"</span><span class="synIdentifier"> </span><span class="synType">content</span><span class="synIdentifier">=</span><span class="synConstant">"no-cache"</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><</span><span class="synStatement">meta</span><span class="synIdentifier"> </span><span class="synType">http-equiv</span><span class="synIdentifier">=</span><span class="synConstant">"Cache-Control"</span><span class="synIdentifier"> </span><span class="synType">content</span><span class="synIdentifier">=</span><span class="synConstant">"no-cache"</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><</span><span class="synStatement">title</span><span class="synIdentifier">></span>get Selection Test<span class="synIdentifier"></</span><span class="synStatement">title</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><</span><span class="synStatement">script</span><span class="synIdentifier">></span>
+<span class="synIdentifier">var</span><span class="synSpecial"> drag = </span><span class="synConstant">false</span><span class="synSpecial">;</span>
+<span class="synIdentifier">var</span><span class="synSpecial"> getText = </span><span class="synIdentifier">function</span>()<span class="synSpecial"> </span><span class="synIdentifier">{</span>
+<span class="synSpecial">    </span><span class="synStatement">if</span>(<span class="synSpecial"> drag === </span><span class="synConstant">true</span><span class="synSpecial">  </span>)<span class="synSpecial"> </span><span class="synIdentifier">{</span>
+<span class="synSpecial">        </span><span class="synStatement">window</span><span class="synSpecial">.open</span>(<span class="synSpecial"> </span><span class="synConstant">'http://www.google.com?q='</span><span class="synSpecial"> + encodeURI</span>(<span class="synSpecial"> </span><span class="synStatement">window</span><span class="synSpecial">.getSelection</span>()<span class="synSpecial"> </span>)<span class="synSpecial"> </span>)<span class="synSpecial">;</span>
+<span class="synSpecial">    </span><span class="synIdentifier">}</span>
+<span class="synSpecial">    drag = </span><span class="synConstant">false</span><span class="synSpecial">;</span>
+<span class="synIdentifier">}</span>
+
+<span class="synIdentifier">var</span><span class="synSpecial"> setDragStatus = </span><span class="synIdentifier">function</span>()<span class="synSpecial"> </span><span class="synIdentifier">{</span>
+<span class="synSpecial">    drag = </span><span class="synConstant">true</span><span class="synSpecial">;</span>
+<span class="synIdentifier">}</span>
+
+<span class="synStatement">document</span><span class="synSpecial">.addEventListener</span>(<span class="synSpecial"> </span><span class="synConstant">'touchend'</span><span class="synSpecial">, getText, </span><span class="synConstant">false</span><span class="synSpecial"> </span>)<span class="synSpecial">;</span>
+<span class="synStatement">document</span><span class="synSpecial">.addEventListener</span>(<span class="synSpecial"> </span><span class="synConstant">'touchstart'</span><span class="synSpecial">, setDragStatus, </span><span class="synConstant">false</span><span class="synSpecial"> </span>)<span class="synSpecial">;</span>
+<span class="synIdentifier"></</span><span class="synStatement">script</span><span class="synIdentifier">></span>
+<span class="synIdentifier"></</span><span class="synStatement">head</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><</span><span class="synStatement">body</span><span class="synIdentifier">></span>
+選択文字列 iPhone テスト<span class="synIdentifier"><</span><span class="synStatement">br</span><span class="synIdentifier">></span> 
+選択文字列 iPhone テスト<span class="synIdentifier"><</span><span class="synStatement">br</span><span class="synIdentifier">></span> 
+選択文字列 iPhone テスト<span class="synIdentifier"><</span><span class="synStatement">br</span><span class="synIdentifier">></span> 
+<span class="synIdentifier"><</span><span class="synStatement">br</span><span class="synIdentifier">><</span><span class="synStatement">br</span><span class="synIdentifier">></span>
+選択文字列 iPhone テスト<span class="synIdentifier"><</span><span class="synStatement">br</span><span class="synIdentifier">></span> 
+<span class="synIdentifier"></</span><span class="synStatement">body</span><span class="synIdentifier">></span>
+<span class="synIdentifier"></</span><span class="synStatement">html</span><span class="synIdentifier">></span>
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/javascript">javascript</a></h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>の場合は注意が必要です。<span style="color:#FF0000;">※PCのbrowserでは以下のコードが動作しても、<a class="keyword" href="http://d.hatena.ne.jp/keyword/iphone">iphone</a>上では動作しません。</span><br />
+作業手順は文字列選択→<a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>起動という流れです。</p>
+<pre class="hljs javascript" data-lang="javascript" data-unlink>javascript:void((<span class="synIdentifier">function</span>()<span class="synIdentifier">{</span><span class="synStatement">alert</span>(<span class="synStatement">window</span>.getSelection());<span class="synIdentifier">}</span>)());
+</pre><p>上の件を調査してみると、<a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>としてwindow.getSelection()を使うことはできないようです。bugとして報告されています。<br />
+<a href="http://openradar.appspot.com/7013257">http://openradar.appspot.com/7013257</a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>解決方法</h4>
+
+<blockquote>
+    <p>以下単純ですが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/iPhone">iPhone</a>対策としての<a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/javascript">javascript</a>を記述します。適用できないケースも有ると思うので、そこに関してはご勘弁を。<br />
+<span style="color:#FF0000;">※上と作業手順が変わります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>起動→文字列選択となります。</span><br />
+変更点は２点です。</p>
+
+<ol>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>ではwindow.getSelectionを呼び出さない。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>ではtouchendイベントにてwindow.getSelection()を取得するようなコードをHTMLに仕込む。</li>
+</ol><p>変更後のサンプルです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/hoge">hoge</a>.jsの箇所は適当に読み込みたい<a class="keyword" href="http://d.hatena.ne.jp/keyword/javascript">javascript</a>ファイルパスに変えてください。</p>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a></h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink>javascript:void((<span class="synIdentifier">function</span>()<span class="synIdentifier">{</span>s=<span class="synStatement">document</span>.createElement(<span class="synConstant">'script'</span>);s.setAttribute(<span class="synConstant">'src'</span>,<span class="synConstant">'hoge.js'</span>);<span class="synStatement">document</span>.body.appendChild(s);<span class="synIdentifier">}</span>)());
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>から読み込まれる<a class="keyword" href="http://d.hatena.ne.jp/keyword/javascript">javascript</a></h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synIdentifier">var</span> drag = <span class="synConstant">false</span>;
+<span class="synIdentifier">var</span> getText = <span class="synIdentifier">function</span>() <span class="synIdentifier">{</span>
+<span class="synStatement">if</span>( drag === <span class="synConstant">true</span>  ) <span class="synIdentifier">{</span>
+    <span class="synStatement">window</span>.open( <span class="synConstant">'http://www.google.com?q='</span> + encodeURI( <span class="synStatement">window</span>.getSelection() ) );
+    <span class="synComment">//alert( window.getSelection() );</span>
+<span class="synIdentifier">}</span>
+drag = <span class="synConstant">false</span>;
+<span class="synIdentifier">}</span>
+
+<span class="synIdentifier">var</span> setDragStatus = <span class="synIdentifier">function</span>() <span class="synIdentifier">{</span>
+drag = <span class="synConstant">true</span>;
+<span class="synIdentifier">}</span>
+<span class="synStatement">document</span>.addEventListener( <span class="synConstant">'mouseup'</span>, getText, <span class="synConstant">false</span> );
+<span class="synStatement">document</span>.addEventListener( <span class="synConstant">'mousedown'</span>, setDragStatus, <span class="synConstant">false</span> );
+<span class="synStatement">document</span>.addEventListener( <span class="synConstant">'touchend'</span>, getText, <span class="synConstant">false</span> );
+<span class="synStatement">document</span>.addEventListener( <span class="synConstant">'touchstart'</span>, setDragStatus, <span class="synConstant">false</span> );
+</pre><p>このように変更すると<a class="keyword" href="http://d.hatena.ne.jp/keyword/iphone">iphone</a>でも<a class="keyword" href="http://d.hatena.ne.jp/keyword/bookmarklet">bookmarklet</a>起動で選択文字列が取得できます。<br />
+意外と<a class="keyword" href="http://d.hatena.ne.jp/keyword/iPhone">iPhone</a>の画面ドラッグだけで<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a>検索に飛ばすのはUI的に楽かもしれないですね。</p>
+
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201102111710/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201102111710/">WordPressをGoogle App Engine上で動かす</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201103020038/">ギャル文字変換Bookmarklet</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201103020038/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

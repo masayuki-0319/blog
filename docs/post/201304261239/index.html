@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130426/1366947548" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>MongoDBの集計機能が便利過ぎて泣けてくるお話し &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>MongoDBの集計機能が便利過ぎて泣けてくるお話し</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Apr 26, 12:39</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="mongodb-mongodbの集計機能が便利過ぎて泣けてくるお話し">[MongoDB] : MongoDBの集計機能が便利過ぎて泣けてくるお話し</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873115906/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51BgSZpsvaL._SL160_.jpg" class="hatena-asin-detail-image" alt="MongoDBイン・アクション" title="MongoDBイン・アクション"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873115906/yutakikuchi-22/">MongoDBイン・アクション</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Kyle Banker,Sky株式会社玉川竜司</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2012/12/14</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 5人 <span class="hatena-asin-detail-label">クリック</span>: 55回</li><li><a href="http://d.hatena.ne.jp/asin/4873115906/yutakikuchi-22" target="_blank">この商品を含むブログ (4件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>MongoDB集計機能</h4>
+
+<blockquote>
+    <p><a href="http://d.hatena.ne.jp/yutakikuchi/20130220/1361316293">CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20130220/1361316293"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20130220/1361316293" alt="はてなブックマーク - CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する - Yuta.Kikuchiの日記" border="0" /></a><br />
+時給3000円のCEOと揶揄されている<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。今日は簡単にMongodbのログ集計機能を紹介します。機能が豊富過ぎて泣けてくるんで、ログ解析する人は是非使ってみて下さい。FluentdでMongodbにNginxのLogを流し込む設定は上のエントリーを参照して下さい。次回はAggregationFramework/<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>周りについて触れたいと思います。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>泣ける話 : 集計Query</h4>
+
+<blockquote>
+    <p><a href="https://wiki.10gen.com/pages/viewpage.action?pageId=5800049">インデックス - Docs-Japanese - 10gen Confluence</a> <a href="http://b.hatena.ne.jp/entry/s/wiki.10gen.com/pages/viewpage.action?pageId=5800049"><img src="http://b.hatena.ne.jp/entry/image/https://wiki.10gen.com/pages/viewpage.action?pageId=5800049" alt="はてなブックマーク - インデックス - Docs-Japanese - 10gen Confluence" border="0" /></a><br />
+<a href="https://wiki.10gen.com/pages/viewpage.action?pageId=6029355">クエリー - Docs-Japanese - 10gen Confluence</a> <a href="http://b.hatena.ne.jp/entry/s/wiki.10gen.com/pages/viewpage.action?pageId=6029355"><img src="http://b.hatena.ne.jp/entry/image/https://wiki.10gen.com/pages/viewpage.action?pageId=6029355" alt="はてなブックマーク - クエリー - Docs-Japanese - 10gen Confluence" border="0" /></a><br />
+MongodbはKVSでありながら、<a class="keyword" href="http://d.hatena.ne.jp/keyword/RDB">RDB</a>の機能も持っているというところが便利で泣けます。具体例としてはIndex機能と、集計Queryをサポートしているところでしょうか。ここでは集計Queryについて説明します。集計Queryは<a class="keyword" href="http://d.hatena.ne.jp/keyword/RDB">RDB</a>のlimit、count、group、sortなどが使えることや、比較<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>による条件指定もできます。また集計のデータ検索に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>が使えるところも魅力的です。それらを紹介していきます。</p>
+
+<div class="section">
+<h5>条件指定はfind()、行数取得はcount()</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/RDB">RDB</a>で言うSELECTとしてMongdbでは<span class="deco" style="color:#FF0000;">find</span>を使います。MongdbのQueryでの条件指定は<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>形式だと思って下さい。x = 10 AND B = 20を<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>の条件とすると{ x : 10, y : 20 } こんな感じです。またfindでは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>の指定ができるので、特定のRequestURIを含むログだけを出力したいときなどに便利です。例えば/<a class="keyword" href="http://d.hatena.ne.jp/keyword/api">api</a>/userという<a class="keyword" href="http://d.hatena.ne.jp/keyword/URI">URI</a>への<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>は{ path : /\/<a class="keyword" href="http://d.hatena.ne.jp/keyword/api">api</a>\/user/ }のように指定します。また検索されたレコードの個数をカウントする場合は<span class="deco" style="color:#FF0000;">count</span>を利用します。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>//登録されているデータベースを表示
+> show dbs
+local   (empty)
+nginx   <span class="synConstant">0</span>.203125GB
+
+// dbを使用
+> use nginx
+switched <span class="synSpecial">to</span> db nginx
+
+// collectionを表示
+> show collections
+nginx_access
+system.indexes
+
+// findによりnginxのアクセスを出力
+> db.nginx_access.find()
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5123476fe138231086000001"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"200"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"612"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"w3m/0.5.2"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-02-19T09:35:35Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"51234790e138231086000002"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"200"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"612"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"w3m/0.5.2"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-02-19T09:36:14Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c10ee138231b1b000001"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/api/user/test"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"404"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"570"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:24:53Z"</span>) }
+
+// 条件にstatus codeが200OKだけを指定
+> db.nginx_access.find({code:<span class="synConstant">'200'</span>})
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5123476fe138231086000001"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"200"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"612"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"w3m/0.5.2"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-02-19T09:35:35Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"51234790e138231086000002"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"200"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"612"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"w3m/0.5.2"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-02-19T09:36:14Z"</span>) }
+
+// 条件にstatus codeが200OKのアクセスをカウント
+> db.nginx_access.find({code:<span class="synConstant">'200'</span>}).count()
+<span class="synConstant">2</span>
+
+// /api/userというRequestURIを含むアクセスを出力
+> db.nginx_access.find({path:/\/api\/<span class="synSpecial">user</span>/})
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c10ee138231b1b000001"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/api/user/test"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"404"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"570"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:24:53Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c145e138231b1b000005"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/api/user"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"404"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"570"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:25:57Z"</span>) }
+</pre>
+</div>
+<div class="section">
+<h5>条件<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>の利用</h5>
+<p>Mongodbの数値の大小などを比較する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>の指定に<span class="deco" style="color:#FF0000;">$</span>を利用するのでやや可読性に欠けますが、覚えてしまうと簡単に記述することが出来ます。以下に比較<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>の表を記載します。ついでにsortの条件も表にまとめます。下の条件<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>を利用して特定の日付のデータを降順にして最大3件表示するようなMongo Shellを書いてみます。条件演算としては<span class="deco" style="color:#FF0000;">$gt</span>と<span class="deco" style="color:#FF0000;">$lt</span>と<span class="deco" style="color:#FF0000;">and</span>を使用し、sort/limit関数でデータの並び替えと制限を付けます。</p>
+
+<table>
+<tr>
+<th> 一般的な条件<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a> </th>
+<th> Mongodb find条件<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a> </th>
+</tr>
+<tr>
+<td> x == y </td>
+<td> find( { x : y } ); </td>
+</tr>
+<tr>
+<td> x > y </td>
+<td> find( { x : { $gt : y } } ); </td>
+</tr>
+<tr>
+<td> x < y </td>
+<td> find( { x : { $lt : y } } ); </td>
+</tr>
+<tr>
+<td> x >= y </td>
+<td> find( { x : { $gte : y } } ); </td>
+</tr>
+<tr>
+<td> x <= y </td>
+<td> find( { x : { $<a class="keyword" href="http://d.hatena.ne.jp/keyword/lte">lte</a> : y } } ); </td>
+</tr>
+<tr>
+<td> x != y  </td>
+<td> find( { x : { $ne : y } } ); </td>
+</tr>
+<tr>
+<td> x == y and y == z </td>
+<td> find( { x : y , y : z } ); </td>
+</tr>
+<tr>
+<td> x == y or y == z </td>
+<td> find( { $or : [  { x : y }, { y : z } ] } ); </td>
+</tr>
+<tr>
+<td> x == y not or y == z </td>
+<td> find( { $nor : [  { x : y }, { y : z } ] } ); </td>
+</tr>
+<tr>
+<td> exists( x ) </td>
+<td> find( { x : { $exists : true } } ); </td>
+</tr>
+<tr>
+<td> not exists( x ) </td>
+<td> find( { x : { $exists : false } } ); </td>
+</tr>
+<tr>
+<td> x % y == z </td>
+<td> find( { x : { $mod : [ y, z ] } } ); </td>
+</tr>
+<tr>
+<td> w in ( x, y, z ) </td>
+<td> find( { w : { $in : [ x, y, z ] } } ); </td>
+<td>  </td>
+</tr>
+<tr>
+<td> w not in ( x, y, z ) </td>
+<td> find( { w : { $nin : [ x, y, z ] } } ); </td>
+<td>  </td>
+</tr>
+</table>
+<table>
+<tr>
+<th> sort条件 </th>
+<th> Mongodb sort条件 </th>
+</tr>
+<tr>
+<td> order by name <a class="keyword" href="http://d.hatena.ne.jp/keyword/asc">asc</a> </td>
+<td> sort( { name : 1 } ); </td>
+</tr>
+<tr>
+<td> order by name desc </td>
+<td> sort( { name : -1 } ); </td>
+</tr>
+</table><pre class="hljs sql" data-lang="sql" data-unlink>> db.nginx_access.find({time:{<span class="synConstant">"$gt"</span> : ISODate(<span class="synConstant">"2013-04-24T00:00:00+09:00"</span>), <span class="synConstant">"$lt"</span> : ISODate(<span class="synConstant">"2013-04-25T00:00:00+09:00"</span>)}}).sort( {time:<span class="synConstant">-1</span>}).limit(<span class="synConstant">3</span>);
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c187e138231b1b00000f"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"400"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:26:56Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c17ce138231b1b00000d"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"304"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:26:46Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c17ce138231b1b00000e"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/favicon.ico"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"404"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"570"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:26:46Z"</span>) }
+</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>泣ける話 : <a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a> Shell</h4>
+
+<blockquote>
+    <p><a href="http://docs.mongodb.org/manual/reference/javascript/">mongo Shell JavaScript Quick Reference ― MongoDB Manual 2.4.3</a> <a href="http://b.hatena.ne.jp/entry/docs.mongodb.org/manual/reference/javascript/"><img src="http://b.hatena.ne.jp/entry/image/http://docs.mongodb.org/manual/reference/javascript/" alt="はてなブックマーク - mongo Shell JavaScript Quick Reference ― MongoDB Manual 2.4.3" border="0" /></a><br />
+Mongodbを操作する外部<a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>ファイルを記述して、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>から実行できます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Ruby">Ruby</a>からも実行出来ますが、これらの言語のDriverを必要とせず<a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>だけでできます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>からdbを読み込む場合はnew Mongo().getDB( "dbname" ); collectionを呼び出す場合はdb.getCollection( "collectionname" );を利用します。取得したデータを繰り返し操作するforEachも使えますし、print関数を使用すれば標準出力してくれます。例えば以下のようなScriptファイルをmongo_shell.jsと保存し<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>からmongo nginx < mongo_shell.jsを実行します。また外部<a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>ファイルより機能は制限されますが、mongoコマンドの--evalオプションを使うと外部ScriptにしなくてもそのままMongodbを操作することが出来ます。--quietでオプションで結果のみを出力します。私が試したところ--evalではfind()の結果が取れず、count()を付けると実行できました。</p>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synIdentifier">var</span> db = <span class="synStatement">new</span> Mongo().getDB( <span class="synConstant">"nginx"</span> );
+<span class="synIdentifier">var</span> col = db.getCollection( <span class="synConstant">"nginx_access"</span> );
+<span class="synIdentifier">var</span> data = col.find().sort( <span class="synIdentifier">{</span> agent:1 <span class="synIdentifier">}</span> );
+print( <span class="synConstant">"User Agent Summary </span><span class="synSpecial">\n</span><span class="synConstant">"</span> );
+data.forEach( <span class="synIdentifier">function</span>( data ) <span class="synIdentifier">{</span> print( <span class="synConstant">"Agent = "</span> + data.agent ); <span class="synIdentifier">}</span> );
+</pre><pre class="code" data-lang="" data-unlink>$ mongo nginx < mongo_shell.js
+MongoDB shell version: 2.2.3
+connecting to: nginx
+User Agent Summary 
+
+Agent = -
+Agent = -
+Agent = -
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+Agent = w3m/0.5.2
+Agent = w3m/0.5.2</pre><pre class="code" data-lang="" data-unlink>$ mongo nginx --quiet --eval 'db.nginx_access.find().count();'
+17</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>泣ける話 : rmongodb</h4>
+
+<blockquote>
+    <p><a href='http://cran.r-project.org/web/packages/rmongodb/rmongodb.pdf'>rmongodb</a><br />
+<a href="http://d.hatena.ne.jp/yutakikuchi/20120704/1341358560">CentOSでR言語を使ってみたことのまとめ - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20120704/1341358560"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20120704/1341358560" alt="はてなブックマーク - CentOSでR言語を使ってみたことのまとめ - Yuta.Kikuchiの日記" border="0" /></a><br />
+分析系の言語であるRからmongodbに接続することが出来ます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>の様々な分析関数を使うと上手いように集計ができると思います。<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>の設定は以下に簡単に書きますが、tcl/tkのバージョン問題を解決するために<a class="keyword" href="http://d.hatena.ne.jp/keyword/rpm">rpm</a>のforceでinstallしているのであまりお薦めはしません。R起動後に install.packages("rmongodb")をにてpackageをinstallします。以下の<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>Scriptをmongdb.Rというファイル名で保存してR起動後にsourceにて呼び出します。そうするとnginx_<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>ログ総数のcountとfindの結果の一覧が出力されます。また<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>Scriptをmongdb.Rという外部ファイル名で保存してsourceにて呼び出します。そうするとnginx_<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>ログ総数のcountとfindの結果の一覧が出力されます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>で取取得したデータを基にbarplot等を使ってMongodbのデータを可視化することができます。以下ではstatus codeを見てそのRequest数をbarplotしています。</p>
+<pre class="code" data-lang="" data-unlink>$ wget http://ftp.riken.jp/Linux/caos/centos/5/os/x86_64/CentOS/tcl-8.4.13-6.el5.x86_64.rpm
+$ wget http://ftp.riken.jp/Linux/caos/centos/5/os/x86_64/CentOS/tk-8.4.13-5.el5_1.1.x86_64.rpm
+$ sudo rpm -ivh --force tcl-8.4.13-6.el5.x86_64.rpm tk-8.4.13-5.el5_1.1.x86_64.rpm
+$ sudo yum install R R-devel -y
+$ R
+> install.packages("rmongodb")</pre><pre class="hljs perl" data-lang="perl" data-unlink>library(rmongodb)
+<span class="synComment">#connect</span>
+mongo <- mongo.create()
+<span class="synStatement">if</span>( mongo.is.connected(mongo) ) { 
+   <span class="synComment">#count</span>
+   cnt <- mongo.count(mongo, <span class="synConstant">'nginx.nginx_access'</span>)
+   <span class="synStatement">print</span>( cnt )
+   <span class="synComment">#find</span>
+   objs <- mongo.find(mongo, <span class="synConstant">'nginx.nginx_access'</span>)
+   <span class="synStatement">while</span>( mongo.cursor.<span class="synStatement">next</span>(objs) ) { 
+  <span class="synStatement">print</span>( mongo.cursor.value(objs) )
+   }   
+}
+</pre><pre class="code" data-lang="" data-unlink>> source( "/home/yuta/mongo.R" )
+[1] 17
+_id : 7      5123476fe138231086000001
+host : 2     127.0.0.1
+user : 2     -
+method : 2   GET
+path : 2     /
+code : 2     200
+size : 2     612
+referer : 2      -
+agent : 2    w3m/0.5.2
+time : 9     1361266535000</pre><pre class="hljs perl" data-lang="perl" data-unlink>library(rmongodb)
+<span class="synComment">#connect</span>
+mongo <- mongo.create()
+<span class="synStatement">if</span>( mongo.is.connected(mongo) ) { 
+   query <- list( code=<span class="synConstant">"200"</span> )
+   r200 <- mongo.count( mongo, <span class="synConstant">"nginx.nginx_access"</span>, query )
+   query <- list( code=<span class="synConstant">"304"</span> )
+   r304 <- mongo.count( mongo, <span class="synConstant">"nginx.nginx_access"</span>, query )
+   query <- list( code=<span class="synConstant">"400"</span> )
+   r400 <- mongo.count( mongo, <span class="synConstant">"nginx.nginx_access"</span>, query )
+   query <- list( code=<span class="synConstant">"404"</span> )
+   r404 <- mongo.count( mongo, <span class="synConstant">"nginx.nginx_access"</span>, query )
+   <span class="synStatement">y <</span><span class="synConstant">- c( r200, r304, r400, r404 )</span>
+<span class="synConstant">   barplot( y, ylab='request count', xlab='status', names.arg=c("200", "304", "400", "404"), col=c("gray", "yellow", "orange", "orangered") )</span>
+<span class="synConstant">}</span>
+</pre><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20130426072452" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20130426/20130426072452.png" alt="f:id:yutakikuchi:20130426072452p:image:w360" title="f:id:yutakikuchi:20130426072452p:image:w360" class="hatena-fotolife" style="width:360px" itemprop="image"></a></span></p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201304190433/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201304190433/">TinyCDB vs QDBM vs MemcachedのPerformance比較</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201305070304/">じゃあ、いつRails始めるの？... 今でしょ！</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201305070304/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

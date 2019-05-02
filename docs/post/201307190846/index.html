@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130719/1374191188" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>アダルトフィルタ実装に向けたA○女優リストの自動抽出 &#43; α &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>アダルトフィルタ実装に向けたA○女優リストの自動抽出 &#43; α</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Jul 19, 08:46</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="programming-アダルトフィルタ実装に向けたa-女優リストの自動抽出-α">[programming] : アダルトフィルタ実装に向けたA○女優リストの自動抽出 + α</h2>
+
+<div class="section">
+<h4>アダルトフィルタ実装に向けて</h4>
+
+<blockquote>
+    <p>エロデータサイエンティストの<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。<br />
+今日はSystemで使うアダルトフィルタの辞書データ作成を目的としていた事が、予想外な方向に突き進んでしまった事をお話します。</p><br />
+<p>アダルトフィルタの良くある活用例としてはユーザーが投稿する内容に卑猥単語が含まれている場合は登録を弾くことです。アダルトフィルタの辞書データを作成/運用することは実は結構大変だったりします。なぜならば人目で1語ずつ卑猥か否かを判断したり、自分で判断できない際どい単語は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google%C0%E8%C0%B8">Google先生</a>に聞きながらだったり..当然新語が増えればアダルトフィルタ辞書の運用コストも膨れるからです。</p><br />
+<p>そこで作成/運用のコストを大幅に下げるために辞書の更新を自動化したいと考えます。例えば新しいA○女優がデビューした場合、名前をアダルトフィルタの辞書に自動登録するようなものです。今日はそれを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>で実装し、最終的にはLTSV形式のデータで出力します。</p><br />
+<p><a href="http://ltsv.org/">Labeled Tab-separated Values (LTSV)</a> <a href="http://b.hatena.ne.jp/entry/ltsv.org/"><img src="http://b.hatena.ne.jp/entry/image/http://ltsv.org/" alt="はてなブックマーク - Labeled Tab-separated Values (LTSV)" border="0" /></a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>サンプルコード</h4>
+
+<blockquote>
+    <p><a href="http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7">A○女優一覧 - Wikipedia</a> <a href="http://b.hatena.ne.jp/entry/ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7"><img src="http://b.hatena.ne.jp/entry/image/http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7" alt="はてなブックマーク - A○女優一覧 - Wikipedia" border="0" /></a><br />
+データソースは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Wikipedia">Wikipedia</a>に乗っている日本のA○女優一覧になります。上のURL以下を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EC%A5%A4%A5%D4%A5%F3%A5%B0">スクレイピング</a>する事で名前のリストを抽出します。今回のアダルトフィルタに必要となるデータ項目は名前ですが、折角なのでVital Statistics(Three Size)、Bra Sizeも<span class="deco" style="font-weight:bold;font-style:italic;">ついでのついでのついでに</span>取得します。保存するLTSVのフォーマットは以下のように定義します。</p>
+<pre class="code" data-lang="" data-unlink>Name:<Value> <Tab> Bust:<Value> <Tab> Waist:<Value> <Tab> Hip:<Value> <Tab> Bra:<Value></pre><p><br />
+以下が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EC%A5%A4%A5%D4%A5%F3%A5%B0">スクレイピング</a>を行う<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>コードです。更新データが直ぐに欲しい場合はCron等で定期的に実行してください。※時間が無くて10分ぐらいで書いたコードなので汚いです。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+<span class="synComment"># アダルトフィルタのデータ抽出</span>
+
+<span class="synPreProc">import</span> sys,re,urllib,urllib2
+f = <span class="synIdentifier">open</span>( <span class="synConstant">'av.txt'</span>, <span class="synConstant">'w'</span> )
+opener = urllib2.build_opener()
+ua = <span class="synConstant">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/    534.51.22'</span>
+referer = <span class="synConstant">'http://www.yahoo.co.jp/'</span>
+opener.addheaders = [( <span class="synConstant">'User-Agent'</span>, ua ),( <span class="synConstant">'Referer'</span>, referer )]
+urls = []
+baseurls = [ <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%81%82%E8%A1%8C"</span>,
+        <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%81%8B%E8%A1%8C"</span>,
+        <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%81%95%E8%A1%8C"</span>,
+        <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%81%9F%E8%A1%8C"</span>,
+        <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%81%AA%E8%A1%8C"</span>,
+        <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%81%AF%E8%A1%8C"</span>,
+        <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%81%BE%E8%A1%8C"</span>,
+        <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%82%84%E8%A1%8C"</span>,
+        <span class="synConstant">"http://ja.wikipedia.org/wiki/AV%E5%A5%B3%E5%84%AA%E4%B8%80%E8%A6%A7_%E3%82%89%E3%83%BB%E3%82%8F%E8%A1%8C"</span> ]
+<span class="synStatement">for</span> burl <span class="synStatement">in</span> baseurls:
+   <span class="synStatement">try</span>:
+  content = opener.<span class="synIdentifier">open</span>( burl ).read()
+  <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<li><a href="(/wiki/.*?)">.*?</li>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+     tmp_urls = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<li><a href="(/wiki/.*?)".*?</li>'</span>, re.M ).findall( content )
+     urls = urls + tmp_urls
+   <span class="synStatement">except</span> <span class="synType">Exception</span>, e:
+  <span class="synIdentifier">print</span> e
+  <span class="synStatement">continue</span>
+
+<span class="synComment">#dedupe</span>
+urls = <span class="synIdentifier">sorted</span>(<span class="synIdentifier">set</span>(urls), key=urls.index)
+
+<span class="synStatement">for</span> url <span class="synStatement">in</span> urls:
+   url = <span class="synConstant">"http://ja.wikipedia.org"</span> + url
+   nodes = []
+   vs = []
+   p = re.<span class="synIdentifier">compile</span>(<span class="synConstant">r'<.*?>'</span>)
+   <span class="synStatement">try</span>: 
+  content = opener.<span class="synIdentifier">open</span>( url ).read()
+  <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<caption.*?>(.|\n)*?<big><b>(.*?)</b></big></caption>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+     tmp = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<caption.*?>(.|\n)*?<big><b>(.*?)</b></big></caption>'</span>, re.M ).search( content ).group(<span class="synConstant">2</span>)
+     nodes.append( <span class="synConstant">"Name:"</span> + tmp.replace( <span class="synConstant">' '</span>, <span class="synConstant">''</span> ) )
+  <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<th valign="top" style="font-weight:normal" nowrap="nowrap">.*?スリーサイズ.*?</th>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+     tmp  = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<th valign="top" style="font-weight:normal" nowrap="nowrap">.*?スリーサイズ.*?</th>(.|\n)*?<td nowrap="nowrap">(.*?)</td>'</span>, re.M ).search( content ).group(<span class="synConstant">2</span>)
+     tmp = tmp.replace( <span class="synConstant">' '</span>, <span class="synConstant">''</span> )
+     tmp = tmp.replace( <span class="synConstant">'cm'</span>, <span class="synConstant">''</span> )
+     vs = tmp.split( <span class="synConstant">'-'</span> )
+     nodes.append( <span class="synConstant">"Bust:"</span> + p.sub( <span class="synConstant">''</span>, vs[<span class="synConstant">0</span>] ) )
+     nodes.append( <span class="synConstant">"Waist:"</span> + p.sub( <span class="synConstant">''</span>, vs[<span class="synConstant">1</span>] ) )
+     nodes.append( <span class="synConstant">"Hip:"</span> + p.sub( <span class="synConstant">''</span>, vs[<span class="synConstant">2</span>] ) )
+  <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<th valign="top" style="font-weight:normal">.*?ブラのサイズ.*?</th>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+     tmp  = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<th valign="top" style="font-weight:normal">.*?ブラのサイズ.*?</th>(.|\n)*?<td>(.*?)</td>'</span>, re.M ).search( content ).group(<span class="synConstant">2</span>)
+     nodes.append( <span class="synConstant">"Bra:"</span> + p.sub( <span class="synConstant">''</span>, tmp ) )
+  <span class="synStatement">if</span> <span class="synIdentifier">len</span>(nodes) == <span class="synConstant">0</span>:
+     <span class="synStatement">continue</span>
+  res = <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span>.join( nodes ) + <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>
+  f.write( res )
+   <span class="synStatement">except</span> <span class="synType">Exception</span>, e:
+  <span class="synIdentifier">print</span> e
+  <span class="synStatement">continue</span>
+f.close()
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>抽出データ</h4>
+
+<blockquote>
+    <p>上の<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>コードを実行すると以下のようなエロTSVデータ、もといLTSVデータを抽出する事ができます。抽出して気づいたのですが、元データが統一フォーマットで書かれていないので、後で抽出コードを書き換えて奇麗なデータを生成するようにします。やってはいけない事だと思いますが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/github">github</a>にも抽出したデータを上げておきます。※データの利用は全て自己責任でお願いします。<br />
+それにしても皆さん凄いサイズですね...。どこが？って..、いや、アレがですよ、アレが。</p>
+<pre class="code" data-lang="" data-unlink>Name:瑠川リナ    Bust:81 Waist:57    Hip:83  Bra:D65
+Name:☆LUNA☆ Bust:83 Waist:57    Hip:82  Bra:D-65
+Name:RUMIKA Bust:82 Waist:60    Hip:85  Bra:C
+Name:麗花 Bust:88 Waist:58    Hip:87  Bra:E
+Name:Reo.   Bust:92 Waist:60    Hip:87  Bra:G
+Name:麗奈 Bust:88 Waist:60    Hip:85  Bra:D
+Name:れのん    Bust:85 Waist:56    Hip:82  Bra:E
+Name:若瀬千夏   Bust:87 Waist:53    Hip:80
+Name:若瀬七海   Bust:85 Waist:58    Hip:85  Bra:D-70
+Name:若槻朱音   Bust:83 Waist:58    Hip:83  Bra:C-70
+Name:若月樹里   Bust:86 Waist:58    Hip:83  Bra:E
+Name:若槻尚美   Bust:88 Waist:60    Hip:86  Bra:F-65
+Name:若菜 Bust:89 Waist:60    Hip:88  Bra:D-75
+Name:若菜亜衣   Bust:85 Waist:57    Hip:86
+Name:若菜すず   Bust:83 Waist:58    Hip:90  Bra:B-65
+Name:若菜瀬奈   Bust:84 Waist:58    Hip:83
+Name:若葉かおり  Bust:86 Waist:53    Hip:80  Bra:E
+Name:若林樹里   Bust:83 Waist:58    Hip:83  Bra:D
+Name:若林美保   Bust:90 Waist:58    Hip:88  Bra:F
+Name:若宮莉那   Bust:92 Waist:59    Hip:86  Bra:I
+Name:和久井由菜  Bust:84 Waist:56    Hip:85  Bra:C
+Name:わさび    Bust:83 Waist:58    Hip:83  Bra:C
+Name:渡瀬晶    Bust:88 Waist:60    Hip:86  Bra:D70
+Name:渡瀬安奈   Bust:70 Waist:56    Hip:73  Bra:B-65
+Name:渡瀬澪    Bust:100    Waist:60    Hip:87  Bra:G
+Name:渡瀬ミク   Bust:80 Waist:55    Hip:80
+Name:渡瀬りえ   Bust:87 Waist:63    Hip:86  Bra:D-75
+Name:渡辺なつき  Bust:86 Waist:56    Hip:84  Bra:E
+Name:渡辺美名子  Bust:80 Waist:60    Hip:85  Bra:C
+Name:渡辺弓絵   Bust:90 Waist:62    Hip:92  Bra:Fカップ</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/github">github</a>のURLは以下です。<br />
+<a href="https://github.com/yutakikuchi/Data/blob/master/ero.tsv">Data/ero.tsv at master · yutakikuchi/Data</a> <a href="http://b.hatena.ne.jp/entry/s/github.com/yutakikuchi/Data/blob/master/ero.tsv"><img src="http://b.hatena.ne.jp/entry/image/https://github.com/yutakikuchi/Data/blob/master/ero.tsv" alt="はてなブックマーク - Data/ero.tsv at master · yutakikuchi/Data" border="0" /></a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>優秀なデータサイエンティストの皆さんへ</h4>
+
+<blockquote>
+    <p>最初はアダルトフィルタ実装に向けたデータ準備を目的としていたのですが、途中から話が可笑しくなって何かの傾向分析ができそうなデータ抽出に成功しました。このデータから何か面白い方向性の研究に話を膨らませてくれる事を多いに期待します。</p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201307170850/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201307170850/">【進撃の巨大データ】RealTimeLog集計を目的としたRedisの活用</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201307220846/">Multi-Class Classifier of Bra Size used as the feature value with vital statics</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201307220846/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

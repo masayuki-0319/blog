@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110106/1294337077" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>5分で理解するPython文字コード &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>5分で理解するPython文字コード</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Jan 06, 03:04</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="python-5分で理解するpython文字コード">[Python] : 5分で理解するPython文字コード</h2>
+
+<div class="section">
+<h4>概要</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定による日本語文字化けの問題は誰もがハマるところ。<br />
+この記事では文字化けの解決方法を簡単にまとめたものになります。<br />
+実行環境は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mac">Mac</a>です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Linux">Linux</a>でもPath以外の箇所は同じように動作すると思います。<br />
+間違いの指摘などあればよろしくお願いします。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>注意すべきこと</h4>
+
+<blockquote>
+    <p>簡単にいうと以下の4点になりそうです。<br />
+<span style="font-weight:bold;font-size:15"><span style="color:#FF0000;">1. ファイルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定</span></span><br />
+<span style="font-weight:bold;font-size:15"><span style="color:#FF0000;">2. ファイル内部の行頭での<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定</span></span><br />
+<span style="font-weight:bold;font-size:15"><span style="color:#FF0000;">3. <a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>の内部コードは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>(オブジェクト)として扱っている。</span></span><br />
+<span style="font-weight:bold;font-size:15"><span style="color:#FF0000;">4. printなどの出力関数では端末の設定に合わせた<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>が利用されている</span></span><br />
+※1,2の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定は一致させます。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>1.ファイルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定</h4>
+
+<blockquote>
+    <p>サンプルとして<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>で指定する例を挙げます。ファイル名はencode.pyです。</p>
+<pre class="code" data-lang="" data-unlink>nkf --guess encode.py
+UTF-8 (LF)</pre><p>もし<a class="keyword" href="http://d.hatena.ne.jp/keyword/EUC">EUC</a>-JPなどになっていれば以下のコマンドで変換します。</p>
+<pre class="code" data-lang="" data-unlink>nkf -w --overwrite encode.py</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>2.ファイル内部の行頭での<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定</h4>
+
+<blockquote>
+    <p>encode.pyのファイル内部の行頭に以下のよう設定します。シバンの次の行が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定になります。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>3. <a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>の内部コードは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>(オブジェクト)として扱っている。</h4>
+
+<blockquote>
+    <p><span style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>と<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>(オブジェクト)は違うものであり</span>、必要に応じてそれぞれの変換が必要になります。<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>内部では<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>を使用しているので、文字列置換処理を行う場合などは処理前に<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>に変換する必要があります。<br />
+以下に簡単なサンプルを書きます。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+data_orig = <span class="synConstant">"日本語"</span>                                 <span class="synComment">#日本語代入(UTF-8)</span>
+<span class="synIdentifier">print</span> <span class="synIdentifier">type</span>( data_orig )                              <span class="synComment">#typeはstr</span>
+data_unic = data_orig.decode( <span class="synConstant">'utf-8'</span> )   <span class="synComment">#utf-8→unicodeオブジェクト</span>
+<span class="synIdentifier">print</span> <span class="synIdentifier">type</span>( data_unic )                             <span class="synComment">#typeはunicodeオブジェクト</span>
+<span class="synIdentifier">print</span> data_unic                                        <span class="synComment">#ここはerrorになる可能性あり</span>
+</pre><p>typeという関数で変数などの型を調べることができます。文字列の場合は通常'str'となりますが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>に<br />
+変換されたものは'<a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>'というオブジェクトの出力になります。<br />
+最後のprint data_unicで以下のような<a class="keyword" href="http://d.hatena.ne.jp/keyword/error">error</a>が出力された場合は(※<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>のversionで表示されない場合もありそう)<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>から出力関数で使われる端末のデフォルト<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>への変換がミスしていることになります。</p>
+<pre class="code" data-lang="" data-unlink>Python UnicodeEncodeError: 'ascii' codec can't encode character</pre><p>もしエラーが表示された場合は、￥<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>オブジェクト形式をそのままprintするのではなく、encodeを使ってstr型への<br />
+変換を行ってみてください。</p><p>余談ですが、端末(ターミナル)で使用しているデフォルトの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>調査と<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>の変更は次のように出来ます。<br />
+<span style="font-weight:bold;font-size:15">■調査</span></p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+<span class="synPreProc">import</span> sys 
+<span class="synIdentifier">print</span> sys.getdefaultencoding()
+</pre><p><span style="font-weight:bold;font-size:15">■変更</span><br />
+※変更はやらないほうがいいと思いますが、どうしてもという場合<br />
+/opt/local/var/<a class="keyword" href="http://d.hatena.ne.jp/keyword/macports">macports</a>/software/<a class="keyword" href="http://d.hatena.ne.jp/keyword/xorg">xorg</a>-xcb-proto/1.6_0+python26/opt/local/lib/python2.6/site-packages/sitecustomize.py<br />
+といったファイルを新規で作成し、以下の内容に書き換えます。</p>
+<pre class="code" data-lang="" data-unlink>import sys
+sys.setdefaultencoding( 'utf-8' )</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>,decode,encode関数の本質的な意味</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>変換の際に<a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>,decode,encodeなどの名前の関数を使いますが、<br />
+最初は名前を覚えるのにややこしいのですが、意味を抑えるとすっきりします。<br />
+最初に述べたように<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>の内部<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C7%A5%A3%A5%F3%A5%B0">エンコーディング</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>を使用しています。<br />
+よって<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>を中心に考えると良いです。</p><p><span style="color:#FF0000;"><span style="font-weight:bold;font-size:15"><a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>に変換しますという普通の意味として捉えます。</span></span><br />
+<span style="color:#FF0000;"><span style="font-weight:bold;font-size:15">decodeとは元の形式に変換しなおすという意味なので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>に戻しますよと覚えます。</span></span><br />
+<span style="color:#FF0000;"><span style="font-weight:bold;font-size:15">encodeとは別の形式に変換しますという意味なので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>から変換しますと覚えます</span>。</span><br />
+※<a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>とdecodeは同じ処理を行いますが、指定の仕方が異なるので注意が必要です。<br />
+また<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>から<a class="keyword" href="http://d.hatena.ne.jp/keyword/EUC">EUC</a>-JPなどへの直接変換はやらずに、一度<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>への変換を中継させる必要がありそうです。</p><p>以上を踏まえたサンプルコードは次のようなものになります。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synComment">#UTF-8→unicode変換 </span>
+data_unic = data_orig.decode( <span class="synConstant">'utf-8'</span> )
+data_unic_2 = <span class="synIdentifier">unicode</span>( data_orig, <span class="synConstant">'utf-8'</span> )
+
+data_euc = data_unic.encode( <span class="synConstant">'euc-jp'</span> )         <span class="synComment">#unicode → euc-jp変換</span>
+data_euc = <span class="synIdentifier">unicode</span>( data_orig, <span class="synConstant">'utf-8'</span> ).encode( <span class="synConstant">'euc-jp'</span> )  <span class="synComment">#UTF-8 → euc-jp変換</span>
+<span class="synIdentifier">print</span> data_euc  <span class="synComment">#euc-jp文字コードで出力</span>
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>まとめ</h4>
+
+<blockquote>
+    <p>・ファイルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定、ファイル内部での<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>指定を忘れずに。<br />
+・<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>内部の処理では<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>が利用されています。<br />
+・print関数などを利用するときは端末(ターミナルなど)に合わせた<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>に変換して出力しましょう。<br />
+・<a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>,decode,encodeの意味を正確におさえ、適切なものを使いましょう。</p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201101040227/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201101040227/">20秒で理解するJSONP</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201101082020/">超簡単 Perl一問一答学習帳</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201101082020/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

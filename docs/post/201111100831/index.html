@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20111110/1320881475" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>AES暗号のまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>AES暗号のまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Nov 10, 08:31</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="php-aes暗号のまとめ">[PHP] : AES暗号のまとめ</h2>
+
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;">AESとは</span></span></h4>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B6%A6%C4%CC%B8%B0%B0%C5%B9%E6">共通鍵暗号</a>方式の一つ。<a href="http://ja.wikipedia.org/wiki/AES">http://ja.wikipedia.org/wiki/AES</a>暗号</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B6%A6%C4%CC%B8%B0%B0%C5%B9%E6">共通鍵暗号</a>方式にはブロック暗号とストリーム暗号が存在し、AESはブロック暗号方式。</li>
+<li>ブロック暗号方式は固定長のブロックデータを単位として処理をする。</li>
+<li>一般的にブロック暗号方式は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%F8%B3%AB%B8%B0%B0%C5%B9%E6%CA%FD%BC%B0">公開鍵暗号方式</a>に比べて高速と言われている。</li>
+<li>ブロック暗号方式のモードはいくつか存在し、以下のページに詳しく載っている。<a href="http://www.triplefalcon.com/Lexicon/Encryption-Block-Mode-1.htm">http://www.triplefalcon.com/Lexicon/Encryption-Block-Mode-1.htm</a>   <a href="http://ja.wikipedia.org/wiki/">http://ja.wikipedia.org/wiki/</a>暗号利用モード</li>
+<li>ブロックモードは<a class="keyword" href="http://d.hatena.ne.jp/keyword/CBC">CBC</a>(暗号文ブロック連鎖モード)等が一般的で、<a class="keyword" href="http://d.hatena.ne.jp/keyword/CBC">CBC</a>は前のブロックの暗号化された値を次のブロックの暗号化に利用する。最初のブロックの暗号を行う場合、最後のブロックかIV(Initial <a class="keyword" href="http://d.hatena.ne.jp/keyword/Vector">Vector</a>:初期ベクトル)を使って暗号化する。</li>
+<li>ブロック長は128bit。鍵長は128ビット、192ビット、256ビットの3つが利用できる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%C8%BC%E5%C0%AD">脆弱性</a>? <a href="http://www.computerworld.jp/topics/563/">http://www.computerworld.jp/topics/563/</a>セキュリティ・マネジメント/200562/<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DE%A5%A4%A5%AF%A5%ED%A5%BD%A5%D5%A5%C8">マイクロソフト</a>の研究</li>
+</ul>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>でAES(RIJNDAEL)</span></span></h4>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>で利用するにはconfigureで--with-<a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>を指定する必要がある。→ <a class="keyword" href="http://d.hatena.ne.jp/keyword/centos">centos</a>では<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> install <a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>を実行すればOK。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>を--with-<a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>で指定するには<a href="http://sourceforge.net/projects/mcrypt/">libmcrypt</a>と<a href="http://sourceforge.net/projects/mhash/files/">mhash</a>が必要。※なぜか<a class="keyword" href="http://d.hatena.ne.jp/keyword/mac">mac</a>でsudo port install libmcryptで設定するとうまく<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>できない。原因は調査中。</li>
+<li><a href="http://jp.php.net/manual/ja/function.mcrypt-get-iv-size.php">PHP: mcrypt_get_iv_size - Manual</a></li>
+<li><a href="http://jp.php.net/manual/ja/function.mcrypt-create-iv.php">PHP: mcrypt_create_iv - Manual</a></li>
+<li><a href="http://jp.php.net/manual/ja/function.mcrypt-encrypt.php">PHP: mcrypt_encrypt - Manual</a></li>
+<li><a href="http://php.net/manual/ja/function.mcrypt-decrypt.php">PHP: mcrypt_decrypt - Manual</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>-get-iv-size,<a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>-create-iv,<a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>-encrypt,<a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>-decrypt関数を利用。</li>
+<li>暗号化/複合化のサンプルプログラム</li>
+</ul><pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">//暗号化方式をRIJNDAELの256bitブロック長、暗号化方式をCBC</span>
+<span class="synStatement">$</span><span class="synIdentifier">iv_size</span> <span class="synStatement">=</span> <span class="synIdentifier">mcrypt_get_iv_size</span><span class="synSpecial">(</span>MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC<span class="synSpecial">)</span>;  
+
+<span class="synComment">//Initial Vectorの大きさ</span>
+<span class="synPreProc">echo</span> "<span class="synConstant">iv size:</span>" <span class="synStatement">.</span> <span class="synStatement">$</span><span class="synIdentifier">iv_size</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+
+<span class="synComment">//Initial Vector生成</span>
+<span class="synStatement">$</span><span class="synIdentifier">iv</span> <span class="synStatement">=</span> <span class="synIdentifier">mcrypt_create_iv</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">iv_size</span>, MCRYPT_RAND<span class="synSpecial">)</span>;
+<span class="synPreProc">echo</span> "<span class="synConstant">iv value:</span>" <span class="synStatement">.</span> <span class="synIdentifier">base64_encode</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">iv</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+
+<span class="synComment">//共通鍵</span>
+<span class="synStatement">$</span><span class="synIdentifier">key</span> <span class="synStatement">=</span> "<span class="synConstant">secret key!!!!!!</span>";
+
+<span class="synComment">//暗号化したい平文</span>
+<span class="synStatement">$</span><span class="synIdentifier">text</span> <span class="synStatement">=</span> "<span class="synConstant">This is plain text</span>";
+<span class="synPreProc">echo</span> "<span class="synConstant">PlainText Value:</span>" <span class="synStatement">.</span> <span class="synStatement">$</span><span class="synIdentifier">text</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+
+<span class="synComment">//暗号化方式をRIJNDAELの256bitブロック長、暗号化方式をCBC</span>
+<span class="synStatement">$</span><span class="synIdentifier">crypttext</span> <span class="synStatement">=</span> <span class="synIdentifier">mcrypt_encrypt</span><span class="synSpecial">(</span>MCRYPT_RIJNDAEL_256, <span class="synStatement">$</span><span class="synIdentifier">key</span>, <span class="synStatement">$</span><span class="synIdentifier">text</span>, MCRYPT_MODE_CBC, <span class="synStatement">$</span><span class="synIdentifier">iv</span><span class="synSpecial">)</span>;
+<span class="synPreProc">echo</span> "<span class="synConstant">Crypt Value:</span>" <span class="synStatement">.</span> <span class="synIdentifier">base64_encode</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">crypttext</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+
+<span class="synComment">//復号化</span>
+<span class="synStatement">$</span><span class="synIdentifier">decrypttext</span> <span class="synStatement">=</span> <span class="synIdentifier">mcrypt_decrypt</span><span class="synSpecial">(</span>MCRYPT_RIJNDAEL_256, <span class="synStatement">$</span><span class="synIdentifier">key</span>, <span class="synStatement">$</span><span class="synIdentifier">crypttext</span>, MCRYPT_MODE_CBC, <span class="synStatement">$</span><span class="synIdentifier">iv</span><span class="synSpecial">)</span>;
+<span class="synPreProc">echo</span> "<span class="synConstant">DeCrypt Value:</span>" <span class="synStatement">.</span> <span class="synStatement">$</span><span class="synIdentifier">decrypttext</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+</pre>
+<ul>
+<li>実行結果</li>
+</ul><pre class="code" data-lang="" data-unlink>iv size:32
+iv value:1YI3/hshZifNIj0EmiS2ounygl2geY1Gw1Uy6MvHZNY=
+PlainText Value:This is plain text
+Crypt Value:VWrSk11wHxrbz7TRcgvfE/Zpe2Ru3qE9grwM4mEFwfQ=
+DeCrypt Value:This is plain text</pre>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>でAES(RIJNDAEL)</span></span></h4>
+
+<ul>
+<li><a href="http://jclement.ca/software/pyrijndael/">http://jclement.ca/software/pyrijndael/</a></li>
+<li>pyrijndaelというモジュールを利用する。ダウンロードしてtar.gzを展開して、pyRijindael.pyをimportするだけ。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ fetch "http://jclement.ca/software/pyrijndael/pyrijndael-v1_4.tar.gz"
+$ tar -xzf pyrijndael-v1_4.tar.gz</pre>
+<ul>
+<li>暗号化/複合化のサンプルプログラム</li>
+</ul><pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">import</span> pyRijndael
+<span class="synPreProc">import</span> base64
+
+<span class="synComment">#共通鍵</span>
+key = <span class="synConstant">"secret key!!!!!!"</span>
+<span class="synComment">#暗号化する文章</span>
+text = <span class="synConstant">"This is plain text"</span>
+<span class="synIdentifier">print</span> <span class="synConstant">"PlainText Value:"</span>, text
+<span class="synComment">#Rijindaelで暗号化</span>
+crypttext = pyRijndael.EncryptData(key,text)
+<span class="synIdentifier">print</span> <span class="synConstant">"Crypt value:"</span>, base64.b64encode(crypttext)
+
+<span class="synComment">#復号化</span>
+decrypttext = pyRijndael.DecryptData(key,crypttext)
+<span class="synIdentifier">print</span> <span class="synConstant">"DecryptText Value:"</span>, decrypttext
+</pre>
+<ul>
+<li>実行結果</li>
+</ul><pre class="code" data-lang="" data-unlink>PlainText Value: This is plain text
+Crypt value: PsgMDBt+jtPN+F9q1rM/Lyl6CxBltIAq+bDr5eS2gbg=
+DecryptText Value: This is plain text</pre>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201110180830/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201110180830/">Apacheのチューニング</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201111131340/">yumコマンド</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201111131340/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

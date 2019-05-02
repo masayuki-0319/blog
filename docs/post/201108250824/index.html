@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110825/1314228258" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Pythonでbase64エンコード・デコードする方法 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Pythonでbase64エンコード・デコードする方法</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Aug 25, 08:24</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="python-pythonでbase64エンコード-デコードする方法">[Python] : Pythonでbase64エンコード・デコードする方法</h2>
+
+<div class="section">
+<h4>import <a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>でできる</h4>
+<p>バイナリデータをASCII文字列化する手段の一つであるbase64encode・decodeを<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>でやる方法。import <a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>によりすごく簡単にできる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>:<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>.b64encod、decode:<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>.b64decode。Paddingには'='が使用される様子。以下はサンプルサンプルコードでバイナリ形式のimageファイルを読み込み、base64encodeを行い、encodeした文字列からdecode関数で元ファイルのバイナリと同じであるかどうかを確認している。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">import</span> base64
+
+<span class="synComment">#file読み込み</span>
+<span class="synIdentifier">file</span> = <span class="synIdentifier">open</span>(<span class="synConstant">'./image.jpg'</span>, <span class="synConstant">'rt'</span>).read()
+<span class="synComment">#base64でencode</span>
+enc_file = base64.b64encode( <span class="synIdentifier">file</span> )
+<span class="synComment">#encodeしたascii文字列を出力</span>
+<span class="synIdentifier">print</span> enc_file
+<span class="synComment">#decodeしてもとデータに変換</span>
+dec_file = base64.b64decode( enc_file )
+<span class="synComment">#decodeしたデータと元データを比較</span>
+<span class="synStatement">if</span> <span class="synIdentifier">file</span> == dec_file :
+<span class="synIdentifier">print</span> <span class="synConstant">'SAME'</span>
+<span class="synStatement">else</span> :
+<span class="synIdentifier">print</span> <span class="synConstant">'NOT SAME'</span>
+</pre><p>encode結果(一部)</p>
+<pre class="code" data-lang="" data-unlink>VQOeSpPIrtIP2jv2f59HklHxv+Eu2QCVI5/F1jGy55IwZMgg9iM1/K9iis4YSKd7jeLk1sf1QTftEfAWeymB+N/wfWRk5P8AwmNhkEjt+9/OstPj/wDAUps/4Xb8I41+YqD4xsQME5wcS9e+PWv5cqKp4WL6k/WZH9REH7QPwGtlljl+NXwmuELlkceMLDPfr++57dajHx8+BlxbO5+NXweiLJgA+M7EHqDn/W8EZNfy90VDwUL7l/W5H9NU/wAefgoJ0D</pre>
+</div>
+<div class="section">
+<h4>urlsafeをサポート</h4>
+<p>urlにbase64encodeした文字列を含めたい時に有用。なぜならば'/','+'はurlのパスやquery文字列に使用されるので変換が必要となる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>の場合は'/'を'_'、'+'を'-'に変換するurlsafe形式を組み込み関数でサポートしている。※他の言語だとdecode/encodeの前後で文字列を自前で変換する。encode:<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>.urlsafe_b64encode、decode:<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>.urlsafe_b64decodeを利用する。以下はサンプルコード。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">import</span> base64
+
+<span class="synComment">#file読み込み</span>
+<span class="synIdentifier">file</span> = <span class="synIdentifier">open</span>(<span class="synConstant">'./image.jpg'</span>, <span class="synConstant">'rt'</span>).read()
+<span class="synComment">#base64でencode</span>
+enc_file = base64.urlsafe_b64encode( <span class="synIdentifier">file</span> )
+<span class="synComment">#encodeしたascii文字列を出力</span>
+<span class="synIdentifier">print</span> enc_file
+<span class="synComment">#decodeしてもとデータに変換</span>
+dec_file = base64.urlsafe_b64decode( enc_file )
+</pre><p>encode結果(一部)<br />
+上のencode結果と比べると'/','+'がそれぞれ置換されていることが分かる。</p>
+<pre class="code" data-lang="" data-unlink>VQOeSpPIrtIP2jv2f59HklHxv-Eu2QCVI5_F1jGy55IwZMgg9iM1_K9iis4YSKd7jeLk1sf1QTftEfAWeymB-N_wfWRk5P8AwmNhkEjt-9_OstPj_wDAUps_4Xb8I41-YqD4xsQME5wcS9e-PWv5cqKp4WL6k_WZH9REH7QPwGtlljl-NXwmuELlkceMLDPfr--57dajHx8-BlxbO5-NXweiLJgA-M7EHqDn_W8EZNfy90VDwUL7l_W5H9NU_wAefgoJ0D</pre>
+</div>
+<div class="section">
+<h4>base32,base16もサポート</h4>
+<p>base32,base16もサポートしており、<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>.b32encode/<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>.b32decode, <a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>.b16encode/<a class="keyword" href="http://d.hatena.ne.jp/keyword/base64">base64</a>.b16decodeといった関数がそれぞれ用意されている。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">import</span> base64
+
+<span class="synComment">#file読み込み</span>
+<span class="synIdentifier">file</span> = <span class="synIdentifier">open</span>(<span class="synConstant">'./image.jpg'</span>, <span class="synConstant">'rt'</span>).read()
+<span class="synComment">#base32でencode</span>
+enc_32file = base64.b32encode( <span class="synIdentifier">file</span> )
+enc_16file = base64.b16encode( <span class="synIdentifier">file</span> )
+<span class="synComment">#encodeしたascii文字列を出力</span>
+<span class="synIdentifier">print</span> enc_32file
+<span class="synIdentifier">print</span> enc_16file
+<span class="synComment">#decodeしてもとデータに変換</span>
+dec_32file = base64.b32decode( enc_32file )
+dec_16file = base64.b16decode( enc_16file )
+</pre><p>base32encode結果(一部)</p>
+<pre class="code" data-lang="" data-unlink>MPJIUKSRLUERRNW4N3W4OA4KKCTWJJ3TOA4OA74FCRIN5JKYIO4EQCDT6NT3B5XWVEGGJSTTESG7YPER5FCRLLC6QFQ2RJM4FFTMRYBXDGUMJDGMK6GHHUCRIVFG5ZB5ZEIJNWQLDZ66UZMLPMUWSJBE446I5VCRK3CDRRBSXB3BT24MPL6STIJTXALWHU5Q74FCRJOUBD7GMJDPMGHJQAUNXFJEWN2PNIUKNACFZH7CN7HKIVA3IHFWP22FCWMBFGEGP3ZXL5VBEPEOLX7U74FCRIFOQNBPZQ7GN7HKJ4UURZFX45CRLIKWGZ2PKC3I4AJ75MHX6YKFCRLIRTH776Z</pre><p>base16encode結果(一部)</p>
+<pre class="code" data-lang="" data-unlink>4884B6D058F3EF532C5BD94B49212739E476A28AB621C62195C3B0CF5C63D7E94D099DC0BB1E9D87F851452EA047F331237B0C74C0146DCA9259BA7B514534022E4FF137E7522A0DA0E5B3F5A28ACC094C433F79BAFB5091E472EFFA7F8514505741A17E61F337E752794A4725BF3A28AD0AB1B3A7A85B47009FF587BFB0A28A2B44667FFFD9</pre>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201108200857/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201108200857/">Android端末のOpenSSL経由でファイルダウンロードができない問題</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201108280833/">モバイルサイトを構築するための文字コード知識</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201108280833/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20101018/1287416278" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>serializeとjson関数の比較 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>serializeとjson関数の比較</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2010 Oct 18, 00:37</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="php-serializeとjson関数の比較">[PHP] : serializeとjson関数の比較</h2>
+
+<div class="section">
+<h4>概要</h4>
+
+<blockquote>
+    <p>serializeと<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encodeのどちらの利用が望ましいかを調べます。理由はWebAPIを作成するときにどのレスポンス形式が最適なのかを検証する必要がでてきたためです。事前に上がった意見としては”<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encodeの方がデータ容量少なくなるから速いっしょ”、”serializeの方が<a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>をそのまま扱っているんだから変換処理コストが少ないはず”などの意見がありましたが、どれが正確か分からないので実際に試してみます。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>サンプルするデータ</h4>
+
+<blockquote>
+    <p><span style="color:#FF0000;">50回実行して処理時間の平均値をサンプリングします。</span></p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>配列から各<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>処理を施した時の処理コスト
+<ul>
+<li>シングルバイト文字列を含む配列を変換するコスト</li>
+<li>マルチバイト文字列を含む配列を変換するコスト</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>したデータから<a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>配列への復元処理コスト
+<ul>
+<li>シングルバイト文字列を含む配列<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>したデータをデコード</li>
+<li>マルチバイト文字列を含む配列を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>したデータをデコード</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a></h4>
+
+<blockquote>
+    <pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synType">array</span><span class="synSpecial">()</span>;
+<span class="synStatement">for</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">i</span><span class="synStatement">=</span><span class="synConstant">0</span>; <span class="synStatement">$</span><span class="synIdentifier">i</span><span class="synStatement"><=</span><span class="synConstant">10000</span>; <span class="synStatement">$</span><span class="synIdentifier">i</span> <span class="synStatement">++</span> <span class="synSpecial">)</span> <span class="synSpecial">{</span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span><span class="synSpecial">[]</span> <span class="synStatement">=</span> "<span class="synConstant">test</span>"; <span class="synComment">//ここを適宜変えます。</span>
+<span class="synSpecial">}</span>
+<span class="synStatement">$</span><span class="synIdentifier">start</span> <span class="synStatement">=</span> <span class="synIdentifier">microtime</span><span class="synSpecial">()</span>;
+
+<span class="synComment">//PHP serialize</span>
+<span class="synStatement">$</span><span class="synIdentifier">string</span> <span class="synStatement">=</span> <span class="synIdentifier">serialize</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span>;
+<span class="synComment">//JSON encode</span>
+<span class="synComment">//$string = json_encode( $data );</span>
+
+<span class="synStatement">$</span><span class="synIdentifier">end</span> <span class="synStatement">=</span> <span class="synIdentifier">microtime</span><span class="synSpecial">()</span>;
+<span class="synPreProc">echo</span> <span class="synStatement">$</span><span class="synIdentifier">end</span> <span class="synStatement">-</span> <span class="synStatement">$</span><span class="synIdentifier">start</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+</pre>
+<div class="section">
+<h4>デコード <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a></h4>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synType">array</span><span class="synSpecial">()</span>;
+<span class="synStatement">for</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">i</span><span class="synStatement">=</span><span class="synConstant">0</span>; <span class="synStatement">$</span><span class="synIdentifier">i</span><span class="synStatement"><=</span><span class="synConstant">10000</span>; <span class="synStatement">$</span><span class="synIdentifier">i</span> <span class="synStatement">++</span> <span class="synSpecial">)</span> <span class="synSpecial">{</span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span><span class="synSpecial">[]</span> <span class="synStatement">=</span> "<span class="synConstant">test</span>"; <span class="synComment">//ここを適宜変えます。</span>
+<span class="synSpecial">}</span>
+<span class="synComment">//PHP serialize</span>
+<span class="synStatement">$</span><span class="synIdentifier">string</span> <span class="synStatement">=</span> <span class="synIdentifier">serialize</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span>;
+
+<span class="synComment">//JSON encode</span>
+<span class="synComment">//$string = json_encode( $data );</span>
+
+<span class="synStatement">$</span><span class="synIdentifier">start</span> <span class="synStatement">=</span> <span class="synIdentifier">microtime</span><span class="synSpecial">()</span>;
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synIdentifier">unserialize</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">string</span> <span class="synSpecial">)</span>;
+<span class="synComment">//json_decode( $string );</span>
+<span class="synStatement">$</span><span class="synIdentifier">end</span> <span class="synStatement">=</span> <span class="synIdentifier">microtime</span><span class="synSpecial">()</span>;
+<span class="synPreProc">echo</span> <span class="synStatement">$</span><span class="synIdentifier">end</span> <span class="synStatement">-</span> <span class="synStatement">$</span><span class="synIdentifier">start</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>の処理時間結果</h4>
+
+<blockquote>
+    <p><span style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>配列からの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>処理では<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encodeが速い/span></p>
+
+<table>
+<tr>
+<th> 形式 </th>
+<th> シングルバイト   </th>
+<th> マルチバイト </th>
+</tr>
+<tr>
+<th> serialize</th>
+<td> 0.00371922 </td>
+<td>  0.0040066 </td>
+</tr>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encode</th>
+<td>  0.00123026</td>
+<td> 0.00314484 </td>
+<td> </td>
+</tr>
+</table>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>byte数比較</h4>
+
+<blockquote>
+    <p><span style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>配列からの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>処理では<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encodeの方が生成Stringのバイト数が少なく済みそう</span></p>
+
+<table>
+<tr>
+<th> 形式 </th>
+<th> シングルバイト </th>
+<th> マルチバイト </th>
+</tr>
+<tr>
+<th>  serialize </th>
+<td> 178919 </td>
+<td> 248926  </td>
+</tr>
+<tr>
+<th>  <a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encode </th>
+<td>  70008 </td>
+<td> 230024 </td>
+<td> </td>
+</tr>
+</table>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>デコード処理時間結果</h4>
+
+<blockquote>
+    <p><span style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>文字列からのデコード処理ではunserializeが速い。</span><br />
+※この検証は元々の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A1%BC%A5%BF%B7%C1%BC%B0">データ形式</a>が異なるものを扱うため、比較が適正ではないかもしれません。</p>
+
+<table>
+<tr>
+<th> 形式 </th>
+<th> シングルバイト </th>
+<th> マルチバイト </th>
+</tr>
+<tr>
+<th> unserialize </th>
+<td> 0.0007774 </td>
+<td>  0.00080212 </td>
+</tr>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_decode </th>
+<td> 0.00382754  </td>
+<td> 0.00643018 </td>
+<td> </td>
+</tr>
+</table>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>まとめ</h4>
+
+<blockquote>
+    <p>・<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>では<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encode、デコードではunserializeが処理として速いことが分かった。<br />
+・<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C9">エンコード</a>、デコード単体で処理の速さを比較することも大事だが、処理全体のtotalコストとしての見積が必要。<br />
+・個人的には<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encode,<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_decodeを利用するのが良いと思う。(<a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a>だと転送データ容量も減らせるので)</p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201010142353/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201010142353/">findとsedを利用した一行野郎のファイル名変換</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201011010022/">Mysqlのメモ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201011010022/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

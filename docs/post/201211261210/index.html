@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20121126/1353899415" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>3ヶ月間Hadoopを使ってみて学んだ事 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>3ヶ月間Hadoopを使ってみて学んだ事</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Nov 26, 12:10</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="hadoop-3ヶ月間hadoopを使ってみて学んだ事">[Hadoop] : 3ヶ月間Hadoopを使ってみて学んだ事</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873115035/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51p88eroNdL._SL160_.jpg" class="hatena-asin-detail-image" alt="Hadoop 第2版" title="Hadoop 第2版"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873115035/yutakikuchi-22/">Hadoop 第2版</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Tom White,玉川竜司,兼田聖士</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2011/07/23</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 9人 <span class="hatena-asin-detail-label">クリック</span>: 182回</li><li><a href="http://d.hatena.ne.jp/asin/4873115035/yutakikuchi-22" target="_blank">この商品を含むブログ (24件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>Overture</h4>
+
+<blockquote>
+    <p>BigData解析という仕事をやり始めて半年、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>を業務で使い始めて3ヶ月以上が経過したのでここで今までの業務での知識をまとめてみたいと思います。先日参加したWebDBForum2012でも各種企業がBigData(主にログ)からユーザの趣味思考や特徴などを解析して表示システムへのFeedBackや企業戦略などに活かしている報告があり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>などの分散処理技術や今後は更にリアルタイムでBigDataを使うための<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DF%A5%C9%A5%EB%A5%A6%A5%A7%A5%A2">ミドルウェア</a>が出てくることが予想され、そこに精通した人間が求められるようになってくると思います。<br />
+<a href="http://db-event.jpn.org/webdbf2012/">第5回 Webとデータベースに関するフォーラム (WebDB Forum 2012)</a> <a href="http://b.hatena.ne.jp/entry/db-event.jpn.org/webdbf2012/"><img src="http://b.hatena.ne.jp/entry/image/http://db-event.jpn.org/webdbf2012/" alt="はてなブックマーク - 第5回 Webとデータベースに関するフォーラム (WebDB Forum 2012)" border="0" /></a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a></h4>
+
+<blockquote>
+    <p><a href="http://ja.wikipedia.org/wiki/Hadoop">Hadoop - Wikipedia</a> <a href="http://b.hatena.ne.jp/entry/ja.wikipedia.org/wiki/Hadoop"><img src="http://b.hatena.ne.jp/entry/image/http://ja.wikipedia.org/wiki/Hadoop" alt="はてなブックマーク - Hadoop - Wikipedia" border="0" /></a><br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>の説明を簡単に。大量のデータを扱うために従来の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%BF%A5%F3%A5%C9%A5%A2%A5%ED%A5%F3">スタンドアロン</a>で処理を行うのではなく、大量のマシンに処理を分散させて解析スピードを劇的に改善することを目的とした<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>です。例えば200Gほどの<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のAccessLogからUserの<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Referer">Referer</a>や利用しているUserAgent/Deviceなどをデータを1日毎に集計しようとした場合、1台<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>で計算していたら翌日の集計に間に合いません。しかしこれを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>の分散処理を使えば1-2時間で処理を完了させることが出来ると思います。</p>
+
+<div class="section">
+<h5>merit / demerit</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>を利用するmerit/demeritを箇条書きで書きます。</p>
+
+<ul>
+<li>merit
+<ul>
+<li>大量のデータを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>台で分散し、解析処理を高速化。</li>
+<li>スケールアウトが比較的楽にできる。</li>
+<li>面倒な分散処理は全て<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>が行ってくれる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>ユーザは解析処理に専念できる。</li>
+<li>導入実績が豊富で信頼ができる。 </li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/JAVA">JAVA</a>が苦手なユーザでもStreamingを使う事で<a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Ruby">Ruby</a>などの言語で<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>を記述する事が可能。</li>
+</ul></li>
+</ul>
+<ul>
+<li>demerit
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C3%E0%BC%A1">逐次</a>処理を行う場合には不向き。</li>
+<li>リアルタイム性を求める処理には不向き。</li>
+<li>多段の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>処理を重ねないと集計が出来ないケースがある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>のテクニックを学ばなければならない。</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>ServerStructure</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>はmaster/slaveの二つに分けられます。masterとなるのは1台のサーバでそこを起点にslaveノードに対してTask,Dataが割り当てられます。master/slaveのサーバの内部でも<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>処理を行うサーバ、<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>のファイルを管理するサーバに分けられ、それぞれに対してJobTracker/TaskTracker/NameNode/DataNodeと名前が定義されています。</p>
+
+<ul>
+<li>JobTracker
+<ul>
+<li>HadoopClientからjobを受け取る。Slaveサーバに対してTaskを分割する。</li>
+</ul></li>
+<li>TaskTracker
+<ul>
+<li>Masterサーバから受け取ったTaskを実行する。</li>
+</ul></li>
+<li>NameNode
+<ul>
+<li>実際のデータがDataNodeのどこに格納されているのかを管理する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BF%A5%C7%A1%BC%A5%BF">メタデータ</a>サーバ。</li>
+</ul></li>
+<li>DataNode 
+<ul>
+<li>NameNodeによって管理されている実際のデータ。ブロックと呼ばれる単位で格納されている。ブロックはデフォルトで64MByte。ファイルは設定に応じてreplication管理されている。</li>
+</ul></li>
+</ul><p>以下は概要図となりますが、Clientから投げられた<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>のJobをMasterのJobTrackerが受け付けてSlaveのTaskTrackerに流します。Clientから投げられた<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>のJobのINPUT_PATHはNameNodeに問い合わせを行い、どのDataNodeにデータが格納されているのかを取得します。JobTrackerはTaskTrackerに対してDataNodeのファイルを指定し、TaskTrackerが実際のファイルを取りに行くような仕組みです。<br />
+<span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20121123204602" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20121123/20121123204602.png" alt="f:id:yutakikuchi:20121123204602p:image" title="f:id:yutakikuchi:20121123204602p:image" class="hatena-fotolife" itemprop="image"></a></span><br />
+</p>
+
+</div>
+<div class="section">
+<h5>Map / Sort & Shuffle/ Reduce</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>流れについて説明します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>を一言で書くとKey/Value形式のテキストデータを標準入出力を用いた分散処理でまとめる事です。処理の流れを以下で書きます。HadoopClientからJobを流し込む時にInputPath,OutputPath,mapper,reducerを指定します。InputPath/OutputPathは<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>上のディレクトリを設定し、Mapper/Reducerは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>のユーザが定義したプログラムを設定します。JobTrackerはInputPathのデータをInputSplitと呼ばれる単位のファイルに分割し、それぞれのTaskTrackerに分散されます。TaskTrackerではユーザが定義したMapperを実行するためにInputSplitからデータを抽出します。map処理では通常、1行の分解と目的データの抽出を行います。map処理で出力するデータもKeyとValue形式になっている必要があり、通常はそれらをTabで区切りで出力します。出力されたデータはTaskTrackerのローカルに一時的に書き出しされます。出力したmapの結果からKeyを基にSortを行い、Shuffle処理で同じKeyのデータを束ねます。Reducerが受け取るデータの規則はKeyによって決まります。よってShuffleで束ねられたデータはKeyを基に必ず特定のReducerに渡るようになっています。Reducerにデータを渡す方法はmap処理を行ったTaskTrackerからファイルのコピーにて行われます。Reducerの目的はMapperが出力したデータの集計する処理になります。コピーが完了し、Reducerの初期化が完了したTaskから処理に移りユーザが定義したReducerが呼び出され、最終的な結果を最初に指定したOutputPathのディレクトリにファイルとして保存します。</p><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20121123235754" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20121123/20121123235754.png" alt="f:id:yutakikuchi:20121123235754p:image" title="f:id:yutakikuchi:20121123235754p:image" class="hatena-fotolife" itemprop="image"></a></span><br />
+</p>
+
+</div>
+<div class="section">
+<h5>DistributedCache</h5>
+<p>DistributedCacheは<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>上に設置した比較的大きなファイルをMapperやReducerで読み込む仕組みです。例えば大量のテキ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%C8%A5%D5%A5%A1%A5%A4">ストファイ</a>ルをMapperで参照したい場合であったり、Jar等のライブラリファイルやsoファイル等の実行ファイルでも可能です。DistributedCacheがJobTrackerから渡されるfileオプションのプログラムと異なるのはコピー回数を減らし、TaskTracker側でデータをキャッシュできるところです。</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a> Technique</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>を使っていて気づいたTechniqueをまとめます。</p>
+
+<ul>
+<li>実装したMapper/ReducerをHadoopClientだけで動かして正常に動作する事を確認する。Mapper/Reducerは標準入出力プログラミングなので一度<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>上のファイルの一部をClientサーバにコピーし、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>で結果をパイプで連結して目的とする結果が出力されることを確認する。</li>
+<li>大量のTaskTrackerサーバのプログラム更新を抑える。StreamingのfileオプションやDistributedCacheを利用してTaskTrackerに対して共通のパッケージをinstallするなどの手間を省く。</li>
+<li>Mapperで出力するKeyがReducer側で分散し偏りが無いように定義する。例えば指定するReducerの数を大きくしてもMapperで吐き出すKeyのバリエーションが少なければ特定のReducerにデータが転送されてしまい、処理が軽いReducerと重いReducerが存在し十分に並列処理を活かす事ができない。Keyの指定にはバリエーション豊富なデータ項目として沢山のReducerに散らせるようにする。</li>
+<li>Reducerへのデータ転送容量を減らす。MapperのTaskTrackerからReducerへはデータが転送コピーされる。このデータ容量を出来る限りコンパクトにするため、Mapperで無駄なデータ項目は出力しない。</li>
+<li>Combinerを使ってReducerへのデータ転送を減らす。MapperとReducerの中間のCombinearを定義して一度簡易集計を行う。簡易集計した結果をReducer側に渡す事によってデータ転送量を減らす事ができる。</li>
+<li>1つのMapperに与えるInputSplitのデータサイズが大きい場合はMapper処理が途中で失敗することがある。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>側の設定ファイルを修正する方法もありそうだが、InputFileのデータを細かく分割して<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>に上げ直すとうまくいくことがある。</li>
+<li>1ヶ月間等の大量のログデータを一度のMapperにInputするとHeapSizeを超えて処理できない可能性がある。その場合は一度1日や1週間単位でコンパクトなデータを作り、コンパクトしたデータを1ヶ月分のデータとして再集計を行う。</li>
+<li>Reducerでの出力を数値の集計としてまとめたい場合、1度のMapReducerでは出来ない可能性がある。その場合は2回に分けて<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>を行う必要がある。1回目は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のReducerで大量のデータから部分集計を行う。2回目のReducerでは1個起動するように定義し、1回目の出力を全てまとめて出力する。</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Practice</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/CentOS">CentOS</a> release 6.3 (Final)で<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a> Streamingを動かしてみます。</p>
+
+<div class="section">
+<h5>WordCount</h5>
+<p><a href="http://flash.sonypictures.com/video/movies/thesocialnetwork/awards/thesocialnetwork_screenplay.pdf">http://flash.sonypictures.com/video/movies/thesocialnetwork/awards/thesocialnetwork_screenplay.pdf</a><br />
+映画socialnetworkの台詞を元にWordCountをHadoopStreamingで行います。まずはテキストをword.txtというファイルにコピーして<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>にアップします。</p>
+<pre class="code" data-lang="" data-unlink>$ alias hdfs="/usr/lib/hadoop-0.20/bin/hadoop fs"
+$ hdfs -mkdir socialnetwork/input
+$ hdfs -put word.txt socialnetwork/input
+$ hdfs -ls socialnetwork/input
+-rw-r--r--   1 yuta supergroup     167091 2012-11-23 21:42 /user/yuta/socialnetwork/input/word.txt</pre><p>英単語はピリオド、スペース、カンマ、クエッションで区切られているのでそれを元に単語に分割します。Mapperで単語 <Tab> 1という<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A1%BC%A5%BF%B7%C1%BC%B0">データ形式</a>で出力し、Reducer側で単語のHashを作成し、カウントの合計値を計算します。ここでは簡単な処理のためにMapper/Reducerともに1で実行します。またMapper/Reducerともに<a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a>で記述しています。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/bin/perl</span>
+<span class="synComment">#WordCouのMapperです</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+
+<span class="synStatement">while</span>( <> ) {
+   <span class="synStatement">chomp</span> <span class="synIdentifier">$_</span>;
+   <span class="synStatement">my</span> <span class="synIdentifier">@tokens</span> = <span class="synStatement">split</span>( <span class="synStatement">/</span><span class="synSpecial">\s</span><span class="synConstant">|</span><span class="synSpecial">\.</span><span class="synConstant">|,|</span><span class="synSpecial">\?</span><span class="synStatement">/</span>, <span class="synIdentifier">$_</span> );
+   <span class="synStatement">foreach</span>( <span class="synIdentifier">@tokens</span> ) {
+  <span class="synIdentifier">$_</span> =~ <span class="synStatement">s/</span><span class="synSpecial">(</span><span class="synConstant">“|”|-</span><span class="synSpecial">)</span><span class="synStatement">//g</span>; 
+  <span class="synStatement">if</span>( <span class="synIdentifier">$_</span> <span class="synStatement">ne</span> <span class="synConstant">""</span> && <span class="synIdentifier">$_</span> <span class="synStatement">ne</span> <span class="synConstant">" "</span> ) {
+     <span class="synStatement">print</span> <span class="synIdentifier">$_</span> . <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span> . <span class="synConstant">1</span> . <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+  }
+   }
+}
+</pre><pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/bin/perl</span>
+<span class="synComment">#WordCountのReducerです</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+<span class="synStatement">my</span> <span class="synIdentifier">%word_hash</span> = ();
+<span class="synStatement">while</span>( <> ) {
+   <span class="synStatement">chomp</span> <span class="synIdentifier">$_</span>;
+   <span class="synStatement">my</span> <span class="synIdentifier">@tokens</span> = <span class="synStatement">split</span>( <span class="synStatement">/</span><span class="synSpecial">\t</span><span class="synStatement">/</span>, <span class="synIdentifier">$_</span> );
+   <span class="synStatement">my</span> <span class="synIdentifier">$word</span> = <span class="synIdentifier">$tokens[</span><span class="synConstant">0</span><span class="synIdentifier">]</span>;
+   <span class="synStatement">if</span>( !<span class="synStatement">defined</span>( <span class="synIdentifier">$word_hash{$word}</span> ) ) {
+  <span class="synIdentifier">$word_hash{$word}</span> = <span class="synConstant">0</span>;
+   }
+   <span class="synIdentifier">$word_hash{$word}</span>++;
+}
+
+<span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$word</span> ( <span class="synStatement">sort</span> <span class="synStatement">keys</span> <span class="synIdentifier">%word_hash</span> ) {
+   <span class="synStatement">print</span> <span class="synIdentifier">$word</span> . <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span> . <span class="synIdentifier">$word_hash{$word}</span> . <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+}
+</pre><p>自作のMapper/Reducerが完成したので一度ローカルで実行してみます。Mapperの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A1%BC%A5%BF%B7%C1%BC%B0">データ形式</a>とReducerの最終出力結果に間違いが無いかを確認します。</p>
+<pre class="code" data-lang="" data-unlink>$ cat word.txt | perl mapper.pl
+the 1
+world   1
+MARK    1
+waits   1
+And 1
+waits   1
+And 1
+we  1
+SNAP    1
+TO  1
+BLACK   1
+ROLL    1
+MAIN    1
+TITLE   1
+
+$ cat word.txt | perl mapper.pl | perl reducer.pl
+FACEBOOK    6
+Facebook    40
+Facebookwhich   1
+Google  2
+MARK    583
+MARK)   15
+MARKDUSTIN  1
+MARK’S  26
+MARK’s  24
+Mark    77
+Mark!   1
+Mark’I  1
+Mark’s  9
+TheFacebook 8
+facebook    6
+facebooks   1
+mark    1
+marker  1
+resentedMark    1
+theFacebook 17</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>上で<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>を実行してみます。以下のような<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>を作成し、コマンドの確認と実行を行います。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink><span class="synComment">#!/bin/sh</span>
+
+<span class="synIdentifier">job_name</span>=<span class="synStatement">'</span><span class="synConstant">"SocialNetwrok WordCount"</span><span class="synStatement">'</span>
+<span class="synIdentifier">hadoop</span>=<span class="synStatement">'</span><span class="synConstant">/usr/lib/hadoop-0.20/bin/hadoop</span><span class="synStatement">'</span>
+<span class="synIdentifier">streaming_jar</span>=<span class="synStatement">'</span><span class="synConstant">/usr/lib/hadoop-0.20/contrib/streaming/hadoop-streaming-0.20.2-cdh3u5.jar</span><span class="synStatement">'</span>
+<span class="synIdentifier">input_path</span>=<span class="synStatement">'</span><span class="synConstant">socialnetwork/input</span><span class="synStatement">'</span>
+<span class="synIdentifier">output_path</span>=<span class="synStatement">'</span><span class="synConstant">socialnetwork/ouput</span><span class="synStatement">'</span>
+<span class="synIdentifier">mapper</span>=<span class="synStatement">'</span><span class="synConstant">wordcount_mapper.pl</span><span class="synStatement">'</span>
+<span class="synIdentifier">reducer</span>=<span class="synStatement">'</span><span class="synConstant">wordcount_reducer.pl</span><span class="synStatement">'</span>
+<span class="synIdentifier">base_path</span>=<span class="synSpecial">`</span><span class="synStatement">pwd</span><span class="synSpecial">`</span>
+<span class="synIdentifier">reducer_num</span>=<span class="synConstant">1</span>
+
+<span class="synStatement">echo</span><span class="synConstant"> </span><span class="synPreProc">$hadoop</span><span class="synConstant"> fs -rmr </span><span class="synPreProc">$output_path</span>
+<span class="synStatement">echo</span><span class="synConstant"> </span><span class="synPreProc">$hadoop</span><span class="synConstant"> jar </span><span class="synPreProc">$streaming_jar</span><span class="synConstant"> -D mapred.job.name=</span><span class="synPreProc">$job_name</span><span class="synConstant"> -D mapred.reduce.task=</span><span class="synPreProc">$reducer_num</span><span class="synConstant"> -input </span><span class="synPreProc">$input_path</span><span class="synConstant"> -output </span><span class="synPreProc">$output_path</span><span class="synConstant"> -mapper </span><span class="synPreProc">$mapper</span><span class="synConstant"> -reducer </span><span class="synPreProc">$reducer</span><span class="synConstant"> -file </span><span class="synPreProc">$base_path</span><span class="synConstant">/</span><span class="synPreProc">$mapper</span><span class="synConstant"> -file </span><span class="synPreProc">$base_path</span><span class="synConstant">/</span><span class="synPreProc">$reducer</span>
+</pre><pre class="code" data-lang="" data-unlink>$ ./exec.sh 
+/usr/lib/hadoop-0.20/bin/hadoop fs -rmr socialnetwork/ouput
+/usr/lib/hadoop-0.20/bin/hadoop jar /usr/lib/hadoop-0.20/contrib/streaming/hadoop-streaming-0.20.2-cdh3u5.jar -D mapred.job.name="SocialNetwrok WordCount" -D mapred.reduce.task=1 -input socialnetwork/input -output socialnetwork/ouput -mapper wordcount_mapper.pl -reducer wordcount_reducer.pl -file /home/yuta/work/hadoop/socialnetwork/wordcount_mapper.pl -file /home/yuta/work/hadoop/socialnetwork/wordcount_reducer.pl
+$ ./exec.sh | sh
+2/11/23 23:23:09 INFO streaming.StreamJob: Tracking URL: http://localhost:50030/jobdetails.jsp?jobid=job_201211231323_0005
+12/11/23 23:23:09 ERROR streaming.StreamJob: Job not successful. Error: NA
+12/11/23 23:23:09 INFO streaming.StreamJob: killJob...</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>を実行してみましたがINFO streaming.StreamJob: killJob...というエラーがコンソールに表示されJobが動きませんでした。<a href="http://localhost:50030/jobdetails.jsp">http://localhost:50030/jobdetails.jsp</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>でエラーを確認すると以下が吐き出されていました。原因を調査してみると、Scriptの先頭に記述する<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shebang">Shebang</a>が正しいパスになっていないと動かないようです。<a href="http://stackoverflow.com/questions/11354516/shell-script-not-found-in-hadoop">shell script not found in hadoop - Stack Overflow</a> <a href="http://b.hatena.ne.jp/entry/stackoverflow.com/questions/11354516/shell-script-not-found-in-hadoop"><img src="http://b.hatena.ne.jp/entry/image/http://stackoverflow.com/questions/11354516/shell-script-not-found-in-hadoop" alt="はてなブックマーク - shell script not found in hadoop - Stack Overflow" border="0" /></a>本来#!/usr/bin/<a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>と書くべきところを#!/usr/local/bin/<a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>としていた事が原因でした。</p>
+<pre class="code" data-lang="" data-unlink>Cannot run program "/var/lib/hadoop-0.20/cache/mapred/mapred/local/taskTracker/yuta/jobcache/job_201211231323_0006/attempt_201211231323_0006_m_000001_3/work/./wordcount_mapper.pl": error=2, No such file or directory
+at java.lang.ProcessBuilder.start(ProcessBuilder.java:1029)</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/shebang">shebang</a>を書き直して再度同じshellを実行します。今度はちゃんとJobが動き出して指定したoutputのディレクトリに結果が格納されます。outputのディレクトリには成功したかどうかの検知用の_SUCCESSと実行ログの_logsと結果出力用のpart-0000が作成されます。作成されたpart-0000の中身を見てみると先ほどlocalで実行した結果と同じものが出力されていて、問題なく<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>が実行できた事が確認できます。</p>
+<pre class="code" data-lang="" data-unlink>$ ./exec.sh | sh
+12/11/24 00:54:59 INFO mapred.FileInputFormat: Total input paths to process : 1
+12/11/24 00:55:00 INFO streaming.StreamJob: getLocalDirs(): [/var/lib/hadoop-0.20/cache/yuta/mapred/local]
+12/11/24 00:55:00 INFO streaming.StreamJob: Running job: job_201211231323_0007
+12/11/24 00:55:00 INFO streaming.StreamJob: To kill this job, run:
+12/11/24 00:55:00 INFO streaming.StreamJob: /usr/lib/hadoop-0.20/bin/hadoop job  -Dmapred.job.tracker=localhost:8021 -kill job_201211231323_0007
+12/11/24 00:55:00 INFO streaming.StreamJob: Tracking URL: http://localhost:50030/jobdetails.jsp?jobid=job_201211231323_0007
+12/11/24 00:55:01 INFO streaming.StreamJob:  map 0%  reduce 0%
+12/11/24 00:55:26 INFO streaming.StreamJob:  map 50%  reduce 0%
+12/11/24 00:55:27 INFO streaming.StreamJob:  map 100%  reduce 0%
+12/11/24 00:55:39 INFO streaming.StreamJob:  map 100%  reduce 17%
+12/11/24 00:55:41 INFO streaming.StreamJob:  map 100%  reduce 100%
+12/11/24 00:55:44 INFO streaming.StreamJob: Job complete: job_201211231323_0007
+12/11/24 00:55:44 INFO streaming.StreamJob: Output: socialnetwork/output
+
+$ hdfs -ls socialnetwork/output
+-rw-r--r--   1 yuta supergroup          0 2012-11-24 00:55 /user/yuta/socialnetwork/output/_SUCCESS
+drwxr-xr-x   - yuta supergroup          0 2012-11-24 00:55 /user/yuta/socialnetwork/output/_logs
+-rw-r--r--   1 yuta supergroup      44607 2012-11-24 00:55 /user/yuta/socialnetwork/output/part-0000
+
+$ hdfs -text socialnetwork/output/part-00000
+FACEBOOK    6
+Facebook    40
+Facebookwhich   1
+Google  2
+MARK    583
+MARK)   15
+MARKDUSTIN  1
+MARK’S  26
+MARK’s  24
+Mark    77
+Mark!   1
+Mark’I  1
+Mark’s  9
+TheFacebook 8
+facebook    6
+facebooks   1
+mark    1
+marker  1
+resentedMark    1
+theFacebook 17</pre>
+</div>
+<div class="section">
+<h5>DistributedCache</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>上に設置したテキ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%C8%A5%D5%A5%A1%A5%A4">ストファイ</a>ルやプログラムをDistributedCacheの形式で読み込めるようにします。ここでは簡単なサンプルとしてMapperへのinputを通常のinputpath以外にもDistributedCacheさせたファイルから読み込めるような設定を行います。例としてWordCountさせたくないNGWordを定義してinputの内容と照らし合わせてMapperで弾くといった処理をやってみます。まずは集計の対象外としたいng_word.txtを<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>に上げます。また<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>に上げたng_word.txtをMapperで読み込めるように修正します。実行するshell<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>も-cacheFileというオプションで<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>上のng_word.txtを参照するようにします。<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>のパスはFullPathで記載し、最後に読み込みたいフィアルのsymlinkを付けます。 <a class="keyword" href="http://d.hatena.ne.jp/keyword/hdfs">hdfs</a>://host:port/absolute-path#link-name</p>
+<pre class="code" data-lang="" data-unlink>$ hdfs -put ng_word.txt socialnetwork/input/ng_word.txt
+$ hdfs -text hdfs://localhost/user/yuta/socialnetwork/input/ng_word.txt
+Facebook 
+Mark
+Zuckerberg</pre><pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/bin/perl</span>
+<span class="synComment">#WordCout Mapperです</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+<span class="synStatement">use </span>Data::Dumper;
+
+<span class="synStatement">open</span>( <span class="synIdentifier">FH</span>, <span class="synConstant">"./ng_word.txt"</span> );
+<span class="synStatement">my</span> <span class="synIdentifier">@nglist</span> = <span class="synIdentifier"><FH></span>;
+
+<span class="synStatement">while</span>( <span class="synStatement">my</span> <span class="synIdentifier">$data</span> = <> ) {
+   <span class="synStatement">chomp</span> <span class="synIdentifier">$data</span>;
+   <span class="synStatement">my</span> <span class="synIdentifier">@tokens</span> = <span class="synStatement">split</span>( <span class="synStatement">/</span><span class="synSpecial">\s</span><span class="synConstant">|</span><span class="synSpecial">\.</span><span class="synConstant">|,|</span><span class="synSpecial">\?</span><span class="synStatement">/</span>, <span class="synIdentifier">$data</span> );
+   <span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$node</span> ( <span class="synIdentifier">@tokens</span> ) {
+  <span class="synIdentifier">$node</span> =~ <span class="synStatement">s/</span><span class="synSpecial">(</span><span class="synConstant">“|”|-</span><span class="synSpecial">)</span><span class="synStatement">//g</span>;
+  <span class="synStatement">if</span>( <span class="synIdentifier">$node</span> <span class="synStatement">ne</span> <span class="synConstant">""</span> && <span class="synIdentifier">$node</span> <span class="synStatement">ne</span> <span class="synConstant">" "</span>  ) {
+     <span class="synStatement">my</span> <span class="synIdentifier">$flag</span> = <span class="synConstant">1</span>;
+     <span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$list</span>( <span class="synIdentifier">@nglist</span> ) {
+        <span class="synIdentifier">$list</span> =~ <span class="synStatement">s/</span><span class="synSpecial">\n</span><span class="synStatement">//g</span>;
+        <span class="synStatement">if</span>( <span class="synIdentifier">$node</span> =~ <span class="synStatement">/</span><span class="synIdentifier">$list</span><span class="synStatement">/i</span> ) {
+           <span class="synIdentifier">$flag</span> = <span class="synConstant">0</span>;
+           <span class="synStatement">last</span>;
+        } 
+     }
+     <span class="synStatement">if</span>( <span class="synIdentifier">$flag</span> == <span class="synConstant">1</span> ) { 
+        <span class="synStatement">print</span> <span class="synIdentifier">$node</span> . <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span> . <span class="synConstant">1</span> . <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+     }
+  }
+   }
+}
+</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>を実行してみるとわかりますが、ng_word.txtを読み込んで<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>,Mark,Zuckerbergの文字列を含む単語を弾いている事が分かります。</p>
+<pre class="code" data-lang="" data-unlink>$ cat exec.sh
+#!/bin/sh
+
+job_name='"SocialNetwrok WordCount"'
+hadoop='/usr/lib/hadoop-0.20/bin/hadoop'
+streaming_jar='/usr/lib/hadoop-0.20/contrib/streaming/hadoop-streaming-0.20.2-cdh3u5.jar'
+input_path='socialnetwork/input'
+output_path='socialnetwork/output'
+mapper='wordcount_mapper.pl'
+reducer='wordcount_reducer.pl'
+base_path=`pwd`
+reducer_num=1
+cachefile='hdfs://localhost/user/yuta/socialnetwork/input/ng_word.txt#ng_word.txt'
+
+echo $hadoop fs -rmr $output_path
+echo $hadoop jar $streaming_jar -D mapred.job.name=$job_name -D mapred.reduce.task=$reducer_num -input $input_path -output $output_path -mapper $mapper -reducer $reducer -file $base_path/$mapper -file $base_path/$reducer -cacheFile $cachefile 
+
+$ ./exec.sh | sh
+$ hdfs -text socialnetwork/output/part-00000 | egrep -i "(FaceBook|Mark|Zuckerberg)"
+(結果なし)</pre><p>DistributedCacheの実行で-cacheFileのオプションについてdeprecatedのエラーが出ていました。今後は-filesオプションを使って欲しいとの事ですが -filesは現在<a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a> jobコマンドのみしか対応していないようで<a class="keyword" href="http://d.hatena.ne.jp/keyword/hadoop">hadoop</a> jarには適用できません。<a href="http://oss.infoscience.co.jp/hadoop/common/docs/current/commands_manual.html">Commands Guide</a> <a href="http://b.hatena.ne.jp/entry/oss.infoscience.co.jp/hadoop/common/docs/current/commands_manual.html"><img src="http://b.hatena.ne.jp/entry/image/http://oss.infoscience.co.jp/hadoop/common/docs/current/commands_manual.html" alt="はてなブックマーク - Commands Guide" border="0" /></a>よってこのエラーは無視してcacheFIleオプションを使うと良いと思います。</p>
+<pre class="code" data-lang="" data-unlink>WARN streaming.StreamJob: -cacheFile option is deprecated, please use -files instead</pre><p>上はテキ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%C8%A5%D5%A5%A1%A5%A4">ストファイ</a>ルのDistributedCacheを説明しましたがJARファイルなども読み込む事ができます。JARファイルを<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>から読み込む時のオプションは-cacheArchiveで読み込む事ができます。</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>FutureWorks</h4>
+
+<blockquote>
+    <p>冒頭でも述べましたが今後はRealtimeでBigDataを扱うケースが増えてくると思います。(まぁRealtimeで扱う時点でBigDataなのか？という議論はあると思いますが。)そんな中で活躍しそうなMiddleWareについてリンクをいくつか紹介しておきたいと思います。</p>
+
+<ul>
+<li><a href="http://incubator.apache.org/s4/">S4: Distributed Stream Computing Platform</a> <a href="http://b.hatena.ne.jp/entry/incubator.apache.org/s4/"><img src="http://b.hatena.ne.jp/entry/image/http://incubator.apache.org/s4/" alt="はてなブックマーク - S4: Distributed Stream Computing Platform" border="0" /></a>
+<ul>
+<li>ストリーミング処理のリアルタイム分散処理エンジン。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a>が開発。データをメモリ上で処理するためにレイテンシが低い。S4はEventとProcessing Elementという2種類により構成。各Processing Elementによって処理されたデータをEvent<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>としてストリーミング処理する。Stormに比べてモデル構成が複雑である。</li>
+</ul></li>
+<li><a href="https://github.com/nathanmarz/storm">nathanmarz/storm · GitHub</a> <a href="http://b.hatena.ne.jp/entry/s/github.com/nathanmarz/storm"><img src="http://b.hatena.ne.jp/entry/image/https://github.com/nathanmarz/storm" alt="はてなブックマーク - nathanmarz/storm · GitHub" border="0" /></a>
+<ul>
+<li>ApacheS4と同じストリーミング処理のリアルタイム分散処理エンジン。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a>が買収した<a class="keyword" href="http://d.hatena.ne.jp/keyword/BackType">BackType</a>社が開発。サーバはMasterとWorkerの2種類からなる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%DD%A1%BC%A5%CD%A5%F3%A5%C8">コンポーネント</a>はspoutとboltにより構成され、spoutはストリーミング処理、boltはデータの受け取りと加工などを行う。ApacheS4に比べて<a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a>がシンプルなのと処理の保証性がある。</li>
+</ul></li>
+<li><a href="http://jubat.us/ja/index_ja.html">Jubatus : オンライン機械学習向け分散処理フレームワーク ― Jubatus 0.3.3 documentation</a> <a href="http://b.hatena.ne.jp/entry/jubat.us/ja/index_ja.html"><img src="http://b.hatena.ne.jp/entry/image/http://jubat.us/ja/index_ja.html" alt="はてなブックマーク - Jubatus : オンライン機械学習向け分散処理フレームワーク ― Jubatus 0.3.3 documentation" border="0" /></a>
+<ul>
+<li>オンライン<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>の分散処理<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>。preferred infrastructureとNTTが開発。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>処理で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>を行うのは不向き。Mahoutも<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>上で実行するので同じ。Jubatusはオンライン<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>という手法と取り入れていて、データを少しずつ見て都度重みの調整を行う。分散サーバで同一となるモデルは保証せずに時間が経つとモデル間の情報共有がなされる。</li>
+</ul></li>
+</ul><p>残りはリンクだけ紹介しておきます。</p>
+
+<ul>
+<li><a href="http://esper.codehaus.org/">Esper - Complex Event Processing</a> <a href="http://b.hatena.ne.jp/entry/esper.codehaus.org/"><img src="http://b.hatena.ne.jp/entry/image/http://esper.codehaus.org/" alt="はてなブックマーク - Esper - Complex Event Processing" border="0" /></a></li>
+<li><a href="http://www.hstreaming.com/">HStreaming Home</a> <a href="http://b.hatena.ne.jp/entry/www.hstreaming.com/"><img src="http://b.hatena.ne.jp/entry/image/http://www.hstreaming.com/" alt="はてなブックマーク - HStreaming Home" border="0" /></a></li>
+<li><a href="http://www.streambase.com/">StreamBase | Complex Event Processing, Event Stream Processing, StreamBase Streaming Platform</a> <a href="http://b.hatena.ne.jp/entry/www.streambase.com/"><img src="http://b.hatena.ne.jp/entry/image/http://www.streambase.com/" alt="はてなブックマーク - StreamBase | Complex Event Processing, Event Stream Processing, StreamBase Streaming Platform" border="0" /></a></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Links</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://oss.infoscience.co.jp/hadoop/common/docs/current/mapred_tutorial.html">Map/Reduce Tutorial</a> <a href="http://b.hatena.ne.jp/entry/oss.infoscience.co.jp/hadoop/common/docs/current/mapred_tutorial.html"><img src="http://b.hatena.ne.jp/entry/image/http://oss.infoscience.co.jp/hadoop/common/docs/current/mapred_tutorial.html" alt="はてなブックマーク - Map/Reduce Tutorial" border="0" /></a></li>
+<li><a href="http://oss.infoscience.co.jp/hadoop/common/docs/current/commands_manual.html">Commands Guide</a> <a href="http://b.hatena.ne.jp/entry/oss.infoscience.co.jp/hadoop/common/docs/current/commands_manual.html"><img src="http://b.hatena.ne.jp/entry/image/http://oss.infoscience.co.jp/hadoop/common/docs/current/commands_manual.html" alt="はてなブックマーク - Commands Guide" border="0" /></a></li>
+<li><a href="https://github.com/Dempsy/Dempsy">Dempsy/Dempsy · GitHub</a> <a href="http://b.hatena.ne.jp/entry/s/github.com/Dempsy/Dempsy"><img src="http://b.hatena.ne.jp/entry/image/https://github.com/Dempsy/Dempsy" alt="はてなブックマーク - Dempsy/Dempsy · GitHub" border="0" /></a></li>
+</ul>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201211130837/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201211130837/">Mahoutを使ったNaiveBayesによる機械学習</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201212170830/">PigでHadoopをより便利に使う！PigでのMapReduceまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201212170830/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

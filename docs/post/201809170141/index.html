@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/2018/09/17/014115" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>DeepLearningによる画像解析 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>DeepLearningによる画像解析</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2018 Sep 17, 01:41</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="etc-deeplearningによる画像解析">[etc] : DeepLearningによる画像解析</h2>
+
+<blockquote><h3>概要</h3>
+
+<p><a href="http://www.image-net.org/challenges/LSVRC/">http://www.image-net.org/challenges/LSVRC/</a>
+<a href="http://www.image-net.org/challenges/LSVRC/2012/">http://www.image-net.org/challenges/LSVRC/2012/</a></p>
+
+<p>ILSVRC(ImageNet Large Scale Visual Recognition Challenge)はImageNetが毎年主催するコンピュータを利用した画像解析による物体認識・検出のコンペ。2012年にDeepLearningの手法が登場し、物体認識・検出の技術として3位以降のMachineLearningチームとError率で圧倒的な差をつけて優勝したことから注目を集めた。DeepLearningによる画像解析タスクといっても目的が複数存在するため、言葉の定義を下記にまとめる。</p>
+
+<ul>
+<li><b>物体認識(Object Recognition・Classification) </b>: 1枚ずつの画像毎に何の物体であるかを認識する。(1枚の画像に対して1つの物体のラベルを付与する。)</li>
+<li><b>物体位置特定(Object Localization)</b> : 1枚の画像の中に物体が何処に映っているかの領域を認識する。</li>
+<li><b>物体検出(Object Detection) </b>: 1枚の画像の中に何が何処に映っているかを検出する。(1枚の画像に対して複数の物体のラベルと領域を認識する。)</li>
+<li><b>セグメンテーション(Segmentation) </b> : 1枚の画像の中に何が何処に映っているかを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D4%A5%AF%A5%BB%A5%EB">ピクセル</a>単位で分離する。</li>
+</ul>
+
+
+<p><i>Object Recognition: which object is depicted in the image? <br>
+Object detection: where is this object in the image?</i></p>
+
+<p>Ref :
+<a href="https://dsp.stackexchange.com/questions/12940/object-detection-versus-object-recognition">image processing - Object detection versus object recognition - Signal Processing Stack Exchange</a></p>
+
+<h3>画像解析<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a></h3>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20180916/20180916233821.png" alt="f:id:yutakikuchi:20180916233821p:plain:w450" title="f:id:yutakikuchi:20180916233821p:plain:w450" class="hatena-fotolife" style="width:450px" itemprop="image"></span>
+<span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20180917/20180917013315.png" alt="f:id:yutakikuchi:20180917013315p:plain:w450" title="f:id:yutakikuchi:20180917013315p:plain:w450" class="hatena-fotolife" style="width:450px" itemprop="image"></span>
+DeepLearningの画像解析<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a>は目的により多数あり、それぞれで使用目的が異なる。</p>
+
+<ul>
+<li>物体認識(Object Recognition・Classification)
+
+<ul>
+<li>VGG(Visual Geometry Group : team)
+
+<ul>
+<li><a href="http://www.robots.ox.ac.uk/~vgg/research/very_deep/">Visual Geometry Group Home Page</a></li>
+<li>畳み込みとプーリング層で構成される基本的なCNN。層の数でVGG16、VGG19がある。</li>
+</ul>
+</li>
+<li>ResNet(Residual Network)
+
+<ul>
+<li><a href="https://arxiv.org/pdf/1512.03385.pdf">https://arxiv.org/pdf/1512.03385.pdf</a></li>
+<li>層を深くしすぎると性能劣化が起こる点を解消し、深くすることによって精度を改善する。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Microsoft">Microsoft</a>のチームによって開発。</li>
+</ul>
+</li>
+<li>GoogLeNet(Inception-V1)
+
+<ul>
+<li><a href="https://www.tensorflow.org/hub/modules/google/imagenet/inception_v1/classification/1">https://www.tensorflow.org/hub/modules/google/imagenet/inception_v1/classification/1</a></li>
+<li>基本構造はCNN、縦と横の両方にネットワークを広げる。横方向の幅をInception構造と呼ぶ。名前の通り<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a>(<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%BF%A1%BC%A5%F3">インターン</a>)が開発。Inception-V4など新しいVersionもある。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>物体検出(Object Detection)
+
+<ul>
+<li>YOLO(You only look once)
+
+<ul>
+<li><a href="https://pjreddie.com/darknet/yolo/">YOLO: Real-Time Object Detection</a></li>
+<li>RealTimeに物体を検出する。その他の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a>と比較して処理速度が速いとされる。ただし、物体の検出ができるのは2個までのように制限がある。</li>
+</ul>
+</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/SSD">SSD</a>(Single Shot MultiBox Detector)
+
+<ul>
+<li><a href="https://arxiv.org/pdf/1512.02325.pdf">https://arxiv.org/pdf/1512.02325.pdf</a></li>
+<li>YOLOと同様にRealTimeに物体を検出するが、多クラスの物体検出も可能としている。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Ref :
+<a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/object_localization_and_detection.html">Object Localization and Detection &middot; Artificial Inteligence</a>
+<a href="http://blog.qure.ai/notes/semantic-segmentation-deep-learning-review">A 2017 Guide to Semantic Segmentation with Deep Learning</a></p>
+
+<h3>物体認識の精度比較</h3>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20180917/20180917011720.png" alt="f:id:yutakikuchi:20180917011720p:plain:w450" title="f:id:yutakikuchi:20180917011720p:plain:w450" class="hatena-fotolife" style="width:450px" itemprop="image"></span>
+左図はCNNベースの物体認識(Object Recognition・Classification)の精度比較グラフ(縦軸精度)であり、後発の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a>ほど精度が高い様子が分かる。右図は精度(縦軸)、学習速度(横軸)、メモリ使用量(円の大きさ)を示している。一般的には精度が高くなれば学習速度が遅くなる。精度、学習速度・メモリ使用量はそれぞれtrade offの関係となるようだ。</p>
+
+<p>Ref :
+<a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/object_localization_and_detection.html">Object Localization and Detection &middot; Artificial Inteligence</a>
+<a href="https://arxiv.org/pdf/1605.07678.pdf">https://arxiv.org/pdf/1605.07678.pdf</a></p></blockquote>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201809090609/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201809090609/">Computer Vision : Visual Importance Mapの研究</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201809180049/">tmux : powerlineの表示ズレを解消する</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201809180049/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

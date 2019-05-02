@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110505/1304559764" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>jQueryの参考にすべきSiteのまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>jQueryの参考にすべきSiteのまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 May 05, 10:42</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="javascript-jqueryの参考にすべきsiteのまとめ">[javascript] : jQueryの参考にすべきSiteのまとめ</h2>
+
+<div class="section">
+<h4><span class="deco" style="font-size:large;">基礎</span></h4>
+
+<blockquote>
+    
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>日本語リファレンス <a href="http://semooh.jp/jquery/">http://semooh.jp/jquery/</a>
+<ul>
+<li>文法チェックに誰もが見るサイト。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>速習講座 <a href="http://ascii.jp/elem/000/000/498/498710/">http://ascii.jp/elem/000/000/498/498710/</a>
+<ul>
+<li>selector、命令、イベント、アニメーション、UIについての解説。初心者にとっては分かりやすい。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>入門 <a href="http://www.openspc2.org/JavaScript/Ajax/jQuery_study/ver1.3.1/index.html">http://www.openspc2.org/JavaScript/Ajax/jQuery_study/ver1.3.1/index.html</a>
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>の基礎的な内容についてのまとめ。</li>
+</ul></li>
+<li>一日で学ぶ<a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a> <a href="http://blog.spicebox.jp/labs/2009/04/_jquery.html">http://blog.spicebox.jp/labs/2009/04/_jquery.html</a>
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>についてサンプルをまとめたサイト。</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">UI</span></h4>
+
+<blockquote>
+    
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>サンプル集 <a href="http://www.designwalker.com/2008/04/jquery.html">http://www.designwalker.com/2008/04/jquery.html</a>
+<ul>
+<li>画像の処理のサンプル集</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a> UI 実践サンプル <a href="http://jsajax.com/jQueryUI.aspx">http://jsajax.com/jQueryUI.aspx</a>
+<ul>
+<li>Interactions、Widgets、Effectsを紹介。シンプルな例が多い。</li>
+</ul></li>
+<li>150 best <a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a> effects for web designers and developers <a href="http://www.webdesignshock.com/showcase/best-jquery-effects/">http://www.webdesignshock.com/showcase/best-jquery-effects/</a>
+<ul>
+<li>アニメーションからインタフェースまで充実</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>+<a class="keyword" href="http://d.hatena.ne.jp/keyword/CSS">CSS</a>で実装するナビゲーションメニュー総集編 <a href="http://kachibito.net/web-design/css-menu-with-jquery-collection.html">http://kachibito.net/web-design/css-menu-with-jquery-collection.html</a>
+<ul>
+<li>menu中心の内容</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">Plugin</span></h4>
+
+<blockquote>
+    
+<ul>
+<li>jQueryList <a href="http://jquerylist.com/">http://jquerylist.com/</a>
+<ul>
+<li>495種類の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%E9%A5%B0%A5%A4%A5%F3">プラグイン</a>&tips</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%E9%A5%B0%A5%A4%A5%F3">プラグイン</a> サンプル（画像系）<a href="http://www.skuare.net/test/jQuery_1.html">http://www.skuare.net/test/jQuery_1.html</a>
+<ul>
+<li>紹介されている種類が豊富。かっこいいUIが多い。</li>
+</ul></li>
+<li>jQuery4u <a href="http://www.jquery4u.com/plugins/">http://www.jquery4u.com/plugins/</a>
+<ul>
+<li>1000件の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%E9%A5%B0%A5%A4%A5%F3">プラグイン</a>が紹介されている。索引もあり。Top5 Pluginの紹介。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a> Mobile の紹介 <a href="http://www.ibm.com/developerworks/jp/web/library/wa-jqmobile/?cmp=dw&cpb=dwwdv&ct=dwrss&cr=dwrss&ccy=jp&csr=030411">http://www.ibm.com/developerworks/jp/web/library/wa-jqmobile/?cmp=dw&cpb=dwwdv&ct=dwrss&cr=dwrss&ccy=jp&csr=030411</a>
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>に適用可能な<a class="keyword" href="http://d.hatena.ne.jp/keyword/jQueryMobile">jQueryMobile</a>のサンプル。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a> Mobile が必須スキルになる！と思うのでこれから勉強する際に参考になる記事まとめ <a href="http://c-brains.jp/blog/wsg/11/04/14-023818.php">http://c-brains.jp/blog/wsg/11/04/14-023818.php</a>
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQueryMobile">jQueryMobile</a>のサンプルやリファレンスなど。</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">パフォーマンス</span></h4>
+
+<blockquote>
+    
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>のパフォーマンスにおいて厳守すべき11の掟 <a href="http://blog.mudaimemo.com/2009/07/jquery11.html">http://blog.mudaimemo.com/2009/07/jquery11.html</a>
+<ul>
+<li>翻訳サイト。オブジェクトのキャッシュなど当たり前のことなんだろうけど参考になる。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/jQuery">jQuery</a>のパフォーマンス最適化に関するTips  <a href="http://labs.unoh.net/2007/11/jquerytips.html">http://labs.unoh.net/2007/11/jquerytips.html</a>
+<ul>
+<li>Minified版を使う、mod_deflateやExpiresの設定といった<a class="keyword" href="http://d.hatena.ne.jp/keyword/apache">apache</a>の設定などについても説明。</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201104180831/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201104180831/">MYSQL INDEXのまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201105081014/">超簡単! ボタン一つで登録可能なソーシャルメディアShareBookmarklet</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201105081014/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

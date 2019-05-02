@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/2016/02/13/215724" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>機械学習の種類と特徴 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>機械学習の種類と特徴</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2016 Feb 13, 21:57</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="etc-機械学習の種類と特徴">[etc] : 機械学習の種類と特徴</h2>
+
+<blockquote>
+    <p>人間ではなく機械が自動的に意思決定することのメリットとして、<i><b>大量のデータをInputとした予測、推定、分類などの処理をAlgorithmの構築によって瞬時に行える事である。</b></i> 1枚の画像だけを見て何が写っているかのような判断においては人間の脳が優れているものの、大量のデータInputを基にした組み合わせの選択や最適解に瞬時に辿り着くという目的においては機械に任せてしまったほうが効率的とも言える。昔から<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>による予測、推定、分類などの処理は様々な手法として提案されており、どういった問題を機械に判断させるかという切り口で最適なものを人が選択する。下記表に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>の種類と特徴を纏めてみた。※ただし必ずしも6種類のいずれかに分類される訳ではない。例として<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CB%A5%E5%A1%BC%A5%E9%A5%EB%A5%CD%A5%C3%A5%C8%A5%EF%A1%BC%A5%AF">ニューラルネットワーク</a>があり教師あり学習であり深層学習にも位置する。</p>
+
+<table>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>の種類 </th>
+<th> 特徴 </th>
+<th> 代表的なAlgorithm </th>
+<th> 備考 </th>
+</tr>
+<tr>
+<td> 教師あり学習 </td>
+<td> 正解を持つデータを入力とし、特定の法則に従って予測データの出力を行うこと。<br>(例) 男女などの正解ラベルがあるデータを入力とし、ラベルが未知のデータに対して法則を適用し予測ラベル出力する。</td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/SVM">SVM</a><br>NaiveBayes<br>回帰分析 </td>
+<td><a href="https://ja.wikipedia.org/wiki/%E6%95%99%E5%B8%AB%E3%81%82%E3%82%8A%E5%AD%A6%E7%BF%92">教師あり学習 - Wikipedia</a></td>
+</tr>
+<tr>
+<td> 教師なし学習 </td>
+<td> 正解ラベルなどが無く、データそのものを解析して特徴などを出す手法。<br> (例) データとして距離的に近いものを同一の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>として定義する。 </td>
+<td> LDA<br><a class="keyword" href="http://d.hatena.ne.jp/keyword/LSI">LSI</a><br>主成分分析<br>K-Means </td>
+<td><a href="https://ja.wikipedia.org/wiki/%E6%95%99%E5%B8%AB%E3%81%AA%E3%81%97%E5%AD%A6%E7%BF%92">教師なし学習 - Wikipedia</a></td>
+</tr>
+<tr>
+<td> 半教師あり学習 </td>
+<td> 正解を持つデータの数は少ない場合、正解と未知のデータを合わせて学習することで効果を高める事ができる。<br> (例)  教師あり学習である<a class="keyword" href="http://d.hatena.ne.jp/keyword/SVM">SVM</a>を拡張して既知/未知データを合わせて学習する。 </td>
+<td> S3VMs(Semi-Supervised Support Vector Machines) </td>
+<td><a href="http://ibisforest.org/index.php?%E5%8D%8A%E6%95%99%E5%B8%AB%E3%81%82%E3%82%8A%E5%AD%A6%E7%BF%92">半教師あり学習 - 機械学習の「朱鷺の杜Wiki」</a></td>
+</tr>
+<tr>
+<td> 構造学習 </td>
+<td> 個々のデータに対して推定を行わずに全体のデータ構造に最適な形として個々の推定を行う。<br> (例) 文書のカテゴリを判断する際に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7">形態素</a>に分解して品詞レベルで推定するのではなく全体で推定する。</td>
+<td> CRF </td>
+<td><a href="https://research.preferred.jp/2010/11/dual-decomposition/">双対分解による構造学習 | Preferred Research</a></td>
+</tr>
+<tr>
+<td> 強化学習 </td>
+<td> 学習した結果に対して得た報酬によって更に学習を強くすることが出来る。<br> (例) A/Bテストを行って実績が高いものに自動的に最適化を寄せる </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DE%A5%EB%A5%B3%A5%D5%B7%E8%C4%EA%B2%E1%C4%F8">マルコフ決定過程</a><br>BanditAlgorithm<br>UCB </td>
+<td> <a href="https://ja.wikipedia.org/wiki/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92">強化学習 - Wikipedia</a></td>
+</tr>
+<tr>
+<td> 深層学習 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CB%A5%E5%A1%BC%A5%E9%A5%EB%A5%CD%A5%C3%A5%C8%A5%EF%A1%BC%A5%AF">ニューラルネットワーク</a>を多層化した、様々なレベルのデータを学習することが出来る <br> (例) 画像の特徴量を自動抽出し、画像に描かれているものを自動判する </td>
+<td> 畳み込み<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CB%A5%E5%A1%BC%A5%E9%A5%EB%A5%CD%A5%C3%A5%C8">ニューラルネット</a><br>ディープボルツマンマシン </td>
+<td><a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0">ディープラーニング - Wikipedia</a></td>
+</tr>
+</table>
+</blockquote>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201602071336/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201602071336/">Good Product Manager/Bad Product Manager</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201603062332/">The Data Management Platform: Foundation for Right-Time Customer Engagement [DMPに関する欧米の調査内容(2012.12)]</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201603062332/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

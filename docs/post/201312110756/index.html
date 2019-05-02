@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20131211/1386716177" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>「DSP/RTBオーディエンスターゲティング入門」読了 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>「DSP/RTBオーディエンスターゲティング入門」読了</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Dec 11, 07:56</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="ad-dsp-rtbオーディエンスターゲティング入門-読了">[AD] : 「DSP/RTBオーディエンスターゲティング入門」読了</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4864780013/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/41mlpGRp3QL._SL160_.jpg" class="hatena-asin-detail-image" alt="DSP/RTBオーディエンスターゲティング入門 ビッグデータ時代に実現する「枠」から「人」への広告革命 (Next Publishing)" title="DSP/RTBオーディエンスターゲティング入門 ビッグデータ時代に実現する「枠」から「人」への広告革命 (Next Publishing)"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4864780013/yutakikuchi-22/">DSP/RTBオーディエンスターゲティング入門 ビッグデータ時代に実現する「枠」から「人」への広告革命 (Next Publishing)</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%B2%A3%BB%B3%CE%B4%BC%A3">横山隆治</a>,菅原健一,楳田良輝</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%D7%A5%EC%A5%B9R%26D">インプレスR&D</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2012/05/25</li><li><span class="hatena-asin-detail-label">メディア:</span> オンデマンド (ペーパーバック)</li><li><span class="hatena-asin-detail-label">購入</span>: 4人 <span class="hatena-asin-detail-label">クリック</span>: 58回</li><li><a href="http://d.hatena.ne.jp/asin/4864780013/yutakikuchi-22" target="_blank">この商品を含むブログ (10件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>/RTBオーディエンスターゲティング入門読了</h4>
+
+<blockquote>
+    <p>あどてくやってます<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。<br />
+今日は帰省中の新幹線で読んだ「<span class="deco" style="font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>/RTBオーディエンスターゲティング入門</span>」についてのまとめを書きたいと思います。すごく基礎的な事しか書いてなかったり同じ説明が何度も繰り返されたりしていますが、あどてくやあどまーけてぃんぐに関わっている人は読んでおいて損はないかと思いました。一言で本の内容をまとめると「<span class="deco" style="font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>を導入するとオーディエンスデータが見えるから施策が打ちやすいよ！欲求施策にはリタゲが効果的だよ！</span>」って感じかなと。個人的にはもう少し<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>の予測技術について内容を書いて欲しかったなぁというところもあったりしました。下記で記載する内容はかなり噛み砕いているのと、最後の章を記載していません。また初版が2012年5月という情報なのでそこには注意してください。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>まとめ</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Chapter 1-1 進化した広告配信</h5>
+
+<ul>
+<li>広告は「枠」から「人」へ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D1%A5%E9%A5%C0%A5%A4%A5%E0">パラダイム</a>シフトしている。</li>
+<li>初期のネット広告は期間保障で特定に1社の画像をベタ張りしていた。サイトのPV=掲載料という仕組み。</li>
+<li>その次に登場したのが各種メディアが作ったアドサーバー。Webページからアドサーバーの広告を読み込むタグを埋め込む。広告を全てアドサーバーで管理。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の掲載面と掲載場所に広告を配信するアドネットワークの登場。広告営業、配信管理、レポート業務を全て代行してくれるのでメディアはサイト作りに専念。</li>
+<li>第三者配信サーバーは一つの広告主キャンペーンが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のサイトにまたがる場合でも一箇所で管理できる。</li>
+<li>第三者配信の利点は広告主側のサイトへの流入管理をしやすい、ポストインプレッションを捕らえやすい、<a class="keyword" href="http://d.hatena.ne.jp/keyword/SEM">SEM</a>と統合的に流入管理がしやすい。</li>
+<li>第三者配信はクリエイティブの評価もしやすい。その結果最適化もしやすい。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 1-2 <a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>/RTBの基本的な仕組み</h5>
+
+<ul>
+<li><span class="deco" style="font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>(Demand Side Platform)</span>とは広告主などの広告を張りたい側のPF。<span class="deco" style="font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>(Suply Side Platform)</span>は媒体社が使うPF。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>の入札と<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>の応札を1Imp毎に瞬時に行うのが<span class="deco" style="font-weight:bold;">RTB(Real Time Bidding)</span>。</li>
+<li>ユーザーが訪れた媒体はまず<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>にRequestする。<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>にユーザーID、<a class="keyword" href="http://d.hatena.ne.jp/keyword/IP%A5%A2%A5%C9%A5%EC%A5%B9">IPアドレス</a>、ブラウザ、OS、掲載先<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>、カテゴリ、広告枠ID、広告サイズ、許可広告主、その他業種などの情報をRequestしている。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>はBid Requestに対して条件に一致する広告を探し、<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>に対して金額を含めたBid Responseを返す。 </li>
+<li>1Impについてユーザーが媒体にアクセスした瞬間にBid Requestによって買う/売るをRealTimeでやり取りしている。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>に対してBid Requestを行うので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>側としては他の<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>に条件で勝つ必要がある。</li>
+<li>こういった仕組みがでてきた背景にはユーザーの行動履歴を分析できるようになったこと、膨大な処理を一瞬で行うコンピューティングの向上がある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chaper 1-3 広告の価格はどのように決まるか</h5>
+
+<ul>
+<li>従来の枠に対する広告販売と管理はコストがかかる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>/RTBは売り手/買い手ともに都合が良いエコシステム。買いたい側は買う側の理屈に合わせて、売りたい側も広く受注を受けて最適なものを選択できるから。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>/RTBが生まれた背景には<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A1%BC%A5%DE%A5%F3%A5%B7%A5%E7%A5%C3%A5%AF">リーマンショック</a>で失業した<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B6%E2%CD%BB%B9%A9%B3%D8">金融工学</a>のエンジニアが広告業界に転職したこともある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 1-4 トレーディングデスクの業務</h5>
+<p>※たいした事書いてないので飛ばし。</p>
+
+</div>
+<div class="section">
+<h5>Chapter 1-5 DMPの役割</h5>
+
+<ul>
+<li>ユーザーのリアル行動、ネット行動、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%E2%A5%B0%A5%E9%A5%D5%A5%A3%A5%C3%A5%AF">デモグラフィック</a>を集めて様々な業種、商品カテゴリーのブランドに対して有効な広告配信データを活用できるようにするのがDMP。</li>
+<li>日本でもCCC、Optの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%E7%CA%DB%B2%F1%BC%D2">合弁会社</a>Platform IDがO2Oに参入している。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 1-6 アドエクスチェンジというビジネス</h5>
+
+<ul>
+<li>アドエクスチェンジがアドネットワークを束ねた事によりRTBの土台となる環境ができた。</li>
+<li>アドエクスチェンジは<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>の機能を持つプレイヤーもいるので役割が重複している。ゆえにカオスな業界と言われる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 1-7 「枠」から「人」への<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D1%A5%E9%A5%C0%A5%A4%A5%E0">パラダイム</a>シフト</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>/RTBでは誰に出すかということが条件付けされている。</li>
+<li>広告を買う側は最小単位でチューニングが可能になった。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>/RTBでも効率は良いが絶対量は保証されない。</li>
+<li>人を選ぶ<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>ではユーザープロフィールでターゲティングが可能でより本質的。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>/RTBは企業マーケティングの新しいビジネスチャンスである。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 2-1 内部データと外部データ</h5>
+
+<ul>
+<li>Impを判断するデータは<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>のBid Request、広告主が持っている情報、第三者のオーディエンスデータの3つ。</li>
+<li>サイトの訪問履歴から再度訪問を狙うリターゲティング広告は効果が高く、高値での入札が期待できる。Bid Requestの内容と組み合わせることで他社と異なる手法で展開可能。</li>
+<li>オーディエンスターゲティング以外にはGEOターゲティング、プロバイダーターゲティング、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0">行動ターゲティング</a>がる。</li>
+<li>オーディエンスターゲティングは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%E2%A5%B0%A5%E9%A5%D5%A5%A3%A5%C3%A5%AF">デモグラフィック</a>データ、興味データ、検索データが含まれる。</li>
+<li>外部オーディエンスデータを提供するDMPは様々なサイトにデータを管理するタグを貼ってもらい、閲覧データを取得する。取得したデータはカテゴリごとに管理する。日本ではオムニバスなどがサービスを展開している。</li>
+<li>3Stepのパーチェスファネルを意識してオーディエンスデータを活かす。
+<ul>
+<li>知らない人に知ってもらう(認知施策)</li>
+<li>知ってる人に欲しいと思ってもらう(欲求施策)</li>
+<li>欲しい人に買ってもらう(獲得施策)</li>
+</ul></li>
+<li>外部オーディエンスデータは認知施策、内部オーディエンスデータは欲求施策からの開始となる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 2-2 リターゲティング拡張で配信先を広げる</h5>
+
+<ul>
+<li>内部オーディエンスデータは自社サイトに訪問済みという条件のデータなので対象者が少ない。一方外部オーディエンスデータは対象者は多いものの、自社サイトとの関連付けが難しい。</li>
+<li>リターゲティング拡張とは広告主の特定ページに訪問したユーザーと同じようなユーザーを探す技術。</li>
+<li>リターゲティング拡張は<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>が多くの<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>と提携し沢山のオーディエンスデータを保持していないと精度を上げることは難しい。リターゲティング拡張もただの外部オーディエンスデータに過ぎないので取り扱いが難しい。</li>
+<li>ゴールまでの障壁が低い、類推の精度が高くなくてもOK、ユーザーが特定(連想)しやすいものという条件ではリターゲティング拡張は有効な手段となる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 2-3 ネットの行動とリアル行動の統合</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%A2%A5%EB%C5%B9%CA%DE">リアル店舗</a>での購買行動とネット上での行動を<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>をベースに紐付けが可能。しかしこれにより特定できるユーザは10%にも満たないのでユーザー<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>を作ることが良い。</li>
+<li>ネット広告とWebで把握できるユーザーデータはマス広告を含む全てのマーケティング施策全体の改善に繋がる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 2-4 人の連想ではできないデータから読み取るターゲティング</h5>
+
+<ul>
+<li>外部データと自社サイトのCVデータを掛け合わせることでCVした人がどういうオーディエンスなのかを知ることができる。この手法はDiscoveryやLook alikeと呼ばれるもので今後の<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>やオーディエンスデータの活用には欠かせない。</li>
+<li>リターゲティング拡張はCVしたユーザーに似ている人を探すこと、Look-alikeはCVした人が外部オーディエンスのどこに所属していたか(カテゴリやデータ名)を知る手法。</li>
+<li>CVデータから自社の顧客像を明確にし、クリエイティブの最適化につなげる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 3-1 レスポンスを最適化する</h5>
+
+<ul>
+<li>ユーザーの反応として「誰が」、「いつ」、「どこで」、「どのようなクリエイティブ」、「どんな反応」をしたのかを解析することで最適化を図る。</li>
+<li>最適化の方法は反応の良い媒体、時間帯、オーディエンス、クリエイティブ、回数を探すこと。</li>
+<li>媒体に対しての配信は最高のタイミングで行うと効果が上がる。たとえば媒体×時間でより平均CTRが高い時間に配信するなど。さらにクリエイティブやオーディエンスを掛け合わせて3、4次元データから最適化することが可能であればパフォーマンスが向上する。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 3-2 反応からターゲットを探す</h5>
+
+<ul>
+<li>新しいターゲティングは想像で反応する人を決めるのではなく、反応した人をターゲットとすること。都度ユーザーの反応を見て<a class="keyword" href="http://d.hatena.ne.jp/keyword/PDCA">PDCA</a>を細かく回していく。そのためには広い認知獲得が必要。最適化は認知の後に行えば良い。</li>
+<li>一度反応があったユーザーに対しては継続的にコミュニケーションをとることが重要。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 3-3 予測モデル</h5>
+
+<ul>
+<li>あらゆるデータから相関関係を探し意思決定プロセスに繋げる必要がある。</li>
+<li>取得したデータは過去のデータにすぐに加えて、加えたことによる予測の変化をまた直ぐに活用できるようにしなければならない。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 3-4 フリークエンシーとロードバケット</h5>
+
+<ul>
+<li>ユーザ一人に広告を何回表示させるかを制限することで効果を最大化し、その値を見直すことも必要である。</li>
+<li>ロードバケットとは一度広告に反応し、しばらくは広告に反応しないユーザーにも一定間隔の経過後に広告を表示する手法。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-1 <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">リスティング広告</a>依存からの脱却</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">リスティング広告</a>の問題点
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/CPA">CPA</a>を安く抑えられるキーワードはそんなに多くない。</li>
+<li>未来においてどれぐらい検索されるかが読めない。</li>
+<li>検索数が読めないので比較的多く検索されるビッグワードに一致するよう広告を入稿してしまう。そうするとImpsは増えるが効果は良くなるとはいえない。</li>
+<li>ユーザーは広告を順位の上から見ていくので他社と差別化ができないと印象付けることができない。広告1位のランディングページのUSP(独自売り)が力を発揮すると2位以降の訴求効果を弱めることができる。</li>
+<li>1位をキープするにはコストがかかるし、<a class="keyword" href="http://d.hatena.ne.jp/keyword/CPA">CPA</a>がそれによりどんどん悪化する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">リスティング広告</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/CPA">CPA</a>が良い、ディスプレイ広告は<a class="keyword" href="http://d.hatena.ne.jp/keyword/CPA">CPA</a>が悪いといわれるが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">リスティング広告</a>でも<a class="keyword" href="http://d.hatena.ne.jp/keyword/CPA">CPA</a>が良いのはブランドワードだけである。</li>
+</ul></li>
+<li>今までは認知施策と獲得施策に大きな隔たりがあったが内部オーディエンスデータをリターゲティングに利用することで離脱ユーザーへの再プッシュができるようになっている。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-2 3Stepsパーチェスファネルの構築</h5>
+
+<ul>
+<li>ゴールを明確にする、ゴールまでのプロセスを可視化、対象ユーザーに最適な方法でコミュニケーションを取り次のSTEPに進めることがパーチェスファネルの構築では最も重要なこと。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-3 並列のメディアプランから直列のコミュニケーションプランへ</h5>
+
+<ul>
+<li>全てのゴールをCV獲得としてしまい、そのための一番効率の良い施策だけを実施することは良くない。</li>
+<li>CTRも適切な広告が表示されているかを判断する重要な要素で、一般的にはノンターゲティング広告の場合はCTRが0.04〜0.5%ぐらい。</li>
+<li>広告を全くClickしないNon Clickerはネット人口の68%、広告を4回以上ClickするHeavy Clickerは6%で全体のClickの50%を占める。</li>
+<li>Non Clickerは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DD%A1%BC%A5%BF%A5%EB%A5%B5%A5%A4%A5%C8">ポータルサイト</a>、検索サイト、ニュースやファイナンスサイトによく滞在する。それに対してHeavy Clickerはギャンブルサイト、転職サイト、ゲームサイトによく滞在する。</li>
+<li>Heavy Clickerが過剰にCTRを上げてしまうこともあるので、適切なCTRを把握しておく必要がある。</li>
+<li>○○商品を知っていますか？という問いにYESとなるような想起を助成想起、○○が直接欲しいと思うことが純粋想起である。この純粋想起をしてもらうことが重要。</li>
+<li>ディスプレイ広告で認知欲求施策を行うとブランドキーワードが向上する例がたくさんある。獲得施策で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">リスティング広告</a>を使えば数のジレンマが無い。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-4 インプレッションを計測する</h5>
+
+<ul>
+<li>第三者配信を使って広告枠に外部<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>を記述することでインプレッション、クリックともに計測が可能。</li>
+<li>第三者配信を使うことで媒体を横断した統一のカウントとレポートが作成可能。</li>
+<li>第三者配信を行うことで媒体ごとのユーザー重複が分かる。</li>
+<li>媒体ごとにImpression数とUB数を把握することででどれぐらいフリークエンシーが発生したかを計算することができる。</li>
+<li>従来は事前にクリエイティブを渡し、配信中は見守り、実施後はレポートをもらうという最適化のできない配信だったが、第三者配信ではクリエイティブの切り替えも広告主や代理店側で対応することができる。</li>
+<li>全媒体でどれだけユーザーが広告に接触したかを図る指標としてグローバルフリークエンシーと呼ぶものがある。</li>
+<li>フリークエンシーに合わせて広告クリエイティブを切り替えることも可能。このようなシーケンス配信は平均を考慮したやり方なので全てのユーザーに当てはめると精度が落ちる場合がある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-5 CVまでのフェーズをブレイクダウンする</h5>
+
+<ul>
+<li>獲得までのストーリを探す。例えば通販サイトであれば認知から申し込みの間にトライアルの要素を入れるだけで申し込みの障壁が低くなる。</li>
+<li>送料無料などの施策は認知フェーズのユーザにはあまり効果を発揮しないが、商品決定後の送料無料の情報は効果的。</li>
+<li>デジタルマーケティングではリーチよりも適切なゴールが重要。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">ブランディング</a>では「忘れられない」ための施策が必要。</li>
+<li>ビッグワードや他商品から流入してきたユーザーに対しては広告を届ける事でより強くブランドのイメージを植え付ける事が可能。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-6 サイトのシナリオと評価軸を構築する</h5>
+
+<ul>
+<li>ユーザが初回訪問でゴールに達成することはほとんどない。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4%B2%F3">複数回</a>サイトを訪れてサイトの安全性、欲しい商品の有無、そのサイトで買うべきかを判断する。</li>
+<li>認知施策では初回訪問を促す。TV、純広、<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>が効果的。</li>
+<li>インプレッションからの検索という事が発生するので、クリックだけの最適化というのは良く無い。クリック + インプレッションからの検索の流入を加えて評価する。</li>
+<li>離脱者に対してはリターゲティングをする。トライアル前/後、カートへ商品を入れた後の離脱のそれぞれで訴求方法を変える。</li>
+<li>メールアドレスを既に取得しているのであれば再訪問をメールで促すのも良い。個人の興味に合せた内容や画像を送信する事でより訴求効果がある。ただしやりすぎるとスパム扱いになる。</li>
+<li>最後の購買のタイミングでは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">リスティング広告</a>が一番強い。</li>
+<li>シナリオを最後から設計すると良い。</li>
+<li>階段を適切に設ける事でそれぞれの施策に個別の指標を設ける事ができる。</li>
+<li>各階段を定義しそれぞれの貢献度を認めようとすることがアトリビューション分析である。CVだけがアトリビューションではなく、全ての施策がCVにどのように貢献したかを判断する事が必要。</li>
+<li>アトリビューション分析は広告データだけでなく、サイトデータと連動する必要がある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-7 コンシューマーディシジョンポイントを発見する</h5>
+
+<ul>
+<li>獲得までのゴールを広告とサイトを横断して管理する事でシナリオやコミュニケーションの王道を発見し、ユーザーが何を求めているかを見つけられるようになる。</li>
+<li>広告は無駄も含まれるが排除してしまうと成功も減ってしまう。無駄は無駄と証明が出来ず何らかの因果関係がある場合が多い。</li>
+<li>無駄を探す事よりは成功のシナリオを探すべき。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-8 フェーズごとのメッセージ・クリエイティブ設計</h5>
+
+<ul>
+<li>3STEP パーチェスファネルで各施策毎にメッセージやクリエイティブを変えてここのパフォーマンスを改善する事が出来る。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 4-9 リ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0">スティング</a>やメールなど他施策と統合する</h5>
+
+<ul>
+<li>アメリカでは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Adobe">Adobe</a>社のAdobeGenesisがあらゆる<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>を連携できるが、Genesisが連携できる<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>はほとんど海外製品で日本のデジタルマーケティング業界の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>は遅れを取っている。</li>
+<li>連携<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>によって<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D3%A5%C3%A5%B0%A5%C7%A1%BC%A5%BF">ビッグデータ</a>を一元管理する。</li>
+<li>並列のメディアプランでは無く、直列のコミュニケーションプランへ舵を取らなければならない。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 5-1 世界中のインプレッションにアクセスできる時代</h5>
+
+<ul>
+<li>ビッドリクエストの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%FE%C5%FA%BB%FE%B4%D6">応答時間</a>から<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>と<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSP">SSP</a>はセットで近い国にある必要がある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">リスティング広告</a>はセントラルマーケティングチームで世界中のキーワードを入札しているケースが多い。</li>
+<li>セントラルマーケティングで世界中を管理した方が理にかなうこともあるが、その逆もある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 5-2 ECの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B0%A5%ED%A1%BC%A5%D0%A5%EB%B2%BD">グローバル化</a>で世界中にキャンペーン</h5>
+
+<ul>
+<li>世界中で広告を配信して反応の良い国により多くの予算を投じる事が可能。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 5-3 <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>と4スクリーン</h5>
+
+<ul>
+<li>4スクリーンとはPC、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BF%A5%D6%A5%EC%A5%C3%A5%C8">タブレット</a>、ネットTVの事。</li>
+<li>広告をそれらに最適な形で配信するようにしたい。</li>
+<li>まだPCでのターゲティングが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>では出来ない。</li>
+<li>1配信の訴求力/情報量が多くなれば配信先を特定する事も更に大きな意味が生まれる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 5-4 マスマーケティング企業のための<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>活用</h5>
+
+<ul>
+<li>広告主のサイトのどのコンテンツが顧客獲得に寄与しているかを把握する事が大切。そのためには<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>ベースでの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のセッションを見たり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/SEM">SEM</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/SEO">SEO</a>での流入管理、サイトのログ解析管理が一緒になっている必要がある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 5-5 トリプルメディアマーケティング時代の<a class="keyword" href="http://d.hatena.ne.jp/keyword/DSP">DSP</a>活用</h5>
+
+<ul>
+<li>トリプルメディアあとは自社メディア、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B7%A5%E3%A5%EB%A5%E1%A5%C7%A5%A3%A5%A2">ソーシャルメディア</a>、ペイドメディア(<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DE%A5%B94%C7%DE%C2%CE">マス4媒体</a>)から成る。</li>
+<li>今後は自社メディアがソーシャル/ペイドメディアが持つ機能を拡張していくであろうと予想。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Chapter 5-6 デジタル<a class="keyword" href="http://d.hatena.ne.jp/keyword/CMO">CMO</a>が活躍する時代</h5>
+
+<ul>
+<li>トリプルメディアを統合的に管理するチーフマーケティングオフィサー(<a class="keyword" href="http://d.hatena.ne.jp/keyword/CMO">CMO</a>)が必要になる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/CMO">CMO</a>こそ経営のトップ候補。</li>
+<li>またソーシャル<a class="keyword" href="http://d.hatena.ne.jp/keyword/CRM">CRM</a>を活用できる者も経営トップ候補。</li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201312060824/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201312060824/">Redisにマルチプロセスで接続する時に気をつけたい事</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201401060822/">FacebookとLINEで呼びかけ、16年ぶりの再会をした同窓会の結果報告</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201401060822/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

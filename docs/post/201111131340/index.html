@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20111113/1321159216" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>yumコマンド &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>yumコマンド</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Nov 13, 13:40</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="centos-yumコマンド">[CentOs] : yumコマンド</h2>
+
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;"><span class="deco" style="color:#FF0000;">概要</span></span></span></h4>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/BSD">BSD</a>のportコマンドのように<a class="keyword" href="http://d.hatena.ne.jp/keyword/Linux">Linux</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/RPM">RPM</a>パッケージを管理するプログラム。</li>
+<li>パッケージ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%C8%A1%BC%A5%E9">インストーラ</a>とも言える。</li>
+<li>パッケージの依存関係解消をある程度自動的に解消?</li>
+</ul>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;"><span class="deco" style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> usage</span></span></span></h4>
+<pre class="code" data-lang="" data-unlink>List of Commands:
+
+check-update   Check for available package updates
+clean          Remove cached data
+deplist        List a package's dependencies
+downgrade      downgrade a package
+erase          Remove a package or packages from your system
+groupinfo      Display details about a package group
+groupinstall   Install the packages in a group on your system
+grouplist      List available package groups
+groupremove    Remove the packages in a group from your system
+help           Display a helpful usage message
+info           Display details about a package or group of packages
+install        Install a package or packages on your system
+list           List a package or groups of packages
+localinstall   Install a local RPM
+makecache      Generate the metadata cache
+provides       Find what package provides the given value
+reinstall      reinstall a package
+repolist       Display the configured software repositories
+resolvedep     Determine which package provides the given dependency
+search         Search package details for the given string
+shell          Run an interactive yum shell
+update         Update a package or packages on your system
+upgrade        Update packages taking obsoletes into account
+
+
+options:
+  -h, --help            show this help message and exit
+  -t, --tolerant        be tolerant of errors
+  -C                    run entirely from cache, don't update cache
+  -c  [config file]     config file location
+  -R  [minutes]         maximum command wait time
+  -d  [debug level]     debugging output level
+  --showduplicates      show duplicates, in repos, in list/search commands
+  -e  [error level]     error output level
+  -q, --quiet           quiet operation
+  -v, --verbose         verbose operation
+  -y                    answer yes for all questions
+  --version             show Yum version and exit
+  --installroot=[path]  set install root
+  --enablerepo=[repo]   enable one or more repositories (wildcards allowed)
+  --disablerepo=[repo]  disable one or more repositories (wildcards allowed)
+  -x [package], --exclude=[package]
+                    exclude package(s) by name or glob
+  --disableexcludes=[repo]
+                    disable exclude from main, for a repo or for
+                    everything
+  --obsoletes           enable obsoletes processing during updates
+  --noplugins           disable Yum plugins
+  --nogpgcheck          disable gpg signature checking
+  --disableplugin=[plugin]
+                    disable plugins by name
+  --enableplugin=[plugin]
+                    enable plugins by name
+  --skip-broken         skip packages with depsolving problems
+  --color=COLOR         control whether color is used
+
+  Plugin Options:</pre>
+<div class="section">
+<h5>アップデート可能なパッケージ一覧取得</h5>
+<pre class="code" data-lang="" data-unlink>$ yum check-update
+$ yum list updates</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>に関するデータを消去</h5>
+<pre class="code" data-lang="" data-unlink>$ yum clean <package> /headers / metadata / cache / dbcache / all</pre>
+</div>
+<div class="section">
+<h5>install済みパッケージの依存関係表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum deplist <package></pre>
+</div>
+<div class="section">
+<h5>ダウングレード</h5>
+<pre class="code" data-lang="" data-unlink>$ yum downgrade <package></pre>
+</div>
+<div class="section">
+<h5>パッケージを削除</h5>
+<pre class="code" data-lang="" data-unlink>$ yum remove <package>
+$ yum erase <package></pre>
+</div>
+<div class="section">
+<h5>パッケージgroup一覧の表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum grouplist</pre>
+</div>
+<div class="section">
+<h5>パッケージgroup情報表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum groupinfo <group></pre>
+</div>
+<div class="section">
+<h5>パッケージgroupのインストール</h5>
+<pre class="code" data-lang="" data-unlink>$ yum groupinstall <group></pre>
+</div>
+<div class="section">
+<h5>パッケージgroupのアップデート</h5>
+<pre class="code" data-lang="" data-unlink>$ yum groupupdate <group></pre>
+</div>
+<div class="section">
+<h5>パッケージgroupの削除</h5>
+<pre class="code" data-lang="" data-unlink>$ yum groupremove <group></pre>
+</div>
+<div class="section">
+<h5>ヘルプ表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum help</pre>
+</div>
+<div class="section">
+<h5>パッケージ情報の表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum info <package></pre>
+</div>
+<div class="section">
+<h5>パッケージのinstall</h5>
+<pre class="code" data-lang="" data-unlink>$ yum install <package></pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/RPM">RPM</a>パッケージ一覧を表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum list</pre>
+</div>
+<div class="section">
+<h5>install済みパッケージ一覧を表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum list installed</pre>
+</div>
+<div class="section">
+<h5>ローカルにあるパッケージをinstall</h5>
+<pre class="code" data-lang="" data-unlink>$ yum localinstall <package></pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BF%A5%C7%A1%BC%A5%BF">メタデータ</a>を生成</h5>
+<pre class="code" data-lang="" data-unlink>$ yum makecache</pre>
+</div>
+<div class="section">
+<h5>パッケージに含まれるファイル一覧表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum provides <package></pre>
+</div>
+<div class="section">
+<h5>再度install</h5>
+<pre class="code" data-lang="" data-unlink>$ yum reinstall <package></pre>
+</div>
+<div class="section">
+<h5>repositoryの情報を表示</h5>
+<pre class="code" data-lang="" data-unlink>$ yum repolist</pre>
+</div>
+<div class="section">
+<h5>パッケージの依存関係を解消</h5>
+<pre class="code" data-lang="" data-unlink>$ yum resolvedep <package></pre>
+</div>
+<div class="section">
+<h5>指定文字列を含むパッケージの検索</h5>
+<pre class="code" data-lang="" data-unlink>$ yum search <string></pre>
+</div>
+<div class="section">
+<h5>パッケージのupdate</h5>
+<pre class="code" data-lang="" data-unlink>$ yum update <package></pre>
+</div>
+<div class="section">
+<h5>install済みパッケージのupgradeを行う</h5>
+<pre class="code" data-lang="" data-unlink>$ yum upgrade</pre>
+</div>
+<div class="section">
+<h5>コマンドalias設定</h5>
+<p>※<span class="deco" style="color:#FF0000;">タイピングが面倒になりそうなコマンドはalias張って短くすると便利。</span></p>
+<pre class="code" data-lang="" data-unlink>alias yum-ls='yum list'
+alias yum-ls-i='yum list installed'
+alias yum-li-u='yum list updates'
+alias yum-pro='yum provides'
+alias yum-i='yum info'
+alias yum-rm='yum remove'</pre>
+</div>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;"><span class="deco" style="color:#FF0000;">設定</span></span></span></h4>
+
+<div class="section">
+<h5>設定ファイルパス</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>の設定は以下のパスに置かれている</p>
+<pre class="code" data-lang="" data-unlink>/etc/yum/
+/etc/yum.conf
+/etc/yum.repos.d/</pre>
+</div>
+<div class="section">
+<h5>GPGで怒られた場合</h5>
+<p>おそらく<a class="keyword" href="http://d.hatena.ne.jp/keyword/CentOS">CentOS</a>の初期設定時や特殊<a class="keyword" href="http://d.hatena.ne.jp/keyword/RPM">RPM</a>の更新時にしか発生しないと思うが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>での更新にはGPGキーが必要となる。これは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%F8%B3%AB%B8%B0%B0%C5%B9%E6%CA%FD%BC%B0">公開鍵暗号方式</a>による整合性チェックである。</p>
+<pre class="code" data-lang="" data-unlink>You have enabled checking of packages via GPG keys</pre><p>上のようなメッセージが表示された場合は以下の手順でimportと設定を確認する。</p>
+<pre class="code" data-lang="" data-unlink>$ /bin/rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5    <-- import
+
+$ /bin/rpm -qa "gpg-pubkey*"      <-- 設定済みGPGの確認
+gpg-pubkey-e8562897-459f07a4
+gpg-pubkey-0d4306ef-45f6bc30
+
+$ /bin/rpm -qi "gpg-pubkey-e8562897-459f07a4"
+Name        : gpg-pubkey                   Relocations: (not relocatable)
+Version     : e8562897                          Vendor: (none)
+Release     : 459f07a4                      Build Date: 2009年12月29日 23時50分45秒
+Install Date: 2009年12月29日 23時50分45秒      Build Host: localhost
+Group       : Public Keys                   Source RPM: (none)
+Size        : 0                                License: pubkey
+Signature   : (none)
+Summary     : gpg(CentOS-5 Key (CentOS 5 Official Signing Key) <centos-5-key@centos.org>)
+Description :
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: rpm-4.4.2.3 (NSS-3)
+
+mQGiBEWfB6MRBACrnYW6yKMT+MwJlCIhoyTxGf3mAxmnAiDEy6HcYN8rivssVTJk
+CFtQBlBOpLV/OW2YtKrCO2xHn46eNfnMri8FGT8g+9JF3MUVi7kiV1He4iJynHXB
++F2ZqIvHf3IaUj1ys+p8TK64FDFxDQDrGQfIsD/+pkSGx53/877IrvdwjwCguQcr
+Ioip5TH0Fj0OLUY4asYVZH8EAIqFHEqsY+9ziP+2R3/FyxSllKkjwcMLrBug+cYO
+LYDD6eQXE9Mq8XKGFDj9ZB/0+JzK/XQeStheeFG75q3noq5oCPVFO4czuKErIRAB
+qKbDBhaTj3JhOgM12XsUYn+rI6NeMV2ZogoQCC2tWmDETfRpYp2moo53NuFWHbAy
+XjETA/sHEeQT9huHzdi/lebNBj0L8nBGfLN1nSRP1GtvagBvkR4RZ6DTQyl0UzOJ
+RA3ywWlrL9IV9mrpb1Fmn60l2jTMMCc7J6LacmPK906N+FcN/Docj1M4s/4CNanQ
+NhzcFhAFtQL56SNyLTCk1XzhssGZ/jwGnNbU/aaj4wOj0Uef5LRGQ2VudE9TLTUg
+S2V5IChDZW50T1MgNSBPZmZpY2lhbCBTaWduaW5nIEtleSkgPGNlbnRvcy01LWtl
+eUBjZW50b3Mub3JnPohkBBMRAgAkBQJFnwekAhsDBQkSzAMABgsJCAcDAgMVAgMD
+FgIBAh4BAheAAAoJEKikR9zoViiXKlEAmwSoZDvZo+WChcg3s/SpNoWCKhMAAJwI
+E2aXpZVrpsQnInUQWwkdrTiL5YhMBBMRAgAMBQJFnwiSBYMSzAIRAAoJEDjCFhY5
+bKCk0hAAn134bIx3wSbq58E6P6U5RT7Z2Zx4AJ9VxnVkoGHkVIgSdsxHUgRjo27N
+F7kBDQRFnwezEAQA/HnJ5yiozwgtf6jt+kii8iua+WnjqBKomPHOQ8moxbWdv5Ks
+4e1DPhzRqxhshjmub4SuJ93sgMSAF2ayC9t51mSJV33KfzPF2gIahcMqfABe/2hJ
+aMzcQZHrGJCEX6ek8l8SFKou7vICzyajRSIK8gxWKBuQknP/9LKsoczV+xsAAwUD
+/idXPkk4vRRHsCwc6I23fdI0ur52bzEqHiAIswNfO521YgLk2W1xyCLc2aYjc8Ni
+nrMX1tCnEx0/gK7ICyJoWH1Vc7//79sWFtX2EaTO+Q07xjFX4E66WxJlCo9lOjos
+Vk5qc7R+xzLDoLGFtbzaTRQFzf6yr7QTu+BebWLoPwNTiE8EGBECAA8FAkWfB7MC
+GwwFCRLMAwAACgkQqKRH3OhWKJfvvACfbsF1WK193zM7vSc4uq51XsceLwgAoI0/
+9GxdNhGQEAweSlQfhPa3yYXH
+=o/Mx-----END PGP PUBLIC KEY BLOCK-----
+
+$ less /etc/yum.repos.d/CentOS-Base.repo    <-- 設定の記述を確認
+
+# CentOS-Base.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for CentOS updates
+# unless you are manually picking other mirrors.
+#
+# If the mirrorlist= does not work for you, as a fall back you can try the 
+# remarked out baseurl= line instead.
+#
+#
+
+[base]
+name=CentOS-$releasever - Base
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
+#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5</pre><p>※ GPGの設定を読み込む仕組みは/etc/<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>.repos.d/*.repo　というファイルを読み込むようだ。このルールに従えばファイルを自由に追加できる。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5>自動更新</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> -y updateで手動で毎回実行するのも手間がかかるので、更新を自動的にすることも可能。ただし勝手にOSだけでなくパッケージもアップデートされてしまうと元々のシステム動作が保証されない可能性もあるので、導入する場合は要検討。</p>
+
+<ul>
+<li>自動更新を設定する</li>
+</ul><p>checkconfig(<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C6%B0%B5%AF%C6%B0">自動起動</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>を管理するコマンド)でon / offの設定が可能。</p>
+<pre class="code" data-lang="" data-unlink>$ yum install -y yum-cron    <-- 自動更新設定RPMのインストール
+$ /etc/init.d/yum-cron start
+Enabling nightly yum update:                               [  OK  ]
+$ chkconfig yum-cron on
+$ chkconfig --list yum-cron   
+yum-cron        0:off   1:off   2:on    3:on    4:on    5:on    6:off </pre>
+<ul>
+<li>パッケージ更新の<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>-updatedsdをoffにする</li>
+</ul><pre class="code" data-lang="" data-unlink>$ /etc/init.d/yum-updatesd stop
+$ chkconfig yum-updatesd off
+$ chkconfig --list yum-updatesd  
+yum-updatesd    0:off   1:off   2:off   3:off   4:off   5:off   6:off</pre>
+</div>
+<div class="section">
+<h5>特定の<a class="keyword" href="http://d.hatena.ne.jp/keyword/RPM">RPM</a>更新を対象から外す</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>の設定ファイルにexcludeを記述して更新対象から外す</li>
+</ul><pre class="code" data-lang="" data-unlink>$ vi /etc/yum.conf
+
+installonly_limit = 5 
+
+# PUT YOUR REPOS HERE OR IN separate files named file.repo
+# in /etc/yum.repos.d
+
+# 更新対象から外す(ワイルドカード指定可能)
+exclude=kernel* gain*</pre>
+</div>
+<div class="section">
+<h5>OSバージョン情報</h5>
+<p>自動でOSの更新が掛かると現在のバージョンが分からなくなるが、以下のファイルパスに情報が格納されている。</p>
+<pre class="code" data-lang="" data-unlink>$ less -r /etc/redhat-release
+CentOS release 5.7 (Final)</pre>
+</div>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201111100831/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201111100831/">AES暗号のまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201111240842/">美女サイトのデータハッキング方法をまとめてみた</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201111240842/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

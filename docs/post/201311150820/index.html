@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20131115/1384471222" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>crypto&#43;&#43;でのお手軽暗号 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>crypto&#43;&#43;でのお手軽暗号</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Nov 15, 08:20</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="c-crypto-でのお手軽暗号">[C++] : crypto++でのお手軽暗号</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873110637/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/516MBZPYNSL._SL160_.jpg" class="hatena-asin-detail-image" alt="C++プログラミング入門" title="C++プログラミング入門"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873110637/yutakikuchi-22/">C++プログラミング入門</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> グレゴリーサティア,ダウグブラウン,Gregory Satir,Doug Brown,望月康司,谷口功</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A1%A6%A5%B8%A5%E3%A5%D1%A5%F3">オライリー・ジャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2001/11</li><li><span class="hatena-asin-detail-label">メディア:</span> 単行本</li><li><span class="hatena-asin-detail-label">購入</span>: 9人 <span class="hatena-asin-detail-label">クリック</span>: 147回</li><li><a href="http://d.hatena.ne.jp/asin/4873110637/yutakikuchi-22" target="_blank">この商品を含むブログ (29件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>お手軽暗号</h4>
+
+<blockquote>
+    <p><a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。<br />
+今日はcppで暗号/復号するためのエントリーを書きます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>にはcrypt標準モジュールがありドキュメントも充実しているので簡単に暗号化できますが、cppではそれらがあまり整備されていない事もあってプログラム書く時にちょいと苦労します。尚、ここで<span class="deco" style="font-weight:bold;">お手軽暗号</span>と言っているのは暗号化のブロック方式をECBで対応するためです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/CBC">CBC</a>方式でも良いのですがIVの管理も面倒だし、そもそもそこまで暗号化強度に拘らないケースを想定しています。cppでの暗号化を行う為のLibraryとしてcrypto++という様々な暗号化方式をサポートする物を利用します。<br />
+<a href="http://www.cryptopp.com/">Crypto++ Library 5.6.2 - a Free C++ Class Library of Cryptographic Schemes</a> <a href="http://b.hatena.ne.jp/entry/www.cryptopp.com/"><img src="http://b.hatena.ne.jp/entry/image/http://www.cryptopp.com/" alt="はてなブックマーク - Crypto++ Library 5.6.2 - a Free C++ Class Library of Cryptographic Schemes" border="0" /></a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>crypto++</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>install</h5>
+<p>以下のOneLineです。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ sudo yum <span class="synStatement">install</span> cryptopp cryptopp-devel <span class="synSpecial">-y</span>
+</pre>
+</div>
+<div class="section">
+<h5>DES × ECB</h5>
+<p><a href="http://www.cryptopp.com/wiki/TripleDES">TripleDES - Crypto++ Wiki</a> <a href="http://b.hatena.ne.jp/entry/www.cryptopp.com/wiki/TripleDES"><img src="http://b.hatena.ne.jp/entry/image/http://www.cryptopp.com/wiki/TripleDES" alt="はてなブックマーク - TripleDES - Crypto++ Wiki" border="0" /></a><br />
+以下のコードで<span class="deco" style="font-weight:bold;">DES × ECB</span>の暗号化/復号化ができます。crypto++の<a class="keyword" href="http://d.hatena.ne.jp/keyword/wiki">wiki</a>にTripleDES × <a class="keyword" href="http://d.hatena.ne.jp/keyword/CBC">CBC</a>の内容が載っていたのでそれを真似て作ってみました。暗号化の対象テキストが「<span class="deco" style="font-weight:bold;color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CB%E2%CB%A1%BE%AF%BD%F7%A4%DE%A4%C9%A4%AB%A1%F9%A5%DE%A5%AE%A5%AB">魔法少女まどか☆マギカ</a></span>」、暗号化keyに「<span class="deco" style="font-weight:bold;color:#FF0000;">Soul Gem</span>」を指定します。ECBブロック暗号なのでIVを必要としません。処理としては単純にマルチバイト文字列を暗号化 => バイナリを16進数変換 => 16進数をバイナリに変換 => マルチバイト文字列を復元です。下に実行結果も載せておきます。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synPreProc">#include </span><span class="synConstant">"modes.h"</span>
+<span class="synPreProc">#include </span><span class="synConstant">"filters.h"</span>
+<span class="synPreProc">#include </span><span class="synConstant">"hex.h"</span>
+<span class="synPreProc">#include </span><span class="synConstant">"des.h"</span>
+
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+<span class="synStatement">using</span> <span class="synType">namespace</span> CryptoPP;
+
+<span class="synType">int</span> main(<span class="synType">int</span> argc, <span class="synType">char</span>* argv[]) {
+
+string plain = <span class="synConstant">"魔法少女まどか☆マギカ"</span>;
+string cipher, encoded, decoded, recovered;
+ECB_Mode<DES>::Encryption encctx;
+    byte key[DES::DEFAULT_KEYLENGTH];
+memcpy( key, <span class="synConstant">"Soul Gem"</span>, DES::DEFAULT_KEYLENGTH );
+encctx.SetKey( key, DES::DEFAULT_KEYLENGTH );
+
+<span class="synComment">// ciper</span>
+StringSource( plain, <span class="synConstant">true</span>, 
+    <span class="synStatement">new</span> StreamTransformationFilter( encctx,
+        <span class="synStatement">new</span> StringSink( cipher )
+<span class="synComment">//StreamTransformationFilter::PKCS_PADDING</span>
+                   <span class="synComment">//StreamTransformationFilter::ZEROS_PADDING</span>
+    )      
+    ); 
+<span class="synComment">//cout << "cipher text: " << cipher << endl;   </span>
+
+<span class="synComment">// hex encode</span>
+StringSource( cipher, <span class="synConstant">true</span>,
+    <span class="synStatement">new</span> HexEncoder( 
+        <span class="synStatement">new</span> StringSink( encoded )
+    )
+);
+cout << <span class="synConstant">"encode text: "</span> << encoded << endl;    
+
+    <span class="synComment">// hex decode</span>
+StringSource( encoded, <span class="synConstant">true</span>,
+    <span class="synStatement">new</span> HexDecoder( 
+        <span class="synStatement">new</span> StringSink( decoded )
+    )
+);
+<span class="synComment">// cout << "decode text: " <<  decoded << endl;    </span>
+
+<span class="synComment">// ciper decode</span>
+ECB_Mode<DES>::Decryption decctx;
+decctx.SetKey( key, DES::DEFAULT_KEYLENGTH );
+StringSource( decoded, <span class="synConstant">true</span>, 
+    <span class="synStatement">new</span> StreamTransformationFilter( decctx,
+        <span class="synStatement">new</span> StringSink( recovered )
+<span class="synComment">//StreamTransformationFilter::PKCS_PADDING</span>
+<span class="synComment">//StreamTransformationFilter::ZEROS_PADDING</span>
+    )
+    );
+cout << <span class="synConstant">"recovered text: "</span> << recovered << endl;
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><pre class="hljs sh" data-lang="sh" data-unlink>$ g++ <span class="synSpecial">-I</span>/usr/include/cryptopp <span class="synSpecial">-lcryptopp</span> crypto.cpp
+$ ./a.out                                  
+encode text: B374EB12891FFF5C538281C88A612D522F2CE61360BA5B6776EB2A32E77E5C66B42978BA11B1C5E3
+recovered text: 魔法少女まどか☆マギカ
+</pre>
+</div>
+<div class="section">
+<h5>Support Padding</h5>
+<p><a href="http://www.cryptopp.com/docs/ref/class_stream_transformation_filter.html">Crypto++: StreamTransformationFilter Class Reference</a> <a href="http://b.hatena.ne.jp/entry/www.cryptopp.com/docs/ref/class_stream_transformation_filter.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.cryptopp.com/docs/ref/class_stream_transformation_filter.html" alt="はてなブックマーク - Crypto++: StreamTransformationFilter Class Reference" border="0" /></a></p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synType">enum</span>  BlockPaddingScheme { 
+  NO_PADDING, 
+  ZEROS_PADDING, 
+  PKCS_PADDING, 
+  ONE_AND_ZEROS_PADDING, 
+  DEFAULT_PADDING 
+}
+</pre><p>crypto++では暗号化ブロックに分割した時のPaddingとして上の内容をサポートしています。Paddingは特に異なる言語間で暗号化/復号化する時に問題になる事が多いです。例としては<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>ですが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>関数では自動的にZEROS_PADDING(NULL_PADDING)となってしまいます。もし異なる言語間で連携をする時に平文と暗号化keyは一致しているんだけど、<span class="deco" style="font-weight:bold;">暗号文が異なってしまったという場合はPaddingの指定ミスの可能性がある</span>と覚えておけば嵌ることは無いと思います。次は<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>でencryptした結果が上のcrypto++とは異なっている事を表す例です。encode textの部分ですね。</p>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synPreProc">function</span> pkcs5_pad <span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span>, <span class="synStatement">$</span><span class="synIdentifier">blocksize</span><span class="synSpecial">)</span> 
+<span class="synSpecial">{</span> 
+<span class="synStatement">$</span><span class="synIdentifier">pad</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">blocksize</span> <span class="synStatement">-</span> <span class="synSpecial">(</span><span class="synIdentifier">strlen</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span><span class="synSpecial">)</span> <span class="synStatement">%</span> <span class="synStatement">$</span><span class="synIdentifier">blocksize</span><span class="synSpecial">)</span>; 
+<span class="synStatement">return</span> <span class="synStatement">$</span><span class="synIdentifier">text</span> <span class="synStatement">.</span> <span class="synIdentifier">str_repeat</span><span class="synSpecial">(</span><span class="synIdentifier">chr</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">pad</span><span class="synSpecial">)</span>, <span class="synStatement">$</span><span class="synIdentifier">pad</span><span class="synSpecial">)</span>; 
+<span class="synSpecial">}</span>
+
+<span class="synPreProc">function</span> pkcs5_unpad<span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span><span class="synSpecial">)</span> 
+<span class="synSpecial">{</span> 
+<span class="synStatement">$</span><span class="synIdentifier">pad</span> <span class="synStatement">=</span> <span class="synIdentifier">ord</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span><span class="synSpecial">{</span><span class="synIdentifier">strlen</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span><span class="synSpecial">)</span><span class="synConstant">-1</span><span class="synSpecial">})</span>; 
+<span class="synStatement">if</span> <span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">pad</span> <span class="synStatement">></span> <span class="synIdentifier">strlen</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span><span class="synSpecial">))</span> <span class="synStatement">return</span> <span class="synConstant">false</span>; 
+<span class="synStatement">if</span> <span class="synSpecial">(</span><span class="synIdentifier">strspn</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span>, <span class="synIdentifier">chr</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">pad</span><span class="synSpecial">)</span>, <span class="synIdentifier">strlen</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span><span class="synSpecial">)</span> <span class="synStatement">-</span> <span class="synStatement">$</span><span class="synIdentifier">pad</span><span class="synSpecial">)</span> <span class="synStatement">!=</span> <span class="synStatement">$</span><span class="synIdentifier">pad</span><span class="synSpecial">)</span> <span class="synStatement">return</span> <span class="synConstant">false</span>; 
+<span class="synStatement">return</span> <span class="synIdentifier">substr</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">text</span>, <span class="synConstant">0</span>, <span class="synConstant">-1</span> <span class="synStatement">*</span> <span class="synStatement">$</span><span class="synIdentifier">pad</span><span class="synSpecial">)</span>; 
+<span class="synSpecial">}</span>  
+
+<span class="synComment">//$size = mcrypt_get_block_size(MCRYPT_DES, MCRYPT_MODE_ECB);</span>
+<span class="synStatement">$</span><span class="synIdentifier">message</span> <span class="synStatement">=</span> '<span class="synConstant">魔法少女まどか☆マギカ</span>';
+<span class="synComment">//$message = pkcs5_pad( $message, $size );</span>
+<span class="synStatement">$</span><span class="synIdentifier">key</span> <span class="synStatement">=</span> '<span class="synConstant">Soul Gem</span>';
+
+<span class="synStatement">$</span><span class="synIdentifier">encryptedMessage</span> <span class="synStatement">=</span> <span class="synIdentifier">mcrypt_encrypt</span><span class="synSpecial">(</span>MCRYPT_DES, <span class="synStatement">$</span><span class="synIdentifier">key</span>, <span class="synStatement">$</span><span class="synIdentifier">message</span>, MCRYPT_MODE_ECB<span class="synSpecial">)</span>;
+<span class="synStatement">$</span><span class="synIdentifier">decryptedMessage</span> <span class="synStatement">=</span> <span class="synIdentifier">mcrypt_decrypt</span><span class="synSpecial">(</span>MCRYPT_DES, <span class="synStatement">$</span><span class="synIdentifier">key</span>, <span class="synStatement">$</span><span class="synIdentifier">encryptedMessage</span>, MCRYPT_MODE_ECB<span class="synSpecial">)</span>;
+
+<span class="synPreProc">echo</span> "<span class="synConstant">encode text:</span>" <span class="synStatement">.</span> <span class="synIdentifier">strtoupper</span><span class="synSpecial">(</span><span class="synIdentifier">bin2hex</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">encryptedMessage</span><span class="synSpecial">))</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synPreProc">echo</span> "<span class="synConstant">recovered text:</span><span class="synStatement">$</span><span class="synIdentifier">decryptedMessage</span>";
+</pre><pre class="hljs sh" data-lang="sh" data-unlink>// phpでmcryptを使う為の設定
+$ wget http://dl.fedoraproject.org/pub/epel/<span class="synConstant">6</span>/x86_64/epel-release<span class="synConstant">-6</span>-8.noarch.rpm
+$ wget http://ftp.riken.jp/Linux/fedora/epel/RPM-GPG-KEY-EPEL<span class="synConstant">-6</span>
+$ sudo <span class="synStatement">rpm</span> <span class="synSpecial">--import</span> RPM-GPG-KEY-EPEL<span class="synConstant">-6</span>
+$ sudo <span class="synStatement">rpm</span> <span class="synSpecial">-i</span> epel-release<span class="synConstant">-6</span>-8.noarch.rpm
+$ sudo yum <span class="synStatement">install</span> php-mcrypt <span class="synSpecial">-y</span>
+
+// 上で書いたプログラムを実行
+$ php crypto.php 
+encode text:B374EB12891FFF5C538281C88A612D522F2CE61360BA5B6776EB2A32E77E5C6656FAC9AFC18DA65F
+recovered text:魔法少女まどか☆マギカ
+</pre><p>ではcrypto++と<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>を連携する時にはどうすれば良いか？一般的には「<span class="deco" style="font-weight:bold;">crypto++でZERO_PADDINGを指定する</span>」、「<span class="deco" style="font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>でPKCS5Paddingを自前で実装する</span>」のどちらかで対応すると思います。暗号化ブロックの観点から言うとPKCS5でやるのが一般的かもしれません。PKCS5Paddingは上の<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/mcrypt">mcrypt</a>_get_block_size、pkcs5_padをコメントインするだけです。pkcs5_pad関数は以下のURLから持ってきました。<a href="http://www.php.net/manual/en/ref.mcrypt.php#69782">PHP: Mcrypt Functions - Manual</a> <a href="http://b.hatena.ne.jp/entry/www.php.net/manual/en/ref.mcrypt.php%2369782"><img src="http://b.hatena.ne.jp/entry/image/http://www.php.net/manual/en/ref.mcrypt.php%2369782" alt="はてなブックマーク - PHP: Mcrypt Functions - Manual" border="0" /></a><br />
+当然crypto++のコードも修正が必要で、StreamTransformationFilter::<a class="keyword" href="http://d.hatena.ne.jp/keyword/PKCS">PKCS</a>_PADDING,StreamTransformationFilter::ZEROS_PADDINGを内容に合せてコメントインする必要があります。下はZEROS_PADDINGを指定した実行例です。<span class="deco" style="font-weight:bold;">今度はencode textの部分がcrypto++と<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>で一致していますね！</span></p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ cp crypto.cpp crypto2.cpp
+$ vi crypto.cpp // StreamTransformationFilter::ZEROS_PADDINGをコメントイン
+$ diff <span class="synSpecial">-u</span> crypto.cpp crypto2.cpp 
+--- crypto.cpp  <span class="synConstant">2013-11-15</span> <span class="synConstant">03</span>:<span class="synConstant">00</span>:46.778536984 <span class="synSpecial">+0900</span>
++++ crypto2.cpp <span class="synConstant">2013-11-15</span> <span class="synConstant">03</span>:<span class="synConstant">00</span>:02.604531919 <span class="synSpecial">+0900</span>
+@@ <span class="synConstant">-19</span>,<span class="synConstant">8</span> <span class="synSpecial">+19</span>,<span class="synConstant">9</span> @@
+    // ciper
+    StringSource<span class="synPreProc">(</span><span class="synSpecial"> plain, </span><span class="synStatement">true</span><span class="synSpecial">, </span>
+<span class="synSpecial">         new StreamTransformationFilter</span><span class="synPreProc">(</span><span class="synSpecial"> encctx,</span>
+<span class="synSpecial">-            new StringSink</span><span class="synPreProc">(</span><span class="synSpecial"> cipher </span><span class="synPreProc">)</span><span class="synSpecial">,</span>
+<span class="synSpecial">-            StreamTransformationFilter::ZEROS_PADDING</span>
+<span class="synSpecial">+            new StringSink</span><span class="synPreProc">(</span><span class="synSpecial"> cipher </span><span class="synPreProc">)</span>
+<span class="synSpecial">+          //StreamTransformationFilter::PKCS_PADDING</span>
+<span class="synSpecial">+      //StreamTransformationFilter::ZEROS_PADDING</span>
+<span class="synSpecial">         </span><span class="synPreProc">)</span><span class="synSpecial">      </span>
+<span class="synSpecial">     </span><span class="synPreProc">)</span>; 
+    cout <span class="synStatement"><< "cipher</span><span class="synConstant"> text: " << cipher << endl;  </span>
+<span class="synConstant">@@ -46,8 +47,9 @@</span>
+<span class="synConstant">  decctx.SetKey( key, DES::DEFAULT_KEYLENGTH );</span>
+<span class="synConstant">  StringSource( decoded, true, </span>
+<span class="synConstant">         new StreamTransformationFilter( decctx,</span>
+<span class="synConstant">-            new StringSink( recovered ),</span>
+<span class="synConstant">-               StreamTransformationFilter::ZEROS_PADDING</span>
+<span class="synConstant">+            new StringSink( recovered )</span>
+<span class="synConstant">+         //StreamTransformationFilter::PKCS_PADDING</span>
+<span class="synConstant">+         //StreamTransformationFilter::ZEROS_PADDING</span>
+<span class="synConstant">         )</span>
+<span class="synConstant">     );</span>
+<span class="synConstant">  cout << "recovered text: " << recovered << endl;</span>
+
+<span class="synConstant">$ g++ -I/usr/include/cryptopp -lcryptopp crypto.cpp</span>
+<span class="synConstant">$ ./a.out</span>
+<span class="synConstant">encode text: B374EB12891FFF5C538281C88A612D522F2CE61360BA5B6776EB2A32E77E5C6656FAC9AFC18DA65F</span>
+<span class="synConstant">recovered text: 魔法少女まどか☆マギカ</span>
+</pre>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201311050826/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201311050826/">スケジュールの仮登録を神速で管理できる「Cu-hacker」がセクシー過ぎる件</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201311220824/">Apache ModuleでRequest ParameterをParseしてDBからデータを取得する</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201311220824/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110602/1306971910" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>WebSocket対応状況のまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>WebSocket対応状況のまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Jun 02, 08:45</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="programming-websocket対応状況のまとめ">[programming] : WebSocket対応状況のまとめ</h2>
+
+<div class="section">
+<h4><span class="deco" style="font-size:large;">概要</span></h4>
+
+<blockquote>
+    <p><a href="http://d.hatena.ne.jp/yutakikuchi/20110531/1306798231">Node.jsでWebSocketを試してみる - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20110531/1306798231"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20110531/1306798231" alt="はてなブックマーク - Node.jsでWebSocketを試してみる - Yuta.Kikuchiの日記" border="0" /></a><br />
+以前Node.jsを使ったWebSocketの導入についてまとめたので、今回はブラウザ、サーバ言語の対応状況についてまとめてみる。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">WebSocket<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%C8%A5%B3%A5%EB">プロトコル</a>の種類</span></h4>
+
+<blockquote>
+    
+<ul>
+<li>draft-hixie-thewebsocketprotocol-75</li>
+<li>draft-hixie-thewebsocketprotocol-76</li>
+<li>draft-<a class="keyword" href="http://d.hatena.ne.jp/keyword/ietf">ietf</a>-hybi-thewebsocketprotocol-00</li>
+<li>draft-<a class="keyword" href="http://d.hatena.ne.jp/keyword/ietf">ietf</a>-hybi-thewebsocketprotocol-06</li>
+</ul><p>等<br />
+元々はdraft75,76がメインだったようで二つが混在していた。draft-<a class="keyword" href="http://d.hatena.ne.jp/keyword/ietf">ietf</a>-hybi-thewebsocketprotocol-03、それ以前の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%C8%A5%B3%A5%EB">プロトコル</a>に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BB%A5%AD%A5%E5%A5%EA%A5%C6%A5%A3%A5%DB%A1%BC%A5%EB">セキュリティホール</a>が発見される。<br />
+<a href="http://gihyo.jp/dev/feature/01/websocket/0003">http://gihyo.jp/dev/feature/01/websocket/0003</a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">仕様策定状況</span></h4>
+
+<blockquote>
+    
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/HTML5">HTML5</a>の仕様からは分離。</li>
+<li>各種ブラウザもセキュリティの状況を見ての対応を進めている様子。</li>
+<li>websocketの仕様は2011/5月中に策定完了を目標に動いていた。</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">対応ブラウザ</span></h4>
+
+<table>
+<tr>
+<th><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%C8%A5%B3%A5%EB">プロトコル</a> </th>
+<th> ブラウザ </th>
+<td> </td>
+</tr>
+<tr>
+<td> draft-hixie-thewebsocketprotocol-75 </td>
+<td> Google Chrome4 / Safari5.0.0 </td>
+</tr>
+<tr>
+<td> draft-hixie-thewebsocketprotocol-76 draft-<a class="keyword" href="http://d.hatena.ne.jp/keyword/ietf">ietf</a>-hybi-thewebsocketprotocol-00 </td>
+<td> Google Chrome6 / Safari5.0.1 </td>
+</tr>
+<tr>
+<td>  draft-<a class="keyword" href="http://d.hatena.ne.jp/keyword/ietf">ietf</a>-hybi-thewebsocketprotocol-06 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/IE">IE</a> HTML5Labs </td>
+</tr>
+</table><p>基本的には<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google%20Chrome">Google Chrome</a>と<a class="keyword" href="http://d.hatena.ne.jp/keyword/Safari">Safari</a>しか対応していない。FF/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Opera">Opera</a>はデフォルト仕様から外している。 (2011/12/24追記)</p>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">WebSocketサーバ対応言語</span></h4>
+
+<blockquote>
+    <p>結論から言うと<a class="keyword" href="http://d.hatena.ne.jp/keyword/Java">Java</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>での開発状況が熱いようだ。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%C8%A5%B3%A5%EB">プロトコル</a>の種類によって使える/使えないが出てきそうなので、各webページで状況のチェックが必要。</p>
+
+<div class="section">
+<h5><span class="deco" style="font-size:large;">サーバサイド<a class="keyword" href="http://d.hatena.ne.jp/keyword/JavaScript">JavaScript</a></span></h5>
+
+<ul>
+<li><a href="http://socket.io/">Socket.io</a></li>
+<li><a href="http://static.brandedcode.com/nws-docs/">node websocket server</a></li>
+</ul>
+</div>
+<div class="section">
+<h5><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/JAVA">JAVA</a></span></h5>
+
+<ul>
+<li><a href="http://jetty.codehaus.org/jetty/">Jetty</a></li>
+<li><a href="http://cometd.org/">cometd</a></li>
+<li><a href="http://jwebsocket.org/">jwebsocket</a></li>
+<li><a href="https://grizzly.dev.java.net/">Grizzly</a></li>
+<li><a href="http://www.kaazing.com/">kaazing</a></li>
+</ul>
+</div>
+<div class="section">
+<h5><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a></span></h5>
+
+<ul>
+<li><a href="http://code.google.com/p/pywebsocket/">pywebsocket</a></li>
+<li><a href="https://github.com/nori0428/mod_websocket">mode_websocket</a></li>
+<li><a href="http://pypi.python.org/pypi/django-websocket/">Django WebSocket</a></li>
+<li><a href="http://www.gevent.org/">gevent</a></li>
+<li><a href="https://github.com/fiorix/cyclone">cyclone</a></li>
+<li><a href="https://github.com/facebook/tornado">tornado</a></li>
+<li><a href="http://gunicorn.org/">gunicorn</a></li>
+<li><a href="https://github.com/mopemope/meinheld">meinheld</a></li>
+<li><a href="https://github.com/gleicon/txwebsockets">txwebsockets</a></li>
+</ul>
+</div>
+<div class="section">
+<h5><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Ruby">Ruby</a></span></h5>
+
+<ul>
+<li><a href="https://github.com/igrigorik/em-websocket">em-websocket</a></li>
+<li><a href="https://github.com/frsyuki/rev-websocket">rev-websocket</a></li>
+<li><a href="https://github.com/lifo/cramp">cramp</a></li>
+</ul>
+</div>
+<div class="section">
+<h5><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a></span></h5>
+
+<ul>
+<li><a href="http://showmetheco.de/articles/2010/05/more-mojolicious-websocket-examples.html">mojolicious</a></li>
+<li><a href="https://github.com/typester/anyevent-websocket-demo">anyevent-websocket-demo</a></li>
+<li><a href="https://github.com/clkao/Web-Hippie">Web-Hippie</a></li>
+</ul>
+</div>
+<div class="section">
+<h5><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a></span></h5>
+
+<ul>
+<li><a href="http://code.google.com/p/phpwebsocket/">phpwebsocket</a></li>
+</ul>
+</div>
+<div class="section">
+<h5><span class="deco" style="font-size:large;">Go</span></h5>
+
+<ul>
+<li><a href="http://golang.jp/pkg/websocket">golang</a></li>
+</ul>
+</div>
+<div class="section">
+<h5><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/erlang">erlang</a></span></h5>
+
+<ul>
+<li><a href="https://github.com/MiCHiLU/erlang_websocket">erlang_websocket</a></li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">リファレンス</span></h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://websocketserverswiki.pbworks.com/w/page/28646473/FrontPage">websocketserverswiki</a></li>
+<li><a href="https://github.com/makoto/wsbench">wsbench</a></li>
+<li><a href="http://www.html5.jp/trans/w3c_websockets.html">websocket apiの日本語訳</a></li>
+<li><a href="http://gihyo.jp/dev/feature/01/websocket/0003">Jettyで始めるWebSocket超入門</a></li>
+</ul>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201105310830/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201105310830/">Node.jsでWebSocketを試してみる</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201106051924/">注目各社のTechBlogまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201106051924/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

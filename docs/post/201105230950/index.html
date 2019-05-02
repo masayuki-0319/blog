@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110523/1306111855" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>ackコマンド &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>ackコマンド</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 May 23, 09:50</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="linux-ackコマンド">[Linux] : ackコマンド</h2>
+
+<div class="section">
+<h4><span class="deco" style="font-size:large;">目次</span></h4>
+
+<blockquote>
+    
+<ol>
+<li>概要</li>
+<li>設定
+<ol>
+<li>port install</li>
+<li>コマンドを作る</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/cpan">cpan</a> install</li>
+<li>設定ファイル</li>
+</ol></li>
+<li>コマンドの実例
+<ol>
+<li>通常検索</li>
+<li>検索対象から外す</li>
+<li>全部検索</li>
+<li>Pager指定</li>
+<li>ファイルタイプ指定</li>
+<li>大小文字区別なし</li>
+<li>ファイル検索</li>
+<li>ファイルパス名の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>指定</li>
+<li>ファイルパス+ファイル名の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>指定</li>
+<li>完全一致検索</li>
+<li>指定単語の前後行出力</li>
+<li>一致したファイル名を出力</li>
+<li>再起的に検索しない</li>
+<li>group指定を外す</li>
+<li>検索対象から特定ディレクトリを外す</li>
+<li>猫キャラ表示</li>
+<li>デフォルト指定?</li>
+</ol></li>
+</ol>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">概要</span></h4>
+
+<blockquote>
+    
+<ul>
+<li><span class="deco" style="font-size:x-large;"><span class="deco" style="color:#FF0000;">ack</span></span>コマンド
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>検索は<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>が有名だが、より強力な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>と言われるackを試してみる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>より処理が早い。(設定ファイルなど無視)</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>より文法が短くて済む。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>と文法が似ている。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>の機能がほとんど使えて、findの要素も持つ。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a>で書かれていて<a class="keyword" href="http://d.hatena.ne.jp/keyword/windows">windows</a>でも動く。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>が使える。</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">設定</span></h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/mac">mac</a>で試してみる。以下3つのうちどちらかの手順で設定が行える。</p>
+
+<div class="section">
+<h5>1. port install</h5>
+<p>1行コマンドを実行するだけ。</p>
+<pre class="code" data-lang="" data-unlink>sudo port install p5-app-ack</pre>
+</div>
+<div class="section">
+<h5>2.コマンド作る</h5>
+<p>自分のローカルフォルダに設置。PATHの設定も必要。</p>
+<pre class="code" data-lang="" data-unlink>mkdir -p ~/local/bin/
+fetch http://betterthangrep.com/ack-standalone > ~/local/bin/ack
+chmod +x ~/local/bin/ack</pre>
+</div>
+<div class="section">
+<h5>3.<a class="keyword" href="http://d.hatena.ne.jp/keyword/cpan">cpan</a> install</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/cpan">cpan</a>利用者は楽。</p>
+<pre class="code" data-lang="" data-unlink># cpan
+cpan> install App::Ack
+cpan> exit</pre>
+</div>
+<div class="section">
+<h5>設定ファイル</h5>
+<p>~/.ackrcファイルを設定する。自動でオプションが反映される。</p>
+<pre class="code" data-lang="" data-unlink>--ignore-dir=bak
+--sort-files
+--pager=less
+--nogroup
+--type-add=php=.inc
+--type-set=tags=tags</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">コマンドの実例</span></h4>
+
+<blockquote>
+    <p>オプションは以下のリンクを参照。<a href="http://search.cpan.org/dist/ack/ack-base">http://search.cpan.org/dist/ack/ack-base</a> オプションの日本語ドキュメントがほとんど無い(涙) <br />
+<br />
+</p>
+
+<div class="section">
+<h5>通常検索</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/basic">basic</a>な使い方。簡単ですね。testという単語を含むファイルと行数を表示。</p>
+<pre class="code" data-lang="" data-unlink>ack test</pre>
+</div>
+<div class="section">
+<h5>検索対象から外す</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>と同じでvを指定。</p>
+<pre class="code" data-lang="" data-unlink>ack -v test</pre>
+</div>
+<div class="section">
+<h5>全部検索</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B3%C8%C4%A5%BB%D2">拡張子</a>無しファイルも検索可能とする。</p>
+<pre class="code" data-lang="" data-unlink>ack -a test</pre>
+</div>
+<div class="section">
+<h5>Pager指定</h5>
+<p>検索結果をlessで開く。</p>
+<pre class="code" data-lang="" data-unlink>ack test --pager="less"</pre>
+</div>
+<div class="section">
+<h5>ファイルタイプ指定</h5>
+<p>検索対象となるファイルタイプを指定する。以下はhtmlファイルが対象。</p>
+<pre class="code" data-lang="" data-unlink>ack --html test</pre><p>指定可能なファイルタイプはack --help-typeで閲覧可能。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5>大小文字区別なし</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>と同じく-iで指定。</p>
+<pre class="code" data-lang="" data-unlink>ack -i test</pre>
+</div>
+<div class="section">
+<h5>ファイル検索</h5>
+<p>指定したファイル一覧を表示。</p>
+<pre class="code" data-lang="" data-unlink>ack -f --html</pre>
+</div>
+<div class="section">
+<h5>ファイルパス名の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>指定</h5>
+<p>ファイルパス名の検索に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>指定が可能。</p>
+<pre class="code" data-lang="" data-unlink>ack -w test -G /Filter/</pre>
+</div>
+<div class="section">
+<h5>ファイルパス+ファイル名の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>指定</h5>
+<p>ファイル指定かつファイルパス名の検索に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>指定が可能。-f -Gと一緒。</p>
+<pre class="code" data-lang="" data-unlink>ack -w test -g /Filter/</pre>
+</div>
+<div class="section">
+<h5>完全一致検索</h5>
+<p>指定した単語の完全一致を検索。</p>
+<pre class="code" data-lang="" data-unlink>ack -w test</pre>
+</div>
+<div class="section">
+<h5>指定単語の前後行出力</h5>
+<p>testという単語に一致する前後5行までを出力。</p>
+<pre class="code" data-lang="" data-unlink>ack -C 5 test</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>と同じくB(前行),A(後行)のみも表示可能</p>
+<pre class="code" data-lang="" data-unlink>ack -B 5 test
+ack -A 5 test</pre>
+</div>
+<div class="section">
+<h5>一致したファイル名を出力</h5>
+<p>これは<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>と同じ。-lで指定可能。</p>
+<pre class="code" data-lang="" data-unlink>ack -l test</pre><p>一致していないファイルを表示。-Lで指定可能。</p>
+<pre class="code" data-lang="" data-unlink>ack -L test</pre>
+</div>
+<div class="section">
+<h5>再起的に検索しない</h5>
+<p>オプション-rが再起的検索指定(おそらくデフォルトで指定)。-nが再起的検索しない。</p>
+<pre class="code" data-lang="" data-unlink>ack -n test</pre>
+</div>
+<div class="section">
+<h5>group指定を外す</h5>
+<p>結果表示方法の切り替え。ackはデフォルトgroup指定がされており、これにより各ファイルに対しての検索結果がまとめられてしまう。それを<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>のようにgroupを外す事が可能。</p>
+<pre class="code" data-lang="" data-unlink>ack --nogroup test</pre><p>通常のack結果</p>
+<pre class="code" data-lang="" data-unlink>test.html
+2:test
+
+test.php
+2:echo "test";
+
+test.pl
+2:test</pre><p>nogroup指定結果</p>
+<pre class="code" data-lang="" data-unlink>test.html:2:test
+test.php:2:echo "test";
+test.pl:2:test</pre>
+</div>
+<div class="section">
+<h5>検索対象から特定ディレクトリを外す</h5>
+<p>検索対象から特定ディレクトリを外す指定。bakディレクトリを無視する。</p>
+<pre class="code" data-lang="" data-unlink>ack --ignore-case bak</pre>
+</div>
+<div class="section">
+<h5>猫キャラ表示</h5>
+<p>全然意味ないコマンドなんで無視。</p>
+<pre class="code" data-lang="" data-unlink>ack --thpppt</pre><p>結果</p>
+<pre class="code" data-lang="" data-unlink>_   /|
+\'o.O'
+=(___)=
+   U    ack --thpppt!</pre>
+</div>
+<div class="section">
+<h5>デフォルト指定?</h5>
+<p>以下のオプションはどうやらデフォルトで指定されている様子。</p>
+<pre class="code" data-lang="" data-unlink>--color : 結果のハイライト
+-r : 再起的検索</pre>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201105081014/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201105081014/">超簡単! ボタン一つで登録可能なソーシャルメディアShareBookmarklet</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201105310830/">Node.jsでWebSocketを試してみる</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201105310830/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

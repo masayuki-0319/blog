@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20140212/1392161307" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>ログ集計システムを自前で作る &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>ログ集計システムを自前で作る</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2014 Feb 12, 08:28</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="log-ログ集計システムを自前で作る">[Log] : ログ集計システムを自前で作る</h2>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20140208162606" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20140208/20140208162606.jpg" alt="f:id:yutakikuchi:20140208162606j:image:w480" title="f:id:yutakikuchi:20140208162606j:image:w480" class="hatena-fotolife" style="width:480px" itemprop="image"></a></span><br />
+</p>
+
+<div class="section">
+<h4>Index</h4>
+
+<blockquote>
+    
+<ol>
+<li>ログ集計システムの要件</li>
+<li>DB設計
+<ul>
+<li>データ保存方針</li>
+<li>table設計</li>
+<li>サーバ構成</li>
+</ul></li>
+<li>Fluentd
+<ul>
+<li>fluentd,fluent-plugin-<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>-bulk install</li>
+<li>td-agent.conf</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>にデータが格納される事を確認する</li>
+</ul></li>
+<li>集計用のバッチ</li>
+<li>その他
+<ul>
+<li>Table肥大化防止</li>
+<li>可視化</li>
+</ul></li>
+</ol>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>ログ集計システムの要件</h4>
+
+<blockquote>
+    <p>爆弾ログ処理班の<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。<br />
+ログ集計システムというものを作る時に皆さんはどのように対応していますか？ 以下の候補から要件のレベルで使い分けをしている人が多いと予想しています。ざっくりの評価ですが、導入難易度、正確性、可視化、リアルタイム、長期集計、スケール、運用費用という点で評価を書いています。</p>
+
+<table>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a> </th>
+<th> 導入難易度 </th>
+<th> 正確性 </th>
+<th> 可視化 </th>
+<th> リアルタイム </th>
+<th> 長期集計 </th>
+<th> スケール </th>
+<th> 運用費用 </th>
+<th> リンク </th>
+</tr>
+<tr>
+<td> GA(スタンダード) </td>
+<td> ○ </td>
+<td>  × </td>
+<td>  ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td><a href="http://www.google.co.jp/intl/ja/analytics/">Google アナリティクス公式サイト - ウェブ解析とレポート機能 – Google アナリティクス</a> <a href="http://b.hatena.ne.jp/entry/www.google.co.jp/intl/ja/analytics/"><img src="http://b.hatena.ne.jp/entry/image/http://www.google.co.jp/intl/ja/analytics/" alt="はてなブックマーク - Google アナリティクス公式サイト - ウェブ解析とレポート機能 – Google アナリティクス" border="0" /></a> </td>
+</tr>
+<tr>
+<td> 自前<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a> </td>
+<td> × </td>
+<td> ○ </td>
+<td> × </td>
+<td>× </td>
+<td> ○ </td>
+<td> △ </td>
+<td>○ </td>
+<td><a href="http://shiumachi.hatenablog.com/entry/20100928/1285673951">NTTデータのHadoop報告書がすごかった - 科学と非科学の迷宮</a> <a href="http://b.hatena.ne.jp/entry/shiumachi.hatenablog.com/entry/20100928/1285673951"><img src="http://b.hatena.ne.jp/entry/image/http://shiumachi.hatenablog.com/entry/20100928/1285673951" alt="はてなブックマーク - NTTデータのHadoop報告書がすごかった - 科学と非科学の迷宮" border="0" /></a> </td>
+</tr>
+<tr>
+<td> Kibana </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td>○ </td>
+<td> × </td>
+<td> × </td>
+<td>○ </td>
+<td> <a href="https://speakerdeck.com/y310/kibanaru-men">Kibana入門 // Speaker Deck</a> <a href="http://b.hatena.ne.jp/entry/s/speakerdeck.com/y310/kibanaru-men"><img src="http://b.hatena.ne.jp/entry/image/https://speakerdeck.com/y310/kibanaru-men" alt="はてなブックマーク - Kibana入門 // Speaker Deck" border="0" /></a> </td>
+</tr>
+<tr>
+<td> TresureData </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> △ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td>× </td>
+<td> <a href="http://www.itmedia.co.jp/enterprise/articles/1312/09/news109.html">数百億件のデータを30秒で解析――クラウド型DWH「Treasure Data」に新サービス - ITmedia エンタープライズ</a> <a href="http://b.hatena.ne.jp/entry/www.itmedia.co.jp/enterprise/articles/1312/09/news109.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.itmedia.co.jp/enterprise/articles/1312/09/news109.html" alt="はてなブックマーク - 数百億件のデータを30秒で解析――クラウド型DWH「Treasure Data」に新サービス - ITmedia エンタープライズ" border="0" /></a> </td>
+</tr>
+<tr>
+<td> Redshift</td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> △ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> × </td>
+<td> <a href="http://gihyo.jp/dev/serial/01/redshift">Amazon Redshiftではじめるビッグデータ処理入門：連載｜gihyo.jp … 技術評論社</a> <a href="http://b.hatena.ne.jp/entry/gihyo.jp/dev/serial/01/redshift"><img src="http://b.hatena.ne.jp/entry/image/http://gihyo.jp/dev/serial/01/redshift" alt="はてなブックマーク - Amazon Redshiftではじめるビッグデータ処理入門：連載｜gihyo.jp … 技術評論社" border="0" /></a> </td>
+</tr>
+<tr>
+<td> GoogleBigQuery </td>
+<td> △ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> △ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> × </td>
+<td> <a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20131205/522877/?ST=bigdata&P=2">（2/6）システム部が担うデジタルマーケティング - 第1回　ビッグデータチームの結成を──Google BigQueryがデー...：ITpro</a> <a href="http://b.hatena.ne.jp/entry/itpro.nikkeibp.co.jp/article/COLUMN/20131205/522877/?ST=bigdata&P=2"><img src="http://b.hatena.ne.jp/entry/image/http://itpro.nikkeibp.co.jp/article/COLUMN/20131205/522877/?ST=bigdata&P=2" alt="はてなブックマーク - （2/6）システム部が担うデジタルマーケティング - 第1回　ビッグデータチームの結成を──Google BigQueryがデー...：ITpro" border="0" /></a> </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a> </td>
+<td> × </td>
+<td> ○ </td>
+<td> × </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> × </td>
+<td> ○ </td>
+<td> <a href="http://engineer.dena.jp/2010/11/mysql-for-socialgame.html">ソーシャルゲームのためのMySQL入門 - Technology of DeNA</a> <a href="http://b.hatena.ne.jp/entry/engineer.dena.jp/2010/11/mysql-for-socialgame.html"><img src="http://b.hatena.ne.jp/entry/image/http://engineer.dena.jp/2010/11/mysql-for-socialgame.html" alt="はてなブックマーク - ソーシャルゲームのためのMySQL入門 - Technology of DeNA" border="0" /></a> </td>
+</tr>
+</table><p>集計要件の切り口はリアルタイム性を求めるか、集計結果に正確性を求めるのか、大量データを後からスケールさせるか、長期保存が必要なログなのかのという点を考えればある程度は使える<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>が見えてくると思います。世間の動きとしてはTresureData、RedShift、GoogleBigQueryのように<span class="deco" style="font-weight:bold;color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%A6%A5%C9">クラウド</a>型DWHにデータを転送して、BI<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>で集計結果を見る</span>という流れにある気がします。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%A6%A5%C9">クラウド</a>型DWHを使う事で開発コストを抑えれる、大量データを突っ込んでもスケール面で安心感があります。Kibanaのように<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%A1%BA%F7%A5%A8%A5%F3%A5%B8%A5%F3">検索エンジン</a>を裏側で持つ仕組みを見た時はなるほどと思ったのですが、大量データを長期間保存するのには不向きな面があります。GAも素晴らしい<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>ですがスタンダード会員だと集計できる数に制限がでてきてしまいます。僕の今の仕事は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%A6%A5%C9">クラウド</a>型DWHは使わないという条件があり... 非効率だと叩かれそうですが<span class="deco" style="font-weight:bold;color:#FF0000;">安定と実績がある<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a></span>を利用してログを貯めるような設計を考えています。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>DB設計</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>データ保存方針</h5>
+<p>上に貼った画像のように「<span class="deco" style="font-weight:bold;">食べたパンの枚数</span>」を忘れてしまうようでは<span class="deco" style="font-weight:bold;">ディオ様</span>にも怒られてしまいます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B7%A5%B9%A5%C6%A5%E0%B3%AB%C8%AF">システム開発</a>の現場でも<span class="deco" style="font-weight:bold;">過去の履歴を辿って数を抽出する</span>ことはとても重要な話で、生ログに近いデータをDBに保存しておくのはシステム障害の場合等にも有効です。(当然生ログファイルも残します。<span class="deco" style="color:#FF0000;font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>で無くてMongodbでも良いです。</span>) この生ログに近いデータをtableに保存しつつ、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D0%A5%C3%A5%C1%BD%E8%CD%FD">バッチ処理</a>で定期的に集計値を算出し別tableに記録しBI<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>はそちらを参照するような形がとれれば良いと思います。以前は生ログに近いデータを保存するのに反対で集計tableだけを用意し1行の集計カラムだけを都度updateする方針でやっていたのですが、集計値がずれた場合にはログファイルから再集計をやる必要があったので、今後は生ログtableと集計tableを分けて使いたいと思っています。その他生ログをDBに保存する用途としてはDBはAND条件指定が得意なのでURL×<a class="keyword" href="http://d.hatena.ne.jp/keyword/UA">UA</a>などの<span class="deco" style="font-weight:bold;color:#FF0000;">クロス集計</span>も簡単に抽出できます。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5>table設計</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>でログ集計を考える時に重要な要素は2つあってログ保存期間の仕様を決める、用途毎のtableを用意するという内容があるかと思います。大量の生ログに近いデータを<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>に延々と貯め続けるのは非効率なのである程度のところでデータを削除しなければなりません。(削除は仕様として割り切るしかないかなと考えています。<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>のパー<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B8%A5%B3%A5%B9">ジコス</a>トは大きいですが)それに関連してログを保存するテーブルと集計結果を格納するtableを分けBI<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>からは集計用のテーブルを参照するような仕組みが良いと思います。そこで以下のようなテーブルを設計します。パージし易いようにPARTITIONを使います。<br />
+tableを3つ用意します。</p>
+
+<table>
+<tr>
+<th> table名 </th>
+<th> 用途 </th>
+<th> 書き込み元 </th>
+</tr>
+<tr>
+<td> log </td>
+<td> リアルタイムでログを書き込む。<span class="deco" style="font-weight:bold;color:#FF0000;">1行で1アクセスを管理</span>。 </td>
+<td> fluentd </td>
+</tr>
+<tr>
+<td> summary_realtime </td>
+<td> 短時間でlogから集計結果をsummaryする。 </td>
+<td> batch </td>
+</tr>
+<tr>
+<td> summary_date </td>
+<td>デイリーでlogから集計結果をsummaryする。 </td>
+<td> batch </td>
+</tr>
+<tr>
+<td> batch_history </td>
+<td> バッチが正常終了とsummary_realtimeで何分迄集計したかを記録。 </td>
+<td> batch </td>
+</tr>
+</table><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20140209040753" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20140209/20140209040753.png" alt="f:id:yutakikuchi:20140209040753p:image" title="f:id:yutakikuchi:20140209040753p:image" class="hatena-fotolife" itemprop="image"></a></span><br />
+</p>
+<pre class="hljs sql" data-lang="sql" data-unlink><span class="synStatement">SET</span> @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=<span class="synConstant">0</span>;
+<span class="synStatement">SET</span> @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=<span class="synConstant">0</span>;
+<span class="synStatement">SET</span> @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE=<span class="synConstant">'TRADITIONAL'</span>;
+
+<span class="synStatement">CREATE</span> SCHEMA <span class="synSpecial">IF</span> <span class="synStatement">NOT</span> <span class="synStatement">EXISTS</span> `analytics` <span class="synSpecial">DEFAULT</span> <span class="synType">CHARACTER</span> <span class="synStatement">SET</span> utf8 ;
+USE `analytics` ;
+
+<span class="synComment">-- -----------------------------------------------------</span>
+<span class="synComment">-- Table `analytics`.`log`</span>
+<span class="synComment">-- -----------------------------------------------------</span>
+<span class="synStatement">CREATE</span>  <span class="synSpecial">TABLE</span> <span class="synSpecial">IF</span> <span class="synStatement">NOT</span> <span class="synStatement">EXISTS</span> `analytics`.`log` (
+  `log_id` INT <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> AUTO_INCREMENT ,
+  `path` <span class="synType">VARCHAR</span>(<span class="synConstant">255</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `code` INT <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `ua` <span class="synType">VARCHAR</span>(<span class="synConstant">512</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `referer` <span class="synType">VARCHAR</span>(<span class="synConstant">255</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `created_at` DATETIME <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  PRIMARY KEY (`log_id`, `created_at`) ,
+  <span class="synSpecial">INDEX</span> `PATH` (`path` <span class="synSpecial">ASC</span>, `code` <span class="synSpecial">ASC</span>, `created_at` <span class="synSpecial">ASC</span>) )
+ENGINE = InnoDB PARTITION <span class="synSpecial">BY</span> RANGE(TO_DAYS(created_at)) PARTITIONS <span class="synConstant">5</span>( PARTITION p1 <span class="synSpecial">VALUES</span> LESS THAN (TO_DAYS(<span class="synConstant">'2014-02-01 00:00:00'</span>)),  PARTITION p2 <span class="synSpecial">VALUES</span> LESS THAN (TO_DAYS(<span class="synConstant">'2014-03-01 00:00:00'</span>)),  PARTITION p3 <span class="synSpecial">VALUES</span> LESS THAN (TO_DAYS(<span class="synConstant">'2014-04-01 00:00:00'</span>)),  PARTITION p4 <span class="synSpecial">VALUES</span> LESS THAN (TO_DAYS(<span class="synConstant">'2014-05-01 00:00:00'</span>)),  PARTITION p5 <span class="synSpecial">VALUES</span> LESS THAN (TO_DAYS(<span class="synConstant">'2014-06-01 00:00:00'</span>)));
+
+<span class="synComment">-- -----------------------------------------------------</span>
+<span class="synComment">-- Table `analytics`.`realcreated_at_summary`</span>
+<span class="synComment">-- -----------------------------------------------------</span>
+<span class="synStatement">CREATE</span>  <span class="synSpecial">TABLE</span> <span class="synSpecial">IF</span> <span class="synStatement">NOT</span> <span class="synStatement">EXISTS</span> `analytics`.`summary_realtime` (
+  `summary_realtime_id` INT <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> AUTO_INCREMENT ,
+  `path` <span class="synType">VARCHAR</span>(<span class="synConstant">255</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `count` INT <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `start_at` DATETIME <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `end_at` DATETIME <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `created_at` DATETIME <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `modified_at` DATETIME <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  PRIMARY KEY (`summary_realtime_id`) ,
+  <span class="synSpecial">UNIQUE</span>(`path`, `start_at`, `end_at`),
+  <span class="synSpecial">INDEX</span> `PATH1` (`path` <span class="synSpecial">ASC</span>, `created_at` <span class="synSpecial">ASC</span>) )
+ENGINE = InnoDB;
+
+<span class="synComment">-- -----------------------------------------------------</span>
+<span class="synComment">-- Table `analytics`.`summary_date`</span>
+<span class="synComment">-- -----------------------------------------------------</span>
+<span class="synStatement">CREATE</span>  <span class="synSpecial">TABLE</span> <span class="synSpecial">IF</span> <span class="synStatement">NOT</span> <span class="synStatement">EXISTS</span> `analytics`.`summary_date` (
+  `summary_date_id` INT <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> AUTO_INCREMENT ,
+  `path` <span class="synType">VARCHAR</span>(<span class="synConstant">255</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `count` INT <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `<span class="synType">date</span>` <span class="synType">DATE</span> <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `created_at` DATETIME <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `modified_at` DATETIME <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  PRIMARY KEY (`summary_date_id`) ,
+  <span class="synSpecial">INDEX</span> `PATH` (`path` <span class="synSpecial">ASC</span>, `<span class="synType">date</span>` <span class="synSpecial">ASC</span>) )
+ENGINE = InnoDB;
+
+<span class="synComment">-- -----------------------------------------------------</span>
+<span class="synComment">-- Table `analytics`.`batch_history`</span>
+<span class="synComment">-- -----------------------------------------------------</span>
+
+<span class="synStatement">CREATE</span>  <span class="synSpecial">TABLE</span> <span class="synSpecial">IF</span> <span class="synStatement">NOT</span> <span class="synStatement">EXISTS</span> `analytics`.`batch_history` (
+  `batch_history_id` INT <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> AUTO_INCREMENT ,
+  `<span class="synSpecial">type</span>` <span class="synType">CHAR</span>(<span class="synConstant">1</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `<span class="synType">date</span>` <span class="synType">DATE</span> <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  `count` INT <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> ,
+  PRIMARY KEY (`batch_history_id`) ,
+  <span class="synSpecial">UNIQUE</span>(`<span class="synSpecial">type</span>`, `<span class="synType">date</span>`),
+  <span class="synSpecial">INDEX</span> `<span class="synType">DATE</span>` (`<span class="synSpecial">type</span>` <span class="synSpecial">ASC</span>, `<span class="synType">date</span>` <span class="synSpecial">ASC</span>))
+ENGINE = InnoDB;
+
+
+<span class="synStatement">SET</span> SQL_MODE=@OLD_SQL_MODE;
+<span class="synStatement">SET</span> FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY
+</pre>
+</div>
+<div class="section">
+<h5>サーバ構成</h5>
+<p>サーバ構成は次のようなものを想定しています。一応半年前ぐらいにも<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>とinfinidbでログ集計を扱ったエントリーを書いていますので参考になれば。<br />
+<a href="http://d.hatena.ne.jp/yutakikuchi/20130709/1373327347">【進撃の巨大データ】Log集計用DBとシステム構成の美しい設計を考える - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20130709/1373327347"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20130709/1373327347" alt="はてなブックマーク - 【進撃の巨大データ】Log集計用DBとシステム構成の美しい設計を考える - Yuta.Kikuchiの日記" border="0" /></a></p><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20140208193403" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20140208/20140208193403.png" alt="f:id:yutakikuchi:20140208193403p:image:w560" title="f:id:yutakikuchi:20140208193403p:image:w560" class="hatena-fotolife" style="width:560px" itemprop="image"></a></span></p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Fluentd</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>fluentd,fluent-plugin-<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>-bulk install</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のログをリアルタイムで<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>に格納する為の準備をします。Fluentd本体とfluent-plugin-<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>-bulkを設定します。※fluentdのmysqlpluginは他にもありますが、1レコードずつinsertすると<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>への接続負荷が高くなってしまうのでbulkinsertできるpluignを選びました。blukinsertとはINSERT INTO (A,B,C) VALUES(aaa,bbb,ccc), (ddd,eee,fff)のように1つの<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>文でINSERTが出来る為に高速と言われています。<br />
+<a href="http://fluentd.org/">Fluentd: Open Source Log Management</a> <a href="http://b.hatena.ne.jp/entry/fluentd.org/"><img src="http://b.hatena.ne.jp/entry/image/http://fluentd.org/" alt="はてなブックマーク - Fluentd: Open Source Log Management" border="0" /></a><br />
+<a href="https://github.com/toyama0919/fluent-plugin-mysql-bulk">toyama0919/fluent-plugin-mysql-bulk · GitHub</a> <a href="http://b.hatena.ne.jp/entry/s/github.com/toyama0919/fluent-plugin-mysql-bulk"><img src="http://b.hatena.ne.jp/entry/image/https://github.com/toyama0919/fluent-plugin-mysql-bulk" alt="はてなブックマーク - toyama0919/fluent-plugin-mysql-bulk · GitHub" border="0" /></a></p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ curl <span class="synSpecial">-L</span> http://toolbelt.treasuredata.com/sh/<span class="synStatement">install</span>-redhat.sh | sh
+$ sudo /usr/lib64/fluent/ruby/bin/fluent-gem <span class="synStatement">install</span> fluent-plugin-mysql-bulk
+</pre>
+</div>
+<div class="section">
+<h5>td-agent.conf</h5>
+<p>上のサーバ構成のLogAggregator Masterの設定を想定して記述します。次の内容を<span class="deco" style="font-weight:bold;">/etc/td-agent/td-agent.conf</span>に設定すると<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>に接続してbulkinsertしてくれます。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink><span class="synStatement"><source></span>
+  <span class="synStatement">type</span> forward
+  port <span class="synConstant">24224</span>
+<span class="synStatement"><</span>/<span class="synStatement">source></span>
+
+<span class="synStatement"><</span>match apache.access<span class="synStatement">></span>
+  <span class="synStatement">type</span> file
+  path /var/log/apache/access.log
+<span class="synStatement"><</span>/match<span class="synStatement">></span>
+
+<span class="synStatement"><source></span>
+  <span class="synStatement">type</span> <span class="synStatement">tail</span>
+  path /var/log/httpd/access_log
+  format apache
+  tag apache.log
+  pos_file /var/log/td-agent/apache.pos
+<span class="synStatement"><</span>/<span class="synStatement">source></span>
+
+<span class="synStatement"><</span>match apache.log<span class="synStatement">></span>
+  <span class="synStatement">type</span> mysql_bulk
+  host localhost
+  database analytics
+  username root
+  column_names path,code,ua,referer,created_at
+  key_names path,code,agent,referer,<span class="synPreProc">${time}</span>
+  table log
+  flush_interval 5s
+<span class="synStatement"><</span>/match<span class="synStatement">></span>
+</pre><pre class="hljs sh" data-lang="sh" data-unlink>$ sudo /etc/init.d/td-agent <span class="synStatement">restart</span> 
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>にデータが格納される事を確認する</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/apache">apache</a>へのRequest　=> <a class="keyword" href="http://d.hatena.ne.jp/keyword/apache">apache</a> logへの書き込み => fluent-plugin-<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>-bulk  => <a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>の流れを確認します。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ <span class="synStatement">for </span>i <span class="synStatement">in</span> <span class="synSpecial">{</span>1..100<span class="synSpecial">}</span>
+<span class="synStatement">do</span>              
+  curl <span class="synStatement">"</span><span class="synConstant">http://localhost/index.html</span><span class="synStatement">"</span>
+<span class="synStatement">done</span>
+
+$ <span class="synStatement">tail</span> <span class="synSpecial">-n</span> <span class="synConstant">3</span> /var/log/httpd/access_log
+<span class="synComment">:</span>:<span class="synConstant">1</span> - - <span class="synStatement">[</span><span class="synConstant">08</span>/Feb/<span class="synConstant">2014</span>:<span class="synConstant">23</span>:<span class="synConstant">10</span>:<span class="synConstant">40</span> +<span class="synConstant">0900</span><span class="synStatement">]</span> <span class="synStatement">"</span><span class="synConstant">GET /index.html HTTP/1.1</span><span class="synStatement">"</span> <span class="synConstant">200</span> - <span class="synStatement">"</span><span class="synConstant">-</span><span class="synStatement">"</span> <span class="synStatement">"</span><span class="synConstant">curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2</span><span class="synStatement">"</span>
+<span class="synComment">:</span>:<span class="synConstant">1</span> - - <span class="synStatement">[</span><span class="synConstant">08</span>/Feb/<span class="synConstant">2014</span>:<span class="synConstant">23</span>:<span class="synConstant">10</span>:<span class="synConstant">40</span> +<span class="synConstant">0900</span><span class="synStatement">]</span> <span class="synStatement">"</span><span class="synConstant">GET /index.html HTTP/1.1</span><span class="synStatement">"</span> <span class="synConstant">200</span> - <span class="synStatement">"</span><span class="synConstant">-</span><span class="synStatement">"</span> <span class="synStatement">"</span><span class="synConstant">curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2</span><span class="synStatement">"</span>
+<span class="synComment">:</span>:<span class="synConstant">1</span> - - <span class="synStatement">[</span><span class="synConstant">08</span>/Feb/<span class="synConstant">2014</span>:<span class="synConstant">23</span>:<span class="synConstant">10</span>:<span class="synConstant">40</span> +<span class="synConstant">0900</span><span class="synStatement">]</span> <span class="synStatement">"</span><span class="synConstant">GET /index.html HTTP/1.1</span><span class="synStatement">"</span> <span class="synConstant">200</span> - <span class="synStatement">"</span><span class="synConstant">-</span><span class="synStatement">"</span> <span class="synStatement">"</span><span class="synConstant">curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2</span><span class="synStatement">"</span>
+
+$ <span class="synStatement">tail</span> <span class="synSpecial">-n</span> <span class="synConstant">3</span> /var/log/td-agent/td-agent.log
+<span class="synConstant">2014-02-08</span> <span class="synConstant">23</span>:<span class="synConstant">10</span>:<span class="synConstant">42</span> <span class="synSpecial">+0900</span> <span class="synStatement">[</span>info<span class="synStatement">]</span>: bulk insert sql <span class="synStatement">=></span> <span class="synStatement">[</span>INSERT INTO log (path,code,ua,referer,created_at) VALUES (<span class="synStatement">'</span><span class="synConstant">/index.html</span><span class="synStatement">'</span>,<span class="synStatement">'</span><span class="synConstant">200</span><span class="synStatement">'</span>,<span class="synStatement">'</span><span class="synConstant">curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2</span><span class="synStatement">'</span>,<span class="synStatement">'</span><span class="synConstant">-</span><span class="synStatement">'</span>,<span class="synStatement">'</span><span class="synConstant">2014-02-08 23:10:37</span><span class="synStatement">'</span>),(<span class="synStatement">'</span><span class="synConstant">/index.html</span><span class="synStatement">'</span>,<span class="synStatement">'</span><span class="synConstant">200</span><span class="synStatement">'</span>,<span class="synStatement">'</span><span class="synConstant">curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2</span><span class="synStatement">'</span>,<span class="synStatement">'</span><span class="synConstant">-</span><span class="synStatement">'</span>,<span class="synStatement">'</span><span class="synConstant">2014-02-08 23:10:37</span><span class="synStatement">'</span>),....
+</pre><pre class="hljs mysql" data-lang="mysql" data-unlink>mysql> <span class="synStatement">SELECT</span> * <span class="synStatement">FROM</span> analytics.log <span class="synStatement">ORDER</span> <span class="synStatement">BY</span> log_id <span class="synStatement">DESC</span> <span class="synStatement">LIMIT</span> <span class="synConstant">3</span> ;
++--------+-------------+------+--------------------------------------------------------------------------------------------------------+---------+---------------------+
+| log_id | path        | code | ua                                                                                                     | referer | created_at          |
++--------+-------------+------+--------------------------------------------------------------------------------------------------------+---------+---------------------+
+|    <span class="synConstant">100</span> | /<span class="synStatement">index</span>.html |  <span class="synConstant">200</span> | curl/<span class="synConstant">7.19</span>.<span class="synConstant">7</span> (x86_64-redhat-linux-gnu) libcurl/<span class="synConstant">7.19</span>.<span class="synConstant">7</span> NSS/<span class="synConstant">3.14</span>.<span class="synConstant">0.0</span> zlib/<span class="synConstant">1.2</span>.<span class="synConstant">3</span> libidn/<span class="synConstant">1.18</span> libssh2/<span class="synConstant">1.4</span>.<span class="synConstant">2</span> | -       | <span class="synConstant">2014-02-08</span> <span class="synConstant">23</span>:<span class="synConstant">10</span>:<span class="synConstant">40</span> |
+|     <span class="synConstant">99</span> | /<span class="synStatement">index</span>.html |  <span class="synConstant">200</span> | curl/<span class="synConstant">7.19</span>.<span class="synConstant">7</span> (x86_64-redhat-linux-gnu) libcurl/<span class="synConstant">7.19</span>.<span class="synConstant">7</span> NSS/<span class="synConstant">3.14</span>.<span class="synConstant">0.0</span> zlib/<span class="synConstant">1.2</span>.<span class="synConstant">3</span> libidn/<span class="synConstant">1.18</span> libssh2/<span class="synConstant">1.4</span>.<span class="synConstant">2</span> | -       | <span class="synConstant">2014-02-08</span> <span class="synConstant">23</span>:<span class="synConstant">10</span>:<span class="synConstant">40</span> |
+|     <span class="synConstant">98</span> | /<span class="synStatement">index</span>.html |  <span class="synConstant">200</span> | curl/<span class="synConstant">7.19</span>.<span class="synConstant">7</span> (x86_64-redhat-linux-gnu) libcurl/<span class="synConstant">7.19</span>.<span class="synConstant">7</span> NSS/<span class="synConstant">3.14</span>.<span class="synConstant">0.0</span> zlib/<span class="synConstant">1.2</span>.<span class="synConstant">3</span> libidn/<span class="synConstant">1.18</span> libssh2/<span class="synConstant">1.4</span>.<span class="synConstant">2</span> | -       | <span class="synConstant">2014-02-08</span> <span class="synConstant">23</span>:<span class="synConstant">10</span>:<span class="synConstant">40</span> |
++--------+-------------+------+--------------------------------------------------------------------------------------------------------+---------+---------------------+
+</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>集計用のバッチ</h4>
+
+<blockquote>
+    <p>以下の<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>コードでlogtableから5分毎に集計結果をsummary_realtimeに格納、1日毎にsummary_dateに格納する事ができます。それぞれのプログラムをcronで回せばOKですね。実行した結果<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>にデータが格納されている事も確認します。logtableの格納件数とsummarytableの集計値が一致しているので問題無さそうでした。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment">#coding:utf-8</span>
+<span class="synPreProc">import</span> sys,mysql.connector
+<span class="synPreProc">from</span> datetime <span class="synPreProc">import</span> *
+<span class="synPreProc">import</span> time
+date =  datetime.now().strftime( <span class="synConstant">'%Y-%m-%d'</span> )
+base_timestamp = <span class="synIdentifier">int</span>( time.mktime( datetime.strptime( date + <span class="synConstant">' 00:00:00'</span>, <span class="synConstant">"%Y-%m-%d %H:%M:%S"</span> ).timetuple() ) )
+
+<span class="synComment"># mysql connector</span>
+con = mysql.connector.connect(
+host=<span class="synConstant">'localhost'</span>,
+db=<span class="synConstant">'analytics'</span>,
+user=<span class="synConstant">'root'</span>,
+passwd=<span class="synConstant">''</span>,
+buffered=<span class="synIdentifier">True</span>)
+cur = con.cursor()
+
+<span class="synComment"># get batch_count</span>
+cur.execute(<span class="synConstant">'SELECT count FROM %s WHERE date = "%s" AND type = "%s"'</span> % (<span class="synConstant">'batch_history'</span>, date, <span class="synConstant">'R'</span>) )
+res = cur.fetchone()
+<span class="synStatement">try</span>:
+batch_count = res[<span class="synConstant">0</span>]
+<span class="synStatement">except</span> <span class="synType">TypeError</span>:
+batch_count = <span class="synConstant">0</span>
+start_timestamp = base_timestamp +  <span class="synConstant">300</span> * ( batch_count -<span class="synConstant">1</span> );
+end_timestamp = base_timestamp + <span class="synConstant">300</span> * batch_count; 
+
+<span class="synComment"># get logdata</span>
+cur.execute(<span class="synConstant">'SELECT COUNT(path),path,ua FROM %s WHERE code = %d AND created_at BETWEEN FROM_UNIXTIME("%s") AND FROM_UNIXTIME("%s") GROUP BY path'</span> % (<span class="synConstant">'log'</span>, <span class="synConstant">200</span>, start_timestamp, end_timestamp))
+res = cur.fetchall()
+
+<span class="synComment"># insert into summary_realtime</span>
+<span class="synStatement">for</span> row <span class="synStatement">in</span> res:
+cur.execute(<span class="synConstant">'INSERT INTO %s (path, count, start_at, end_at, created_at, modified_at) VALUES("%s", %d, FROM_UNIXTIME("%s"), FROM_UNIXTIME("%s"), NOW(), NOW()) ON DUPLICATE KEY UPDATE count = %d, start_at = FROM_UNIXTIME("%s"), end_at = FROM_UNIXTIME("%s"), modified_at = NOW(), summary_realtime_id = LAST_INSERT_ID(summary_realtime_id)'</span> %(<span class="synConstant">'summary_realtime'</span>, row[<span class="synConstant">1</span>], row[<span class="synConstant">0</span>], start_timestamp, end_timestamp, row[<span class="synConstant">0</span>], start_timestamp, end_timestamp ))
+
+<span class="synComment"># history</span>
+cur.execute(<span class="synConstant">'INSERT INTO %s (type,date,count) VALUES("%s", "%s", 1) ON DUPLICATE KEY UPDATE batch_history_id = LAST_INSERT_ID(batch_history_id), count = count + 1'</span> % (<span class="synConstant">'batch_history'</span>, <span class="synConstant">'R'</span>, date))
+
+con.commit()
+cur.close()
+con.close()
+</pre><pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment">#coding:utf-8</span>
+<span class="synPreProc">import</span> sys,mysql.connector
+<span class="synPreProc">from</span> datetime <span class="synPreProc">import</span> *
+<span class="synPreProc">import</span> time
+yesterday = datetime.now() - timedelta(<span class="synConstant">0</span>,<span class="synConstant">3600</span>*<span class="synConstant">24</span>)
+start_date =  yesterday.strftime( <span class="synConstant">'%Y-%m-%d 00:00:00'</span> )
+end_date =  datetime.now().strftime( <span class="synConstant">'%Y-%m-%d 00:00:00'</span> ) 
+date =  yesterday.strftime( <span class="synConstant">'%Y-%m-%d'</span> )
+
+<span class="synComment"># mysql connector</span>
+con = mysql.connector.connect(
+host=<span class="synConstant">'localhost'</span>,
+db=<span class="synConstant">'analytics'</span>,
+user=<span class="synConstant">'root'</span>,
+passwd=<span class="synConstant">''</span>,
+buffered=<span class="synIdentifier">True</span>)
+cur = con.cursor()
+
+<span class="synComment"># get batch_count</span>
+cur.execute(<span class="synConstant">'SELECT count FROM %s WHERE date = "%s" AND type = "%s"'</span> % (<span class="synConstant">'batch_history'</span>, date, <span class="synConstant">'D'</span>) )
+res = cur.fetchone()
+<span class="synStatement">try</span>:
+batch_count = res[<span class="synConstant">0</span>]
+<span class="synStatement">except</span> <span class="synType">TypeError</span>:
+batch_count = <span class="synConstant">0</span>
+
+<span class="synComment"># get logdata</span>
+cur.execute(<span class="synConstant">'SELECT COUNT(path),path,ua FROM %s WHERE code = %d AND created_at BETWEEN "%s" AND "%s" GROUP BY path'</span> % (<span class="synConstant">'log'</span>, <span class="synConstant">200</span>, start_date, end_date))
+res = cur.fetchall()
+
+<span class="synComment"># insert into summary_date</span>
+<span class="synStatement">for</span> row <span class="synStatement">in</span> res:
+cur.execute(<span class="synConstant">'INSERT INTO %s (path, count, date, created_at, modified_at) VALUES("%s", %d, "%s", NOW(), NOW()) ON DUPLICATE KEY UPDATE count = %d, date = "%s", modified_at = NOW(), summary_date_id = LAST_INSERT_ID(summary_date_id)'</span> %(<span class="synConstant">'summary_date'</span>, row[<span class="synConstant">1</span>], row[<span class="synConstant">0</span>], end_date, row[<span class="synConstant">0</span>], end_date))
+
+<span class="synComment"># history</span>
+cur.execute(<span class="synConstant">'INSERT INTO %s (type,date,count) VALUES("%s", "%s", 1) ON DUPLICATE KEY UPDATE batch_history_id = LAST_INSERT_ID(batch_history_id), count = count + 1'</span> % (<span class="synConstant">'batch_history'</span>, <span class="synConstant">'D'</span>, date))
+
+con.commit()
+cur.close()
+con.close()
+</pre><pre class="hljs mysql" data-lang="mysql" data-unlink>mysql> <span class="synStatement">SELECT</span> <span class="synIdentifier">COUNT(*)</span> <span class="synStatement">FROM</span> log <span class="synStatement">WHERE</span> created_at <span class="synStatement">BETWEEN</span> <span class="synConstant">'2014-02-08'</span> <span class="synStatement">AND</span> <span class="synConstant">'2014-02-09'</span>;
++----------+
+| <span class="synIdentifier">COUNT(*)</span> |
++----------+
+|      <span class="synConstant">100</span> |
++----------+
+<span class="synConstant">1</span> <span class="synStatement">row</span> <span class="synStatement">in</span> set (<span class="synConstant">0.00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> <span class="synIdentifier">COUNT(*)</span> <span class="synStatement">FROM</span> log <span class="synStatement">WHERE</span> created_at <span class="synStatement">BETWEEN</span> <span class="synConstant">'2014-02-09'</span> <span class="synStatement">AND</span> <span class="synConstant">'2014-02-10'</span>;
++----------+
+| <span class="synIdentifier">COUNT(*)</span> |
++----------+
+|     <span class="synConstant">1288</span> |
++----------+
+<span class="synConstant">1</span> <span class="synStatement">row</span> <span class="synStatement">in</span> set (<span class="synConstant">0.00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> * <span class="synStatement">FROM</span> summary_date;
++-----------------+-------------+-------+------------+---------------------+---------------------+
+| summary_date_id | path        | count | <span class="synType">date</span>       | created_at          | modified_at         |
++-----------------+-------------+-------+------------+---------------------+---------------------+
+|               <span class="synConstant">1</span> | /<span class="synStatement">index</span>.html |   <span class="synConstant">100</span> | <span class="synConstant">2014-02-09</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">15</span>:<span class="synConstant">48</span>:<span class="synConstant">37</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">15</span>:<span class="synConstant">48</span>:<span class="synConstant">37</span> |
++-----------------+-------------+-------+------------+---------------------+---------------------+
+<span class="synConstant">1</span> <span class="synStatement">row</span> <span class="synStatement">in</span> set (<span class="synConstant">0.00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> <span class="synIdentifier">SUM(count)</span> <span class="synStatement">FROM</span> summary_date;
++------------+
+| <span class="synIdentifier">SUM(count)</span> |
++------------+
+|        <span class="synConstant">100</span> |
++------------+
+<span class="synConstant">1</span> <span class="synStatement">row</span> <span class="synStatement">in</span> set (<span class="synConstant">0.00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> * <span class="synStatement">FROM</span> summary_realtime;
++---------------------+-------------+-------+---------------------+---------------------+---------------------+---------------------+
+| summary_realtime_id | path        | count | start_at            | end_at              | created_at          | modified_at         |
++---------------------+-------------+-------+---------------------+---------------------+---------------------+---------------------+
+|                   <span class="synConstant">1</span> | /<span class="synStatement">index</span>.html |   <span class="synConstant">144</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">01</span>:<span class="synConstant">00</span>:<span class="synConstant">00</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">01</span>:<span class="synConstant">05</span>:<span class="synConstant">00</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">15</span>:<span class="synConstant">45</span>:<span class="synConstant">21</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">15</span>:<span class="synConstant">45</span>:<span class="synConstant">21</span> |
+|                   <span class="synConstant">2</span> | /<span class="synStatement">index</span>.html |   <span class="synConstant">144</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">01</span>:<span class="synConstant">10</span>:<span class="synConstant">00</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">01</span>:<span class="synConstant">15</span>:<span class="synConstant">00</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">15</span>:<span class="synConstant">45</span>:<span class="synConstant">21</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">15</span>:<span class="synConstant">45</span>:<span class="synConstant">21</span> |
+|                   <span class="synConstant">3</span> | /<span class="synStatement">index</span>.html |  <span class="synConstant">1000</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">01</span>:<span class="synConstant">50</span>:<span class="synConstant">00</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">01</span>:<span class="synConstant">55</span>:<span class="synConstant">00</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">15</span>:<span class="synConstant">45</span>:<span class="synConstant">23</span> | <span class="synConstant">2014-02-09</span> <span class="synConstant">15</span>:<span class="synConstant">45</span>:<span class="synConstant">23</span> |
++---------------------+-------------+-------+---------------------+---------------------+---------------------+---------------------+
+<span class="synConstant">3</span> <span class="synStatement">rows</span> <span class="synStatement">in</span> set (<span class="synConstant">0.00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> <span class="synIdentifier">SUM(count)</span> <span class="synStatement">FROM</span> summary_realtime;
++------------+
+| <span class="synIdentifier">SUM(count)</span> |
++------------+
+|       <span class="synConstant">1288</span> |
++------------+
+<span class="synConstant">1</span> <span class="synStatement">row</span> <span class="synStatement">in</span> set (<span class="synConstant">0.00</span> sec)
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>その他</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Table肥大化防止</h5>
+<p>logtableが肥大化して来た時はパージを行います。予めpartitionを月毎に切っているので仕様で決めた蓄積期間を経過したらサヨナラします。summary_dateのtableは容量を食わないはずなのでそのまま残しておいても良いと思います。</p>
+<pre class="hljs mysql" data-lang="mysql" data-unlink>mysql> <span class="synStatement">ALTER</span> <span class="synStatement">TABLE</span> log <span class="synStatement">DROP</span> PARTITION p1;
+</pre>
+</div>
+<div class="section">
+<h5>可視化</h5>
+<p><a href="http://www.highcharts.com/">Highcharts - Interactive JavaScript charts for your webpage</a> <a href="http://b.hatena.ne.jp/entry/www.highcharts.com/"><img src="http://b.hatena.ne.jp/entry/image/http://www.highcharts.com/" alt="はてなブックマーク - Highcharts - Interactive JavaScript charts for your webpage" border="0" /></a><br />
+<a href="http://www.oesmith.co.uk/morris.js/">morris.js</a> <a href="http://b.hatena.ne.jp/entry/www.oesmith.co.uk/morris.js/"><img src="http://b.hatena.ne.jp/entry/image/http://www.oesmith.co.uk/morris.js/" alt="はてなブックマーク - morris.js" border="0" /></a><br />
+グラフ描画のJSで注目したいのはHighchartsとmorris.jsぐらいでしょうか。Highchartsは商用での利用はライセンス契約しないとだめなので、その辺を気にせず使いたい方はmorris.jsが良いかなと思います。<br />
+<span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20140211115933" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20140211/20140211115933.png" alt="f:id:yutakikuchi:20140211115933p:image" title="f:id:yutakikuchi:20140211115933p:image" class="hatena-fotolife" itemprop="image"></a></span></p>
+
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201402100142/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201402100142/">7万5千円で会社を作ったった【後編】</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201402170828/">【男の浪漫】身長、体重およびスリーサイズを素性とした「アレ」のサイズを推定する実験</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201402170828/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

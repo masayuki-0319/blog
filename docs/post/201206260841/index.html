@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120626/1340667713" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>C&#43;&#43;でマルチスレッドプログラミングを試してみたことのまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>C&#43;&#43;でマルチスレッドプログラミングを試してみたことのまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Jun 26, 08:41</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="c-c-でマルチスレッドプログラミングを試してみたことのまとめ">[C++] : C++でマルチスレッドプログラミングを試してみたことのまとめ</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873110637/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/516MBZPYNSL._SL160_.jpg" class="hatena-asin-detail-image" alt="C++プログラミング入門" title="C++プログラミング入門"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873110637/yutakikuchi-22/">C++プログラミング入門</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> グレゴリーサティア,ダウグブラウン,Gregory Satir,Doug Brown,望月康司,谷口功</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A1%A6%A5%B8%A5%E3%A5%D1%A5%F3">オライリー・ジャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2001/11</li><li><span class="hatena-asin-detail-label">メディア:</span> 単行本</li><li><span class="hatena-asin-detail-label">購入</span>: 9人 <span class="hatena-asin-detail-label">クリック</span>: 147回</li><li><a href="http://d.hatena.ne.jp/asin/4873110637/yutakikuchi-22" target="_blank">この商品を含むブログ (29件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>Index</h4>
+
+<blockquote>
+    
+<ul>
+<li>Word
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C7%D3%C2%BE%C0%A9%B8%E6">排他制御</a></li>
+<li>アトミック性</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%EA%A5%C6%A5%A3%A5%AB%A5%EB%A5%BB%A5%AF%A5%B7%A5%E7%A5%F3">クリティカルセクション</a></li>
+<li>fork</li>
+<li>マルチプロセス/マルチスレッド</li>
+<li>mutex</li>
+<li>semaphore</li>
+<li>Pthreads</li>
+<li>スレッドセーフ</li>
+<li>スピンロック</li>
+<li>ACID</li>
+</ul></li>
+<li>pthread <a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a></li>
+<li>fork</li>
+<li>semaphore</li>
+<li>mutex</li>
+<li>Attention</li>
+<li>links</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Word</h4>
+
+<blockquote>
+    <p>初歩的な単語ですが、マルチスレッドプログラミングに関するものを簡単にまとめます。</p>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C7%D3%C2%BE%C0%A9%B8%E6">排他制御</a></h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のタスクが処理を並行して同一の資源にアクセス可能な場合、データの整合性が合わない事を避けるために他のプロセスの処理を排除すること。相互排除（mutual exclusion）ともいう。最大k個のタスクが資源にアクセス可能な事をk-相互排除と呼ばれる。</p>
+
+</div>
+<div class="section">
+<h5>アトミック性</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の操作が不可分であり、切り離せない事。システム上の他の操作から見てアトミック性を持つ操作は全てが完了したか/全てが失敗したかの状態として観測できない事。全てが失敗したと観測された場合は処理前の状態に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%EB%A5%D0%A5%C3%A5%AF">ロールバック</a>しないとならない。</p>
+
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%EA%A5%C6%A5%A3%A5%AB%A5%EB%A5%BB%A5%AF%A5%B7%A5%E7%A5%F3">クリティカルセクション</a></h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のタスクの同時アクセスを可能とした時に、データの不整合が発生すると破綻する部分の事。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%EA%A5%C6%A5%A3%A5%AB%A5%EB%A5%BB%A5%AF%A5%B7%A5%E7%A5%F3">クリティカルセクション</a>では<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C7%D3%C2%BE%C0%A9%B8%E6">排他制御</a>を行い、データのアトミック性を保証する。</p>
+
+</div>
+<div class="section">
+<h5>fork</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/UNIX">UNIX</a>系の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B7%A5%B9%A5%C6%A5%E0%A5%B3%A1%BC%A5%EB">システムコール</a>で親プロセスから子プロセスを生成すること。forkはプロセスを新たに生成するのでマルチスレッドとは異なりマルチプロセスである。</p>
+
+</div>
+<div class="section">
+<h5>マルチプロセス/マルチスレッド</h5>
+<p>マルチプロセスはそれぞれのプロセスが独立したメモリ空間を使用してプロセス毎の平行した処理が可能。マルチプロセスはプロセス間通信や共有メモリを使ってデータのやり取りができる。それに対してマルチスレッドは同一のメモリ空間に対して<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のスレッドを作成して平行処理が可能。メモリを共有しているのでマルチスレッドはデータのやり取りがスレッド間でできる。</p>
+
+</div>
+<div class="section">
+<h5>mutex</h5>
+<p>Mutual Exclusion(相互排他)の略で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C7%D3%C2%BE%C0%A9%B8%E6">排他制御</a>を行う場面でアトミック性を保証するための同期仕様。広義にはsemaphoreの一種と言える。semaphoreは同一<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%EA%A5%C6%A5%A3%A5%AB%A5%EB%A5%BB%A5%AF%A5%B7%A5%E7%A5%F3">クリティカルセクション</a>に対して<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のタスクが操作可能であり、mutexでは一つしか操作可能とならないので完全なる<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C7%D3%C2%BE%C0%A9%B8%E6">排他制御</a>。P操作(ロック)、V操作(アンロック)を持ち<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C7%D3%C2%BE%C0%A9%B8%E6">排他制御</a>を行う。</p>
+
+</div>
+<div class="section">
+<h5>semaphore</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のタスクが同一資源にアクセスする上限を規定する時に用いる。同時アクセス1とした場合はmutexとほぼ同じことになり、これをバイナリ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BB%A5%DE%A5%D5%A5%A9">セマフォ</a>と呼ぶ。処理としては共通領域に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BB%A5%DE%A5%D5%A5%A9">セマフォ</a>領域を確保し、任意の最大k個のアクセスを許可する。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BB%A5%DE%A5%D5%A5%A9">セマフォ</a>領域でタスクがP操作、V操作により処理実行中/完了フラグのON/OFFを行う。</p>
+
+</div>
+<div class="section">
+<h5>Pthread</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/POSIX">POSIX</a>標準のスレッドのこと。スレッド生成や操作の<a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a>が用意されている。<a class="keyword" href="http://d.hatena.ne.jp/keyword/C%B8%C0%B8%EC">C言語</a>のデータ型や関数をpthread.hというヘッダファイルに組み込まれている。semaphore、mutexともにpthread_createという関数を利用してスレッドを生成する。</p>
+
+</div>
+<div class="section">
+<h5>スレッドセーフ</h5>
+<p>マルチスレッドプログラミングで<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のスレッドが同時にアクセスしてもデータの不整合等の問題が発生しないこと。スレッドセーフを保つためには<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C7%D3%C2%BE%C0%A9%B8%E6">排他制御</a>やリエントラントである事が望まれる。</p>
+
+</div>
+<div class="section">
+<h5>スピンロック</h5>
+<p>スレッドがスピン(ループ)しながらロックが取得できるのを待つ方法。</p>
+
+</div>
+<div class="section">
+<h5>ACID</h5>
+<p>原子性（英: atomicity）、一貫性（英: consistency）、独立性（英: isolation）、および永続性（英: durability）といった<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>システムが持つべき性質概念。データベース系の話でよく利用される言葉。原子性(atomic性)：全てが実行されるか/全くされないかを保証する事。一貫性(整合性)：<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>開始と終了時で整合性が合っている事を保証する。独立性：<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>中の処理が他の操作から隔離される事。永続性：<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>ログを記録し、データを失われなくする。</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>pthread <a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a></h4>
+
+<blockquote>
+    <p>pthreadAPIの概要をまとめます。以下の<a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a>はsemaphoreなどの実装で利用します。</p>
+
+<table>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a> </th>
+<th> 説明 </th>
+</tr>
+<tr>
+<td> pthread_create </td>
+<td> 新規スレッド作成 </td>
+<td> </td>
+</tr>
+<tr>
+<td> pthread_exit </td>
+<td> スレッド終了 </td>
+</tr>
+<tr>
+<td> pthread_join </td>
+<td> スレッドが終了するまでブロック </td>
+</tr>
+<tr>
+<td> pthread_detach </td>
+<td> スレッドのメモリを解放可能とする </td>
+</tr>
+<tr>
+<td> pthread_equal </td>
+<td> スレッドのIDを比較する </td>
+</tr>
+<tr>
+<td> pthread_once </td>
+<td> 関数が一度だけ呼び出し可能とする </td>
+</tr>
+<tr>
+<td> pthread_self </td>
+<td> スレッドIDを取得 </td>
+</tr>
+<tr>
+<td> pthread_cleanup_push </td>
+<td> キャン<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BB%A5%EB%A5%B9%A5%BF">セルスタ</a>ックに挿入 </td>
+<td> </td>
+</tr>
+<tr>
+<td> pthread_cleanup_pop </td>
+<td> キャン<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BB%A5%EB%A5%B9%A5%BF">セルスタ</a>ックからハンドラを取り出して実行 </td>
+</tr>
+<tr>
+<td> pthread_key_create </td>
+<td> スレッドのKeyを作成 </td>
+</tr>
+<tr>
+<td> pthread_key_delete </td>
+<td> スレッドのkeyを削除 </td>
+</tr>
+<tr>
+<td> pthread_setspecific </td>
+<td> スレッド固有データをKeyに紐付け </td>
+</tr>
+<tr>
+<td> pthread_getspecific </td>
+<td> スレッド固有のデータを取得 </td>
+</tr>
+<tr>
+<td> pthread_cancel </td>
+<td> スレッドをキャンセル </td>
+</tr>
+<tr>
+<td> pthread_testcancel </td>
+<td> キャンセルポイント作成 </td>
+</tr>
+<tr>
+<td> pthread_setcancelstate </td>
+<td> キャンセル状態の設定 </td>
+</tr>
+<tr>
+<td> pthread_setcanceltype </td>
+<td> キャンセルタイプの設定 </td>
+</tr>
+</table>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>fork</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Simple fork</h5>
+<p>プロセスから子プロセスを派生させます。プロセスを派生させるので単純なforkではデータの共有を行いません。例としてParentプロセスの時にChildプロセスのpid、Childプロセスの時にParentプロセスのpidをそれぞれ表示するプログラムを書いてみます。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+
+<span class="synType">int</span> main(){
+
+<span class="synType">int</span> count = <span class="synConstant">0</span>;
+count++;
+std::cout << <span class="synConstant">"Count = "</span>;
+std::cout << count << std::endl;
+
+pid_t pid;
+<span class="synComment">// 子プロセス作成</span>
+pid = fork();
+
+<span class="synComment">// pidが0の場合は子プロセス</span>
+<span class="synComment">// pidが-1の場合はforkに失敗</span>
+<span class="synComment">// pidが0,-1以外の場合は親プロセス</span>
+<span class="synStatement">if</span>( pid < <span class="synConstant">0</span> ) {
+    std::cout << <span class="synConstant">"Fork Failed."</span> << std::endl;
+    <span class="synStatement">return</span> <span class="synConstant">0</span>;
+} <span class="synStatement">else</span> <span class="synStatement">if</span>( pid == <span class="synConstant">0</span> ) {
+    putchar( <span class="synSpecial">'\n'</span> );
+    std::cout << <span class="synConstant">"Child Process. pid = "</span>;
+    std::cout << getpid() << std::endl;
+    std::cout << <span class="synConstant">"My Parent pid = "</span>;
+    std::cout << getppid() << std::endl;
+    count++;
+} <span class="synStatement">else</span> { 
+    putchar( <span class="synSpecial">'\n'</span> );
+    std::cout << <span class="synConstant">"Parent Process. pid = "</span>;
+    std::cout << getpid() << std::endl;
+    std::cout << <span class="synConstant">"My Child pid = "</span>;
+    std::cout << pid << std::endl;
+    count++;
+}
+
+std::cout << <span class="synConstant">"Count = "</span>;
+std::cout << count << std::endl;
+
+putchar( <span class="synSpecial">'\n'</span> );
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><pre class="code" data-lang="" data-unlink>Count = 1
+
+Child Process. pid = 4073
+My Parent pid = 4072
+Count = 2
+
+Parent Process. pid = 4072
+My Child pid = 4073
+Count = 2</pre>
+</div>
+<div class="section">
+<h5>fork wait</h5>
+<p>Parentプロセスで派生したChildプロセスが終わるのを待ちたい(Childプロセスを管理したい)プログラムを書く事があると思います。そんな時はwaitpid関数を利用します。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synPreProc">#include </span><span class="synConstant"><sys/wait.h></span>
+
+<span class="synType">int</span> main(){
+
+<span class="synType">int</span> count = <span class="synConstant">0</span>;
+<span class="synType">int</span> status;
+count++;
+std::cout << <span class="synConstant">"Count = "</span>;
+std::cout << count << std::endl;
+
+pid_t pid;
+<span class="synComment">// 子プロセス作成</span>
+pid = fork();
+
+<span class="synComment">// pidが0の場合は子プロセス</span>
+<span class="synComment">// pidが-1の場合はforkに失敗</span>
+<span class="synComment">// pidが0,-1以外の場合は親プロセス</span>
+<span class="synStatement">if</span>( pid < <span class="synConstant">0</span> ) {
+    std::cout << <span class="synConstant">"Fork Failed."</span> << std::endl;
+    <span class="synStatement">return</span> -<span class="synConstant">1</span>;
+} <span class="synStatement">else</span> <span class="synStatement">if</span>( pid == <span class="synConstant">0</span> ) {
+    putchar( <span class="synSpecial">'\n'</span> );
+    std::cout << <span class="synConstant">"Child Process. pid = "</span>;
+    std::cout << getpid() << std::endl;
+    std::cout << <span class="synConstant">"My Parent pid = "</span>;
+    std::cout << getppid() << std::endl;
+    count++;
+} <span class="synStatement">else</span> { 
+    putchar( <span class="synSpecial">'\n'</span> );
+    std::cout << <span class="synConstant">"Parent Process. pid = "</span>;
+    std::cout << getpid() << std::endl;
+    std::cout << <span class="synConstant">"My Child pid = "</span>;
+    std::cout << pid << std::endl;
+
+    <span class="synComment">//Child Processが終わるのを待つ</span>
+    waitpid( pid, &status, <span class="synConstant">0</span> );
+    std::cout << <span class="synConstant">"Finishied. pid = "</span>;
+    std::cout << pid << std::endl;
+
+    <span class="synStatement">if</span> (WIFEXITED(status)){
+        printf(<span class="synConstant">"exit, status=</span><span class="synSpecial">%d\n</span><span class="synConstant">"</span>, WEXITSTATUS(status));
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (WIFSIGNALED(status)){
+        printf(<span class="synConstant">"signal, sig=</span><span class="synSpecial">%d\n</span><span class="synConstant">"</span>, WTERMSIG(status));
+    } <span class="synStatement">else</span> {
+        printf(<span class="synConstant">"abnormal exit</span><span class="synSpecial">\n</span><span class="synConstant">"</span>);
+    }
+    count++;
+}
+
+std::cout << <span class="synConstant">"Count = "</span>;
+std::cout << count << std::endl;
+
+putchar( <span class="synSpecial">'\n'</span> );
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><pre class="code" data-lang="" data-unlink>Count = 1
+
+Child Process. pid = 4073
+My Parent pid = 4072
+Count = 2
+
+Parent Process. pid = 4072
+My Child pid = 4073
+Finishied. pid = 4073
+exit, status=0
+Count = 2</pre>
+</div>
+<div class="section">
+<h5>fork 共有メモリ</h5>
+<p>単純なforkではParent/Childプロセス間でデータの共有が出来ないので、共有メモリを介してデータを共有するやり方を記述します。共有メモリを扱うには#include <sys/shm.h>を読み込む必要があります。以下にshm関数の一覧を表にまとめます。</p>
+
+<table>
+<tr>
+<th> 関数 </th>
+<th> 説明 </th>
+</tr>
+<tr>
+<td> shmget </td>
+<td> 共有メモリのセグメント新規作成、取得を行う </td>
+<td> </td>
+</tr>
+<tr>
+<td> shmat </td>
+<td> 共有メモリのセグメントをattachする </td>
+</tr>
+<tr>
+<td> shmdt </td>
+<td> 不要になった共有メモリセグメントをdetachする </td>
+</tr>
+<tr>
+<td> shmctl </td>
+<td> 共有メモリセグメントを消去 </td>
+</tr>
+</table><pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synPreProc">#include </span><span class="synConstant"><sys/wait.h></span>
+<span class="synPreProc">#include </span><span class="synConstant"><sys/shm.h></span>
+
+<span class="synType">int</span> main(){
+
+<span class="synType">int</span> count = <span class="synConstant">0</span>;
+<span class="synType">int</span> status;
+<span class="synType">int</span> shmid; 
+<span class="synType">int</span> *shmaddr;
+std::cout << <span class="synConstant">"Count = "</span>;
+std::cout << count << std::endl;
+
+pid_t pid;
+<span class="synComment">// 子プロセス作成</span>
+pid = fork();
+
+<span class="synComment">// 共有メモリセグメント作成</span>
+<span class="synStatement">if</span> ((shmid = shmget(IPC_PRIVATE, <span class="synConstant">100</span>, <span class="synPreProc">0</span><span class="synConstant">600</span>)) == -<span class="synConstant">1</span>){
+    perror( <span class="synConstant">"shmget error."</span> );
+    exit( <span class="synConstant">EXIT_FAILURE</span> );
+}
+
+<span class="synComment">// pidが0の場合は子プロセス</span>
+<span class="synComment">// pidが-1の場合はforkに失敗</span>
+<span class="synComment">// pidが0,-1以外の場合は親プロセス</span>
+<span class="synStatement">if</span>( pid < <span class="synConstant">0</span> ) {
+    std::cout << <span class="synConstant">"Fork Failed."</span> << std::endl;
+    <span class="synStatement">return</span> -<span class="synConstant">1</span>;
+} <span class="synStatement">else</span> <span class="synStatement">if</span>( pid == <span class="synConstant">0</span> ) {
+    putchar( <span class="synSpecial">'\n'</span> );
+    std::cout << <span class="synConstant">"Child Process. pid = "</span>;
+    std::cout << getpid() << std::endl;
+    std::cout << <span class="synConstant">"My Parent pid = "</span>;
+    std::cout << getppid() << std::endl;
+    count++;
+
+    <span class="synComment">//共有メモリattach</span>
+    <span class="synStatement">if</span> ((shmaddr = (<span class="synType">int</span> *)shmat(shmid, <span class="synConstant">NULL</span>, <span class="synConstant">0</span>)) == (<span class="synType">void</span> *)-<span class="synConstant">1</span>) {
+        perror( <span class="synConstant">"ChildProcess shmat error."</span> );
+        exit(<span class="synConstant">EXIT_FAILURE</span>);
+    }
+    
+    *shmaddr = count;
+
+    <span class="synComment">//共有メモリのdetach</span>
+    <span class="synStatement">if</span> (shmdt(shmaddr) == -<span class="synConstant">1</span>) {
+        perror( <span class="synConstant">"ChildProcess shmdt error."</span> );
+        exit(<span class="synConstant">EXIT_FAILURE</span>);
+    }
+
+    exit(<span class="synConstant">EXIT_SUCCESS</span>);
+
+} <span class="synStatement">else</span> { 
+    putchar( <span class="synSpecial">'\n'</span> );
+    std::cout << <span class="synConstant">"Parent Process. pid = "</span>;
+    std::cout << getpid() << std::endl;
+    std::cout << <span class="synConstant">"My Child pid = "</span>;
+    std::cout << pid << std::endl;
+
+    <span class="synComment">//Child Processが終わるのを待つ</span>
+    waitpid( pid, &status, <span class="synConstant">0</span> );
+    std::cout << <span class="synConstant">"Finishied. pid = "</span>;
+    std::cout << pid << std::endl;
+
+
+    <span class="synComment">/* 共有メモリ・セグメントをプロセスのアドレス空間に付加 */</span>
+    <span class="synComment">/*</span>
+<span class="synComment">        if ((shmaddr = (int *)shmat(shmid, NULL, 0)) == (void *)-1) {</span>
+<span class="synComment">            perror( "ParentProcess shmat error." );</span>
+<span class="synComment">            exit(EXIT_FAILURE);</span>
+<span class="synComment">        }</span>
+<span class="synComment">        */</span>
+
+    std::cout << <span class="synConstant">"Attache Count = "</span>;
+    std::cout << *shmaddr << std::endl;
+     
+
+    <span class="synStatement">if</span> (WIFEXITED(status)){
+        printf(<span class="synConstant">"exit, status=</span><span class="synSpecial">%d\n</span><span class="synConstant">"</span>, WEXITSTATUS(status));
+    } <span class="synStatement">else</span> <span class="synStatement">if</span> (WIFSIGNALED(status)){
+        printf(<span class="synConstant">"signal, sig=</span><span class="synSpecial">%d\n</span><span class="synConstant">"</span>, WTERMSIG(status));
+    } <span class="synStatement">else</span> {
+        printf(<span class="synConstant">"abnormal exit</span><span class="synSpecial">\n</span><span class="synConstant">"</span>);
+    }
+    count++;
+}
+
+std::cout << <span class="synConstant">"Count = "</span>;
+std::cout << count << std::endl;
+
+putchar( <span class="synSpecial">'\n'</span> );
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><pre class="code" data-lang="" data-unlink>Count = 0
+
+Child Process. pid = 9965
+My Parent pid = 9964
+
+Parent Process. pid = 9964
+My Child pid = 9965
+Finishied. pid = 9965
+Attache Count = 1
+exit, status=0
+Count = 1</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>semaphore</h4>
+
+<blockquote>
+    <p>semaphoreのPOSIXAPIについて表にまとめます。</p>
+
+<table>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a> </th>
+<th> 説明 </th>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/sem">sem</a>_init </td>
+<td> semaphoreの初期化。メモリ領域の確保 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/sem">sem</a>_post </td>
+<td> semaphoreの値を1加算 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/sem">sem</a>_wait </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/sem">sem</a>が0より大きければsemaphoreの値を1減算。<a class="keyword" href="http://d.hatena.ne.jp/keyword/sem">sem</a>が0なら呼び出しスレッドはブロック </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/sem">sem</a>_getvalue </td>
+<td> semaphoreの値を抽出 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/sem">sem</a>_destroy </td>
+<td> semaphoreの破棄 </td>
+</tr>
+</table><p>ptreadはdetachかjoinをしないとメモリが解放されません。joinを忘れると<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%E2%A5%EA%A5%EA%A1%BC%A5%AF">メモリリーク</a>を発生する可能性があります。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synPreProc">#include </span><span class="synConstant"><pthread.h></span>
+<span class="synPreProc">#include </span><span class="synConstant"><semaphore.h></span>
+
+<span class="synComment">// sem_t型の定義</span>
+sem_t sem;
+<span class="synType">int</span> count = <span class="synConstant">0</span>;
+
+<span class="synType">void</span>* threadFunction1( <span class="synType">void</span>* args )
+{
+<span class="synStatement">while</span>(<span class="synConstant">1</span>){
+    std::cout << <span class="synConstant">"called threadFunction1"</span> << std::endl;
+    std::cout << <span class="synConstant">"count before wait = "</span>;
+    std::cout << count << std::endl;
+    <span class="synComment">// 待機状態</span>
+    sem_wait( &sem );
+    std::cout << <span class="synConstant">"count = "</span>;
+    std::cout << count << std::endl;
+    count = <span class="synConstant">0</span>;
+}
+<span class="synStatement">return</span> <span class="synConstant">NULL</span>;
+}
+
+<span class="synComment">/*</span>
+<span class="synComment">void* threadFunction2( void* args )</span>
+<span class="synComment">{</span>
+<span class="synComment">    while(1){</span>
+<span class="synComment">        std::cout << "called threadFunction2" << std::endl;</span>
+<span class="synComment">        std::cout << "count before wait = ";</span>
+<span class="synComment">        std::cout << count << std::endl;</span>
+<span class="synComment">        // 待機状態</span>
+<span class="synComment">        sem_wait( &sem );</span>
+<span class="synComment">        std::cout << "count = ";</span>
+<span class="synComment">        std::cout << count << std::endl;</span>
+<span class="synComment">        count = 0;</span>
+<span class="synComment">    }</span>
+<span class="synComment">    return NULL;</span>
+<span class="synComment">}</span>
+<span class="synComment">*/</span>
+
+<span class="synType">int</span> main()
+{
+<span class="synType">int</span> status;
+pthread_t thread_1, thread_2;
+<span class="synType">int</span> n;
+
+<span class="synComment">// sempahoreの初期化</span>
+sem_init( &sem, <span class="synConstant">0</span>, <span class="synConstant">0</span> );
+
+<span class="synComment">// スレッド1個目作成</span>
+status = pthread_create( &thread_1, <span class="synConstant">NULL</span>, threadFunction1, <span class="synConstant">NULL</span> );
+<span class="synStatement">if</span>( status != <span class="synConstant">0</span> ) {
+    std::cout << <span class="synConstant">"failed to create thread 1"</span> << std::endl;
+    exit(<span class="synConstant">1</span>);
+}
+
+<span class="synComment">// スレッド2個目作成</span>
+<span class="synComment">/*</span>
+<span class="synComment">    status = pthread_create( &thread_2, NULL, threadFunction2, NULL );</span>
+<span class="synComment">    if( status != 0 ) {</span>
+<span class="synComment">        std::cout << "failed to create thread 2" << std::endl;</span>
+<span class="synComment">        exit(1);</span>
+<span class="synComment">    }</span>
+<span class="synComment">    */</span>
+
+<span class="synComment">// detach </span>
+pthread_detach( thread_1 );
+<span class="synComment">//pthread_detach( thread_2 );</span>
+
+<span class="synStatement">for</span> ( n = <span class="synConstant">0</span>; n < <span class="synConstant">5</span>; ){
+    count++;
+    <span class="synStatement">if</span> ( count == <span class="synConstant">20</span> ) {
+        <span class="synComment">// semaphoreの値を1加算 シグナル送信</span>
+        std::cout << <span class="synConstant">"main count = "</span>;
+        std::cout << count << std::endl;
+        sem_post( &sem );
+        n++;
+    }
+}
+
+<span class="synComment">// semaphore解放</span>
+sem_destroy( &sem );
+}
+</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>を通すには-lpthreadを指定する必要があります。</p>
+<pre class="code" data-lang="" data-unlink>$ g++ pthread.cpp -lpthread
+$ ./a.out        
+main count = 20
+called threadFunction1
+count before wait = 142119050
+count = 142119050
+called threadFunction1
+count before wait = 0
+main count = 20
+count = 188569130
+called threadFunction1
+count before wait = 0
+main count = 20
+count = 20
+called threadFunction1
+count before wait = 0
+main count = 20
+count = 20
+called threadFunction1
+count before wait = 0
+main count = 20
+count = 20
+called threadFunction1
+count before wait = 0</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>mutex</h4>
+
+<blockquote>
+    <p>mutexの<a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a>について表にまとめます。</p>
+
+<table>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a> </th>
+<th> 説明 </th>
+</tr>
+<tr>
+<td> pthread_mutex_init </td>
+<td> mutexオブジェクトを初期化します。 </td>
+</tr>
+<tr>
+<td> pthread_mutex_lock </td>
+<td> 与えられたmutexをlockします。これはmutexがunlockされるまでスレッドの実行を停止させます。 </td>
+</tr>
+<tr>
+<td> pthread_mutex_trylock </td>
+<td> mutexが既に他のスレッドによってlockされている場合はスレッドをlockしません。</td>
+</tr>
+<tr>
+<td> pthread_mutex_unlock </td>
+<td> lockされた状態からunlock状態に戻します。</td>
+</tr>
+<tr>
+<td> pthread_mutex_destroy </td>
+<td> mutexオブジェクトを破棄して、資源を解放します。</td>
+</tr>
+</table><p>以下はサンプルプログラムです。pthread_mutex_lock中の変数は変更できませんが、pthred_mutex_unlockされると変更が可能になります。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synPreProc">#include </span><span class="synConstant"><pthread.h></span>
+
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+<span class="synType">int</span> count_1=<span class="synConstant">0</span>;
+<span class="synType">int</span> count_2=<span class="synConstant">0</span>;
+pthread_mutex_t mutex; <span class="synComment">//mutexの宣言</span>
+
+<span class="synType">void</span>* threadFunction1( <span class="synType">void</span>* args )
+{
+  <span class="synType">int</span> i;
+  <span class="synComment">//mutexのlock</span>
+  pthread_mutex_lock(&mutex);
+  
+  <span class="synComment">// sleepしてその間に変数の書き換えが無いかを確認する</span>
+  system( <span class="synConstant">"sleep 3"</span> );
+  cout << <span class="synConstant">"count_1 = "</span>;
+  <span class="synStatement">for</span>(i=<span class="synConstant">0</span>;i<=<span class="synConstant">10</span>;i++){
+cout << count_1;
+cout << <span class="synConstant">","</span>;
+count_1++;
+  }
+  printf(<span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>);
+
+  <span class="synComment">//mutexのunlock</span>
+  pthread_mutex_unlock(&mutex);
+  <span class="synComment">// sleepしてその間に変数の書き換えが無いかを確認する</span>
+  system( <span class="synConstant">"sleep 3"</span> );
+  cout << <span class="synConstant">"count_2 = "</span>;
+  <span class="synStatement">for</span>(i=<span class="synConstant">0</span>;i<=<span class="synConstant">10</span>;i++){
+cout << count_2;
+cout << <span class="synConstant">","</span>;
+count_2++;
+  }
+  printf(<span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>);
+}
+
+<span class="synType">void</span>* threadFunction2( <span class="synType">void</span>* args )
+{
+  cout << <span class="synConstant">"thread 2 call1 "</span> << endl;
+  pthread_mutex_lock(&mutex);
+  <span class="synComment">// lock中なのでcount_1は変更されない</span>
+  count_1=<span class="synConstant">10</span>;
+  cout << <span class="synConstant">"thread 2 call2 "</span> << endl;
+  pthread_mutex_unlock(&mutex);
+  <span class="synComment">// unlock中なのでcount_2は変更される</span>
+  count_2=<span class="synConstant">10</span>;
+}
+
+<span class="synType">int</span> main() {
+  pthread_t thread_1, thread_2;
+
+  <span class="synComment">// mutex初期化</span>
+  pthread_mutex_init(&mutex, <span class="synConstant">NULL</span>);
+
+  <span class="synComment">// スレッドの作成</span>
+  pthread_create(&thread_1, <span class="synConstant">NULL</span>, threadFunction1, <span class="synConstant">NULL</span>);
+  pthread_create(&thread_2, <span class="synConstant">NULL</span>, threadFunction2, <span class="synConstant">NULL</span>);
+  
+  <span class="synComment">// スレッドのjoin</span>
+  pthread_join(thread_1,<span class="synConstant">NULL</span>);
+  pthread_join(thread_2,<span class="synConstant">NULL</span>);
+  
+  <span class="synComment">// mutexの破棄</span>
+  pthread_mutex_destroy(&mutex); 
+  <span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><pre class="code" data-lang="" data-unlink>$ g++ mutex.cpp -lpthread
+$ ./a.out      
+thread 2 call1 
+count_1 = 0,1,2,3,4,5,6,7,8,9,10,
+thread 2 call2 
+count_2 = 10,11,12,13,14,15,16,17,18,19,20,</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Attention</h4>
+
+<blockquote>
+    <p>マルチスレッドプログラミングを行う際には以下の事に気をつけなければなりません。</p>
+
+<ul>
+<li>パフォーマンスの検証。マルチスレッドを導入する事によりどれだけの処理コストやメモリが抑えられるか。</li>
+<li>ロック時間を短くする。また可能であればロックを使わないようにすること。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のリソースにロックを同時にかける場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%C3%A5%C9%A5%ED%A5%C3%A5%AF">デッドロック</a>に注意する。</li>
+<li>生成したスレッドから更なるスレッドを生成しないように気をつける。</li>
+<li>スレッドセーフ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C7%D3%C2%BE%C0%A9%B8%E6">排他制御</a>を行い、データの整合性を保証する事。</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Links</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://d.hatena.ne.jp/yutakikuchi/20120521/1337557316">PHPのマルチスレッドプログラミングを使ってシステム処理を爆速化するお話し - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20120521/1337557316"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20120521/1337557316" alt="はてなブックマーク - PHPのマルチスレッドプログラミングを使ってシステム処理を爆速化するお話し - Yuta.Kikuchiの日記" border="0" /></a></li>
+<li><a href="http://www.ncad.co.jp/~komata/c-kouza28.htm">コンピューター：C言語講座：マルチスレッドについて</a> <a href="http://b.hatena.ne.jp/entry/www.ncad.co.jp/~komata/c-kouza28.htm"><img src="http://b.hatena.ne.jp/entry/image/http://www.ncad.co.jp/~komata/c-kouza28.htm" alt="はてなブックマーク - コンピューター：C言語講座：マルチスレッドについて" border="0" /></a></li>
+<li><a href="http://www.atmarkit.co.jp/fdotnet/mthread/mthread04/mthread04_02.html">＠IT：連載：.NETマルチスレッド・プログラミング入門　第4回　デッドロックの回避とスレッド間での同期制御</a> <a href="http://b.hatena.ne.jp/entry/www.atmarkit.co.jp/fdotnet/mthread/mthread04/mthread04_02.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.atmarkit.co.jp/fdotnet/mthread/mthread04/mthread04_02.html" alt="はてなブックマーク - ＠IT：連載：.NETマルチスレッド・プログラミング入門　第4回　デッドロックの回避とスレッド間での同期制御" border="0" /></a></li>
+<li><a href="http://www.csc.villanova.edu/~mdamian/threads/posixsem.html">POSIX semaphores</a> <a href="http://b.hatena.ne.jp/entry/www.csc.villanova.edu/~mdamian/threads/posixsem.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.csc.villanova.edu/~mdamian/threads/posixsem.html" alt="はてなブックマーク - POSIX semaphores" border="0" /></a></li>
+<li><a href="http://www.tsoftware.jp/nptl/">Linux スレッドプログラミング</a> <a href="http://b.hatena.ne.jp/entry/www.tsoftware.jp/nptl/"><img src="http://b.hatena.ne.jp/entry/image/http://www.tsoftware.jp/nptl/" alt="はてなブックマーク - Linux スレッドプログラミング" border="0" /></a></li>
+<li><a href="http://cursuri.cs.pub.ro/~apc/2003/resources/pthreads/uguide/document.htm">Pthreads APIs - User's Guide and Reference</a> <a href="http://b.hatena.ne.jp/entry/cursuri.cs.pub.ro/~apc/2003/resources/pthreads/uguide/document.htm"><img src="http://b.hatena.ne.jp/entry/image/http://cursuri.cs.pub.ro/~apc/2003/resources/pthreads/uguide/document.htm" alt="はてなブックマーク - Pthreads APIs - User's Guide and Reference" border="0" /></a></li>
+<li><a href="http://www.stdthread.co.uk/doc/headers/mutex/mutex.html">std::mutex class</a> <a href="http://b.hatena.ne.jp/entry/www.stdthread.co.uk/doc/headers/mutex/mutex.html"></li>
+</ul><p>class" border="0" /></a></p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201206220820/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201206220820/">はてなダイアリーにFacebookのLikeBoxを設置する方法</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201207020838/">Makefileの書き方</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201207020838/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

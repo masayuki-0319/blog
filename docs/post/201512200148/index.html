@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/2015/12/20/014845" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Recsys2015で発表されたCriteo社の最新レコメンド情報を読む &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Recsys2015で発表されたCriteo社の最新レコメンド情報を読む</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2015 Dec 20, 01:48</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="etc-recsys2015で発表されたcriteo社の最新レコメンド情報を読む">[etc] : Recsys2015で発表されたCriteo社の最新レコメンド情報を読む</h2>
+
+<blockquote>
+    <p><iframe src="https://www.slideshare.net/slideshow/embed_code/key/aceQuZOyidN5TP" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/RomainLerallut/recsys-2015-largescale-realtime-product-recommendation-at-criteo" title="RecSys 2015: Large-scale real-time product recommendation at Criteo" target="_blank">RecSys 2015: Large-scale real-time product recommendation at Criteo</a> </strong> from <strong><a href="http://www.slideshare.net/RomainLerallut" target="_blank">Romain Lerallut</a></strong> </div><cite class="hatena-citation"><a href="http://www.slideshare.net/RomainLerallut/recsys-2015-largescale-realtime-product-recommendation-at-criteo">www.slideshare.net</a></cite></p>
+
+<div class="section">
+<h5>criteo社のRecommendation Logic</h5>
+<p>Criteo社の広告枠への配信に対するCTR/CVR予測モデルの話以外にもRecommendLogicに関する発表がRecsys2015であったので見てみました。一般的なRecommed Systemでは良く見受けられる構成や手法なので<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%D1%A5%AF">インパク</a>トがある内容ではありませんが共有します。Keywords : Logistic Regression, <a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>, <a class="keyword" href="http://d.hatena.ne.jp/keyword/Memcached">Memcached</a>, collaboration filterling, Recsys2015,<br />
+Criteo社のCTR/CVR予測モデルは下記論文などを参照  <a href="http://people.csail.mit.edu/romer/papers/TISTRespPredAds.pdf">Simple and scalable response prediction for display advertising</a> <a href="http://b.hatena.ne.jp/entry/people.csail.mit.edu/romer/papers/TISTRespPredAds.pdf"><img src="http://b.hatena.ne.jp/entry/image/http://people.csail.mit.edu/romer/papers/TISTRespPredAds.pdf" alt="はてなブックマーク - " border="0" /></a><br />
+</p>
+
+</div>
+<div class="section">
+<h5>Criteo社の説明とインフラ</h5>
+
+<ul>
+<li>2005年に設立、フランスに本社を置き世界に社員1700人(そのうちEnginnerが300人)、100億のUniqUserを持つ。</li>
+<li>秒間80万のHTTPリクエスト、29000インプレッション、RTBの処理を10ms、Recommendの処理を100msでこなす。</li>
+<li>3つの大陸にインハウスのデータセンターが7つ。サーバー15000台、ヨーロッパに巨大な<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a> Clusterがある。35PBのBig Dataがある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Criteo社のデータソース</h5>
+
+<ul>
+<li>商品カタログデータが広告主ごとに100万ほど。その広告主を10000社持つ。</li>
+<li>インターネットユーザーの行動履歴のイベント数が毎日2B。</li>
+<li>広告表示やクリックなどのイベントデータが毎日20B。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Recommend Logic</h5>
+
+<ul>
+<li>やりたいこととしてはRecommendの関数にインターネットユーザーを入れた時に一番のオススメ商品が出るようにしたいが、実際のところ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の商品が出るし、新鮮さも保たなければならない。</li>
+<li>できることとしてはOfflineで事前に商品の推薦を選んでおき、OnlineでRecommendationを決定する。</li>
+<li>Offlineで広告主からインターネットユーザーの行動ログを送ってもらい、商品ランキング/カテゴリ商品ランキングを定め、商品閲覧の共起から類似商品を導き出し、商品購買の共起から補足商品を推薦する。</li>
+<li>インターネットユーザーが商品Xを閲覧した時の推薦する候補は以下のもの
+<ul>
+<li>閲覧した商品Xそのもの。(直接商品)</li>
+<li>他のインターネットユーザーが商品Xと閲覧共起しているもの。(類似商品)</li>
+<li>他のインターネットユーザーが商品Xを閲覧した上で購入したもの。(補足商品)</li>
+<li>広告主のサイトで最も見られて/買われているもの。(売れ筋商品)</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>System Overview</h5>
+
+<ul>
+<li>4時間おきに広告主から商品カタログデータを貰い、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Memcached">Memcached</a>に入れる。</li>
+<li>広告主サイト側でのインターネットユーザーのイベントログを送ってもらい、商品アイテム推薦を導き出すためにHadop <a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>にかける。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>された推薦データは12時間おきに<a class="keyword" href="http://d.hatena.ne.jp/keyword/Memcached">Memcached</a>に入れられる。</li>
+<li>広告表示/クリック/コンバージョンデータを6時間おきに取得し、それを基に予測モデルを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>上で更新する。</li>
+<li>Recommendのリクエストが来るたびに、インターネットユーザーのデータを用いて推薦アイテムを商品カタログから参照する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>の予測モデル(おそらくクリックやコンバージョン予測)はLogistic Regressionを利用している。なぜならばLRはスケールするし、速いし、たくさんの特徴を扱うことができる。(bitのhash magicを使うなどして)</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Memcached">Memcached</a>に入れられた類似商品、最も見られている商品、最も買われている商品をスコアリングして高いものから推薦する。</li>
+</ul>
+</div>
+<div class="section">
+<h5>Recommend Logicの評価</h5>
+
+<ul>
+<li>オンラインABテストを行う際はインターネットユーザーの50%ずつにそれぞれのモデルを適用するが、これらは以下の理由により煩わしい。
+<ul>
+<li>すぐに多くのお金を失う。</li>
+<li>テストの期間が長くなってしまう。信頼がおける期間は2週間ぐらい必要。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>を本番同様にしなければならない。</li>
+<li>インフラ的に高負荷になってしまう。</li>
+<li>広告主のアカウントがそこまで十分な時間をくれない。</li>
+</ul></li>
+<li>その代わりとしてOnlineのログを使ったテスト<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>がある。</li>
+<li>しかし自分たちで管理するデータしかもっていない。(外部データは非常に高価なため)</li>
+<li>それでも私達は完全な間違いをしないことの確信がある。</li>
+<li>Onlineのパフォーマンスを上げるためにOfflineテストの最善策を見つけなければならない。以下は参考論文 <a href="http://jmlr.org/papers/volume14/bottou13a/bottou13a.pdf">Counterfactual Reasoning and Learning Systems</a> <a href="http://b.hatena.ne.jp/entry/jmlr.org/papers/volume14/bottou13a/bottou13a.pdf"><img src="http://b.hatena.ne.jp/entry/image/http://jmlr.org/papers/volume14/bottou13a/bottou13a.pdf" alt="はてなブックマーク - " border="0" /></a></li>
+</ul>
+</div>
+<div class="section">
+<h5>今後のUpdate</h5>
+
+<ul>
+<li>より長期的なUserのProfileデータを活用する。</li>
+<li>より多く/より良い商品情報を利用する。(画像、文脈、<a class="keyword" href="http://d.hatena.ne.jp/keyword/NLP">NLP</a>)</li>
+<li>類似商品計算のUpdate。</li>
+<li>商品スコアリングの結合。</li>
+<li>私たちはClick予測のデータを公開している。
+<ul>
+<li>4GB display-click data : Kaggle challenge in 2014 <a href="http://bit.ly/1vgw2XC">http://bit.ly/1vgw2XC</a></li>
+<li>1TB Display-Click data (industry’s largest dataset) : <a href="http://bit.ly/1PyH4Vq">http://bit.ly/1PyH4Vq</a>
+<ul>
+<li>4 billion of observations</li>
+<li>156 billion feature-value</li>
+<li>available on <a class="keyword" href="http://d.hatena.ne.jp/keyword/Microsoft">Microsoft</a> Azure</li>
+<li>used by edX (UC Berkeley)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</blockquote>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201508230213/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201508230213/">アジャイル開発の導入に向けた備忘録</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201512230246/">AdExchangeとSupply Side Platform(SSP)との違いって何よ？</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201512230246/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

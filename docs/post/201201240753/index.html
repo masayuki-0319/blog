@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120124/1327359223" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>PHPにおける時間表記のISO-8061、DATE_ATOM、DATE_RFC3309、DATE_W3Cの違いは何か &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>PHPにおける時間表記のISO-8061、DATE_ATOM、DATE_RFC3309、DATE_W3Cの違いは何か</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Jan 24, 07:53</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="php-phpにおける時間表記のiso-8061-date-atom-date-rfc3309-date-w3cの違いは何か">[PHP] : PHPにおける時間表記のISO-8061、DATE_ATOM、DATE_RFC3309、DATE_W3Cの違いは何か</h2>
+
+<div class="section">
+<h4>ISO-8601<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%FE%B9%EF%C9%BD%B5%AD">時刻表記</a>について</h4>
+
+<blockquote>
+    <p>ISO-8601はあまり使わない時刻を表記する形式ではあるが<a class="keyword" href="http://d.hatena.ne.jp/keyword/Atom%A5%D5%A5%A3%A1%BC%A5%C9">Atomフィード</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%FE%B9%EF%C9%BD%B5%AD">時刻表記</a>でその互換規格として利用されます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Atom">Atom</a>については最近記事を書いたのでそちらを参照してください。<a href="http://d.hatena.ne.jp/yutakikuchi/20120120/1327015917">RSSより便利なAtomデータの詳細と利用方法について簡単にまとめてみた - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20120120/1327015917"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20120120/1327015917" alt="はてなブックマーク - RSSより便利なAtomデータの詳細と利用方法について簡単にまとめてみた - Yuta.Kikuchiの日記" border="0" /></a>ISO-8601とは簡単に説明すると時刻の表記を以下のような形式で表現します。</p>
+
+<ul>
+<li>年、月、日の関係はYYYY-MM-DDと表記する。(2012-01-24、20120124)。</li>
+<li>年、年内の日番号はYYYY-DDDと表記する。(2012024) 2012年の24日目。</li>
+<li>年、週、曜日をYYYY-Www-Dと表記する。(2012-W04-2) 2012年の4週目の火曜日。すなわち2012/01/24。</li>
+<li>時刻の表記にはhh:mm:ssの形式が利用される。
+<ul>
+<li>10時30分20.5秒 ( 10:30:20,5 )</li>
+<li>10:30,5(1130,5)は10:30:30と同じ。</li>
+<li>10.5は10:30と同じ。</li>
+</ul></li>
+<li>timezone指定
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/UTC">UTC</a>では時刻の後ろにZを添える。2012-01-24T12:00Z</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/UTC">UTC</a>以外では時刻の後ろに+-hh:mm、+-hhmm、+-hhのいずれかを添える。2012-01-24T12:00+09:00(日本時間での2012/01/24の12時) </li>
+</ul></li>
+<li>日付と時刻の間にはTを入れる。2012-01-24T12:00+09:00</li>
+<li>期間を表記する場合は開始日時/終了日で表記する。2012-01-01T00:00+09:00/2012-01-24T12:00+09:00 (2012/01/01の0時〜2012/01/24の12時)</li>
+</ul><p>年/月/日の表記が省略表記等自由に表現できることや期間の表現が可能であるというメリットはありますが、定義が曖昧なのと人の目には分かりづらい表記のように思います。(timestampよりはましですが)。しかしほとんどの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%B0%A5%E9%A5%DF%A5%F3%A5%B0%B8%C0%B8%EC">プログラミング言語</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DF%A5%C9%A5%EB%A5%A6%A5%A7%A5%A2">ミドルウェア</a>はこの表記をサポートしているということで覚えた方が良いという事です。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Atom">Atom</a>のDate<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%B9%A5%C8%A5%E9%A5%AF%A5%BF">コンストラクタ</a></h4>
+
+<blockquote>
+    <p><a href="http://www.futomi.com/lecture/japanese/rfc4287.html">RFC 4287 The Atom Syndication Format 日本語訳</a> <a href="http://b.hatena.ne.jp/entry/www.futomi.com/lecture/japanese/rfc4287.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.futomi.com/lecture/japanese/rfc4287.html" alt="はてなブックマーク - RFC 4287 The Atom Syndication Format 日本語訳" border="0" /></a> ここのDate<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%B9%A5%C8%A5%E9%A5%AF%A5%BF">コンストラクタ</a>定義によると<a href="http://www.ietf.org/rfc/rfc3339.txt">RFC3339</a>に準拠している必要があるようですが、この規格自体がISO-8601や<a class="keyword" href="http://d.hatena.ne.jp/keyword/W3C">W3C</a>.NOTE-datetime-19980827、<a class="keyword" href="http://d.hatena.ne.jp/keyword/W3C">W3C</a>.REC-xmlschema-2-20041028と互換性があります。以下はDate<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%B9%A5%C8%A5%E9%A5%AF%A5%BF">コンストラクタ</a>の簡単な例になります。</p>
+<pre class="code" data-lang="" data-unlink><updated>2012-01-24T00:00:00Z</updated>
+<updated>2012-01-24T00:00:00.00Z</updated>
+<updated>2012-01-24T00:00:00+09:00</updated>
+<updated>2012-01-24T00:00:00.00+09:00</updated></pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>での各規格の表記の違い</h4>
+
+<blockquote>
+    <p><a href="http://jp.php.net/manual/ja/class.datetime.php#datetime.constants.types">PHP: DateTime - Manual</a> <a href="http://b.hatena.ne.jp/entry/jp.php.net/manual/ja/class.datetime.php%23datetime.constants.types"><img src="http://b.hatena.ne.jp/entry/image/http://jp.php.net/manual/ja/class.datetime.php%23datetime.constants.types" alt="はてなブックマーク - PHP: DateTime - Manual" border="0" /></a><br />
+ここに載っているDateTime Manualの表記の違いについてコメントしますが、結論からするとISO8601だけ少し表記が違うぐらいの差でしかありません。なぜなら上のISO-8601の定義から同じ時刻を示すからです。規格自体が変わらないのだとすれば定数を増やすのは無意味と感じてしまいます。</p>
+
+<table>
+<tr>
+<th> 定数 </th>
+<th> 実データ </th>
+</tr>
+<tr>
+<td> DATE_ISO8601 </td>
+<td> 2012-01-23T23:14:15+0900 </td>
+<td> </td>
+</tr>
+<tr>
+<td> DATE_RFC3339 </td>
+<td> 2012-01-23T23:14:15+09:00 </td>
+</tr>
+<tr>
+<td> DATE_<a class="keyword" href="http://d.hatena.ne.jp/keyword/ATOM">ATOM</a> </td>
+<td> 2012-01-23T23:14:15+09:00 </td>
+</tr>
+<tr>
+<td> DATE_<a class="keyword" href="http://d.hatena.ne.jp/keyword/W3C">W3C</a>    </td>
+<td> 2012-01-23T23:14:15+09:00 </td>
+</tr>
+</table><p><a href="http://jp.php.net/manual/ja/function.date.php">PHP: date - Manual</a> <a href="http://b.hatena.ne.jp/entry/jp.php.net/manual/ja/function.date.php"><img src="http://b.hatena.ne.jp/entry/image/http://jp.php.net/manual/ja/function.date.php" alt="はてなブックマーク - PHP: date - Manual" border="0" /></a> <br />
+こちらのdate関数の説明も更に混乱を招きます。date関数の第一引数に'c'を指定するとISO8601形式と書いてありますが、実際には他の3パターンの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%FE%B9%EF%C9%BD%B5%AD">時刻表記</a>で表示されます。以下は<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>のサンプルコードとその実行結果です。どれも同じ値を示しますが混乱しないように注意しましょう。</p>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?</span>
+
+<span class="synComment">//timezone設定</span>
+date_default_timezone_set<span class="synSpecial">(</span>'<span class="synConstant">Asia/Tokyo</span>'<span class="synSpecial">)</span>;
+
+<span class="synComment">//ISO 8601</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> DATE_ISO8601, <span class="synIdentifier">time</span><span class="synSpecial">()</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> '<span class="synConstant">Y-m-d\TH:i:sO</span>', <span class="synIdentifier">time</span><span class="synSpecial">()</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+
+<span class="synComment">//ATOM</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> '<span class="synConstant">c</span>', <span class="synIdentifier">time</span><span class="synSpecial">()</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> '<span class="synConstant">Y-m-d\TH:i:sP</span>' <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> DATE_ATOM, <span class="synIdentifier">time</span><span class="synSpecial">()</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+
+<span class="synComment">//RFC3339</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> '<span class="synConstant">Y-m-d\TH:i:sP</span>' <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> DATE_RFC3339, <span class="synIdentifier">time</span><span class="synSpecial">()</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+
+<span class="synComment">//W3C</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> '<span class="synConstant">Y-m-d\TH:i:sP</span>' <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> DATE_W3C, <span class="synIdentifier">time</span><span class="synSpecial">()</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+</pre><pre class="code" data-lang="" data-unlink>2012-01-24T00:00:00+0900
+2012-01-24T00:00:00+0900
+2012-01-24T00:00:00+09:00
+2012-01-24T00:00:00+09:00
+2012-01-24T00:00:00+09:00
+2012-01-24T00:00:00+09:00
+2012-01-24T00:00:00+09:00
+2012-01-24T00:00:00+09:00
+2012-01-24T00:00:00+09:00</pre>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>で表記するとどうなるか</h4>
+
+<blockquote>
+    <p>折角なので<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>でも上の時刻表期に挑戦してみます。ISO-8601とRFC3339を見てみます。<del datetime="2012-01-24T07:54:09+09:00">それぞれパース用のパッケージが作成されています。<a href="http://pypi.python.org/pypi/iso-8601/0.1.8">ISO-8601</a>と<a href="http://pypi.python.org/pypi/rfc3339/">RFC3339</a>です。</del>今回は標準モジュールのimportでISO-8601と<a href="https://raw.github.com/tonyg/python-rfc3339/master/rfc3339.py">rfc3339.py</a>を利用してRFC3339の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%FE%B9%EF%C9%BD%B5%AD">時刻表記</a>の作成を行いたいと思います。</p>
+
+<ul>
+<li>ISO-8601</li>
+</ul><pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+
+<span class="synPreProc">from</span> datetime <span class="synPreProc">import</span> tzinfo, timedelta, datetime
+<span class="synStatement">class</span> <span class="synIdentifier">TZ</span>(tzinfo):
+<span class="synStatement">def</span> <span class="synIdentifier">utcoffset</span>(self, dt): <span class="synStatement">return</span> timedelta(minutes=+<span class="synConstant">540</span>)
+<span class="synIdentifier">print</span> datetime(<span class="synConstant">2012</span>, <span class="synConstant">01</span>, <span class="synConstant">24</span>, <span class="synConstant">00</span>, <span class="synConstant">00</span> tzinfo=TZ()).isoformat()
+</pre>
+<ul>
+<li>RFC3339</li>
+</ul><pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+<span class="synPreProc">import</span> rfc3339 <span class="synStatement">as</span> rfc3339
+rfc3339.UTC_TZ=rfc3339.tzinfo(<span class="synConstant">540</span>,<span class="synConstant">'Z'</span>)
+<span class="synIdentifier">print</span> rfc3339.now()
+</pre>
+</blockquote>
+
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201201221535/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201201221535/">実践 ハイパフォーマンスMySQL(第2版)を斜め読みして前半の重要なポイントだけをまとめてみた</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201201291307/">InnoDBの設計とインデックスを意識したサロゲートキーと複合プライマリキーの比較</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201201291307/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

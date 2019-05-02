@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130801/1375314238" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>データ集計コマンドを極めてシステム処理と業務速度を爆速化するお話 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>データ集計コマンドを極めてシステム処理と業務速度を爆速化するお話</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Aug 01, 08:43</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="linux-データ集計コマンドを極めてシステム処理と業務速度を爆速化するお話">[Linux] : データ集計コマンドを極めてシステム処理と業務速度を爆速化するお話</h2>
+
+<div class="section">
+<h4>Index</h4>
+
+<blockquote>
+    
+<ol>
+<li>データ集計コマンド</li>
+<li>爆速で検索したいぜ！
+<ol>
+<li>lookを使う</li>
+<li>LC_ALL=Cを設定する</li>
+</ol></li>
+<li>データのランダムサンプリングがしたいぜ！
+<ol>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>を使う</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>を使う</li>
+<li>sortの--random-sortを使う</li>
+<li>Script言語を使う</li>
+<li>shufを使う</li>
+<li>ランダムサンプリング速度比較</li>
+</ol></li>
+<li>合計と平均値を集計したいぜ！
+<ol>
+<li>列データ取得</li>
+<li>重複行のカウント</li>
+<li>合計値出力</li>
+<li>平均値出力</li>
+</ol></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>ファイルのデータ結合がしたいぜ！
+<ol>
+<li>共通項目での結合</li>
+<li>同じ行数での結合</li>
+</ol></li>
+<li>まとめ</li>
+</ol>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>データ集計コマンド</h4>
+
+<blockquote>
+    <p><a href="http://d.hatena.ne.jp/yutakikuchi/20120907/1346975281">joinコマンドが便利過ぎて生きるのが辛い - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20120907/1346975281"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20120907/1346975281" alt="はてなブックマーク - joinコマンドが便利過ぎて生きるのが辛い - Yuta.Kikuchiの日記" border="0" /></a><br />
+<a href="http://d.hatena.ne.jp/yutakikuchi/20121029/1351467398">lookコマンドによる二分探索が速すぎて見えない - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20121029/1351467398"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20121029/1351467398" alt="はてなブックマーク - lookコマンドによる二分探索が速すぎて見えない - Yuta.Kikuchiの日記" border="0" /></a></p><p>今日はデータ集計を行う上で絶対に覚えておいた方が良いコマンドと知識を紹介したいと思います。これを身につければシステム処理と業務効率化に大きく繋がると思います。この記事で紹介するコマンドは<span class="deco" style="color:#FF0000;font-weight:bold;">look、sort、cut、uniq、shuf、<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>、join、paste</span>で、設定知識として<span class="deco" style="color:#FF0000;font-weight:bold;">LC_ALL=C</span>についても軽く触れたいと思います。その他<span class="deco" style="color:#FF0000;font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a></span>の一行野郎についても少し書きます。下で紹介する例はとにかく一行野郎に拘って書いていますので、見づらい事は予めご了承ください。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>爆速で検索したいぜ！</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>lookを使う</h5>
+<p>検索するコマンドで誰もが<span class="deco" style="color:#FF0000;font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a></span>を使っていると思いますがドキュメント全てを検索対象としてしまうので処理速度が遅くなります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>以外に検索するための良いコマンドとして<span class="deco" style="color:#FF0000;font-weight:bold;">look</span>というものがあります。lookは予め検索対象のデータをsortしておく必要がありますが、2分探索が可能なので繰り返しシステムが大量データから検索する場合に有効だと思います。以下1000万行のデータに対して<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>とlookを使った時の検索時間の比較になります。使用するデータのFormatは英数字の32Byte文字列になります。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/bin/env perl</span>
+<span class="synStatement">use warnings</span>;
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use </span>String::Random;
+<span class="synStatement">open</span>(<span class="synIdentifier">FH</span>, <span class="synConstant">">>data.txt"</span>);
+<span class="synStatement">for</span>(<span class="synStatement">my</span> <span class="synIdentifier">$i</span>=<span class="synConstant">0</span>; <span class="synIdentifier">$i</span><<span class="synConstant">10000000</span>; <span class="synIdentifier">$i</span>++ ) {
+   <span class="synStatement">my</span> <span class="synIdentifier">$rand_str</span> = String::Random->new->randregex(<span class="synConstant">'[A-Za-z0-9]{32}'</span>);
+   <span class="synStatement">print</span> <span class="synIdentifier">FH</span> <span class="synIdentifier">$rand_str</span> . <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+}
+<span class="synStatement">close</span>(<span class="synIdentifier">FH</span>);
+</pre><pre class="hljs sh" data-lang="sh" data-unlink>$ head <span class="synSpecial">-n</span> <span class="synConstant">5</span> data.txt 
+eEiWsUhytV79rhOl50JEM7Dm1DFvGwfB
+enOU4fPD74pNsnfzWKzBMpbmo3XNylry
+Xa1fSlpIJ5ljG3vJ4g6z6zFr5dqbQiey
+Yb27y5H1Uw5QbymfKyqmRejC7kcLcF6H
+0KkDXpMXmNJATBbIxUArt4mVevMUSwRD
+
+
+$ awk <span class="synStatement">"</span><span class="synConstant">NR==5000000</span><span class="synStatement">"</span> data.txt 
+oAQ7d7MpN7WV69U5CMeY4EeWqpJ8hXh2
+
+$ <span class="synStatement">grep</span> <span class="synStatement">"</span><span class="synConstant">oAQ7d7MpN7WV69U5CMeY4EeWqpJ8hXh2</span><span class="synStatement">"</span> data.txt
+0.05s user 1.40s system <span class="synConstant">9</span>% cpu 14.964 total
+
+$ <span class="synStatement">sort</span> data <span class="synStatement">></span> sort_data.txt
+28.81s user 9.37s system <span class="synConstant">40</span>% cpu <span class="synConstant">1</span>:35.24 total
+
+$ look <span class="synStatement">"</span><span class="synConstant">oAQ7d7MpN7WV69U5CMeY4EeWqpJ8hXh2</span><span class="synStatement">"</span> sort_data.txt
+0.00s user 0.00s system <span class="synConstant">41</span>% cpu 0.012 total
+</pre>
+<table>
+<tr>
+<th> 検索方法 </th>
+<th> 検索時間 </th>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a> </td>
+<td> 14.964 </td>
+</tr>
+<tr>
+<td> look </td>
+<td> 0.012 </td>
+</tr>
+</table><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>に比べて<span class="deco" style="color:#FF0000;font-weight:bold;">lookの方が圧倒的に速い</span>結果になりました。皆さん、検索の高速化を行いたい場合は一度ファイルをsortした上でlookコマンドを使うようにしましょう！<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5>LC_ALL=Cを設定する</h5>
+<p><a href="http://stackoverflow.com/questions/8138124/implications-of-lc-all-c-to-speedup-grep">bash - Implications of LC_ALL=C to speedup grep - Stack Overflow</a> <a href="http://b.hatena.ne.jp/entry/stackoverflow.com/questions/8138124/implications-of-lc-all-c-to-speedup-grep"><img src="http://b.hatena.ne.jp/entry/image/http://stackoverflow.com/questions/8138124/implications-of-lc-all-c-to-speedup-grep" alt="はてなブックマーク - bash - Implications of LC_ALL=C to speedup grep - Stack Overflow" border="0" /></a><br />
+LC_ALLを設定しないと環境設定毎にsortの結果に違いが出るというのは有名な話ですが、<span class="deco" style="color:#FF0000;font-weight:bold;">LC_ALL=C</span>を設定すると<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>が速くなるらしいので試してみます。LC_*はLocaleに関する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B4%C4%B6%AD%CA%D1%BF%F4">環境変数</a>です。上で実行した例に対してLC_ALL=Cを加えてみます。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ <span class="synIdentifier">LC_ALL</span>=C <span class="synStatement">grep</span> <span class="synStatement">"</span><span class="synConstant">oAQ7d7MpN7WV69U5CMeY4EeWqpJ8hXh2</span><span class="synStatement">"</span> data.txt 
+0.06s user 0.79s system <span class="synConstant">7</span>% cpu 10.747 total
+
+$ <span class="synIdentifier">LC_ALL</span>=C <span class="synStatement">grep</span> <span class="synStatement">"</span><span class="synConstant">oAQ7d7MpN7WV69U5CMeY4EeWqpJ8hXh2</span><span class="synStatement">"</span> data.txt  
+0.06s user 0.91s system <span class="synConstant">8</span>% cpu 11.172 total
+
+$ <span class="synIdentifier">LC_ALL</span>=C <span class="synStatement">grep</span> <span class="synStatement">"</span><span class="synConstant">oAQ7d7MpN7WV69U5CMeY4EeWqpJ8hXh2</span><span class="synStatement">"</span> data.txt
+0.05s user 0.87s system <span class="synConstant">9</span>% cpu 9.916 total
+</pre>
+<table>
+<tr>
+<th> 検索方法 </th>
+<th> 検索時間 </th>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a> </td>
+<td> 14.964 </td>
+</tr>
+<tr>
+<td> LC_ALL=C <a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a> </td>
+<td> 10.747 </td>
+</tr>
+</table><p>この結果をみると<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>は<span class="deco" style="color:#FF0000;font-weight:bold;">LC_ALL=Cを付けた方が1.4倍処理が速くなっている</span>事が分かりました。<br />
+同様にsortコマンドでも影響があるかどうかを確認してみます。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ <span class="synIdentifier">LC_ALL</span>=C <span class="synStatement">sort</span> data.txt <span class="synStatement">></span> sort_data.txt
+11.59s user 6.43s system <span class="synConstant">24</span>% cpu <span class="synConstant">1</span>:14.03 total
+
+$ <span class="synIdentifier">LC_ALL</span>=C <span class="synStatement">sort</span> data.txt <span class="synStatement">></span> sort_data.txt
+11.76s user 5.17s system <span class="synConstant">23</span>% cpu <span class="synConstant">1</span>:10.59 total
+
+$ <span class="synIdentifier">LC_ALL</span>=C <span class="synStatement">sort</span> data.txt <span class="synStatement">></span> sort_data.txt
+12.48s user 6.36s system <span class="synConstant">22</span>% cpu <span class="synConstant">1</span>:23.57 total
+</pre>
+<table>
+<tr>
+<th> sort方法 </th>
+<th> sort時間 </th>
+</tr>
+<tr>
+<td> sort </td>
+<td> 1:35.24 </td>
+</tr>
+<tr>
+<td> LC_ALL=C sort </td>
+<td> 1:14.03 </td>
+</tr>
+</table><p>sortの場合は<span class="deco" style="color:#FF0000;font-weight:bold;">LC_ALL=Cを付けた方が1.28倍処理が速くなっている</span>事が分かりました。なので皆さん、LC_ALL=Cの設定は忘れないようにしましょう！</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>データのランダムサンプリングがしたいぜ！</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>shufを使うと吉</h5>
+<p>大容量のデータを全て集計対象とするのではなく、必要なデータをランダムでサンプリングする方法を紹介します。ネット上に沢山やり方が紹介されたりしていますが、結論から言っておくと一番簡単なのは<a class="keyword" href="http://d.hatena.ne.jp/keyword/coreutils">coreutils</a>に含まれる<span class="deco" style="color:#FF0000;font-weight:bold;">shuf</span>というコマンドを利用することです。<span class="deco" style="color:#FF0000;font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>、sort</span>を使うのは注意が必要です。ランダムサンプリングの方法ですが2種類やり方があります。</p>
+
+<table>
+<tr>
+<th> サンプリング方法 </th>
+<th> 特徴 </th>
+<th> コマンド </th>
+</tr>
+<tr>
+<td> 乱数行取得 </td>
+<td> 乱数生成は処理が速い。<br>乱数行取得は処理が重い。<br>乱数の重複制御を入れる必要がある。 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a> </td>
+</tr>
+<tr>
+<td> 全体をシャッフルする </td>
+<td> データ全体を操作するので処理が重くなる。<br>それでも<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>よりは速い。<br> 重複の制御が必要無い。</td>
+<td> shuf、sort、script言語 </td>
+</tr>
+</table><p>以下の実験では上と同様に1000万行のデータを使用します。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>を使う</h5>
+<p>必要な行数の乱数を発生させ<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>で取得します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>は置換だけでなく行数指定で対象データを取得する事ができます。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ <span class="synIdentifier">LC_ALL</span>=C; <span class="synIdentifier">file</span>=data.txt; <span class="synIdentifier">lines</span>=<span class="synSpecial">`wc -l < </span><span class="synPreProc">$file</span><span class="synSpecial">`</span>; <span class="synStatement">for </span>i <span class="synStatement">in</span> <span class="synSpecial">{</span>1..100<span class="synSpecial">}</span>; <span class="synStatement">do</span> <span class="synStatement">sed</span> <span class="synStatement">-n</span> <span class="synPreProc">$((</span><span class="synConstant">1</span><span class="synSpecial">+</span><span class="synPreProc">$RANDOM</span><span class="synSpecial">%</span><span class="synPreProc">$lines))</span>p <span class="synPreProc">$file</span><span class="synStatement">;</span> <span class="synStatement">done</span>
+63.83s user 76.11s system <span class="synConstant">24</span>% cpu <span class="synConstant">9</span>:35.45 total
+</pre><p>上の例には2つ問題があります。乱数の発生に$RANDOMと変数を利用していますが<span class="deco" style="color:#FF0000;font-weight:bold;">最大値32767</span>までしか取得できないところに注意が必要です。man <a class="keyword" href="http://d.hatena.ne.jp/keyword/bash">bash</a>というコマンドを打ってみると以下の事が記載されています。$RANDOMを使用する場合はデータの大きさに合わせて$RANDOM * 1000などの処理を入れてください。</p>
+
+<blockquote>
+    <p><span class="deco" style="font-style:italic;">RANDOM Each  time  this parameter is referenced, a random integer between 0 and 32767 is generated.  The sequence of random numbers may be initialized by assigning a  value  to  RANDOM.   If  RANDOM  is unset, it loses its special properties, even if it is subsequently reset.</span></p>
+
+</blockquote>
+<p>2つ目の問題は同じ乱数が発生されても制御していない点です。これでは結果に同じ行数のデータが含まれる可能性があるので、厳密にデータをサンプリングしたい場合は<span class="deco" style="color:#FF0000;font-weight:bold;">重複制御</span>をする必要があります。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>を使う</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>のsrand()、rand()を使って乱数を生成する方法を紹介します。ただしこの方法も上の<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>と同様で乱数の重複制御がされていないものです。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ <span class="synIdentifier">LC_ALL</span>=C; <span class="synIdentifier">num</span>=<span class="synConstant">100</span>; <span class="synIdentifier">file</span>=data.txt; <span class="synIdentifier">lines</span>=<span class="synSpecial">`wc -l < </span><span class="synPreProc">$file</span><span class="synSpecial">`</span>; <span class="synIdentifier">list</span>=<span class="synSpecial">`awk -v </span><span class="synIdentifier">lines</span>=<span class="synPreProc">$lines</span><span class="synSpecial"> -v </span><span class="synIdentifier">num</span>=<span class="synPreProc">$num</span><span class="synSpecial"> </span><span class="synStatement">"</span><span class="synConstant">BEGIN{ srand(); for(i=1;i<=num;i++) print int(rand()*lines+1) }</span><span class="synStatement">"</span><span class="synSpecial">`</span>; <span class="synStatement">for </span>i <span class="synStatement">in</span> <span class="synSpecial">`echo </span><span class="synPreProc">$list</span><span class="synSpecial"> </span><span class="synStatement">|</span><span class="synSpecial"> xargs echo`</span>; <span class="synStatement">do</span> awk <span class="synStatement">"</span><span class="synConstant">NR==</span><span class="synPreProc">$i</span><span class="synStatement">"</span> <span class="synPreProc">$file</span> <span class="synStatement">;done</span>
+146.86s user 238.94s system <span class="synConstant">21</span>% cpu <span class="synConstant">29</span>:16.09 total
+</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>を使って乱数の重複を除外したのが以下の例になります。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ <span class="synIdentifier">LC_ALL</span>=C; <span class="synIdentifier">file</span>=data.txt; awk <span class="synStatement">'</span><span class="synConstant">BEGIN{ srand() } { lines[++d]=$0 } END{ while (1){ if (e==d) {break} RANDOM = int(1 + rand() * d); if ( RANDOM in lines  ){ print lines[RANDOM]; delete lines[RANDOM]; ++e; } } }</span><span class="synStatement">'</span> <span class="synPreProc">$file</span> | head <span class="synSpecial">-n</span> <span class="synConstant">100</span>
+9.13s user 59.22s system <span class="synConstant">1</span>% cpu <span class="synConstant">1</span>:<span class="synConstant">12</span>:44.20 total
+</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>の問題としてランダムサンプリングのロジックが複雑になってしまうので<span class="deco" style="color:#FF0000;font-weight:bold;">自分で最初から書くのが大変</span>です。また処理も<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>と比較すると重たくなります。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5>sortの--random-sortを使う</h5>
+<p>sortのオプションである--random-sortを使用します。行のデータを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%B4%D8%BF%F4">ハッシュ関数</a>に掛けて<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%C3%CD">ハッシュ値</a>毎にランダムにsortします。記述が簡単なので導入し易いと思います。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ <span class="synIdentifier">LC_ALL</span>=C <span class="synStatement">sort</span> <span class="synSpecial">--random-sort</span> data.txt | head <span class="synSpecial">-n</span> <span class="synConstant">100</span>
+90.36s user 2.79s system <span class="synConstant">71</span>% cpu <span class="synConstant">2</span>:10.29 total
+</pre><p>このランダムsortも注意が必要です。1つ目は全行の<span class="deco" style="color:#FF0000;font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%C3%CD">ハッシュ値</a>の計算に時間がかかってしまいます</span>。2つ目<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%C3%CD">ハッシュ値</a>によるランダムsortになるので<span class="deco" style="color:#FF0000;font-weight:bold;">同じ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%C3%CD">ハッシュ値</a>の行はかならず連続出力</span>されます。3つ目は実装されている<span class="deco" style="color:#FF0000;font-weight:bold;">sortのバージョンに寄っては--random-sortが使えない</span>可能性があります。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5>Script言語を使う</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a>と<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>の例を書いておきます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>の例はデータ量が多いと実行にとてつもない時間がかかってしまうので利用はお勧めしません。しかし男ならScript言語には頼らず出来ればコマンドおよびシェルで実現したいものです。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ perl <span class="synSpecial">-MList</span>::<span class="synIdentifier">Util</span>=shuffle <span class="synSpecial">-e</span> <span class="synStatement">'</span><span class="synConstant">print shuffle(<>)</span><span class="synStatement">'</span> <span class="synStatement"><</span> data.txt | head <span class="synSpecial">-n</span> <span class="synConstant">100</span>
+3.78s user 7.88s system <span class="synConstant">21</span>% cpu 53.833 total
+</pre><pre class="hljs sh" data-lang="sh" data-unlink>$ python <span class="synSpecial">-c</span> <span class="synStatement">'</span><span class="synConstant">import random;import sys;d=open("data.txt","r").readlines();random.shuffle(d);[sys.stdout.write(str(i)) for i in d ]</span><span class="synStatement">'</span> | head <span class="synSpecial">-n</span> <span class="synConstant">100</span>
+</pre>
+</div>
+<div class="section">
+<h5>shufを使う</h5>
+<p>shufが<span class="deco" style="color:#FF0000;font-weight:bold;">一番簡単かつ高速</span>です。よって皆さん、<span class="deco" style="color:#FF0000;font-weight:bold;">ランダム行出力を行いたい場合はshufを使うようにしましょう！</span></p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ shuf <span class="synSpecial">-n</span> <span class="synConstant">100</span> data.txt
+0.25s user 1.02s system <span class="synConstant">25</span>% cpu 4.999 total
+</pre>
+</div>
+<div class="section">
+<h5>ランダムサンプリング速度比較</h5>
+<p>shufの圧勝となりました。※N/Aは処理が重たすぎて結果が取得できず。</p>
+
+<table>
+<tr>
+<th> サンプリング手法 </th>
+<th> 処理速度 </th>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>で乱数生成。重複あり </td>
+<td>  9:35.45 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>で乱数生成。重複あり </td>
+<td> 29:16.09 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>で乱数生成。重複無し </td>
+<td> 1:12:44.20　</td>
+</tr>
+<tr>
+<td> sortでシャッフル。重複無し </td>
+<td> 2:10.29 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>でシャッフル。重複無し </td>
+<td> 53.833 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>でシャッフル。重複無し </td>
+<td> N/A </td>
+</tr>
+<tr>
+<td> shufでシャッフル。重複無し </td>
+<td> 4.999 </td>
+<td> </td>
+</tr>
+</table>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>合計と平均値を集計したいぜ！</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>列データ取得</h5>
+<p>数値の集計には<span class="deco" style="color:#FF0000;font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a></span>を利用するのがいいです。上と使用するデータを変更して以前お遊びで抽出した以下のデータを利用します。<a href="https://github.com/yutakikuchi/Data/blob/master/ero_prediction.tsv">Data/ero_prediction.tsv at master · yutakikuchi/Data</a> <a href="http://b.hatena.ne.jp/entry/s/github.com/yutakikuchi/Data/blob/master/ero_prediction.tsv"><img src="http://b.hatena.ne.jp/entry/image/https://github.com/yutakikuchi/Data/blob/master/ero_prediction.tsv" alt="はてなブックマーク - Data/ero_prediction.tsv at master · yutakikuchi/Data" border="0" /></a></p><p>まずは集計したいデータの列を取得したいので<span class="deco" style="color:#FF0000;font-weight:bold;">cut</span>を利用します。cutの-fオプションで列数を指定すると取得できます。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ head <span class="synSpecial">-n</span> <span class="synConstant">5</span> ero_prediction.tsv  
+Name:愛内希    Bust:<span class="synConstant">80</span>    Waist:<span class="synConstant">57</span>   Hip:<span class="synConstant">83</span> Bra:C
+Name:愛内萌    Bust:<span class="synConstant">86</span>    Waist:<span class="synConstant">56</span>   Hip:<span class="synConstant">82</span> Bra:E
+Name:相川とも子  Bust:<span class="synConstant">83</span>    Waist:<span class="synConstant">56</span>   Hip:<span class="synConstant">83</span> Bra:D
+Name:愛川ひな   Bust:<span class="synConstant">83</span>    Waist:<span class="synConstant">57</span>   Hip:<span class="synConstant">85</span> Bra:C
+Name:藍川めぐみ  Bust:<span class="synConstant">95</span>    Waist:<span class="synConstant">60</span>   Hip:<span class="synConstant">88</span> Bra:G
+
+$ cut <span class="synSpecial">-f</span> <span class="synConstant">2</span> ero_prediction.tsv
+Bust:<span class="synConstant">80</span>
+Bust:<span class="synConstant">86</span>
+Bust:<span class="synConstant">83</span>
+</pre>
+</div>
+<div class="section">
+<h5>重複行のカウント</h5>
+<p>次にsortとuniqを使ってデータの重複をカウントします。uniqの利用制限としてlookと同様に事前にsortする必要があるためにsortを使います。また重複のカウントはuniqの-cオプションでできます。出力された結果は1列目が重複個数、2列名がデータになります。出力結果を更に重複個数で降順にsortします。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ cut <span class="synSpecial">-f</span> <span class="synConstant">2</span> ero_prediction.tsv | <span class="synStatement">sort</span> | uniq <span class="synSpecial">-c</span> | <span class="synStatement">sort</span> <span class="synSpecial">-k</span> <span class="synConstant">1</span>,<span class="synConstant">1</span> <span class="synSpecial">-r</span>
+<span class="synConstant">126</span> Bust:<span class="synConstant">83</span>
+ <span class="synConstant">76</span> Bust:<span class="synConstant">82</span>
+ <span class="synConstant">68</span> Bust:<span class="synConstant">85</span>
+</pre>
+</div>
+<div class="section">
+<h5>列の順番変更</h5>
+<p>通常はデータ=>個数の順番になっているのが普通だと思うので、上の結果の列を入れ替えます。列の入れ替えは<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>を利用します。また<a class="keyword" href="http://d.hatena.ne.jp/keyword/Excel">Excel</a>等に張りつけがし易いように列間のdelimiterにtabを設定します。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ cut <span class="synSpecial">-f</span> <span class="synConstant">2</span> ero_prediction.tsv | <span class="synStatement">sort</span> | uniq <span class="synSpecial">-c</span> | <span class="synStatement">sort</span> <span class="synSpecial">-k</span> <span class="synConstant">1</span>,<span class="synConstant">1</span> <span class="synSpecial">-r</span> | awk <span class="synStatement">'</span><span class="synConstant">{print $2 "\t" $1}</span><span class="synStatement">'</span>
+Bust:<span class="synConstant">83</span>    <span class="synConstant">126</span>
+Bust:<span class="synConstant">82</span>    <span class="synConstant">76</span>
+Bust:<span class="synConstant">85</span>    <span class="synConstant">68</span>
+</pre>
+</div>
+<div class="section">
+<h5>合計値出力</h5>
+<p>列データの合計値を取得します。合計値の計算は<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>の条件文とENDを使います。この場合BEGINは省略可能です。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ cut <span class="synSpecial">-f</span> <span class="synConstant">2</span> ero_prediction.tsv | <span class="synStatement">sed</span> <span class="synStatement">"</span><span class="synConstant">s/Bust://g</span><span class="synStatement">"</span> | awk <span class="synStatement">'</span><span class="synConstant">{total += $1} END {print total}</span><span class="synStatement">'</span>   
+<span class="synConstant">51553</span>
+
+$ cut <span class="synSpecial">-f</span> <span class="synConstant">2</span> ero_prediction.tsv | <span class="synStatement">sed</span> <span class="synStatement">"</span><span class="synConstant">s/Bust://g</span><span class="synStatement">"</span> | awk <span class="synStatement">'</span><span class="synConstant">BEGIN{ total =0} {total += $1} END {print total}</span><span class="synStatement">'</span>   
+<span class="synConstant">51553</span>
+</pre>
+</div>
+<div class="section">
+<h5>平均値出力</h5>
+<p>合計値が求められたら平均値は行数で割るだけなので上の命令文に行数で割る処理を加えてあげるだけです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>のNRという定数に行数が記録される仕様になっています。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ cut <span class="synSpecial">-f</span> <span class="synConstant">2</span> ero_prediction.tsv | <span class="synStatement">sed</span> <span class="synStatement">"</span><span class="synConstant">s/Bust://g</span><span class="synStatement">"</span> | awk <span class="synStatement">'</span><span class="synConstant">{total += $1} END {print total/NR}</span><span class="synStatement">'</span>   
+84.5131
+</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>ファイルのデータ結合がしたいぜ！</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>共通項での結合</h5>
+<p>異なるデータを持つ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のファイルを共通のKeyで連結するには<span class="deco" style="color:#FF0000;font-weight:bold;">join</span>を利用します。共通のKeyを持たない行に関しては連結の対象外になります。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ cat data_1.txt data_2.txt 
+A <span class="synConstant">100</span>円
+B <span class="synConstant">300</span>円
+C <span class="synConstant">200</span>円
+D <span class="synConstant">400</span>円
+E <span class="synConstant">500</span>円
+A Category1
+B Category2
+C Category3
+D Category4
+
+$ join data_1.txt data_2.txt
+A <span class="synConstant">100</span>円 Category1
+B <span class="synConstant">300</span>円 Category2
+C <span class="synConstant">200</span>円 Category3
+D <span class="synConstant">400</span>円 Category4
+</pre>
+</div>
+<div class="section">
+<h5>同じ行数での結合</h5>
+<p>同じ行数でデータを結合したい場合は<span class="deco" style="color:#FF0000;font-weight:bold;">paste</span>を利用します。joinと異なり共通のkeyが無くても同一行数だけで結合します。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ paste data_1.txt data_2.txt
+A <span class="synConstant">100</span>円 A Category1
+B <span class="synConstant">300</span>円 B Category2
+C <span class="synConstant">200</span>円 C Category3
+D <span class="synConstant">400</span>円 D Category4
+E <span class="synConstant">500</span>円 
+</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>まとめ</h4>
+
+<blockquote>
+    
+<ul>
+<li>大量データに対して検索を行う場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>ではなく、lookコマンドを利用しましょう！</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>、sortを使う時は環境による依存を無くすだけでなく処理速度を上げるためにLC_ALL=Cを設定しましょう！</li>
+<li>大量データからランダムサンプリングする時はshufコマンドを利用しましょう！</li>
+<li>合計、平均値を求める場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/awk">awk</a>を利用しましょう！</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>ファイルのデータ結合をしたい場合は、joinとpasteを利用しましょう!</li>
+</ul>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201307220846/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201307220846/">Multi-Class Classifier of Bra Size used as the feature value with vital statics</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201308090846/">Google先生の検索結果リンクが予想以上に作り込まれていた件</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201308090846/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

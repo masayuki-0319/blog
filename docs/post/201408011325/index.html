@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20140801/1406867116" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>常駐型受託開発の経験から &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>常駐型受託開発の経験から</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2014 Aug 01, 13:25</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="起業-常駐型受託開発の経験から">[起業] : 常駐型受託開発の経験から</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774134538/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/515mfeoKgQL._SL160_.jpg" class="hatena-asin-detail-image" alt="受託開発の極意―変化はあなたから始まる。現場から学ぶ実践手法 (WEB+DB PRESS plusシリーズ)" title="受託開発の極意―変化はあなたから始まる。現場から学ぶ実践手法 (WEB+DB PRESS plusシリーズ)"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774134538/yutakikuchi-22/">受託開発の極意―変化はあなたから始まる。現場から学ぶ実践手法 (WEB+DB PRESS plusシリーズ)</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> 岡島幸男,四六</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%BB%BD%D1%C9%BE%CF%C0%BC%D2">技術評論社</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2008/04/08</li><li><span class="hatena-asin-detail-label">メディア:</span> 単行本（ソフトカバー）</li><li><span class="hatena-asin-detail-label">購入</span>: 25人 <span class="hatena-asin-detail-label">クリック</span>: 1,381回</li><li><a href="http://d.hatena.ne.jp/asin/4774134538/yutakikuchi-22" target="_blank">この商品を含むブログ (91件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>常駐型受託開発</h4>
+
+<blockquote>
+    <p>久しぶりにブログを更新します。「常駐型受託開発」という言葉が正確かどうかも分からないけど、とりあえず取引先のシステムを作ってました<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。とある会社様(クライント)の新規<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%F6%B6%C8">事業</a>立ち上げが目的で、そのクライアント様のOfficeにお邪魔しながら約1年程携わらせて頂きました。結論から言うとこの経験が凄く身になって<span class="deco" style="font-weight:bold;color:#FF0000;">とても良かった</span>と感じました。(※優秀なスタッフさんが沢山いらっしゃる環境で、とても親切にして頂いた事は厚くお礼を申し上げます。)<br />
+受託やらないほうが良いぜ！論を当然否定することはしませんし、逆に強く薦めもしませんが、新規<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%F6%B6%C8">事業</a>立ち上げに必要な事を凄く近いところで経験できたのは今後自分が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%F6%B6%C8">事業</a>を立ち上げる事にもプラスの材料になったと思います。今日はこの開発現場で感じた<span class="deco" style="color:#FF0000;font-weight:bold;">受託開発とマネジメント</span>について記録するだけなので、内容的には<span class="deco" style="font-weight:bold;"><span class="deco" style="color:#FF0000;">糞つまらないことかも</span></span>しれませんが、どなたかのお役に立てればと思います。因に僕の会社には社員がいないので、一人で出向いていました。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>常駐型受託で良かった点、残念だった点</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>良かった点</h5>
+
+<ul>
+<li>自分と同じような受託社長さん達と知り合う事が出来た(<span class="deco" style="color:#FF0000;"><span class="deco" style="font-weight:bold;">ここ凄く大事</span></span>)。また受託開発現場というのを肌で感じれた。</li>
+<li>自分の技術力の立ち位置を把握できた。また技術力よりも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B4%D6%CE%CF">人間力</a>/信頼力が仕事を得る材料である事も理解できた。</li>
+<li>常駐する事で社員さんとのコミュニケーションが密にできたし、認識の大きな間違いも少なかった。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%F6%B6%C8">事業</a>立ち上げフェーズから入れてもらえた事で社員さんと同等のStartUPの進め方のノウハウを身につける事ができた。</li>
+<li>0からのスタートなので、幅広く必要なシステムの根幹を作り込んだ。またその仕組みをいち早く作れるように考える頭も身につけた。</li>
+<li>注文請書、請求書等のやり取り作業を全部自分で経験できた。契約面で質問したい内容があれば直ぐに現場でも解消する事が出来た。</li>
+</ul>
+</div>
+<div class="section">
+<h5>残念だった点</h5>
+
+<ul>
+<li>常駐型+時間契約だったので労働時間の対価を得るような内容になってしまった事。またそれによって時間的な拘束が多く発生してしまった事。これにより他社からの開発を受けられなくなってしまった。</li>
+<li>受託に重きを置きすぎて自社開発に手がつけられなくなってしまった事。(僕はここの比率を途中で変更してしまったのだが、最初に決めた信念を貫く必要があると感じた。)</li>
+<li>決められた方針に反論しづらい、また自分が思った改善策や良いアイディアを率先して現場に浸透させづらい。どうしても所詮受託の意見という考えが浮かんでしまう。</li>
+<li>イベントや勉強会で直接的な成果を発表しづらい。発表する場合はコアな話は出来なく、概要レベルもしくは一般論に置き換えて話す必要がある。</li>
+<li>頑張った事に対する評価についてあれこれ考えてしまう。</li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>受託エンジニアの種別</h4>
+
+<blockquote>
+    <p>受託エンジニアと言っても様々な背景を持った人と知り合う事ができたのでそれもプラスの材料になりました。今回の現場では受託エンジニアご本人が別の会社に所属しているか否(独立している)か、採用に紹介会社がいるのか否かという<span class="deco" style="font-weight:bold;">2×2の4パターン</span>ありました。凄く失礼な話かもしれませんが、この区分けにより<span class="deco" style="color:#FF0000;font-weight:bold;">なんとなーくのエンジニア特性</span>が見れて取れたように思います。ここでも書けるような内容としては個人を見た場合、会社所属の人たちは要件の抽出とそれを具体化する力、独立している人達は何かやったるぜー！という野心と個性が強く見れた気がします。マネジメントをする人はご自身で特性を見つけ出して知っておくと良いかもしれません。ここはもっと詳しく書きたいんですがこの辺まで(笑)</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>受託の人数</h4>
+
+<blockquote>
+    <p>現場で社員を雇えない状況で今直ぐ対応する人が欲しい場合は受託の人数を増やすのが手っ取り早いですが、その人数が増えすぎるとマネジメントが確実に行き届かなくなります。これはどんなに優秀な社員マネージャーがいたとしても受託に対する指示を一人ずつに細かく伝えるのは不可能であり、結局のところ一番コミュニケーションが発生するのは社員マネージャと受託では無く、<span class="deco" style="font-weight:bold;"><span class="deco" style="color:#FF0000;">機能担当の社員エンジニアと受託の直接になります</span></span>。この社員さんのコミュニケーションコストが半端無い。仕様の伝達、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>レビュー、改修依頼等、ただでさえ忙しい社員エンジニアさんもその辺のサポートに相当な工数が掛かってしまいます。今回の経験での一つの指標として、どんなに苦しい状況でも社員エンジニアの数より受託の数を増やすことはNGであり、更に言うと理想的には受託人数が社員数の半分より小さくなるように採用すべきかと思いました。もしそれでも人数対工数の折り合いが付かないのであれば、常駐型だけではなくマネジメントを含めて外部委託会社に依頼する、そもそものリリーススケジュールを見直すか機能の削ぎ落としや簡略化を図るのが得策と思います。大事なので2度言いますが、<span class="deco" style="font-weight:bold;color:#FF0000;">単純に常駐型受託の人数を増やすのはマネジメントのリスクが大きくなります。</span>あと、受託に重要な機能を任せると後々いなくなってしまった時に大変な事になるので、機能の重要度で委託するかどうかを考える事が必要だと思います。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>紹介業者の戦略</h4>
+
+<blockquote>
+    <p>僕も最初は受託を1人採用するのは紹介会社1社を経由するケースしか無いのかと思ったのですが、実際には間に紹介会社を2,3社挟むケースもあってその分受託サラリーのマージンが引かれているようです。このケースで美味しい思いをしているのは間にいる紹介業者だけであり、<span class="deco" style="color:#FF0000;font-weight:bold;">発注元は金額が高くなるし現場で頑張っているエンジニアの労は報われません。</span>人材だけでなく仲介業全般での当然の話なんでしょうけど、このシステムってなんとかならないんでしょうか。受託の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%CE%B5%A4">士気</a>を上げる為にも常識的なマージンであって欲しいと強く希望します。</p><br />
+<p>紹介会社は既に送り出している受託の人から都度現場状況をヒアリングして、更に人数を増やせるか、そしてどれぐらいのレベルのエンジニアなら長期採用されるのかというのを把握しています。紹介会社としても当然長く現場にいて欲しいという希望があるので、今求められているスキルと新たに送り出せる人のマッチング具合が気になるのだと思います。ある程度の採用単価が保証される事も当然前提の一つですが、ちゃんとした技術基盤があり高い目標を常に持ち続けられるいい環境という情報がうまく紹介会社側に伝われば優秀なエンジニアが来てくれる可能性は高まります。逆に炎上状態やスキル面での低レベル感が伝わると当然紹介会社もハイエンドな人材を送り出したいとは思わなくなってしまう。後者に嵌ってしまうと現場としては完全なる悪循環ですよね。</p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201404040828/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201404040828/">男なら潔くC言語書けよと言われた話。〜mod_db,mod_dbdの実装〜</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201408071705/">ブラウザ識別用Cookieを生成する「mod_oreore(仮)」を作ったった</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201408071705/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

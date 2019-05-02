@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130924/1379977759" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>ギーク野郎のTerminal生活 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>ギーク野郎のTerminal生活</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Sep 24, 08:09</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="linux-ギーク野郎のterminal生活">[Linux] : ギーク野郎のTerminal生活</h2>
+
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AE%A1%BC%A5%AF">ギーク</a>野郎</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AE%A1%BC%A5%AF">ギーク</a>野郎とは開発用Terminalを常に立ち上げて<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%B0%A5%E9%A5%DF%A5%F3%A5%B0%B8%C0%B8%EC">プログラミング言語</a>をいじっている人の事をここでは意味します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AE%A1%BC%A5%AF">ギーク</a>野郎はモニターを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>台所有し、それぞれがTerminal用、ネットサーフィン用、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CB%A5%B3%A5%CB%A5%B3%C6%B0%B2%E8">ニコニコ動画</a>専用というような使い分けをしています。しかしそれぞれのモニターへの視線とマウス移動はフラストレーションを溜める1要因になります。それを回避するために本当の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AE%A1%BC%A5%AF">ギーク</a>野郎は1台モニタのTerminalだけで作業します。すみません、左の発言は適当です笑。この記事ではTerminalだけで作業を完結したい人を対象とし、<a class="keyword" href="http://d.hatena.ne.jp/keyword/GUI">GUI</a>を使わずに<a class="keyword" href="http://d.hatena.ne.jp/keyword/CUI">CUI</a>だけでの作業環境構築を目指し、それに役立ちそうなアイテムについて紹介します。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>tmux</h4>
+
+<blockquote>
+    <p><a href="http://tmux.sourceforge.net/">tmux</a> <a href="http://b.hatena.ne.jp/entry/tmux.sourceforge.net/"><img src="http://b.hatena.ne.jp/entry/image/http://tmux.sourceforge.net/" alt="はてなブックマーク - tmux" border="0" /></a><br />
+<a href="http://d.hatena.ne.jp/yutakikuchi/20130819/1376869479">プロセス管理の初歩テクニック - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20130819/1376869479"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20130819/1376869479" alt="はてなブックマーク - プロセス管理の初歩テクニック - Yuta.Kikuchiの日記" border="0" /></a><br />
+tmuxを使ってWorking Spaceを効率的に使う事を強く薦めます。個人的にはtmuxが好きですが、screenでも良いと思います。tmuxはwindowを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>立てたりpaneと呼ばれる単位の子windowへの分割もできます。分割した領域間の移動は設定した<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AD%A1%BC%A5%D0%A5%A4%A5%F3%A5%C9">キーバインド</a>で可能です。tmuxは一つのプロセス内で作業領域を管理するので、アタッチ/デタッチという機能を使うと作業の中断/再開が簡単にできます。プロセスを消さない限りターミナルを落としても問題ありません。作業領域に関してはターミナルに備わっているタブ機能の方が便利と思われる方も多いと思いますが、個人的にはターミナルのタブ機能は使わずに1つのwindowをtmuxで細かく分割して作業内容を全て1画面で見れるような使い方の方がしっくり来ます。また<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のWorking Spaceの移動をtmuxでやると<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AD%A1%BC%A5%D0%A5%A4%A5%F3%A5%C9">キーバインド</a>が統一されて、使用しているTerminalに依存しません。以下はtmuxの設定ファイルの.tmux.confとtmuxの使用画面例になります。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ sudo yum <span class="synStatement">install</span> tmux <span class="synSpecial">-y</span>
+$ vi ~/.tmux.conf
+
+<span class="synComment">#新しいウィンドウのベース番号</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> base-index 1</span>
+<span class="synComment">#全てのベルを無視</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> bell-action none</span>
+<span class="synComment">#各セッションで保持するバッファ数</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> buffer-limit 20</span>
+<span class="synComment">#256色端末を使用</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> default-terminal </span><span class="synStatement">"</span><span class="synConstant">xterm</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> default-command /usr/local/bin/zsh</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> default-shell /usr/local/bin/zsh</span>
+
+<span class="synComment">#ウィンドウ履歴で保持される最大行数</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> history-limit 5000</span>
+<span class="synComment">#Escapeキー入力時の待ち時間(0.5秒)をキャンセル</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-s</span><span class="synIdentifier"> escape-time 0</span>
+<span class="synComment">#ウィンドウを実行コマンド名で自動リネーム</span>
+<span class="synStatement">set</span><span class="synIdentifier">-window-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> automatic-rename on</span>
+<span class="synComment">#スクロールモード、コピーモード、選択モードで vi のキーバインドを使う</span>
+<span class="synStatement">set</span><span class="synIdentifier">-window-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> mode-keys vi</span>
+<span class="synComment">#ウィンドウで動作があるとステータスラインでハイライト</span>
+<span class="synStatement">set</span><span class="synIdentifier">-window-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> monitor-activity on</span>
+<span class="synComment">#UTF-8 シーケンスが現れることに備える</span>
+<span class="synStatement">set</span><span class="synIdentifier">-window-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> utf8 on</span>
+ 
+<span class="synComment">#set-option -g mouse-resize-pane on</span>
+<span class="synComment">#set-option -g mouse-select-pane on</span>
+ 
+<span class="synComment"># prefix + r で設定ファイルを再読み込み</span>
+<span class="synStatement">set</span><span class="synIdentifier">-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> prefix C-g</span>
+unbind <span class="synStatement">r</span>
+<span class="synStatement">bind</span> <span class="synStatement">r</span> <span class="synStatement">source</span>-file ~/.tmux.conf
+ 
+<span class="synComment"># キーバインド</span>
+<span class="synComment"># 各種ペインの移動</span>
+<span class="synStatement">bind</span> h select-pane <span class="synSpecial">-L</span>
+<span class="synStatement">bind</span> j select-pane <span class="synSpecial">-D</span>
+<span class="synStatement">bind</span> k select-pane <span class="synSpecial">-U</span>
+<span class="synStatement">bind</span> l select-pane <span class="synSpecial">-R</span>
+<span class="synComment"># 各種ペインのリサイズ</span>
+<span class="synStatement">bind</span> H resize-pane <span class="synSpecial">-L</span> <span class="synConstant">5</span>
+<span class="synStatement">bind</span> J resize-pane <span class="synSpecial">-D</span> <span class="synConstant">5</span>
+<span class="synStatement">bind</span> K resize-pane <span class="synSpecial">-U</span> <span class="synConstant">5</span>
+<span class="synStatement">bind</span> L resize-pane <span class="synSpecial">-R</span> <span class="synConstant">5</span>
+
+<span class="synComment">#マウススクロールバック</span>
+<span class="synStatement">set</span><span class="synIdentifier">-window-option </span><span class="synSpecial">-g</span><span class="synIdentifier"> mode-mouse on</span>
+
+<span class="synComment">#status line</span>
+<span class="synStatement">set</span><span class="synIdentifier"> </span><span class="synSpecial">-g</span><span class="synIdentifier"> status-interval 5</span>
+<span class="synStatement">set</span><span class="synIdentifier"> </span><span class="synSpecial">-g</span><span class="synIdentifier"> status-fg cyan</span>
+<span class="synStatement">set</span><span class="synIdentifier"> </span><span class="synSpecial">-g</span><span class="synIdentifier"> status-bg black</span>
+<span class="synStatement">set</span><span class="synIdentifier"> </span><span class="synSpecial">-g</span><span class="synIdentifier"> status-left-length 40 </span>
+<span class="synStatement">set</span><span class="synIdentifier"> </span><span class="synSpecial">-g</span><span class="synIdentifier"> status-left </span><span class="synStatement">'</span><span class="synConstant">#[fg=white,bg=blue]#H#[fg=white,bg=black]:#[fg=white,bg=black][#S#[fg=white,bg=black]][#[fg=white,bg=black]</span><span class="synStatement">'</span>
+<span class="synStatement">set</span><span class="synIdentifier"> </span><span class="synSpecial">-g</span><span class="synIdentifier"> status-right </span><span class="synStatement">'</span><span class="synConstant">#[fg=white,bg=cyan][CPU=#(cpu.sh) MEM=#(mem.sh)]#[fg=black,bg=green][%Y/%m/%d(%a)%H:%M]#[default]</span><span class="synStatement">'</span>
+
+setw <span class="synSpecial">-g</span> window-<span class="synStatement">status</span>-current-<span class="synStatement">fg</span> cyan
+setw <span class="synSpecial">-g</span> window-<span class="synStatement">status</span>-current-<span class="synStatement">bg</span> black
+setw <span class="synSpecial">-g</span> window-<span class="synStatement">status</span>-current-attr bold#,underscore
+</pre><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20130819032954" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20130819/20130819032954.png" alt="f:id:yutakikuchi:20130819032954p:image" title="f:id:yutakikuchi:20130819032954p:image" class="hatena-fotolife" itemprop="image"></a></span></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/w3m">w3m</a></h4>
+
+<blockquote>
+    <p><a href="http://w3m.sourceforge.net/index.ja.html">W3M Homepage</a> <a href="http://b.hatena.ne.jp/entry/w3m.sourceforge.net/index.ja.html"><img src="http://b.hatena.ne.jp/entry/image/http://w3m.sourceforge.net/index.ja.html" alt="はてなブックマーク - W3M Homepage" border="0" /></a><br />
+コードを書きながら<a class="keyword" href="http://d.hatena.ne.jp/keyword/google">google</a>で調べ物をして進める人が多いと思います。そんな時は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Chrome">Chrome</a>等のWebブラウザを起動するのでは無く、<a class="keyword" href="http://d.hatena.ne.jp/keyword/w3m">w3m</a>を使います。<a class="keyword" href="http://d.hatena.ne.jp/keyword/w3m">w3m</a>はテキストのViewerになるので画像を表示しません。<a class="keyword" href="http://d.hatena.ne.jp/keyword/JavaScript">JavaScript</a>もOFFになります。これによりバナー広告等一切表示されないので快適です。(<a class="keyword" href="http://d.hatena.ne.jp/keyword/w3m">w3m</a>-imgをinstallすると画像を表示する事も可能です。) 動画を再生したい場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/emacs-w3m">emacs-w3m</a>をinstallする事で出来るみたいですが、ここでは紹介しません。<br />
+ブラウザで重要な機能は履歴の一覧とブックマーク、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>等があります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/w3m">w3m</a>も当然これらを使う事ができます。履歴の一覧参照は<a class="keyword" href="http://d.hatena.ne.jp/keyword/w3m">w3m</a>起動中にCTR + h、ブックマークへの追加はESC + a、ブックマークの参照はESC + b、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>を使用したい場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/w3m">w3m</a>の軌道オプションで--<a class="keyword" href="http://d.hatena.ne.jp/keyword/cookie">cookie</a>とします。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink><span class="synComment"># install</span>
+$ sudo yum <span class="synStatement">install</span> w3m <span class="synSpecial">-y</span>
+
+<span class="synComment">#通常起動</span>
+$ w3m <span class="synStatement">"</span><span class="synConstant">http://google.com</span><span class="synStatement">"</span>
+
+<span class="synComment"># cookieを使う</span>
+$ w3m <span class="synSpecial">--cookie</span> <span class="synStatement">"</span><span class="synConstant">http://facebook.com</span><span class="synStatement">"</span>
+
+<span class="synComment"># bookmarkを確認</span>
+$ w3m <span class="synSpecial">-B</span>
+</pre><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20130924021231" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20130924/20130924021231.png" alt="f:id:yutakikuchi:20130924021231p:image" title="f:id:yutakikuchi:20130924021231p:image" class="hatena-fotolife" itemprop="image"></a></span></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/mutt">mutt</a></h4>
+
+<blockquote>
+    <p><a href="http://www.mutt.org/">The Mutt E-Mail Client</a> <a href="http://b.hatena.ne.jp/entry/www.mutt.org/"><img src="http://b.hatena.ne.jp/entry/image/http://www.mutt.org/" alt="はてなブックマーク - The Mutt E-Mail Client" border="0" /></a><br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Linux">Linux</a>上で動作するCUIMailerは幾つかありますが、ここでは<a class="keyword" href="http://d.hatena.ne.jp/keyword/mutt">mutt</a>について紹介します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/mutt">mutt</a>を使って<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>からmailを送信したり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Gmail">Gmail</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/IMAP">IMAP</a>を利用してメール一覧を取得することが出来ます。<br />
+設定ファイルとなる.muttrcの記述が完了したら<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>からメールを送ってみます。添付ファイルとして.muttrcを送信します。以下のコマンドを実行すると送信メール本文入力の<a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a>が立ち上がるので、適当に送信したいメッセージボディを入力します。ここでは"これはテスト用のメッセージボディです。"と入力して<a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a>を保存終了しました。送信には確認が求められるので"y"と入力すればOKです。本文が不要だという人は/dev/nullを<で指定します。下の画像が実際に添付ファイルを受け取った<a class="keyword" href="http://d.hatena.ne.jp/keyword/mutt">mutt</a>の画面です。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ sudo yum <span class="synStatement">install</span> mutt <span class="synSpecial">-y</span>
+$ <span class="synStatement">mkdir</span> <span class="synSpecial">-p</span> ~/.mutt/cache/headers && <span class="synStatement">mkdir</span> ~/.mutt/cache/bodies && <span class="synStatement">touch</span> ~/.mutt/certificates && <span class="synStatement">touch</span> ~/.mutt/signature
+$ vi ~/.muttrc
+
+<span class="synStatement">set</span><span class="synIdentifier"> send_charset=</span><span class="synStatement">"</span><span class="synConstant">iso-2022-jp:utf-8</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> editor</span>    <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">vim</span><span class="synStatement">"</span>
+
+<span class="synStatement">set</span><span class="synIdentifier"> imap_user</span> <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">foo@gmail.com</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> imap_pass</span> <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">foo-pass</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> smtp_url</span>  <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">smtp://foo@smtp.gmail.com:587/</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> smtp_pass</span> <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">foo-pass</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> from</span>      <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">foo@gmail.com</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> realname</span>  <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">Your Name</span><span class="synStatement">"</span>
+
+<span class="synStatement">set</span><span class="synIdentifier"> folder</span> <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">imaps://imap.gmail.com:993</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> spoolfile</span> <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">+INBOX</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> imap_check_subscribed</span>
+<span class="synStatement">set</span><span class="synIdentifier"> hostname</span> <span class="synStatement">=</span> gmail.com
+<span class="synStatement">set</span><span class="synIdentifier"> mail_check</span> <span class="synStatement">=</span> <span class="synConstant">120</span>
+<span class="synStatement">set</span><span class="synIdentifier"> timeout</span> <span class="synStatement">=</span> <span class="synConstant">300</span>
+<span class="synStatement">set</span><span class="synIdentifier"> imap_keepalive</span> <span class="synStatement">=</span> <span class="synConstant">300</span>
+<span class="synStatement">set</span><span class="synIdentifier"> postponed</span> <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">+[GMail]/Drafts</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> record</span> <span class="synStatement">=</span> <span class="synStatement">"</span><span class="synConstant">+[GMail]/Sent Mail</span><span class="synStatement">"</span>
+<span class="synStatement">set</span><span class="synIdentifier"> header_cache=~/.mutt/cache/headers</span>
+<span class="synStatement">set</span><span class="synIdentifier"> message_cachedir=~/.mutt/cache/bodies</span>
+<span class="synStatement">set</span><span class="synIdentifier"> certificate_file=~/.mutt/certificates</span>
+<span class="synStatement">set</span><span class="synIdentifier"> signature</span> <span class="synStatement">=</span>~/.mutt/signature
+<span class="synStatement">set</span><span class="synIdentifier"> move</span> <span class="synStatement">=</span> no
+<span class="synStatement">set</span><span class="synIdentifier"> include</span>
+<span class="synStatement">set</span><span class="synIdentifier"> sort</span> <span class="synStatement">=</span> <span class="synStatement">'</span><span class="synConstant">threads</span><span class="synStatement">'</span>
+<span class="synStatement">set</span><span class="synIdentifier"> sort_aux</span> <span class="synStatement">=</span> <span class="synStatement">'</span><span class="synConstant">reverse-last-date-received</span><span class="synStatement">'</span>
+<span class="synStatement">set</span><span class="synIdentifier"> auto_tag</span> <span class="synStatement">=</span> yes
+ignore <span class="synStatement">"</span><span class="synConstant">Authentication-Results:</span><span class="synStatement">"</span>
+ignore <span class="synStatement">"</span><span class="synConstant">DomainKey-Signature:</span><span class="synStatement">"</span>
+ignore <span class="synStatement">"</span><span class="synConstant">DKIM-Signature:</span><span class="synStatement">"</span>
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+auto_view text/html
+<span class="synStatement">bind</span> editor <span class="synStatement"><</span>Tab<span class="synStatement">></span> <span class="synStatement">complete</span>-query
+<span class="synStatement">bind</span> editor ^T <span class="synStatement">complete</span>
+<span class="synStatement">bind</span> editor <span class="synStatement"><</span>space<span class="synStatement">></span> noop
+
+color header green black <span class="synStatement">"</span><span class="synConstant">^Date:</span><span class="synStatement">"</span>
+color header yellow black <span class="synStatement">"</span><span class="synConstant">^Subject:</span><span class="synStatement">"</span>
+color header green black <span class="synStatement">"</span><span class="synConstant">^From:</span><span class="synStatement">"</span>
+color header green black <span class="synStatement">"</span><span class="synConstant">^To:</span><span class="synStatement">"</span>
+color header green black <span class="synStatement">"</span><span class="synConstant">^Cc:</span><span class="synStatement">"</span>
+
+color body red black <span class="synStatement">"</span><span class="synConstant">(ftp|http)://[^ ]+</span><span class="synStatement">"</span>
+color body red black <span class="synStatement">"</span><span class="synConstant">[-a-zA-Z0-9_.]+@[-a-zA-Z0-9_.]+</span><span class="synStatement">"</span>
+</pre><pre class="hljs sh" data-lang="sh" data-unlink><span class="synComment"># 送信 本文をvimで入力する</span>
+$ mutt <span class="synSpecial">-s</span> <span class="synStatement">"</span><span class="synSpecial">これは</span><span class="synConstant">muttrc</span><span class="synSpecial">ファイルです</span><span class="synStatement">"</span> foo.gmail.com <span class="synSpecial">-a</span> .muttrc
+
+<span class="synComment"># 送信 本文が不要な場合</span>
+$ mutt <span class="synSpecial">-s</span> <span class="synStatement">"</span><span class="synSpecial">これは</span><span class="synConstant">muttrc</span><span class="synSpecial">ファイルです</span><span class="synStatement">"</span> foo.gmail.com <span class="synSpecial">-a</span> .muttrc <span class="synStatement"><</span> /dev/null
+
+<span class="synComment"># 受信確認</span>
+$ mutt
+</pre><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20130924010520" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20130924/20130924010520.png" alt="f:id:yutakikuchi:20130924010520p:image" title="f:id:yutakikuchi:20130924010520p:image" class="hatena-fotolife" itemprop="image"></a></span></p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201309170853/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201309170853/">defineを辞めてhidefを使う</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201309250814/">町田ヒルズ族になってしまいました(｀・ω・´)ｷﾘｯ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201309250814/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

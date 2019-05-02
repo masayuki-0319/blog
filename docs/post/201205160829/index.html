@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120516/1337124582" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Perlの多次元連想配列をJSONエンコードする方法 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Perlの多次元連想配列をJSONエンコードする方法</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 May 16, 08:29</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="perl-perlの多次元連想配列をjsonエンコードする方法">[Perl] : Perlの多次元連想配列をJSONエンコードする方法</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114276/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51IVikrwGLL._SL160_.jpg" class="hatena-asin-detail-image" alt="初めてのPerl 第5版" title="初めてのPerl 第5版"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114276/yutakikuchi-22/">初めてのPerl 第5版</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Randal L. Schwartz,Tom <a class="keyword" href="http://d.hatena.ne.jp/keyword/Phoenix">Phoenix</a>,brian d foy,近藤嘉雪</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2009/10/26</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 22人 <span class="hatena-asin-detail-label">クリック</span>: 293回</li><li><a href="http://d.hatena.ne.jp/asin/4873114276/yutakikuchi-22" target="_blank">この商品を含むブログ (41件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>はじめに</h4>
+
+<blockquote>
+    <p>業務で<a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a>を使う事になったので少しずつ学習した事を書いて行きます。この記事での目的は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>を多次元で定義して、その配列を<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>_encodeします。<br />
+<a href="http://d.hatena.ne.jp/yutakikuchi/20110108/1294572025">超簡単 Perl一問一答学習帳 - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20110108/1294572025"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20110108/1294572025" alt="はてなブックマーク - 超簡単 Perl一問一答学習帳 - Yuta.Kikuchiの日記" border="0" /></a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>配列</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>定義</h5>
+<p>配列の定義には@を使います。@は配列を示す宣言ですが、定義の仕方は色々とあります。以下では()括弧、添字、qw<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>での指定について書きます。qw<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>とは空白での区切りでlistにしてくれるものです。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/local/bin/perl -w</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+
+<span class="synComment"># @を使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@sample</span> = ( <span class="synConstant">'a'</span>, <span class="synConstant">'b'</span>, <span class="synConstant">'c'</span> );
+
+<span class="synComment"># $を使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@sample2</span>;
+<span class="synIdentifier">$sample2[</span><span class="synConstant">0</span><span class="synIdentifier">]</span> = <span class="synConstant">'a'</span>;
+<span class="synIdentifier">$sample2[</span><span class="synConstant">1</span><span class="synIdentifier">]</span> = <span class="synConstant">'b'</span>;
+<span class="synIdentifier">$sample2[</span><span class="synConstant">2</span><span class="synIdentifier">]</span> = <span class="synConstant">'c'</span>;
+
+<span class="synComment"># qwを使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@sample3</span> = <span class="synConstant">qw/a b c/</span>;
+</pre>
+</div>
+<div class="section">
+<h5>取得</h5>
+<p>各要素を取得するにはfor,foreach,whileなどの繰り返し文が使えます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a>の特徴的な記述とし<span class="deco" style="color:#FF0000;">$#配列名とすると配列の最後の添字番号を取得する</span>事が出来ます。またforeachで<span class="deco" style="color:#FF0000;">括弧に@配列を入れると自動的に$_に要素を展開</span>してくれます。スゴい事に<a class="keyword" href="http://d.hatena.ne.jp/keyword/Perl">Perl</a>は繰り返しを使わなくても全要素を表示する事ができます。print @配列名またはprint "@配列名"とします。ダブルクォーテーションで配列名をくくるとスペース区切りで表示します。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/local/bin/perl -w</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+
+<span class="synComment"># @を使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@sample</span> = ( <span class="synConstant">'a'</span>, <span class="synConstant">'b'</span>, <span class="synConstant">'c'</span> );
+
+<span class="synComment"># $を使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@sample2</span>;
+<span class="synIdentifier">$sample2[</span><span class="synConstant">0</span><span class="synIdentifier">]</span> = <span class="synConstant">'a'</span>;
+<span class="synIdentifier">$sample2[</span><span class="synConstant">1</span><span class="synIdentifier">]</span> = <span class="synConstant">'b'</span>;
+<span class="synIdentifier">$sample2[</span><span class="synConstant">2</span><span class="synIdentifier">]</span> = <span class="synConstant">'c'</span>;
+
+<span class="synComment"># qwを使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@sample3</span> = <span class="synConstant">qw/a b c/</span>;
+
+<span class="synComment"># forを使う $#で最後の添字番号取得</span>
+<span class="synStatement">for</span>( <span class="synStatement">my</span> <span class="synIdentifier">$i</span>=<span class="synConstant">0</span>; <span class="synIdentifier">$i</span><=<span class="synIdentifier">$#sample</span>; <span class="synIdentifier">$i</span>++ ) {
+  <span class="synStatement">print</span> <span class="synIdentifier">$sample[$i]</span>;
+}
+
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+
+<span class="synComment"># foreachで $_を使う</span>
+<span class="synStatement">foreach</span>( <span class="synIdentifier">@sample</span> ) {
+  <span class="synStatement">print</span> <span class="synIdentifier">$_</span> ;
+}
+
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+
+<span class="synComment"># foreachで変数に展開</span>
+<span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$tmp2</span> ( <span class="synIdentifier">@sample2</span> ) {
+  <span class="synStatement">print</span> <span class="synIdentifier">$tmp2</span> ;
+}
+
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+
+<span class="synComment"># whileで要素を変数にshiftさせる</span>
+<span class="synStatement">while</span>( <span class="synStatement">my</span> <span class="synIdentifier">$tmp3</span> = <span class="synStatement">shift</span>( <span class="synIdentifier">@sample3</span> ) ) {
+  <span class="synStatement">print</span> <span class="synIdentifier">$tmp3</span>;
+}
+
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+
+<span class="synComment"># 繰り返しを使わないでprint </span>
+<span class="synStatement">print</span> <span class="synIdentifier">@sample</span>;
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+<span class="synComment"># スペース区切りで出力</span>
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synIdentifier">@sample</span><span class="synConstant">"</span>;
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>abc
+abc
+abc
+abc
+abc
+a b c</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a></h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>定義</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の定義には%を使います。配列と同様に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の定義にはいくつか方法があります。下記ではカンマ区切りでの順番、ファットコロン<del datetime="2012-05-24T03:31:56+09:00">アロー<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a></del>、添字での指定について記述します。※2012/5/24追記:アロー<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%E9%BB%BB%BB%D2">演算子</a>は->は意味していました。=>でファットコロンと呼ぶようです。@akajiroさんからご指摘を頂きました。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/local/bin/perl -w</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+
+<span class="synComment"># %を使う key,valueの繰り返し</span>
+<span class="synStatement">my</span> <span class="synIdentifier">%sample</span> = ( <span class="synConstant">'0'</span>, <span class="synConstant">'a'</span>, <span class="synConstant">'1'</span>, <span class="synConstant">'b'</span>, <span class="synConstant">'2'</span>, <span class="synConstant">'c'</span> );
+
+<span class="synComment"># ファットコンマ</span>
+<span class="synStatement">my</span> <span class="synIdentifier">%sample2</span> = ( <span class="synConstant">'0'</span> => <span class="synConstant">'a'</span>, <span class="synConstant">'1'</span> => <span class="synConstant">'b'</span>, <span class="synConstant">'2'</span> => <span class="synConstant">'c'</span> );
+
+<span class="synComment"># $を使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">%sample3</span>;
+<span class="synIdentifier">$sample2{</span><span class="synConstant">'0'</span><span class="synIdentifier">}</span> = <span class="synConstant">'a'</span>;
+<span class="synIdentifier">$sample2{</span><span class="synConstant">'1'</span><span class="synIdentifier">}</span> = <span class="synConstant">'b'</span>;
+<span class="synIdentifier">$sample2{</span><span class="synConstant">'2'</span><span class="synIdentifier">}</span> = <span class="synConstant">'c'</span>;
+</pre>
+</div>
+<div class="section">
+<h5>取得</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>のkey,valueを取得するには<span class="deco" style="color:#FF0000;">foreachとkeys関数</span>の組み合わせか<span class="deco" style="color:#FF0000;">whileとeach関数</span>の組み合わせで記述されることが多いようです。keys関数は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>のkeyを変数に展開、values関数は値だけを変数に展開、eachはkeyと値の両方を展開します。keysやvalues関数を掛けた結果に対し更に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AB%A5%E9%A1%BC">スカラー</a>展開すると<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の大きさを取得する事ができます。また<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の取得は何も指定しないとランダムになるのでforeachとsort関数を使うとkeyをsortできます。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/local/bin/perl -w</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+
+<span class="synComment"># %を使う key,valueの繰り返し</span>
+<span class="synStatement">my</span> <span class="synIdentifier">%sample</span> = ( <span class="synConstant">'0'</span>, <span class="synConstant">'a'</span>, <span class="synConstant">'1'</span>, <span class="synConstant">'b'</span>, <span class="synConstant">'2'</span>, <span class="synConstant">'c'</span> );
+
+<span class="synComment"># アロー演算子を使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">%sample2</span> = ( <span class="synConstant">'0'</span> => <span class="synConstant">'a'</span>, <span class="synConstant">'1'</span> => <span class="synConstant">'b'</span>, <span class="synConstant">'2'</span> => <span class="synConstant">'c'</span> );
+
+<span class="synComment"># $を使う</span>
+<span class="synStatement">my</span> <span class="synIdentifier">%sample3</span>;
+<span class="synIdentifier">$sample2{</span><span class="synConstant">'0'</span><span class="synIdentifier">}</span> = <span class="synConstant">'a'</span>;
+<span class="synIdentifier">$sample2{</span><span class="synConstant">'1'</span><span class="synIdentifier">}</span> = <span class="synConstant">'b'</span>;
+<span class="synIdentifier">$sample2{</span><span class="synConstant">'2'</span><span class="synIdentifier">}</span> = <span class="synConstant">'c'</span>;
+
+
+<span class="synComment"># foreachとkeysを使う </span>
+<span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$key</span>( <span class="synStatement">keys</span> <span class="synIdentifier">%sample</span> ) {
+  <span class="synStatement">print</span> <span class="synConstant">"Key = </span><span class="synIdentifier">$key</span><span class="synConstant">  Value = </span><span class="synIdentifier">$sample{$key}</span><span class="synConstant"> </span><span class="synSpecial">\n</span><span class="synConstant">"</span>; 
+}
+
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+
+<span class="synComment"># whileとeachを使う</span>
+<span class="synStatement">while</span>( ( <span class="synStatement">my</span> <span class="synIdentifier">$key</span>, <span class="synStatement">my</span> <span class="synIdentifier">$value</span> ) = <span class="synStatement">each</span>( <span class="synIdentifier">%sample2</span> ) ) {
+  <span class="synStatement">print</span> <span class="synConstant">"Key = </span><span class="synIdentifier">$key</span><span class="synConstant">  Value = </span><span class="synIdentifier">$value</span><span class="synConstant"> </span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+}
+
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+
+<span class="synComment"># keyでsortする</span>
+<span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$key</span>( <span class="synStatement">sort</span> <span class="synStatement">keys</span> <span class="synIdentifier">%sample</span> ) {
+  <span class="synStatement">print</span> <span class="synConstant">"Key = </span><span class="synIdentifier">$key</span><span class="synConstant">  Value = </span><span class="synIdentifier">$sample{$key}</span><span class="synConstant"> </span><span class="synSpecial">\n</span><span class="synConstant">"</span>; 
+}
+
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+
+<span class="synComment"># valueだけを取得</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@value</span> = <span class="synStatement">values</span>( <span class="synIdentifier">%sample</span> );
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synIdentifier">@value</span><span class="synConstant">"</span>;
+
+<span class="synComment"># ハッシュの長さを求める</span>
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n\n</span><span class="synConstant">"</span>;
+<span class="synStatement">my</span> <span class="synIdentifier">$length</span> = <span class="synStatement">values</span>( <span class="synIdentifier">%sample</span> );
+<span class="synStatement">print</span> <span class="synIdentifier">$length</span>;
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>Key = 1  Value = b 
+Key = 0  Value = a 
+Key = 2  Value = c 
+
+Key = 1  Value = b 
+Key = 0  Value = a 
+Key = 2  Value = c 
+
+Key = 0  Value = a 
+Key = 1  Value = b 
+Key = 2  Value = c 
+
+b a c
+
+3</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>多次元<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a></h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>配列に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>を追加</h5>
+<p>上で記載した配列と<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>を組み合わせて使います。まずは配列の中に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>を追加するような定義を行います。@配列で定義してpushで%ハッシュを追加します。注意が必要なのがpush( @array, %hash )と操作を行っても思うように追加されません。配列にハッシュを追加するためにはpush( @array, \%hash )と<span class="deco" style="color:#FF0000;">\を使って<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>のリファレンスを渡す必要があります。</span>リファレンスとはCのポインタのようなもので値が格納されているアドレスです。定義した配列の中の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>を取り出すときに<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>のリファレンスが取得できるので、keyを取得するために<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%EA%A5%D5%A5%A1%A5%EC%A5%F3%A5%B9">デリファレンス</a>を利用します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%EA%A5%D5%A5%A1%A5%EC%A5%F3%A5%B9">デリファレンス</a>とは文字通りリファレンスの逆で格納アドレスから値を引く事です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の場合<span class="deco" style="color:#FF0000;">%$ハッシュ</span>とすることでアドレスから格納されている値に変換します。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/local/bin/perl -w</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+
+<span class="synComment"># 配列,連想配列の組み合わせ</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@array</span> = (); 
+<span class="synStatement">my</span> <span class="synIdentifier">%hash1</span> = ( <span class="synConstant">'Key1'</span> => <span class="synConstant">'Value1'</span> );
+<span class="synStatement">my</span> <span class="synIdentifier">%hash2</span> = ( <span class="synConstant">'Key2'</span> => <span class="synConstant">'Value2'</span> );
+
+<span class="synComment"># 配列に連想配列を追加</span>
+<span class="synStatement">push</span>( <span class="synIdentifier">@array</span>, \<span class="synIdentifier">%hash1</span> );
+<span class="synStatement">push</span>( <span class="synIdentifier">@array</span>, \<span class="synIdentifier">%hash2</span> );
+
+<span class="synComment"># foreachで取得</span>
+<span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$tmp</span>( <span class="synIdentifier">@array</span> ) { 
+   <span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$key</span>( <span class="synStatement">keys</span> <span class="synIdentifier">%$tmp</span> ) { 
+    <span class="synStatement">print</span> <span class="synConstant">"Key = </span><span class="synIdentifier">$key</span><span class="synConstant"> Value = </span><span class="synIdentifier">$tmp->{$key}</span><span class="synConstant"> </span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+   }   
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>Key = Key1 Value = Value1 
+Key = Key2 Value = Value2</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>に配列を追加</h5>
+<p>上とは逆に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>に配列を追加します。配列のリファレンスを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AB%A5%E9%A1%BC">スカラー</a>に渡し、foreachで取得する際に配列の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%EA%A5%D5%A5%A1%A5%EC%A5%F3%A5%B9">デリファレンス</a>を行います。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/local/bin/perl -w</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+
+<span class="synComment"># 配列,連想配列の組み合わせ</span>
+<span class="synStatement">my</span> <span class="synIdentifier">%hash</span> = ();
+<span class="synStatement">my</span> <span class="synIdentifier">@array1</span> = ( <span class="synConstant">'a'</span>, <span class="synConstant">'b'</span>, <span class="synConstant">'c'</span> );
+<span class="synStatement">my</span> <span class="synIdentifier">@array2</span> = ( <span class="synConstant">'d'</span>, <span class="synConstant">'e'</span>, <span class="synConstant">'f'</span> );
+
+<span class="synComment"># 連想配列に配列を追加</span>
+<span class="synIdentifier">$hash{</span> <span class="synConstant">"Key1"</span> <span class="synIdentifier">}</span> = \<span class="synIdentifier">@array1</span>;
+<span class="synIdentifier">$hash{</span> <span class="synConstant">"Key2"</span> <span class="synIdentifier">}</span> = \<span class="synIdentifier">@array2</span>;
+
+<span class="synComment"># foreachで取得</span>
+<span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$key</span>( <span class="synStatement">sort</span> <span class="synStatement">keys</span> <span class="synIdentifier">%hash</span> ) {
+   <span class="synStatement">print</span> <span class="synConstant">"Key = </span><span class="synIdentifier">$key</span><span class="synConstant">"</span>;
+   <span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$data</span>( <span class="synIdentifier">$hash{$key}</span> ) {
+    <span class="synStatement">print</span> <span class="synConstant">" Value = </span><span class="synIdentifier">@$data</span><span class="synConstant">"</span>;
+   }
+   <span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>Key = Key1 Value = a b c
+Key = Key2 Value = d e f</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Json">Json</a> Encode</h4>
+
+<blockquote>
+    <p>配列の中の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の中の配列の両方が定義出来たのでそれらを<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>化します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>にするにはいくつか方法があり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>::Syck、<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>::XSというモジュールか use <a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a> qw/encode_<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a> decode_<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>/、 use <a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a> qw/to_<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a> from_<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>/を指定するようです。下ではencode_<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>を使って<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>に変換します。encode_<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>には配列や<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>のリファレンスを渡さないとエラーが発生するので注意が必要です。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/local/bin/perl -w</span>
+
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+<span class="synStatement">use </span>JSON;
+
+<span class="synComment"># 配列,連想配列の組み合わせ</span>
+<span class="synStatement">my</span> <span class="synIdentifier">@array</span> = ();
+<span class="synStatement">my</span> <span class="synIdentifier">%hash1</span> = ( <span class="synConstant">'Key1'</span> => <span class="synConstant">'Value1'</span> );
+<span class="synStatement">my</span> <span class="synIdentifier">%hash2</span> = ( <span class="synConstant">'Key2'</span> => <span class="synConstant">'Value2'</span> );
+
+<span class="synComment"># 配列に連想配列を追加</span>
+<span class="synStatement">push</span>( <span class="synIdentifier">@array</span>, \<span class="synIdentifier">%hash1</span> );
+<span class="synStatement">push</span>( <span class="synIdentifier">@array</span>, \<span class="synIdentifier">%hash2</span> );
+
+<span class="synComment"># foreachで取得</span>
+<span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$tmp</span>( <span class="synIdentifier">@array</span> ) {
+   <span class="synStatement">foreach</span> <span class="synStatement">my</span> <span class="synIdentifier">$key</span>( <span class="synStatement">keys</span> <span class="synIdentifier">%$tmp</span> ) {
+    <span class="synStatement">print</span> <span class="synConstant">"Key = </span><span class="synIdentifier">$key</span><span class="synConstant"> Value = </span><span class="synIdentifier">$tmp->{$key}</span><span class="synConstant"> </span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+   }
+}
+
+<span class="synComment"># json化する 配列のリファレンスを渡す必要がある</span>
+<span class="synStatement">print</span> encode_json( \<span class="synIdentifier">@array</span> );
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>Key = Key1 Value = Value1 
+Key = Key2 Value = Value2 
+[{"Key1":"Value1"},{"Key2":"Value2"}]</pre>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201205140829/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201205140829/">魔法少女まどか☆マギカN-Gram</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201205210841/">PHPのマルチスレッドプログラミングを使ってシステム処理を爆速化するお話し</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201205210841/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+
