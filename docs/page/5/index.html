@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,49 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201404040828/">男なら潔くC言語書けよと言われた話。〜mod_db,mod_dbdの実装〜</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2014 Apr 04, 08:28</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [C] : 男なら潔くC言語書けよと言われた話。〜mod_db,mod_dbdの実装〜 C実践プログラミング 第3版
-作者: Steve Oualline,望月康司(監訳),谷口功出版社/メーカー: オライリー・ジャパン発売日: 1998/06/15メディア: 大型本購入: 7人 クリック: 158回この商品を含むブログ (45件) を見る
-恩師に言われた言葉  Geek女優の池澤あやかさんに会いたいと思っている@yutakikucです。
-池澤さんはRubyが出来てSFCで女優さんなんて羨ましいですね〜。僕なんてRubyは得意じゃないし東京とは言えないような都心から離れた場所の地味な国立大だし、何よりお金も無いパンピーだしね〜。
-僕の学生時代にもRubyはあったんですけどRailsはまだ出始めでそんなに流行っている雰囲気は無かったし、Webを書くには面倒くさいJSP/ServletかPerlかって感じでした。ApacheのModuleでWebを書ける事も学生ながら知っていたんですが、ポインタ、メモリの動的確保/解放の間違いが頻発して開発効率が落ちるから極力Javaで、どうしてもCを書かなければ行けない時はC++で逃げてました。
-でも学生時代に恩師に言われたんですよね、JavaやPerlを書く奴はチャラいやつと。男なら潔くC言語書けよと。 (因に恩師はJavaとJavascriptの違いも良く理解していなかったと思いますけどww) おそらく恩師が言いたいのは学生の時から高級言語に頼る事無く、まずはプログラミングの仕組みを理解するためにC言語で苦労してエキスパートを目指せっていう意図だったと解釈しています。
-C言語をやると他の言語と違って問題の発生率が高い。 要は言語側であまり頑張ってくれないから自分で工夫する必要があります。特に他のコンポーネントに接続する時には接続数の制御/ポートの使い切り、ConnectionPoolの実装、使用メモリのオーバー、良く分からないSegmentation Fault等必ず経験します。こういった問題解決の経験値をつける事でエンジニアの実力が養われるのだと思います。
-恩師の言葉を信じてCの勉強を重ねた結果、会社の開発チームに配属された時は凄く重宝されましたし、極力PHP以外を書く案件を回して貰えました。だからCを勉強して来て良かったと思ってます。しかし今後C言語はどうなるんでしょうか... 身の回りではゲーム系、広告配信エンジニア以外は触って無さそうです。その他の言語が強力で簡単WebアプリぐらいだとCで頑張って書くとか全く無いんですよね。学生の勉強の仕組み理解と違って会社は効率化や作業時間短縮を掲げてくるのでC推しも難しいですね。
-前置きが長くなりましたが、それでも僕はCを触る事が多いのでこのエントリーではC言語からのDB接続について書きたいと思います。
-  DB接続  mysqlclientを使った自作ApacheModule mod_db.c mysqlclient,prepared stmtを使ったApache Moduleのmod_dbは以下になります。完全なる自作なのであまり自信が無いですが、並列テストをしてもSegmentation Faultは発生しませんでした。下のソースではbindしたいparameterとresultをmemsetで設定するところが分かりづらいのと、Pointerの設定を間違えてmemory errorを起こし易いので注意が必要です。このプログラムの駄目な点はmysql_real_connectで都度Connectionしているので、接続のOverHeadが大きいところです。実際にabでbenchmarkを取ってみるとCommand Connectが多く発生していますし、netstatでも大量のTIME_WAITが出てます。都度接続の方式で頑張る場合は、TIME_WAITが残り続けると実行Port不足に陥って処理が進まなくなる可能性があるので、/etc/sysctlのnet.ipv4.tcp_tw_recycle=1に設定してリサイクルを速く回す設定を入れるか、net.ipv4.ip_local_port_range = 1024 65535のように使用可能なPortを増やすかのどちらかが有効になりそうです。ただしsysctlの設定をチューニングする場合は十分にテストすると良いと思います。
-$ sudo yum install mysql-devel -y $ sudo vim /etc/httpd/conf/httpd.conf IfModule mod_db.c DBHost localhost DBPort 3306 DBUser root DBPass root DBName helloworld DBTableName hello /IfModule $ sudo apxs -i -a -c -I /usr/include/mysql -L /usr/lib64/mysql -lmysqlclient mod_db.
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201404040828/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -638,6 +595,46 @@ DSP/RTBオーディエンスターゲティング入門読了  あどてくや�
   
   <footer>
     <a href="https://yutakikuchi.github.io/post/201312110756/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201312060824/">Redisにマルチプロセスで接続する時に気をつけたい事</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Dec 06, 08:24</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+  [Redis] : Redisにマルチプロセスで接続する時に気をつけたい事 Redis in Action
+作者: Josiah L. Carlson,Salvatore Sanfilippo出版社/メーカー: Manning Pubns Co発売日: 2013/06/25メディア: ペーパーバック クリック: 1回この商品を含むブログを見る
+Redis  広告配信やっています@yutakikucです。
+Redisの内部処理が1スレッドで受けているようなので、マルチプロセスからRedisに書き込み処理を大量に流した時にどうなるのかを検証してみました。言語はCを、Libraryはhiredisを使います。redis/hiredis 
+hiredisを使って単一プロセスで実行した場合と、Apache Moduleにhiredisを組み込んでマルチプロセスの実行状態で検証します。検証機はCentOS6.4です。
+  hiredis  Redisのinstall、version確認、起動 RedisのVersionは2.4.10です。
+$ sudo yum install redis -y $ redis-server -v Redis server version 2.4.10 (00000000:0) $ sudo chkconfig --add redis $ sudo /etc/init.d/redis start   hiredisのinstallとテストプログラム hiredisのinstall後に単純にHashをincrbyするプログラムを実行してみます。まずはプロセス内で単純に指定回数incrbyを繰り返します。今回は指定回数を1万としたので、かなり高速に書き込みが完了している事が分かると思います。実行後にはredis-cliで書き込みが出来ているかを確認します。
+$ sudo yum install hiredis hiredis-devel -y $ gcc -I/usr/include/hiredis -L/usr/lib64 -lhiredis redis-test.
+  </p>
+
+  
+  <footer>
+    <a href="https://yutakikuchi.github.io/post/201312060824/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

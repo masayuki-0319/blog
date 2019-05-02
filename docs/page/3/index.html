@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,47 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201512311829/">mysqlでgroup毎のTop-K行を取得する方法</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2015 Dec 31, 18:29</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [etc] : mysqlでgroup毎のTop-K行を取得する方法  How to select the first/least/max row per group in SQL · Baron Schwartz's Blog 
-mysqlを用いた特定のgroupに所属する行を一定数ずつ(もしくは何かしらでsortされたTop-K行)取り出したいという問題がある。これしきの事、単純なgroup byを使って簡単に解きたい内容であるがちょっとしたテクニックを必要とする。調べたところ以下の解決方法がある。
- 1. union allを使ってgroup毎に抽出した結果を結合。
- 2. tableをgroupで自己結合し特定行数取得。
- 3. session固有のユーザ定義変数を使って特定group内の行をcountしていく。
-因みにposgre/sql serverはrow_number()というgroup毎に数を採番してくれる便利関数が存在してこれを利用するらしいが、mysqlにはまだ無い様子。
-解決方法1の場合は各group毎に特定行抽出した結果をunionするのでgroupが増えるとQueryが冗長でダサい。2の場合はgroupのcross結合を行うのでgroupに紐づくデータが膨大だとつらい。よってここでは 3.session固有のユーザー定義変数を使って...について簡単に紹介する。
-下はidの昇順にてTop-10を出している。最初の行でsession固有の変数を定義している。SQL中の@group = media_idがGroupの指定。group変数が未定義の場合は1を同一の場合にはnumをincrementしている。subquery内のrow_numberがincrement数なので最後のwhereにてrow_numberが10以下を指定するとTop-10を抽出できる。rand()にてgroup内からrandomで特定行数抽出したい場合はsubquery内のsubqueryで最初にrand()しておくと良い。
-set @K := 10, @num := 0, @group := ''; select id, media_id from ( select id, media_id, @num := if(@group = media_id, @num + 1, 1) as row_number, @group := media_id as mid from contents -- randomに切り替えたい場合はfromとして下記を利用 -- from (select id, media_id from contents order by rand()) as c order by media_id ) as t where t.
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201512311829/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -587,6 +546,43 @@ $ git clone https://github.com/bplawler/crawler.git $ cd crawler $ cp build.sbt 
   
   <footer>
     <a href="https://yutakikuchi.github.io/post/201412291448/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201412240032/">What is spray?</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2014 Dec 24, 00:32</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+  [etc] : What is spray? What is spray  spray | Introduction » What is spray? 
+adtech × scala勉強会でsprayの事例が幾つかあったので軽く触ってみることにしました。上のWhat-is-sprayで紹介されている内容をここでも簡単に記述しておくと以下のような感じです。2014.12.23日現在、最新のVersionは1.3.2のようです。尚、本記事の実験環境はCentOS Linux release 7.0.1406 (Core)で動かしています。
+ Akka上で動く、HTTP/RESTをサポートしたクライント/サーバーサイドのライブラリ。 JVMのlayerを触りたい場合もレガシーなJavaの実装が必要なくscalaのAPIの記述で事が足りる。 sprayはフレームワークというよりはライブラリ志向で作られている(哲学的に)。 完全非同期、Non-Blocking。 ActorとFutureベース。 ハイパフォーマンス、軽量、テスト可能。 twirlというtemplate engineもある。 中心となるspray-io、インメモリのキャッシュであるspray-caching、spray-io上でClient/Serverとして動くspray-can、Servlet上で動かすためのspray-servletなどのモジュールが用意されている。    Getting Start  Hello world Getting Started with sbt — Installing sbt on Linux 
+まずはscalaのbuild toolをinstall、次にsprayを動かしてみます。プロジェクト名はhello-worldとします。以下の実行によりHTMLを吐き出すところまでは出来ました。spray-templateはspray-can上でspray-routingを実行するためのtemplateなようです。
+$ wget https://dl.bintray.com/sbt/rpm/sbt-0.13.7.rpm $ sudo yum localinstall sbt-0.13.7.rpm -y $ git clone git://github.com/spray/spray-template.git hello-world $ cd hello-world $ sbt  test  re-start $ curl "
+  </p>
+
+  
+  <footer>
+    <a href="https://yutakikuchi.github.io/post/201412240032/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

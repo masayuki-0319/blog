@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,44 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201205210841/">PHPのマルチスレッドプログラミングを使ってシステム処理を爆速化するお話し</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2012 May 21, 08:41</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [PHP] : PHPのマルチスレッドプログラミングを使ってシステム処理を爆速化するお話し パーフェクトPHP (PERFECT SERIES 3)
-作者: 小川雄大,柄沢聡太郎,橋口誠出版社/メーカー: 技術評論社発売日: 2010/11/12メディア: 大型本購入: 32人 クリック: 1,065回この商品を含むブログ (60件) を見る
-Intro  会社に入社して5年が経ち、4月から新しい部署で働いています。最近はプログラミング言語の学習としてC++/JAVA/Perl/R言語、理論の勉強として機械学習をやっています。平行して少しずつ勉強しているのでblogの記事内容も多種多様になってきています(笑)。新しい事をやる時は一つの事に集中して勉強したいのですが、直近は業務で成果を残さないと相手にされないので学習がforkします。ということで強引な繋ですが今日はforkの話をします。業務で必要になったPHPの処理爆即化に向けてマルチスレッドプログラミングを試してみました。pcntlにより親プロセスから子プロセスを作成してforkさせます。出来たところまでの成果を以下にまとめました。
-PHP: PCNTL - Manual 
-  Source Build  pcntlというPHPのマルチスレッドプログラミングはdefaultでは使えないようです。phpソースをbuildする時に--enable-pcntlを付ける必要があります。以前にmcrypt関数を使う時にもオプションをつけて--with-mcrypt=/usr/local/libを付けたりlibmcryptをインストールしないといけないことがあったので、標準で使えるようにして欲しいですね。
- $pid = pcntl_fork(); if ($pid == -1) { die('fork できません'); } else if ($pid) { // 親プロセスの場合 echo "parent process \n"; pcntl_wait($status); // ゾンビプロセスから守る } else { // 子プロセスの場合 echo "child process \n"; } $ php pcntl.php Fatal error: Call to undefined function pcntl_fork()次にphpソース取得とコンパイル、インストール手順を書きます。
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201205210841/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -597,6 +559,41 @@ man $ man g++ G++(1) GNU Tools G++(1) 名称 g++ - GNU プロジェクト C++ �
   
   <footer>
     <a href="https://yutakikuchi.github.io/post/201204160815/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201204091021/">Hadoop HDFS SHELL TIPS</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Apr 09, 10:21</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+  [Hadoop] : Hadoop HDFS SHELL TIPS Hadoop Articles  今までHadoop関連で紹介した記事は以下のものです。それぞれMapReduceについては紹介したのですが、HDFSの操作については記述していなかったので今回まとめてみました。
+ CentOSでHadoopを使ってみる - Yuta.Kikuchiの日記  Hadoopをより便利に使う！HiveでのMapReduceまとめ - Yuta.Kikuchiの日記  「魔法少女まどか☆マギカ」の台詞をJavaScriptでMapReduceしてGoogle Chart APIでグラフ出力したよ！ - Yuta.Kikuchiの日記     HDFS SHELL  HDFS File System Shell Guide 
+ cat  chgrp chmod chown copyFromLocal copyToLocal count cp du dus  expunge get  getmerge ls lsr  mkdir moveFromLocal moveToLocal mv put  rm rmr  setrep stat tail test text touchz    OverViews   The FileSystem (FS) shell is invoked by bin/hadoop fs .
+  </p>
+
+  
+  <footer>
+    <a href="https://yutakikuchi.github.io/post/201204091021/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

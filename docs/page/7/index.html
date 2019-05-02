@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,41 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201308190844/">プロセス管理の初歩テクニック</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2013 Aug 19, 08:44</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [Linux] : プロセス管理の初歩テクニック Index   一言 Terminalログアウト後もプロセスを残す プロセスの2重起動防止 簡単に不要なプロセスをkillする tmuxの薦め    一言  はてなって不思議なコミュニティーで具体的な実装や調査分析よりも便利なコマンドとかを紹介するネタが何故か重宝されるようなので、良く使うプロセス管理系コマンドの初歩テクニックを書いてみます。( コマンドの学習をより必要とする人が多く一般的な話だからでしょうか？ )
-  Terminalログアウト後もプロセスを残す  単一の処理で長時間かかってしまうようなプログラムを実行後にログアウトするとプロセスが消えて悲惨な目に遭います。tmuxやscreenを使って再起動可能な設定をしている人は特に気にする必要はありませんが、これらを使っていない場合はnohupでログアウト後もプロセスを残しましょう。
-$ vi nohuptest.sh #!/bin/sh sleep 1000 $ chmod +x ./nohuptest.sh $ nohup ./nohuptest.sh & [1] 13564 #nohup: ignoring input and appending output to `nohup.out' $ exit # 再度ログイン $ ps auxww | grep nohuptest yuta 13564 0.0 0.1 106088 1172 ? SN 03:56 0:00 /bin/sh .
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201308190844/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -619,6 +584,45 @@ ApacheModuleを自作する前に標準Moduleのmod_usertrackを使ってみま�
   
   <footer>
     <a href="https://yutakikuchi.github.io/post/201306170835/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201306100845/">MongoDBのAggregation Framework/MapReduceを使ってより賢く集計を行うためのまとめ</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Jun 10, 08:45</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+  [MongoDB] : MongoDBのAggregation Framework/MapReduceを使ってより賢く集計を行うためのまとめ 
+Mogodb集計  MongoDBの集計機能が便利過ぎて泣けてくるお話し - Yuta.Kikuchiの日記 
+1月程前にMongoDBを使った集計機能の紹介をさせていただいた@yutakikucです。内容は全く大した事無かったのですが、タイトルで誘導を引っ張って200近いbookmarkを集める事ができました笑。みなさんの参考にしていただけたこと、大変嬉しく思います。今日はMongoDBの集計をもう一歩踏み込んだ内容を紹介して行きたいと思います。題材としてはAggregation FrameworkとMapReduceについてです。因に今回試してみたMongoDB-Versionは2.2.3です。Versionによって挙動が変わると思うので注意してください。
+$ mongo --version MongoDB shell version: 2.2.3   Aggregation Framework  Aggregation ― MongoDB Manual 2.4.4 
+SQL to Aggregation Framework Mapping Chart ― MongoDB Manual 2.4.4 
+Aggregation FrameworkはRDBMSのSQLに備わっている便利機能をMongoDBに付与したFrameworkという説明が分かりやすいと思います。MongodbのVerson2.2以降に備わった機能です。以下はMongodbのAggregation OperatorとRDBMSのSQLの対応表になります。一つずつのOperatorはFilterに近いイメージで、Chainをしてパイプライン処理とすることができます。最終的にはChainした結果を取得します。
+   MongoDB Aggregation Operator   SQL Term,Function,Concepts     $match   WHERE     $group   GROUP BY     $project   SELECT     $sort   ORDER BY     $limit   LIMIT     $sum   SUM(),COUNT()    $avg   AVERAGE()   CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する - Yuta.
+  </p>
+
+  
+  <footer>
+    <a href="https://yutakikuchi.github.io/post/201306100845/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

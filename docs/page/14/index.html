@@ -25,10 +25,10 @@
   <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,12 +57,12 @@
 
   
     
-        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/blog/css/my.css">
     
   
   
     
-        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+        <script src="https://yutakikuchi.github.io/blog/js/my.js"></script>
     
   
 
@@ -234,41 +234,6 @@
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://yutakikuchi.github.io/post/201204091021/">Hadoop HDFS SHELL TIPS</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2012 Apr 09, 10:21</time>
-  </div>
-
-  
-
-  
-
-  
-
-</div>
-
-  </header>
-
-  <p>
-  [Hadoop] : Hadoop HDFS SHELL TIPS Hadoop Articles  今までHadoop関連で紹介した記事は以下のものです。それぞれMapReduceについては紹介したのですが、HDFSの操作については記述していなかったので今回まとめてみました。
- CentOSでHadoopを使ってみる - Yuta.Kikuchiの日記  Hadoopをより便利に使う！HiveでのMapReduceまとめ - Yuta.Kikuchiの日記  「魔法少女まどか☆マギカ」の台詞をJavaScriptでMapReduceしてGoogle Chart APIでグラフ出力したよ！ - Yuta.Kikuchiの日記     HDFS SHELL  HDFS File System Shell Guide 
- cat  chgrp chmod chown copyFromLocal copyToLocal count cp du dus  expunge get  getmerge ls lsr  mkdir moveFromLocal moveToLocal mv put  rm rmr  setrep stat tail test text touchz    OverViews   The FileSystem (FS) shell is invoked by bin/hadoop fs .
-  </p>
-
-  
-  <footer>
-    <a href="https://yutakikuchi.github.io/post/201204091021/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -597,6 +562,43 @@ API Server  アクセスするAPIサーバをGoogle App Engineに置きます。
   
   <footer>
     <a href="https://yutakikuchi.github.io/post/201201221535/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://yutakikuchi.github.io/post/201201200831/">RSSより便利なAtomデータの詳細と利用方法について簡単にまとめてみた</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Jan 20, 08:31</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+  [WebAPI] : RSSより便利なAtomデータの詳細と利用方法について簡単にまとめてみた 
+概要  Google Data APIがAtom形式のプロトコルを採用しているように、RSS/Atomというサイト情報を配信する仕組みからWebAPIでのリクエストやレスポンスにまでAtomが広く利用されつつあります。Atomって単純なXML文書の拡張でRSSとさほど変わりないと思っていたのですが、最近仕事でAtomに触れる機会が増えてきているので簡単にまとめた記事を書きます。
+  RSSとの違い  Atomが生まれた経緯はRSSが古い仕様かつRSS1.0/2.0の仕様策定で色々と揉めていたときにAtomを作ろうという動きになったようです。RSSのバージョンごとに非互換性であったり、仕様が明確になっていなかった事が利用者からの不満が多くありました。今後のRSS仕様の策定は2.0から改変が加えられる様子は無いです。RSSの不満は仕様が曖昧な故に配信者に委ねられるという点です。例えばHTMLのマークアップがコンテンツに含めて良いのか？などの規定がありません。AtomはRSSでの反省を踏まえて、特定のベンダに依存しない、全ての人が自由に実装できる、誰でも自由に拡張可能である、明確にかつ詳細に定義する理念を掲げています。
+  Atomについて  Atomには二つの仕様があります。一つ目はコンテンツ配信フィード用で｢Atom配信フォーマット｣（Atom Syndication Format）と呼ばれています。もう一つはコンテンツを編集するための｢Atom出版プロトコル｣（Atom Publishing Protocol）でAtomAPIやAtomPPと呼ばれる事もあるようです。Atom Syndication FormatはRFC4287で、Atom Publishing ProtocolはRFC5023で策定がされています。Atomのメリットをいくつか挙げるとすると独自の名前空間が使えるのでデータを自由にカスタマイズできる、配信内容がSummary(要約)とContent(内容)に明確に分離されているのでデータ構造が分かりやすい、contentフィールドにはテキストは勿論のことながらHTMLや画像/動画も含めて配信する事が可能になります。またIETFという機関が仕様を管理しているのでRSSのように配信者の意向に左右されることはありません。以下はAtomのサンプルです。
+xml version="1.0"encoding="utf-8"? xmlns="http://www.w3.org/2005/Atom" type="text"dive into mark type="html" A &lt;em&gt;lot&lt;/em&gt; of effort went into making this effortless  2005-07-31T12:29:29Z tag:example.org,2003:3 rel="alternate"type="text/html" hreflang="en"href="http://example.org/"/ rel="self"type="application/atom+xml" href="http://example.org/feed.atom"/ Copyright (c) 2003, Mark Pilgrim uri="http://www.example.com/"version="1.0" Example Toolkit   Atom draft-07 snapshot rel="alternate"type="text/html" href="http://example.org/2005/04/02/atom"/ rel="enclosure"type="audio/mpeg"length="1337" href="http://example.org/audio/ph34r_my_podcast.mp3"/ tag:example.org,2003:3.2397 2005-07-31T12:29:29Z 2003-12-13T08:29:29-04:00  Mark Pilgrim http://example.
+  </p>
+
+  
+  <footer>
+    <a href="https://yutakikuchi.github.io/post/201201200831/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>
