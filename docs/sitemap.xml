@@ -1040,6 +1040,11 @@
   </url>
   
   <url>
+    <loc>https://yutakikuchi.github.io/about/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yutakikuchi.github.io/startupai/</loc>
     <priority>0</priority>
   </url>
