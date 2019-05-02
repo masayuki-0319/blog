@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20100927/1285606208" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>magic method &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>magic method</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2010 Sep 27, 01:50</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="php-magic-method">[PHP] : magic method</h2>
+
+<p><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>のマジック<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>について挙動を確認してみました。<br />
+とりあえずは代表的なもののみをピックアップ。</p>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial">&lt;?php</span></p>
+
+<p><span class="synType">class</span> MagicMethod <span class="synSpecial">{</span></p>
+
+<p><span class="synType">private</span> <span class="synStatement">$</span><span class="synIdentifier">data_</span> <span class="synStatement">=</span> <span class="synType">array</span><span class="synSpecial">()</span>;</p>
+
+<p><span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">__construct</span><span class="synSpecial">()</span> <span class="synSpecial">{</span>
+    <span class="synPreProc">echo</span> &ldquo;<span class="synConstant">call construct </span><span class="synSpecial">\n</span>&rdquo;;
+<span class="synSpecial">}</span></p>
+
+<p><span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">__destruct</span><span class="synSpecial">()</span> <span class="synSpecial">{</span>
+    <span class="synPreProc">echo</span> &ldquo;<span class="synConstant">call destruct </span><span class="synSpecial">\n</span>&rdquo;;
+<span class="synSpecial">}</span></p>
+
+<p><span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">__get</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">key</span> <span class="synSpecial">)</span> <span class="synSpecial">{</span>
+    <span class="synPreProc">echo</span> &ldquo;<span class="synConstant">call _<em>get </span><span class="synSpecial">\n</span>&rdquo;;
+    <span class="synStatement">return</span> <span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>data</em><span class="synSpecial">[</span> <span class="synStatement">$</span><span class="synIdentifier">key</span> <span class="synSpecial">]</span>;
+<span class="synSpecial">}</span></p>
+
+<p><span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">_<em>set</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">key</span>, <span class="synStatement">$</span><span class="synIdentifier">name</span> <span class="synSpecial">)</span> <span class="synSpecial">{</span>
+    <span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>data</em><span class="synSpecial">[</span> <span class="synStatement">$</span><span class="synIdentifier">key</span> <span class="synSpecial">]</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">name</span>;
+    <span class="synPreProc">echo</span> &ldquo;<span class="synConstant">call __set </span><span class="synSpecial">\n</span>&rdquo;;
+<span class="synSpecial">}</span></p>
+
+<p><span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement"><strong>toString</span><span class="synSpecial">()</span> <span class="synSpecial">{</span>
+    <span class="synStatement">return</span> <span class="synConstant"></strong>CLASS__</span>;
+<span class="synSpecial">}</span></p>
+
+<p><span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">__call</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">name</span>, <span class="synStatement">$</span><span class="synIdentifier">arguments</span> <span class="synSpecial">)</span> <span class="synSpecial">{</span>
+    <span class="synStatement">$</span><span class="synIdentifier">arg</span> <span class="synStatement">=</span> <span class="synIdentifier">implode</span><span class="synSpecial">(</span> &ldquo;<span class="synConstant">,</span>&rdquo; , <span class="synStatement">$</span><span class="synIdentifier">arguments</span> <span class="synSpecial">)</span>;
+    <span class="synPreProc">echo</span> &ldquo;<span class="synConstant">call func class = </span><span class="synStatement">$</span><span class="synIdentifier">name</span><span class="synConstant">  arg = </span><span class="synStatement">$</span><span class="synIdentifier">arg</span><span class="synConstant"> </span><span class="synSpecial">\n</span>&rdquo;;
+<span class="synSpecial">}</span></p>
+
+<p><span class="synSpecial">}</span></p>
+
+<p><span class="synComment">//__construct</span>
+<span class="synStatement">$</span><span class="synIdentifier">magic</span> <span class="synStatement">=</span> <span class="synPreProc">new</span> MagicMethod<span class="synSpecial">()</span>;</p>
+
+<p><span class="synComment">//__call</span>
+<span class="synStatement">$</span><span class="synIdentifier">magic</span><span class="synType">-&gt;</span>magic<span class="synSpecial">(</span> &lsquo;<span class="synConstant">test</span>&rsquo;, <span class="synType">array</span><span class="synSpecial">(</span> &lsquo;<span class="synConstant">arg1</span>&rsquo;, &lsquo;<span class="synConstant">arg2</span>&rsquo; <span class="synSpecial">)</span> <span class="synSpecial">)</span>;</p>
+
+<p><span class="synComment">//__set</span>
+<span class="synStatement">$</span><span class="synIdentifier">magic</span><span class="synType">-&gt;</span><span class="synIdentifier">key</span> <span class="synStatement">=</span> &lsquo;<span class="synConstant">test</span>&rsquo;;</p>
+
+<p><span class="synComment">// __get</span>
+<span class="synPreProc">echo</span> <span class="synStatement">$</span><span class="synIdentifier">magic</span><span class="synType">-&gt;</span><span class="synIdentifier">key</span> <span class="synStatement">.</span> &ldquo;<span class="synSpecial">\n</span>&rdquo;;</p>
+
+<p><span class="synComment">//__toString</span>
+<span class="synPreProc">echo</span> <span class="synStatement">$</span><span class="synIdentifier">magic</span> <span class="synStatement">.</span> &ldquo;<span class="synSpecial">\n</span>&rdquo;;</p>
+
+<p><span class="synComment">//__destruct</span>
+<span class="synStatement">unset</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">magic</span> <span class="synSpecial">)</span>;</p>
+
+<p><span class="synPreProc">echo</span> &ldquo;<span class="synConstant">process is finished </span><span class="synSpecial">\n</span>&rdquo;;
+</pre><p>以下は出力結果です。</p>
+<pre class="code" data-lang="" data-unlink>call construct
+call func class = magic  arg = test,Array
+call __set
+call __get
+test
+MagicMethod
+call destruct
+process is finished </pre>
+<h2>abstract static宣言</h2><p>abstract staticの宣言が<a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>で出来ます。継承した子クラスでもstaticで呼び出すことが出来ます。</p>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial">&lt;?php</span></p>
+
+<p><span class="synType">abstract</span> <span class="synType">class</span> hoge <span class="synSpecial">{</span>
+<span class="synType">abstract</span> <span class="synType">static</span> <span class="synPreProc">function</span> foo <span class="synSpecial">()</span>;
+<span class="synSpecial">}</span></p>
+
+<p><span class="synType">class</span> fuga <span class="synType">extends</span> hoge <span class="synSpecial">{</span>
+<span class="synType">static</span> <span class="synType">public</span> <span class="synPreProc">function</span> foo<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synPreProc">echo</span> &ldquo;<span class="synConstant">Foo </span><span class="synSpecial">\n</span>&rdquo;;
+<span class="synSpecial">}</span></p>
+
+<p><span class="synSpecial">}</span></p>
+
+<p>fuga<span class="synStatement">::</span>foo<span class="synSpecial">()</span>;
+</pre></p>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201009241534/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201009241534/">API Frameworkの設計</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201009292125/">PHPでFilterChainを実装してみた</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201009292125/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

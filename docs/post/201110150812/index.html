@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20111015/1318633937" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Date/Timestamp変換のまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Date/Timestamp変換のまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Oct 15, 08:12</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="php-date-timestamp変換のまとめ">[PHP] : Date/Timestamp変換のまとめ</h2>
+
+<div class="section">
+<h4>2013/07/17追記</h4>
+<p>※本記事の内容より詳しいものを書きました。<br />
+<a href="http://d.hatena.ne.jp/yutakikuchi/20130617/1371425713">誰もが一度は陥る日付処理。各種プログラミング言語におけるDateTime型/TimeStamp型の変換方法のまとめ - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20130617/1371425713"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20130617/1371425713" alt="はてなブックマーク - 誰もが一度は陥る日付処理。各種プログラミング言語におけるDateTime型/TimeStamp型の変換方法のまとめ - Yuta.Kikuchiの日記" border="0" /></a></p><p></p>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">概要</span></h4>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>からアプリケーションで日付情報を引くときDate型<=>Timestamp型の変換を行う事がしばしばある。</li>
+<li>今日は<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>のDate/Timestampの型変換についてまとめる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>の例では<a class="keyword" href="http://d.hatena.ne.jp/keyword/SpiderMonkey">SpiderMonkey</a>を利用している。</li>
+</ul>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">Date型の日付を出力する</span></h4>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a></h5>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">//現在時刻をDate型で出力</span>
+<span class="synComment">//date関数を使う場合</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span>"<span class="synConstant">Y-m-d H:i:s</span>"<span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synComment">//結果　2011-10-14 00:00:00</span>
+
+<span class="synComment">//strftime関数を使う場合</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">strftime</span><span class="synSpecial">(</span>"<span class="synConstant">%Y-%m-%d %H:%M:%S</span>"<span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synComment">//結果　2011-10-14 00:00:00</span>
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a></h5>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">from</span> datetime <span class="synPreProc">import</span> *
+
+<span class="synComment">#現在時刻を表示</span>
+<span class="synIdentifier">print</span> datetime.now().strftime( <span class="synConstant">'%Y-%m-%d %H:%M:%S'</span> )
+<span class="synComment">#結果  2011-10-14 00:00:00</span>
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a></h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synComment">//Dateオブジェクトを利用</span>
+<span class="synIdentifier">var</span> d = <span class="synStatement">new</span> <span class="synType">Date</span>();
+<span class="synIdentifier">var</span> year  = d.getFullYear();
+<span class="synIdentifier">var</span> month = d.getMonth() + 1;
+<span class="synIdentifier">var</span> day   = d.getDate();
+<span class="synIdentifier">var</span> hour  = ( d.getHours()   < 10 ) ? <span class="synConstant">'0'</span> + d.getHours()   : d.getHours();
+<span class="synIdentifier">var</span> min   = ( d.getMinutes() < 10 ) ? <span class="synConstant">'0'</span> + d.getMinutes() : d.getMinutes();
+<span class="synIdentifier">var</span> sec   = ( d.getSeconds() < 10 ) ? <span class="synConstant">'0'</span> + d.getSeconds() : d.getSeconds();
+print( year + <span class="synConstant">'-'</span> + month + <span class="synConstant">'-'</span> + day + <span class="synConstant">' '</span> + hour + <span class="synConstant">':'</span> + min + <span class="synConstant">':'</span> + sec );
+<span class="synComment">//結果  2011-10-14 00:00:00</span>
+</pre>
+</div>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">unixtimeを表示する</span></h4>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a></h5>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">// timestamp取得</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">time</span><span class="synSpecial">()</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synComment">//結果 1318518000</span>
+
+<span class="synComment">// micro秒まで出力</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">microtime</span><span class="synSpecial">()</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synComment">//結果 0.89138500 1318518000</span>
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a></h5>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">from</span> datetime <span class="synPreProc">import</span> *
+<span class="synPreProc">import</span> time
+
+<span class="synComment">#timestamp表示</span>
+<span class="synIdentifier">print</span> <span class="synIdentifier">int</span>( time.mktime( datetime.now().timetuple() ) ) 
+//結果 <span class="synConstant">1318518000</span>
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a></h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink>print( parseInt( <span class="synStatement">new</span> <span class="synType">Date</span>() /1000 ) );
+<span class="synComment">//結果 1318518000</span>
+</pre>
+</div>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">Date型の日付をUnixTimeに変換する</span></h4>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a></h5>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">// Date型をtimestamp型に変換</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">strtotime</span><span class="synSpecial">(</span> "<span class="synConstant">2011-10-14 00:00:00</span>" <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synComment">// 結果 1318518000</span>
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a></h5>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synComment"># from / import</span>
+<span class="synPreProc">from</span> datetime <span class="synPreProc">import</span> *
+<span class="synPreProc">import</span> time
+
+<span class="synComment">#Date型をtimestamp型に変換</span>
+stime = <span class="synConstant">"2011-10-14 00:00:00"</span>
+<span class="synIdentifier">print</span> <span class="synIdentifier">int</span>( time.mktime( datetime.strptime( stime, <span class="synConstant">"%Y-%m-%d %H:%M:%S"</span> ).timetuple() ) )
+<span class="synComment">#結果 1318518000</span>
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a></h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synIdentifier">var</span> ts = <span class="synConstant">"2011-10-14 00:00:00"</span>;
+print( <span class="synType">Date</span>.parse( ts.replace( <span class="synConstant">/-/g</span>, <span class="synConstant">'/'</span>) ) / 1000 );
+<span class="synComment">//結果 1318518000</span>
+</pre>
+</div>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">timestampをdate型に変換</span></h4>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a></h5>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">// timestampをDate型に変換</span>
+<span class="synPreProc">echo</span> <span class="synIdentifier">date</span><span class="synSpecial">(</span> "<span class="synConstant">Y-m-d H:i:s</span>", "<span class="synConstant">1318518000</span>" <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";
+<span class="synComment">// 結果 2011-10-14 00:00:00</span>
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a></h5>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">from</span> datetime <span class="synPreProc">import</span> *
+
+<span class="synComment">#timestamp型をDate型に変換</span>
+<span class="synIdentifier">print</span> datetime.fromtimestamp( <span class="synConstant">1318518000</span> )
+<span class="synComment"># 結果 2011-10-14 00:00:00</span>
+</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a></h5>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synIdentifier">var</span> ts = 1318518000;
+<span class="synIdentifier">var</span> d = <span class="synStatement">new</span> <span class="synType">Date</span>( ts * 1000 );
+<span class="synIdentifier">var</span> year  = d.getFullYear();
+<span class="synIdentifier">var</span> month = d.getMonth() + 1;
+<span class="synIdentifier">var</span> day  = d.getDate();
+<span class="synIdentifier">var</span> hour = ( d.getHours()   < 10 ) ? <span class="synConstant">'0'</span> + d.getHours()   : d.getHours();
+<span class="synIdentifier">var</span> min  = ( d.getMinutes() < 10 ) ? <span class="synConstant">'0'</span> + d.getMinutes() : d.getMinutes();
+<span class="synIdentifier">var</span> sec   = ( d.getSeconds() < 10 ) ? <span class="synConstant">'0'</span> + d.getSeconds() : d.getSeconds();
+print( year + <span class="synConstant">'-'</span> + month + <span class="synConstant">'-'</span> + day + <span class="synConstant">' '</span> + hour + <span class="synConstant">':'</span> + min + <span class="synConstant">':'</span> + sec );
+<span class="synComment">//結果 2011-10-14 00:00:00</span>
+</pre>
+</div>
+</div>
+<div class="section">
+<h4>まとめ</h4>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>はdate,time,strtotime関数だけを覚えておけば大体のことは済みそう。また関数が１個で完結するので直感的にも分かりやすい。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>はdatetimeオブジェクトの理解をしていないと使えない。オブジェクトと<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>を指定するのが一番美しいと言えるかも。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>のDate型出力がとても煩雑。date.toString()などの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>でDate型が出力できれば楽ですが、ブラウザの仕様によって挙動が異なる様子。timestampの出力は楽。</li>
+</ul>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201110130127/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201110130127/">sudoでリダイレクトをしたいとき</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201110180830/">Apacheのチューニング</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201110180830/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

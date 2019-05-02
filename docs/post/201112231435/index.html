@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20111223/1324618543" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Introduction to Computational Advertising - Stanford大学資料から学ぶオンライン広告知識 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Introduction to Computational Advertising - Stanford大学資料から学ぶオンライン広告知識</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Dec 23, 14:35</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="ad-introduction-to-computational-advertising-stanford大学資料から学ぶオンライン広告知識">[AD] : Introduction to Computational Advertising - Stanford大学資料から学ぶオンライン広告知識</h2>
+
+<p><img src="http://www.stanford.edu/images/stanford_title.png" /></p>
+
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">Stanford大学オンライン広告授業</span></h4>
+
+<blockquote>
+    <p><a href="http://www.stanford.edu/class/msande239/">★★Stanford大学オンライン広告授業資料★★</a><br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>/DB/<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BF%CD%B9%A9%C3%CE%C7%BD">人工知能</a>の内容での授業公開で有名なStanford大学ですが、オンライン広告の授業資料も公開しています。一応私も広告配信、集計、解析に業務で携わっており、ようやく最近海外のオンライン広告のトレンドや論文の内容に注目し始めました。Standord大学オンライン広告の授業一覧と内容は次のようになっています。</p>
+
+<ol>
+<li>Overview and Introduction</li>
+<li>Marketplace and Economics</li>
+<li>Textual Advertising 1: Sponsored Search</li>
+<li>Textual Advertising 2: Contextual Advertising</li>
+<li>Display Advertising 1</li>
+<li>Display Advertising 2</li>
+<li>Targeting</li>
+<li>Recommender Systems</li>
+<li>Mobile, Video and other Emerging Formats</li>
+<li>Project Presentations</li>
+</ol><p>今日のブログでは第1回のOverview and Introductionについて日本語に訳しながら個人的に重要だと思う箇所だけ紹介します。みなさんからの反応が良ければ2回目以降の内容についても記述するかもです(笑) ちなみに授業のInstructorは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a>Incで研究者をやっている<a href="http://research.yahoo.com/Vanja_Josifovski">Vanja Josifovski</a>、<a href="http://research.yahoo.com/">Andrei_BroderAndrei Broderさん</a>の二人です。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">授業内容</span></h4>
+
+<blockquote>
+    <p>(注) 以下ではcomputational” advertisingをオンライン広告と訳しています。本来の直訳はコンピュータによる広告です。</p>
+
+<div class="section">
+<h5><span class="deco" style="font-weight:bold;">オンライン広告とは</span></h5>
+
+<ul>
+<li>Find the "best match" between a given user in a given context and a suitable advertisement.(contextを与えられた条件のuserと最適な広告とのbest matchをみつけること)</li>
+<li>オンライン広告のマーケットは以下の3点の中心に位置する。
+<ul>
+<li>Advertiser(広告主)</li>
+<li>Publisher(配信社、広告の出し面を作る人)</li>
+<li>User(ユーザ)</li>
+</ul></li>
+<li>オンライン広告(コンピュータ広告)の要素とは？
+<ul>
+<li>情報検索</li>
+<li>統計モデル</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a></li>
+<li>経済学</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B2%A1%BC%A5%E0%CD%FD%CF%C0">ゲーム理論</a>、オークション理論、自動化デザイン</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF%A5%EA%A5%F3%A5%B0">クラスタリング</a></li>
+<li>最適化</li>
+<li>推薦システム</li>
+</ul></li>
+<li>重要なメッセージ
+<ul>
+<li>繰り返しになるがオンライン広告とはユーザと広告のbestmatchを見つける事。</li>
+<li>広告のお金的なスケールはとても大きい。</li>
+<li>広告も情報の一つの形式である。</li>
+<li>新しいアプリケーションやテクノロジーは日々開発されている。</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>なぜオンライン広告なのか？</h5>
+
+<ul>
+<li>Computationalとつく学問は色々とあるが、これらの多くは以下の2つが言える。
+<ul>
+<li>a) 古い<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D4%A5%E5%A1%BC%A5%BF%A5%B5%A5%A4%A5%A8%A5%F3%A5%B9">コンピュータサイエンス</a>とコンピュータの能力をMixしたもの。</li>
+<li>b) 昔の挑戦を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a>的に考えることである。</li>
+</ul></li>
+<li>昔
+<ul>
+<li>広告媒体の関係性- 雑誌、新聞、テレビ等　<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>存在していた。</li>
+<li>一つの媒体に対してコストが高かった。</li>
+<li>パーソナライズ化されていない。</li>
+<li>Adの知識を持った人によるターゲティングだった</li>
+<li>ROI(投資に対するリターン)を測定するのが困難だった。</li>
+</ul></li>
+<li>昔と比較してオンラインだと
+<ul>
+<li>機会は数十億以上</li>
+<li>クリエイティブも数十億以上</li>
+<li>パーソナライズ化可能</li>
+<li>機会に対するコストが低い</li>
+<li>定量化可能</li>
+</ul></li>
+<li>オンライン広告のメイン挑戦
+<ul>
+<li>contextを与えられた条件のuserと最適な広告とのbest matchをみつけること。</li>
+<li>この場合のcontextが検索結果の場合はスポンサードサーチだし、配信者のページであれば<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%C6%A5%F3%A5%C4%A5%DE%A5%C3%A5%C1">コンテンツマッチ</a>やバナー広告を示す。</li>
+<li>同じような挑戦の例1として、</li>
+</ul></li>
+<li>メイン挑戦を分解してみると
+<ul>
+<li>Representationとは効果的な方法の中でuserとcontextとadのを表現する事。</li>
+<li>Definitionとは現実的なマーケットとゴールを掴むための数学に最適化する問題を定義する事。</li>
+<li>Solutionとは有効な方法で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BA%C7%C5%AC%B2%BD%CC%E4%C2%EA">最適化問題</a>を解決する事。</li>
+</ul></li>
+<li>マーケットデザインはオンライン広告が支え、オンライン広告はシステムが支えている。</li>
+</ul>
+</div>
+<div class="section">
+<h5><span class="deco" style="font-weight:bold;">オンライン広告の機会</span></h5>
+
+<ul>
+<li>広告全体の出資費も増え続けるが、特にオンライン広告の出資費は2015年には2010年の2倍程となる予想。</li>
+<li>広告の形式としては検索、ディスプレイ、属性配信が増えてきており、Email系は減少傾向にある。</li>
+<li>誰が広告に出資しているかと言うと小売り業者、電話会社、金融サービス、コンピュータ製品、旅行関係、エンターテイメント系が増えている。</li>
+<li>アメリカの成人は有名な媒体を一日にどれぐらい何を使うかというと、1位:TV:4時間30分 40%、2位:インターネット:2時間30分 25%となっている。</li>
+<li>半分以上の顧客がTV/Internetを利用している。</li>
+<li>2011年のアメ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%AB%A5%AA%A5%F3">リカオン</a>ライン広告収益は1位:<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a> $12.77(billions)、2位:<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a> $3.46、3位:<a class="keyword" href="http://d.hatena.ne.jp/keyword/FaceBook">FaceBook</a> $2.19、4位:<a class="keyword" href="http://d.hatena.ne.jp/keyword/Microsoft">Microsoft</a> $1.92 、5位:AOL $0.85となっている。</li>
+<li>何故オンラインにお金を費やすかというと
+<ul>
+<li>市場参加者はより測定可能な典型的広告と、効果的かつターゲティング可能な広告を安全に見る事が出来る。</li>
+<li>インターネットは昔からの全てのチャンネルより集計可能な媒体にしている。</li>
+</ul></li>
+<li>オンライン広告の価値
+<ul>
+<li>配信者の収益は拡大するし、小さな配信者もやって行けるようになる。</li>
+<li>広告のリーチに焦点が当てられ、ニッチな興味のビジネスも可能とする。</li>
+<li>広告主の利益もFreeサービスを使って(<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>,<a class="keyword" href="http://d.hatena.ne.jp/keyword/google">google</a>,<a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>,yahooなど)拡大する。</li>
+</ul></li>
+<li>広告無しではWeb全体が縮小してしまう。
+<ul>
+<li>広告は顧客に対して直接的にも間接的にな多くの価値を創造する。</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>オンライン広告の背景</h5>
+
+<ul>
+<li>市場の原理</li>
+<li>CPM(Cost Per thousand impressions) = 1000インプレッション毎のコスト</li>
+<li>CPC(Cost Per Click) = クリック毎のコスト</li>
+<li>CPT/<a class="keyword" href="http://d.hatena.ne.jp/keyword/CPA">CPA</a>(Cost Per Transaction/Action) = <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>やアクション毎のコスト</li>
+<li>グラフィカル広告
+<ul>
+<li>グラフィカル広告にも配信数保証型(GD)とパフォーマンス型(NGD)がある。  </li>
+</ul></li>
+<li>配信数保証型(GD)
+<ul>
+<li>ターゲティング属性のインプレッション(年齢、収入、地域性)を基に契約を結ぶ  </li>
+<li>それぞれの契約には期間と希望配信数がある</li>
+<li>配信保証型は価格の契約、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%D5%A5%A3%A5%C3%A5%AF">トラフィック</a>予想、有効な契約に対してインプレッションの割り振りをするなどの問題がある。</li>
+</ul></li>
+<li>パフォーマンス型(NGD)
+<ul>
+<li>グラフィカル広告はCPM/CPC/<a class="keyword" href="http://d.hatena.ne.jp/keyword/CPA">CPA</a>などのパフォーマンスを基にされる。</li>
+<li>一時的に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BA%C7%C5%AC%B2%BD%CC%E4%C2%EA">最適化問題</a>の精度 = クリックレート(CTR)のMaxと仮定する</li>
+<li>マッチングのアプローチ
+<ul>
+<li>Reactive:異なるページの広告を閲覧、それぞれのページのCTRは達成される、CTRを学習するとCTRが最大となる広告を選ぶことができる。  </li>
+<li>Predictive: 関連のある広告を用いる為に特性を生成する事、ランディングページを作る事、広告主が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BF%A5%C7%A1%BC%A5%BF">メタデータ</a>を作る事。- ページや広告の特性に基づくパフォーマンスを予測する事。</li>
+<li>Hybrid: ReactiveとPredictiveを重ね合わせたもの。</li>
+</ul></li>
+</ul></li>
+<li>Representation 
+<ul>
+<li>Reactive ⇒ 広告はCTR/Page+重みづけにより配信。 </li>
+<li>Predictive⇒ 広告の特性+重みづけにより配信。 </li>
+<li>Hybrid⇒ ReactiveとPredictiveを連結。 </li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>テキスト型広告</h5>
+
+<ul>
+<li>1.検索keywordから導き出される広告=Sponsored Search 
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/adwords">adwords</a>など。  </li>
+<li>広告主はPhase(Query)を入札する。</li>
+</ul></li>
+<li>2.webページのコンテンツから導き出される広告=Content Match
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/adsence">adsence</a>など。  </li>
+</ul></li>
+<li>歴史  
+<ul>
+<li>1990年後半にAlta <a class="keyword" href="http://d.hatena.ne.jp/keyword/Vista">Vista</a>がSponsored Search Modelに挑戦した。  
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%A1%BA%F7%A5%A8%A5%F3%A5%B8%A5%F3">検索エンジン</a>の利用者に受け入れられなかった。  </li>
+</ul></li>
+<li>Goto.com(のちにOvertureに吸収)が広告配信の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%A1%BA%F7%A5%A8%A5%F3%A5%B8%A5%F3">検索エンジン</a>を開発。
+<ul>
+<li>商業に興味のあるユーザはこのエンジンに興味を持った。</li>
+<li>ピーク時には10億ドル規模のビジネスに。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a>がSponsored Search modelに再度挑戦。  
+<ul>
+<li>この時は成功した。  </li>
+</ul></li>
+<li>広告主は十分な効果を受けることができない。  
+<ul>
+<li>Content Matchはよりインプレッションを提供することが可能  </li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>広告の選択</h5>
+
+<ul>
+<li>問題の定義:広告の選定の目的  
+<ul>
+<li>それぞれの参加者は自身の有用性を望んでいる。</li>
+</ul></li>
+</ul>
+<ol>
+<li>広告主はROIと量。</li>
+<li>ユーザは関連性。</li>
+<li>配信者はインプレッションと検索毎の利益。</li>
+<li>Ad network<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%F6%B6%C8">事業</a>者は収益と成長 - 広告の選択:これら4つの参加者の有用性の均衡がとれる場所がゴールとするための最適化。  </li>
+</ol>
+<ul>
+<li>いくつかの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%EC%A1%BC%A5%C9%A5%AA%A5%D5">トレードオフ</a>はビジネス目的の短い単語と長い単語を関連付けさせる。  </li>
+<li>目的の中での定期的な変更に基づく簡単な調整を許可する。  </li>
+<li>効果として要求されること:スケールとサービスのコスト - 10億規模: 
+<ul>
+<li>sponsored searchとcontent matchにおける10億の広告。  </li>
+<li>10億もの一意な検索ワード/一時間毎の100万検索。</li>
+<li>1兆のインプレッション(content macthとグラフィカル広告の両方で)</li>
+<li>10億のユーザ。</li>
+</ul></li>
+<li>ミリ秒
+<ul>
+<li>レスポンスタイムが100msを超えてはいけない。</li>
+</ul></li>
+<li>お金: 
+<ul>
+<li>リクエストは処理におけるCPUの使用量を必要とする。</li>
+<li>データはメモリーに納まりきるように。</li>
+<li>リクエスト毎のコストはサービスのコストより低くする必要がある。</li>
+<li>低いCTRはチャレンジングな問題とする。</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>テキスト広告の選択</h5>
+
+<ul>
+<li>始め:データベースのアプローチ  
+<ul>
+<li>sponsored searchのデータベース問題について考える。
+<ul>
+<li>SELECT ads FROM ad_table WHERE bid_phrase = query </li>
+</ul></li>
+<li>実装
+<ul>
+<li>Sponsored search
+<ul>
+<li>入札されたphrase(標準化された形式)の広告にマッチするquery。</li>
+<li>広告主は全ての柔軟なqueryを入札する事ができない。（特に末尾）→さらに進化したmatchが亜必要。</li>
+</ul></li>
+<li>進化したmatch→入札されたphraseに対してqueryを変換
+<ul>
+<li>contextや関連性などを把握するのはとても難しい。</li>
+<li>価格は間違ったleadをする。- オリジナルのphraseはAdvanced Matchとほとんど関係がない。</li>
+</ul></li>
+<li>Content Match → ページ上の入札Phase
+<ul>
+<li>contextや意味,関連性を把握する事は難しい。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>広告のデータ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>
+<ul>
+<li>広告主 - アカウント - キャンペーン - AdGroup - Creatives : 入札Phraseなどのような階層構造で定義する。</li>
+<li>入札Phraseは1つでも1000でも可能。</li>
+</ul></li>
+<li>古くからの概念:情報としての広告
+<ul>
+<li>"広告をエンターテイメントや芸術の形式として考えてはいないが、メディアの情報としては別である" [David Ogilvy, 1985]</li>
+<li>"広告は情報である" [Nelson, 1974]</li>
+<li>関係のない広告は迷惑。関係のある広告は興味がある。</li>
+<li>最適なテキスト広告を見つける事は情報検索の問題である。(多様かつ多くの便利な機能に矛盾してしまう)</li>
+</ul></li>
+<li>最適な広告を見つけるための情報検索(IR)問題
+<ul>
+<li>Representation: IRの中では広告をドキュメントとして扱う。 [Ribeiro-Neto et al. SIGIR 2005] [Broder et al. SIGIR2007] [Broder et al.</li>
+</ul></li>
+</ul><p>CIKM2008]</p>
+
+<ul>
+<li>
+<ul>
+<li>Optimization/solution: 広告の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A1%BC%A5%D1%A5%B9">コーパス</a>からqueryの評価を行う事によって広告を検索する。</li>
+<li>詳細は以下のように
+<ul>
+<li>queryを解析したり、query特性を引き出す。query = full context(コンテンツ、ユーザのプロフィール、環境など)</li>
+<li>ドキュメント(広告)を解析したり、ドキュメントの特性を引き出す。</li>
+<li>得点機能を工夫する = queryやdocumentの特性と重み付けを予測する。</li>
+<li>最大の得点機能をもったアドの引き当てを速く行う事が可能な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%A1%BA%F7%A5%A8%A5%F3%A5%B8%A5%F3">検索エンジン</a>を開発する。</li>
+</ul></li>
+</ul></li>
+<li>広告検索の問題を定義
+<ul>
+<li>広告<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A1%BC%A5%D1%A5%B9">コーパス</a>は以下である。
+<ul>
+<li>テキスト形式 : 入札Phase(s) + Title + Createive + URL + 掲載ページ + ...</li>
+<li>グラフィカル形式: 広告主から与えられるmeta data + URL + 掲載ページ + クリックがあるページのコンテンツ ...</li>
+</ul></li>
+<li>queryの特性は以下である。
+<ul>
+<li>Keyword検索 + 知識拡張の外 + contextの特性。</li>
+</ul></li>
+<li>sponsored searchのcontextの特性は以下である
+<ul>
+<li>場所 + ユーザのデータ + 以前の検索内容 + ...</li>
+</ul></li>
+<li>content matchのcontextの特性は以下である
+<ul>
+<li>場所 + ユーザのデータ + ページのトピックス + ページのキーワード。</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>まとめ</h5>
+
+<ul>
+<li>key messages
+<ul>
+<li>1. オンライン広告 = ユーザと最適な広告の間のbest matchを見つけることが基本的な方法。</li>
+<li>2. 副問題のkey
+<ul>
+<li>1 ユーザ、context、広告の表現</li>
+<li>2 <a class="keyword" href="http://d.hatena.ne.jp/keyword/%BA%C7%C5%AC%B2%BD%CC%E4%C2%EA">最適化問題</a>の精度</li>
+<li>3 効率的、効果的な解決</li>
+</ul></li>
+<li>3. オンライン広告の経済的なスケールは巨大である。
+<ul>
+<li>小さな定数の問題。</li>
+<li>多量の更なるリサーチが期待出る。</li>
+</ul></li>
+<li>4.広告は情報形式の一つ
+<ul>
+<li>contextに対して広告を入れる事は異なるタイプの情報を集約する事と同じである。</li>
+<li>最適な広告を見つける事は情報検索問題の１つである。(多様かつ多くの便利な機能に矛盾してしまう)</li>
+</ul></li>
+<li>5.新しいアプリケーションや技術は毎日出てきている。
+<ul>
+<li>研究領域 + 新しいビジネスは良い！</li>
+</ul></li>
+</ul></li>
+</ul><p>以上で終わりです。</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">注目すべきConferences </span></h4>
+
+<ul>
+<li><a href="http://www.w3.org/">WWW(World Wide Web) </a></li>
+<li><a href="http://wsdm2012.org/">WSDM(Web Search and Data Mining) </a></li>
+<li><a href="http://www.sigir.org/">SIGIR(Information Retrieval) </a></li>
+<li><a href="http://www.cikm2011.org/">CIKM (Information and Knowledge Management) </a></li>
+<li><a href="http://www.sigecom.org/ec11/">ACM-EC (Electronic Commerce) </a></li>
+<li><a href="http://www.kdd.org/">KDD(International Conference on Knowledge Discovery and Data Mining) </a></li>
+<li><a href="http://www.stanford.edu/group/wine/">WINE(Workshop on Internet and Network Economics) </a></li>
+</ul>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">Stanford大学<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%F8%B3%AB%B9%D6%BA%C2">公開講座</a></span></h4>
+
+<ul>
+<li><a href="http://ml-class.org/">機械学習</a></li>
+<li><a href="http://www.db-class.org/course/auth/welcome">DB</a></li>
+<li><a href="http://ai-class.org/">人工知能</a></li>
+</ul>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;">YahooResearch</span></span></h4>
+
+<ul>
+<li><a href="http://research.yahoo.com/Computational_Advertising">Computational Advertising</a></li>
+</ul>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201112190830/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201112190830/">Hadoopをより便利に使う！HiveでのMapReduceまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201112311440/">「魔法少女まどか☆マギカ」の台詞をNLTK(Natural Language Toolkit)で解析する</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201112311440/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

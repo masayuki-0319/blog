@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120717/1342481579" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>BehaviorTargeting調査レポート &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>BehaviorTargeting調査レポート</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Jul 17, 08:32</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="ad-behaviortargeting調査レポート">[AD] : BehaviorTargeting調査レポート</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844324934/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/411pOVORInL._SL160_.jpg" class="hatena-asin-detail-image" alt="行動ターゲティング広告 ページビュー神話の終焉" title="行動ターゲティング広告 ページビュー神話の終焉"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844324934/yutakikuchi-22/">行動ターゲティング広告 ページビュー神話の終焉</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> 渡辺健太郎</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%D7%A5%EC%A5%B9%A5%B8%A5%E3%A5%D1%A5%F3">インプレスジャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2007/12/01</li><li><span class="hatena-asin-detail-label">メディア:</span> 単行本（ソフトカバー）</li><li><span class="hatena-asin-detail-label">購入</span>: 2人 <span class="hatena-asin-detail-label">クリック</span>: 66回</li><li><a href="http://d.hatena.ne.jp/asin/4844324934/yutakikuchi-22" target="_blank">この商品を含むブログ (7件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>Index</h4>
+
+<blockquote>
+    
+<ul>
+<li>BehaviorTargetingとは</li>
+<li>WebにおけるBehaviorTargeting</li>
+<li>MicroAdによる詳しい説明</li>
+<li>海外のResearch</li>
+<li>Introduction to Computational Advertising</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/FaceBook">FaceBook</a></li>
+<li>Yahoo</li>
+<li>NHN/<a class="keyword" href="http://d.hatena.ne.jp/keyword/livedoor">livedoor</a></li>
+<li>Amoad</li>
+<li>その他ターゲティングに関する情報</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>BehaviorTargetingとは</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://e-words.jp/w/BTE5BA83E5918A.html">BT広告とは【ビヘイビアターゲティング広告】 - 意味/解説/説明/定義 ： IT用語辞典</a> <a href="http://b.hatena.ne.jp/entry/e-words.jp/w/BTE5BA83E5918A.html"><img src="http://b.hatena.ne.jp/entry/image/http://e-words.jp/w/BTE5BA83E5918A.html" alt="はてなブックマーク - BT広告とは【ビヘイビアターゲティング広告】 - 意味/解説/説明/定義 ： IT用語辞典" border="0" /></a></li>
+</ul><p>BehaviorTargetingとはユーザの行動から趣味指向を分析しそれにあったTargetingを行うことです。もう少し詳しく説明するとユーザの過去のWebサイト閲覧や滞在時間、動画/音楽の視聴、検索キーワード入力、広告クリック、<a class="keyword" href="http://d.hatena.ne.jp/keyword/GPS">GPS</a>などの現在地情報、ID登録時の年代性別、Web以外でのクレジットカード決済などのデータを基にユーザの顕在/潜在ニーズを推定し、それに見合った商品や広告の提案を行う事です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Amazon">Amazon</a>のAffinity Item(関連商品)やGoogleAdsenseもBehaviorTargetingによる商品と言えます。今日はBehaviorTargetingについて海外でのResearchや日本国内企業のTargeting手法に着いて調査した内容をまとめたいと思います。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>WebにおけるBehaviorTargeting</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="https://support.google.com/adsense/bin/answer.py?hl=ja&answer=140378&topic=23402&ctx=topic">インタレスト カテゴリやユーザー属性カテゴリはどのように判別するのですか？ - AdSense ヘルプ</a> <a href="http://b.hatena.ne.jp/entry/s/support.google.com/adsense/bin/answer.py?hl=ja&answer=140378&topic=23402&ctx=topic"><img src="http://b.hatena.ne.jp/entry/image/https://support.google.com/adsense/bin/answer.py?hl=ja&answer=140378&topic=23402&ctx=topic" alt="はてなブックマーク - インタレスト カテゴリやユーザー属性カテゴリはどのように判別するのですか？ - AdSense ヘルプ" border="0" /></a></li>
+<li><a href="http://www.google.com/ads/preferences?hl=ja">Ads Preferences Manager - Google</a></li>
+</ul><p>一般的にはWebにアクセスするブラウザの<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>と過去の行動から推定された趣味指向/興味カテゴリを紐付ける手法が用いられます。当然の事ながら<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>ベースの手法なのでユーザ自身が<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>を削除してしまうと趣味指向/興味カテゴリとの紐付けも解除されます。後でも詳細を説明しますがGoogleAdsenseはユーザ自信が自分が興味を持っているカテゴリを編集することができ、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>に対して新たに編集内容を保存をします。ここでユーザに正確な情報を設定してもらえれば<span class="deco" style="color:#FF0000;">推定</span>というよりは<span class="deco" style="color:#FF0000;">確定</span>要素としてTargetingが可能です。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>MicroAdによる詳しい説明</h4>
+
+<blockquote>
+    <p>MicroAdの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0">行動ターゲティング</a>特集の説明が素晴らしく詳しいので今回参考にさせていただきました。コンテンツの内容は広告主をメインとしているようです。</p>
+
+<ul>
+<li><a href="http://www.microad.jp/">行動ターゲティング,リターゲティングのマイクロアド</a> <a href="http://b.hatena.ne.jp/entry/www.microad.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://www.microad.jp/" alt="はてなブックマーク - 行動ターゲティング,リターゲティングのマイクロアド" border="0" /></a></li>
+</ul>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/AIDMA">AIDMA</a>/AISAS</h5>
+
+<ul>
+<li><a href="http://ja.wikipedia.org/wiki/AIDMA">AIDMA - Wikipedia</a> <a href="http://b.hatena.ne.jp/entry/ja.wikipedia.org/wiki/AIDMA"><img src="http://b.hatena.ne.jp/entry/image/http://ja.wikipedia.org/wiki/AIDMA" alt="はてなブックマーク - AIDMA - Wikipedia" border="0" /></a></li>
+</ul><p>消費者の心理プロセスを略した言葉を<a class="keyword" href="http://d.hatena.ne.jp/keyword/AIDMA">AIDMA</a>/AISASと呼んでいます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/AIDMA">AIDMA</a>は消費者が商品を知ってから購入するまでのプロセスを以下のように定義しています。<span class="deco" style="font-style:italic;">1 Attention（注意)、2 Interest（関心）、3 Desire（欲求）、4 Memory（記憶）、5 Action（行動）。</span>これに対してAISASとはネット上での商品購入までのプロセスのことで以下のように定義しています。<span class="deco" style="font-style:italic;">1 Attention（注意）、2 Interest（関心）、3 Search（検索）、4 Action（行動、購入）、5 Share（共有、商品評価をネット上で共有しあう）。</span> BehaviorTargetingはこれらの心理プロセスの1,2番目で興味分野を検索/閲覧するためのTargetingとされています。</p>
+
+</div>
+<div class="section">
+<h5>検索数を増やす事が目的</h5>
+<p>ここは個人の価値観や企業の方針に寄ると思いますが、MicroAdのページではBehaviorTargetingの目的が検索する人を増やすためにあるとしています。マーケティングの用語でファネルという興味レベルでの階層があり、潜在的な顧客に対して<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>を出し、顕在的な興味を持つ顧客レベルに遷移させ、最終的には検索してConversionに繋げていくビジネスモデルであるとしています。確かにWebページ上に<a class="keyword" href="http://d.hatena.ne.jp/keyword/Adsense">Adsense</a>の広告が出て、そこだけの広告をみてConversionする顧客はかなり珍しいと思います。通常は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Adsense">Adsense</a>広告で商品を認識して、そこから<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%A1%BA%F7%A5%A8%A5%F3%A5%B8%A5%F3">検索エンジン</a>や比較サイトで情報を得ながら自分のニーズや価格に見合う商品を選ぶのが普通だと思います。</p>
+
+</div>
+<div class="section">
+<h5>BehaviorTargeting,Retargeting,SearchRetargeting</h5>
+<p>BehavirorTargetingは既に説明をしたのでここでは簡単に記載しますが、基本的には潜在的顧客向けのTargetingです。Retargetingは一度広告をクリックして広告主サイトに訪問したユーザに対して再度Conversionしてもらうことを目的としたTargetingです。SearchRetargetingは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%A1%BA%F7%A5%A8%A5%F3%A5%B8%A5%F3">検索エンジン</a>を経由して広告主のページに訪問したユーザに対して行うRetargetingです。SearchRetargetingは高い効果が実証されています。</p>
+
+</div>
+<div class="section">
+<h5>AISASに合わせたTargetingを行う</h5>
+<p>上で挙げたAISASという商品購入の認知プロセスに対してそれぞれの場面で適切なプロモーションを行う事で売り上げや利益が最大化できます。Attention(注意)のレイヤーはBehaviorTargetingを行いWebPage上に興味が推定された広告を掲載し、次のInterest(興味/関心)レイヤーへの補助を行います。ある程度Interest(興味/関心)を持った顧客に対してはユーザが目的のコンテンツにたどり着けているかの分析などを行い、次のSeach(検索)への補助を行います。Search(検索)のレイヤーでは検索のListing広告を配信するといったアプローチを行います。Search(検索)からAction(行動)ではSearchRetargeting、Retargetingを行いConversionの促進を行います。最後のShare(共有)では購入した商品をブログや<a class="keyword" href="http://d.hatena.ne.jp/keyword/SNS">SNS</a>系サービスで共有してもらいます。共有してもらう広告を口コミ、バズ、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%E9%A5%EB">バイラル</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%D5%A5%EB%A5%A8%A5%F3%A5%B5%A1%BC">インフルエンサー</a>広告と呼ばれています。個人的な意見ですがこういった各顧客の興味レベルやレイヤーに対して適切なTargetingを行うことは大変難しいと思います。どちらかというとTargetingが変わるよりは興味レベルやレイヤーで使うWebの機能が変わりそれ伴って広告配信も変わるというイメージでしょうか。</p>
+
+</div>
+<div class="section">
+<h5>顧客の認知からConversionまでの時間</h5>
+<p>無料のConversion商材に対しては24時間以内に50%Conversionする商品カテゴリがほとんどのようです。有料のConversion商材に対してはすぐに申す込むのではなく、比較サイトで検証したり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%A1%BA%F7%A5%A8%A5%F3%A5%B8%A5%F3">検索エンジン</a>でよりその情報を詳しく調べてからConversionするケースが多くなります。</p>
+
+</div>
+<div class="section">
+<h5>SearchRetargetingの重要性</h5>
+<p>一度検索ワードで広告主のサイトにやってきたユーザに対してその時はConversionに結びつかなくても、後から広告主側で商品の改良やSale情報、別商品の入手などの情報を打ち出したい時にそれなりの興味を持ったユーザに対してTargetingできるので効果が大きいとされます。一度サイトを訪問しているのでそこに対してTargetingを欠けない事が一度目の訪問時のコストが無駄になってしまう仕組みです。ユーザの検索ワードは最初曖昧なビッグワードから徐々に範囲が絞られてきて、最終的にはブランドワードで商品を選びます。理想的な話としてはワードレベルでLandingPageの見せ方を切り替えることです。ビッグワードでは印象を売り込み、ミドルワードでは他社との違い、ブランドワードでは商品ページへダイレクトにかけること。同じようにRetargetingも重要で他のターゲティングとのCTR比較を行った時に5倍以上の差があるようです。最後にSearchRetargetingとRetargetingの違いをまとめるとユーザが明確なKeywordを持ってサイトに訪れたか、サイト閲覧中に訪れたかの違いです。それによりTargetingの手法を変えるという考え方になります。</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>海外のResearch</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://research.yahoo.com/node/3633">Learning to Target: What Works for Behavioral Targeting | Yahoo! Research</a> <a href="http://b.hatena.ne.jp/entry/research.yahoo.com/node/3633"><img src="http://b.hatena.ne.jp/entry/image/http://research.yahoo.com/node/3633" alt="はてなブックマーク - Learning to Target: What Works for Behavioral Targeting | Yahoo! Research" border="0" /></a></li>
+<li><a href="http://research.yahoo.com/node/3775">Web-Scale User Modeling for Targeting | Yahoo! Research</a> <a href="http://b.hatena.ne.jp/entry/research.yahoo.com/node/3775"><img src="http://b.hatena.ne.jp/entry/image/http://research.yahoo.com/node/3775" alt="はてなブックマーク - Web-Scale User Modeling for Targeting | Yahoo! Research" border="0" /></a></li>
+</ul><p>ここではLearning to Target: What Works for <a class="keyword" href="http://d.hatena.ne.jp/keyword/Behavioral%20Targeting">Behavioral Targeting</a> | <a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a> Researchの2.USER TARGETINGを翻訳します。</p>
+
+<div class="section">
+<h5>USER TARGETING</h5>
+<p>オンライン広告は以下の３つkey要因に基づく。adが表示される箇所のContext、adによってtargetingされたUser、adを経由して届けられるmessageを指定するCreativeである。このPaperではuserに焦点を当てる。次にUserのtargeting問題を理解するための一般的なframeworkを説明する。UserはEventTypeのストーリムとしてモデル化されたものである。TargetingシステムはUserの歴史を定義した関数としてモデル化されたものである。このframeworkの中では有名なtargeting方法、例えばpropertyやuser segments、behavior targetingは特別なケースである。</p>
+
+</div>
+<div class="section">
+<h5>User Modeling</h5>
+<p>userをeventの連続として定義する。<br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=u%20%5Cin%20U" alt="u \in U"/>　<img src="http://chart.apis.google.com/chart?cht=tx&chl=%5C%3C%7Be_1%7D%2C%2C%2C%2C%7Be_m%7D%5C%3E" alt="\<{e_1},,,,{e_m}\>"/>　<img src="http://chart.apis.google.com/chart?cht=tx&chl=e_i%20%5Cin%20E" alt="e_i \in E"/>　<img src="http://chart.apis.google.com/chart?cht=tx&chl=e%3D%28t%2CT%2Cp%29" alt="e=(t,T,p)"/>  <br />
+e=(t,T,p)のtはtimestamp、Tはeventのタイプで例えば検索やPVなど、pは商品を示す。サンプルのEventとして午後5時に靴に関する検索queryを発行する場合、検索QueryとしてのEventと、商品の"靴"と、timestampの5時として表現される。<br />
+どんなtargeting方法でも部分的な広告キャンペーン(a)が与えられた抽象的な関数となる。この関数のoutputはuserに対してtargetするかどうかの2値問題である。この関数を以下のように定義する。<br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=g_a%20%3A%20U-%3E%5C%7B0%2C1%5C%7D" alt="g_a : U->\{0,1\}"/> <img src="http://chart.apis.google.com/chart?cht=tx&chl=u%20%5Cin%20U%20" alt="u \in U "/><br />
+このtargeting関数はuserに対してadが表示されることを保証できない。私たちはadの集合としてad serverを抽象化する事ができる。<img src="http://chart.apis.google.com/chart?cht=tx&chl=a%20%5Cin%20A" alt="a \in A"/> それぞれの配信する機会に2つのoperationを発揮する。最初は以下のような質としてuserが呼ばれている時の広告集合として決定される。関数Qは閲覧を認め荒れたuserに対してADを返却する関数である。<br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=Q%28u%3BA%29%20%3D%20%5C%7Ba%7Ca%20%5Cin%20A%20%5Ccap%20g_a%28u%29%20%3D%201%5C%7D" alt="Q(u;A) = \{a|a \in A \cap g_a(u) = 1\}"/> <img src="http://chart.apis.google.com/chart?cht=tx&chl=Q%3A%20U%20%5Ctimes%20A%20-%3E%202%5EA" alt="Q: U \times A -> 2^A"/><br />
+adの集合が与えられたとき、ad serverはユーザに対して現実的に表示できる個数を決定する。ad serverのこの記述に基づいてtargeting システムの目的は現実的なadの配信を重要とするuserのtargetをシンプルにすることが目的であると理解できる。</p>
+
+</div>
+<div class="section">
+<h5>Property Targeting</h5>
+<p>Property targetingはとてもシンプルで未だに有名なtargetingのメカニズムである。広告主がadを表示したいページ(P)を指定する。Userはtargetされたこれらのページに訪れた時に一致したadが表示される。例えば車を売っている広告主がwebサイト上で車のadを表示することができる。<br />
+Property targetingの形式は完全にuserの履歴や状態とは独立しているが、その代わりにこれは正確な一つの特徴に利用可能である。それはページにユーザが訪れている時である。Property targetingの関数は以下のように定義することができる。<br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=%20g%28u%29%20%3D%20%5Cleft%7B%201%20%5C%5C%200%20%5Cright%7D" alt=" g(u) = \left{ 1 \\ 0 \right}"/><br />
+1はuserがpage Pを訪れている事。0はそれ以外。このモデルの効果はpageとuserの興味の間にカジュアルな連携があると仮定されている。</p>
+
+</div>
+<div class="section">
+<h5>User Segment Targeting</h5>
+<p>Marketing研究や訓練はuserのプロフィールやパーソナリティに基づいた広告としての長い歴史を持っている。同一または別のsegmentにグループ化されたuserに対して適切な広告がtargetingされる。例えば大手飲料会社が低カロリーの飲み物の市場調査を行ったり、商品のアピールを行いたい場合以下のようなセグメントを考える。<br />
+1.若い世代 <img src="http://chart.apis.google.com/chart?cht=tx&chl=g_%7B1.1%7D%20%3D%20age%28u%2C%2815%2C25%29%29" alt="g_{1.1} = age(u,(15,25))"/> <img src="http://chart.apis.google.com/chart?cht=tx&chl=g_%7B1.2%7D%20%3D%20country%28u%2CUSA%29" alt="g_{1.2} = country(u,USA)"/><br />
+2.母親世代 <img src="http://chart.apis.google.com/chart?cht=tx&chl=g_%7B2.1%7D%20%3D%20gender%28u%2C%20F%29" alt="g_{2.1} = gender(u, F)"/> <img src="http://chart.apis.google.com/chart?cht=tx&chl=g_%7B2.2%7D%20%3D%20age%28u%2C%2825%2C45%29%29" alt="g_{2.2} = age(u,(25,45))"/> <img src="http://chart.apis.google.com/chart?cht=tx&chl=g_%7B2.3%7D%20%3D%20country%28u%2C%20USA%29" alt="g_{2.3} = country(u, USA)"/><br />
+age(u,(15,25))というのは15歳以上25歳以下を示す。共通のセグメントタイプは統計的、地理的、心理学的な属性である。上の例として広告主は以下のようなtargeting関数を定義する。<br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=%20g%28u%29%20%3D%20%5Cleft%5C%7B%201%20%5C%5C%200%20%5Cright%5C%7D" alt=" g(u) = \left\{ 1 \\ 0 \right\}"/><br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=%201%3A%20u%20%5Cin%20S" alt=" 1: u \in S"/> <img src="http://chart.apis.google.com/chart?cht=tx&chl=%200%3A%20u%20%5Cnotin%20S%20" alt=" 0: u \notin S "/><br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=%20where%20S%20%3D%20%5Cbigcup%20%5Climits%20_%7Bi%3D1%7D%20%5E%7Bn%7DS_%7Bi%7D%20%3D%5Cbigcup%20%5Climits%20_%7Bi%3D1%7D%20%5E%7Bn%7D%5Cbigcap%20g_%7Bi%2Cj%7D" alt=" where S = \bigcup \limits _{i=1} ^{n}S_{i} =\bigcup \limits _{i=1} ^{n}\bigcap g_{i,j}"/><br />
+<img src="http://chart.apis.google.com/chart?cht=tx&chl=%20s_%7Bi%7D" alt=" s_{i}"/>はi番目のsegmentで、<img src="http://chart.apis.google.com/chart?cht=tx&chl=g_%7Bi%2Cj%7D" alt="g_{i,j}"/>はj番目にi番目のsegmentであると予測されたuserの集合である。Segment targetingは理解するのが簡単で重要であり、更にには広告主へ透明性と広告主側でtargetされた広告を選んだuserを管理することができるので有名である。2つの制限がある。a) 広告主は既存のセグメントに対して広告をマッチさせなければならない。b)ユーザの興味と広告主の要件を正確に掴めていないのでセグメントは十分に表現されないかもしれない。例えば母親世代のセグメントで、子供がいるかどうかの重要な属性に対してミスをしているが、これはペルソナユーザを定義すると解決される。</p>
+
+</div>
+<div class="section">
+<h5>Behavior Targeting</h5>
+<p>Behavior Targetingは歴史的なデータからtargeting関数を学習するアプローチである。一般的にBehavior Targeitngは過去のbehaviorから未来のbehaviorを予測する事に焦点を当てたものである。けれどもBehavior targetingの手法は特徴集合のtermや最適化されたobjectiveやtargeting<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>内で生成されたそれらを変化させる。behavior targetingの方法Bはuserとadのデータからのtargeting関数g(u)を学習するプロセスと見る事ができる。形式的にはこれは<img src="http://chart.apis.google.com/chart?cht=tx&chl=B%3A%20%5C%7B%5CU%7D%5Em%20%E2%86%92%20g" alt="B: \{\U}^m &rarr; g"/>として記述され、userの履歴から構成される特徴ベクトルを学習する線形分離のような関数gをtargetingする特殊な空間において全てのuser Uからm人のuserをサンプルする事である。<br />
+予測モデルはuser特徴集合がとても多く得る事ができるし、ad,CTR,CVRのパフォーマンスに対して直接最適化を学習する事ができる。さらに重要なことはbehavior targetingモデルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>は現在のcontextなどのその他の情報も十分に持つ事ができる。contextとは現在のページや様々なuser segment内のメンバーや、最近のソーシャルネットのデータなどである。targetingを続ける事の例として、オンラインのbehaviorはシンプルなセグメントよりtargetingとして使う事ができる。<br />
+1."若年層" : <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%C3%A5%BB%A5%F3%A5%B8%A5%E3%A1%BC">メッセンジャー</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/SNS">SNS</a>/学校の共通topicsを検索することを良く行う<br />
+2."母親世代”：子供に関する商品検索、親のニュース記事を読む<br />
+この論文では世代や性別を超えたbehavior targetingに対して重点を置いている。現実的なデータに対する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a>を学習する事によってステレオタイプに基づく広告targetingをシンプルにすることができる。(野球ゲーム中に何をしているかを追跡して示す)そしてuserと広告主の利益が等しくなるような個々の経験へ向かって行く事ができる。</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Introduction to Computational Advertising</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://www.stanford.edu/class/msande239/">Stanford University - Introduction to Computational Advertising</a> <a href="http://b.hatena.ne.jp/entry/www.stanford.edu/class/msande239/"><img src="http://b.hatena.ne.jp/entry/image/http://www.stanford.edu/class/msande239/" alt="はてなブックマーク - Stanford University - Introduction to Computational Advertising" border="0" /></a></li>
+</ul><p>stanford大学のComputational Advertisingに関する授業のLecture.7 TargetingについてBehaviorTargetingに関わる内容について書いていきたいと思います。</p>
+
+<ul>
+<li>Demographic,Geo,Behavioral,retaregingは昔からあるtargetingである。</li>
+<li>最近の傾向としては<a class="keyword" href="http://d.hatena.ne.jp/keyword/Personas">Personas</a>やlook-a-likeが使われる。</li>
+<li>BTはuserの行動履歴を基に出版社や広告主のキャンペーン効果が増加する事を目的とした技術である。</li>
+<li>以前のsearch keywordやsearch sessions、ブラウザのactivity状態、広告のクリック、Conversion、demographics情報。</li>
+<li>有益なこととしては全員がwinすることである。
+<ul>
+<li>広告主は有益性を得て、userやCVRやROIを受け入れる。</li>
+<li>ad配信者は利益を求める事ができる。</li>
+<li>userは更なる興味のある広告を見る事が出来る。</li>
+</ul></li>
+<li>retargetingと他のtargetingをどうやって比較するか
+<ul>
+<li>更なる詳細情報がある。例えば検索した商品、検索したquery、cartに入れたitem</li>
+<li>retargetingは今日のkey techniqueである。そして色々な会社がretargetingを広めるためにアイディアを持ってきている。</li>
+</ul></li>
+<li>retargetingの方法として過去の詳細から的確なものを提案されることは嬉しい事なのか、ぞっとすることなのか。</li>
+<li>userにもprivacyがある。onlineのデータが漏洩したとしてもofflineよりは小さいが、hackingされる可能性もあるので、公開されてしまうと法律の問題となる。</li>
+<li>algorithmicなprivacyにはたいてい到達できない。</li>
+<li>user達から情報を得るためのmotivationを与えなければならない(企業が既に正しいデータを集める事にmotivationを与えている)</li>
+<li>user達からは公開用の正確なデータや、自己PR(<a class="keyword" href="http://d.hatena.ne.jp/keyword/facebook">facebook</a>)、新しい経験(アプリや広告)を集める。</li>
+<li>これが誤った方向に進んでしまうと、internetの効果が数十年における個人のデータの開発を遅らせてしまう。</li>
+<li>userのperceptionsは以下の通り
+<ul>
+<li>targeting広告のためにサイト上での行動履歴trackingはOK : 57%</li>
+<li>他のサイトでのtargeting広告のために行動履歴trackingはOK : 27%</li>
+<li>targeting広告のためにサイト上での行動履歴trackingはOKでそれを第三者にshareしてもOK : 22%</li>
+<li>targeting広告のためにofflineのデータを使う事はOK：19%</li>
+</ul></li>
+<li>privacyの心配事を解消するために
+<ul>
+<li>userは<a class="keyword" href="http://d.hatena.ne.jp/keyword/cookie">cookie</a>の仕組みを理解していない。</li>
+<li>消す事が面倒である。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/cookie">cookie</a>を受けいれると他のサイトでもそのサイトを訪れた事が分かってしまう。</li>
+<li>多くの提案的、一般的、信頼がある解決方法が存在する。</li>
+<li>Phormはカテゴリデータだけを採集して<a class="keyword" href="http://d.hatena.ne.jp/keyword/cookie">cookie</a>は厳重に扱うとしている。</li>
+<li>多くの企業がデータ保持に対してポリシーを持っている。例えば<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a>は90日間。</li>
+<li>多くの企業が保存されたデータをuserが制御できる事を認めている。</li>
+<li>Opt-out BTができる。</li>
+</ul></li>
+<li>現在はnetword advertizingが主導権を持っていて、<a class="keyword" href="http://d.hatena.ne.jp/keyword/google">google</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a>のような企業と多くのメジャー企業がsinged onを提携していて、全てのadに対して特殊なIconを表示させていて、それをクリックするとOpt-outすることが出来る。</li>
+<li>Social targetingについて。Social networkは広告表示に対してとても重要な方向性になっている。</li>
+<li>混在した広告表示や原文広告等</li>
+<li>独占的な形式である。</li>
+<li>user情報には2種類あって、プロフィール属性とSocial Graphである。</li>
+<li>どこからkeyと値がくるのか？</li>
+<li>おそらくほとんどの広告がイイネ！や他のユーザ属性の明快な採取によってtargetingされる。また正確なdemographics情報であったり。</li>
+<li>Social Graphはuserに対するデータをスムーズに得るために使われる。</li>
+<li>もしmountain bikeに対しての友達が多ければ、自分もそれと似た者とみなされる。</li>
+<li>Graphから得たものをどれだけの価値としてできるか？</li>
+<li>以下は挑戦する事
+<ul>
+<li>プロフィール情報の価値を薄めてみる</li>
+<li>異なるつながりの差分</li>
+<li>全ての利益をえるためにどれだけ先に行く必要があるのか</li>
+</ul></li>
+<li>正規かつ均一的に長き期間観測された様々な次元に従って友人と類似される。
+<ul>
+<li>どのようにしてBTに対する友人の行動を得るのか。</li>
+<li>Social Graphから得られる予測を一般的なBTModelより精度を高めるにはどうするか。 </li>
+</ul></li>
+<li>BTModelに対するSocial Dataを活用するために<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%A1%B3%A3%B3%D8%BD%AC">機械学習</a>の広い配列を調査した。</li>
+<li>2.5ヶ月間の18億のuserと60の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>のSocial Dataの精度予測を評価した。</li>
+<li>広告の各カテゴリに対するBTCategoryの精度は友人の人数が増えるとどれも少しずつ良くなる。</li>
+<li>友人がクリックしている広告を自分が再度クリックする傾向は、友人がクリックしないものより多いがさほど変わらない。</li>
+<li>BTに対するSocial Dataから得られるもの
+<ul>
+<li>類似 : 一般的なBTに対するSocial特性が現れる。</li>
+<li>合同：BTModelとSocialModelの結合。</li>
+<li>ネットワークの増加：隣人の行動からBTスコアを推論するためにネットワーク増加を使う。</li>
+</ul></li>
+<li>BTと隣人の特徴を掛け合わせると 0.86や0.97%の改善が見られる。</li>
+<li>BTと所属コミュニティの特性を合わせると0.08%改善する。</li>
+<li>BTModelとSocialModelの掛け合わせは0.001%改善する。 </li>
+<li>コンピュータハードウェアや携帯電話のカテゴリにたいしてかなりの改善が見られる。</li>
+<li>Socialの特性は確かな情報的な信号を届ける。</li>
+<li>BTModelはだいたいの場合Social特性だけで学習された他のModelよりは優れている。それは個人のbehaviorが彼らの友達より役立つ事が示している。</li>
+<li>この研究はEmail Graphに利用できる。彼らに対しての暗黙のFeedbackを見込んで。</li>
+<li>Social NetworkではGraphが異なるbehaviorを引き出す。明示的かつ暗黙的なFeedbackとして。</li>
+<li>新しいTargetingの試みとして特定のペルソナに対してtargetしたいという広告主がいる。一般的なDemoを通して得られない、広告配信者はカテゴリを定義することができない。
+<ul>
+<li>同じ35歳の女性セグメントでも美容コスメに対する考え方とニーズはペルソナ毎に違う。</li>
+</ul></li>
+<li>Onlineではuserは連続的な行動を起こす。</li>
+<li>ペルソナは興味と行動をshareする。</li>
+<li>同じユーザでも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のペルソナを持つ。ペルソナは人間性の一面である。</li>
+<li>look-a-like modelによりuserの類似度を計算してsegment化する。</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a></h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="https://support.google.com/adsense/bin/answer.py?hl=ja&answer=140381&topic=23402&ctx=topic">インタレスト ベース広告とプレースメント ターゲット広告の違いは何ですか？ - AdSense ヘルプ</a> <a href="http://b.hatena.ne.jp/entry/s/support.google.com/adsense/bin/answer.py?hl=ja&answer=140381&topic=23402&ctx=topic"><img src="http://b.hatena.ne.jp/entry/image/https://support.google.com/adsense/bin/answer.py?hl=ja&answer=140381&topic=23402&ctx=topic" alt="はてなブックマーク - インタレスト ベース広告とプレースメント ターゲット広告の違いは何ですか？ - AdSense ヘルプ" border="0" /></a></li>
+<li><a href="https://support.google.com/adsense/bin/answer.py?hl=ja&answer=9713&topic=1628432&ctx=topic">ウェブサイトに表示される広告の決定方法 - AdSense ヘルプ</a> <a href="http://b.hatena.ne.jp/entry/s/support.google.com/adsense/bin/answer.py?hl=ja&answer=9713&topic=1628432&ctx=topic"><img src="http://b.hatena.ne.jp/entry/image/https://support.google.com/adsense/bin/answer.py?hl=ja&answer=9713&topic=1628432&ctx=topic" alt="はてなブックマーク - ウェブサイトに表示される広告の決定方法 - AdSense ヘルプ" border="0" /></a></li>
+<li><a href="https://support.google.com/adsense/bin/answer.py?hl=ja&answer=180195&topic=1391547&ctx=topic">AdSense の収益分配率とは - AdSense ヘルプ</a> <a href="http://b.hatena.ne.jp/entry/s/support.google.com/adsense/bin/answer.py?hl=ja&answer=180195&topic=1391547&ctx=topic"><img src="http://b.hatena.ne.jp/entry/image/https://support.google.com/adsense/bin/answer.py?hl=ja&answer=180195&topic=1391547&ctx=topic" alt="はてなブックマーク - AdSense の収益分配率とは - AdSense ヘルプ" border="0" /></a></li>
+<li><a href="https://support.google.com/adsense/bin/answer.py?hl=ja&answer=23168">セクション ターゲットの概要とその設定方法 - AdSense ヘルプ</a> <a href="http://b.hatena.ne.jp/entry/s/support.google.com/adsense/bin/answer.py?hl=ja&answer=23168"><img src="http://b.hatena.ne.jp/entry/image/https://support.google.com/adsense/bin/answer.py?hl=ja&answer=23168" alt="はてなブックマーク - セクション ターゲットの概要とその設定方法 - AdSense ヘルプ" border="0" /></a></li>
+</ul><p>まずはTargetingとは関係無い話になりますが、GoogleAdsenseの収益分配率がページオーナー側に比重が置かれていることに驚きました。通常の場合は<span class="deco" style="color:#FF0000;">68%</span>がページオーナー側に、検索向け<a class="keyword" href="http://d.hatena.ne.jp/keyword/Adsense">Adsense</a>でも<span class="deco" style="color:#FF0000;">51%</span>がページオーナー側に入ります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%B9%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">リスティング広告</a>と比較するととても大きな数字のように思えます。<br />
+GoogleAdsenseではContentsTargeting、PlacementTargeting、InterestTargetingといったTargetingを行っているようでInterestTargetingがBehaviorTargetingによる趣味指向/興味カテゴリへの広告配信ということになると思います。ContentsTargetingとは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A1%BC%A5%E9%A1%BC">クローラー</a>がコンテンツを解析して、ページ情報にマッチしたADを配信する仕組みです。ContentsTargetingではセクションターゲットというものを利用すると<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%ED%A1%BC%A5%E9%A1%BC">クローラー</a>が解析するページ上の強調したいフレーズを抽出することが可能になるようです。PlacementTargetingとはユーザの趣味指向とは関係無くページに対して配信されるものです。ユーザのインタレストカテゴリや属性カテゴリの判別方法は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Adsense">Adsense</a>のヘルプページに書いてあったのでそれを引用します。</p>
+
+<ul>
+<li>「<span class="deco" style="font-style:italic;">ユーザーが <a class="keyword" href="http://d.hatena.ne.jp/keyword/YouTube">YouTube</a> などの <a class="keyword" href="http://d.hatena.ne.jp/keyword/AdSense">AdSense</a> ネットワークのウェブサイトを閲覧すると、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a> ではアクセスしているページの種類を把握するため、ユーザーのブラウザに広告 <a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a> を保存します。この <a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a> 情報に基づいてインタレスト カテゴリとユーザー属性カテゴリを判別して、ユーザーに適した広告を表示します。たとえば、<a class="keyword" href="http://d.hatena.ne.jp/keyword/AdSense">AdSense</a> 広告を表示するスポーツ関連のウェブサイトや <a class="keyword" href="http://d.hatena.ne.jp/keyword/YouTube">YouTube</a> のスポーツ関連動画をよく見るユーザーの場合、そのユーザーの <a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a> はスポーツのインタレスト カテゴリに関連付けられ、スポーツ関連の広告が表示されます。同様に、利用者の大部分を女性が占めるサイト（アクセスに関する集計データに基づく情報）をよく閲覧するユーザーの場合、そのユーザーの <a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a> は「女性」のユーザー属性カテゴリに関連付けられます。ユーザーは Ads Preferences Manager で、自分のインタレスト カテゴリやユーザー属性カテゴリを編集することができます。</span>」</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a></h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://www.seojapan.com/blog/twitter-sales-by-2014">Twitterの広告収入、2014年までに400億円突破の予測 | SEO Japan</a> <a href="http://b.hatena.ne.jp/entry/www.seojapan.com/blog/twitter-sales-by-2014"><img src="http://b.hatena.ne.jp/entry/image/http://www.seojapan.com/blog/twitter-sales-by-2014" alt="はてなブックマーク - Twitterの広告収入、2014年までに400億円突破の予測 | SEO Japan" border="0" /></a></li>
+<li><a href="https://support.twitter.com/articles/423849-">Twitterヘルプセンター | プロモツイートとは?</a> <a href="http://b.hatena.ne.jp/entry/s/support.twitter.com/articles/423849-"><img src="http://b.hatena.ne.jp/entry/image/https://support.twitter.com/articles/423849-" alt="はてなブックマーク - Twitterヘルプセンター | プロモツイートとは?" border="0" /></a></li>
+<li><a href="http://www.twithawk.com/">Twitter Marketing - TwitHawk</a> <a href="http://b.hatena.ne.jp/entry/www.twithawk.com/"><img src="http://b.hatena.ne.jp/entry/image/http://www.twithawk.com/" alt="はてなブックマーク - Twitter Marketing - TwitHawk" border="0" /></a></li>
+</ul><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>の広告収益が2014年までに400億という数字が個人的にはしっくり来ませんでした。というのも<a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>はそこまで広告に対して力を入れている動きが見られないからです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>のTL画面に大きく表示されている画像広告は表示数での<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%F3%A5%C7%A5%A3%A5%F3%A5%B0">ブランディング</a>を意識した広告のようで、それほど強いTargeting要素を感じた事はありません。<a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>はRealtimeのつぶやきを取得できるので、それを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7%B2%F2%C0%CF">形態素解析</a>してtermの類似度が近いものを出せばいいとずっと考えていたのですが、プロモツイートという機能でそれが実現されている様子です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>のヘルプセンターに以下のような記述が書いてありました。自分も一度しか表示された事が無く、多数のユーザに配信されているかなど今後調査してみたいと思います。</p>
+
+<ul>
+<li>「<span class="deco" style="font-style:italic;">このプラットフォームはユーザーがどのようなツイートをリツイートしているかなど、様々な信号をもとに、どのユーザーのタイムラインにどのプロモツイートをのせるかを決定しています。</span>」</li>
+</ul><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>以外の会社でもTwitHawkというTLにターゲティング広告を出すような仕組みがあるようです。個人的にはTL上で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%D5%A5%A3%A5%EA%A5%A8%A5%A4%A5%C8">アフィリエイト</a>ができれば広告業界的には面白くなるかなと思っています。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a></h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://www.emarketer.com/Article.aspx?R=1009058&ecid=a6506033675d47f881651943c21c5ed4">Women Click on More Facebook Ads - eMarketer</a> <a href="http://b.hatena.ne.jp/entry/www.emarketer.com/Article.aspx?R=1009058&ecid=a6506033675d47f881651943c21c5ed4"><img src="http://b.hatena.ne.jp/entry/image/http://www.emarketer.com/Article.aspx?R=1009058&ecid=a6506033675d47f881651943c21c5ed4" alt="はてなブックマーク - Women Click on More Facebook Ads - eMarketer" border="0" /></a></li>
+<li><a href="http://www.businessinsider.com/chart-of-the-day-facebook-ctr-cpc-per-sector-2011-1?utm_source=Triggermail&utm_medium=email&utm_term=Silicon+Alley+Insider+Chart+Of+The+Day&utm_campaign=SAI_COTD_013111">CHART OF THE DAY: The Most Successful Facebook Ads - Business Insider</a> <a href="http://b.hatena.ne.jp/entry/www.businessinsider.com/chart-of-the-day-facebook-ctr-cpc-per-sector-2011-1?utm_source=Triggermail&utm_medium=email&utm_term=Silicon+Alley+Insider+Chart+Of+The+Day&utm_campaign=SAI_COTD_013111"><img src="http://b.hatena.ne.jp/entry/image/http://www.businessinsider.com/chart-of-the-day-facebook-ctr-cpc-per-sector-2011-1?utm_source=Triggermail&utm_medium=email&utm_term=Silicon+Alley+Insider+Chart+Of+The+Day&utm_campaign=SAI_COTD_013111" alt="はてなブックマーク - CHART OF THE DAY: The Most Successful Facebook Ads - Business Insider" border="0" /></a></li>
+<li><a href="http://www.facebook.com/advertising/how-it-works">Facebookで広告ターゲットを構築</a> <a href="http://b.hatena.ne.jp/entry/www.facebook.com/advertising/how-it-works"><img src="http://b.hatena.ne.jp/entry/image/http://www.facebook.com/advertising/how-it-works" alt="はてなブックマーク - Facebookで広告ターゲットを構築" border="0" /></a></li>
+<li><a href="http://www.facebook.com/settings?tab=ads">Facebook広告</a> <a href="http://b.hatena.ne.jp/entry/www.facebook.com/settings?tab=ads"><img src="http://b.hatena.ne.jp/entry/image/http://www.facebook.com/settings?tab=ads" alt="はてなブックマーク - Facebook広告" border="0" /></a></li>
+<li><a href="http://www.facebook.com/help?page=226611954016283">広告の利用 - Facebook ヘルプセンター</a> <a href="http://b.hatena.ne.jp/entry/www.facebook.com/help?page=226611954016283"><img src="http://b.hatena.ne.jp/entry/image/http://www.facebook.com/help?page=226611954016283" alt="はてなブックマーク - 広告の利用 - Facebook ヘルプセンター" border="0" /></a></li>
+</ul><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>の広告クリックは性別で傾向が異なり女性の方がよりCTRが高いようです。またCTRが高くCPCが低いという広告主に取って理想の状態となるカテゴリとしてはブログやエンタメ系であり、その逆はHealth Careやインターネットソフトという結果になっています。<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>に広告を掲載するにはまず<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>ページを作らなければなりません。つまりランディングページが<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>ページになるんだと思います。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>の広告は大きく2つに分かれており1つは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>のソーシャル<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%E9%A5%B0%A5%A4%A5%F3">プラグイン</a>を使用した外部ページへの表示、2つめが<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>のTopページに表示されるものです。後者の特徴的な手法として<span class="deco" style="color:#FF0000;">ソーシャル広告</span>というものがあります。ソーシャル広告は友達がいいね！した<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>ページと連動した広告を出す手法です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>の広告Targetingについてはヘルプセンターに詳しく書いてあったのでそれを引用します。</p>
+
+<ul>
+<li>「<span class="deco" style="font-style:italic;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>はユーザーの皆様に興味を持っていただけるような広告を表示するよう努めています。これを実現するため、以下のような情報を利用しています。ユーザーが自分について追加した情報(居住地、性別、年齢、交際ステータス、職業、学校など) / プロフィール(タイムライン)に記載されている趣味・関心と参加しているグループ / <a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>で実行したアクション(ページに対する「いいね！」やグループへのアクセス、アプリの利用など)投稿や近況アップデートからのキーワード(注: キーワードはシステムにより自動的に抽出されます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>がユーザーの投稿を閲覧しているわけではありません。) プロフィール(タイムライン)に自分の関心事について多く記載すると、より適した<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>広告が表示されるようになります。興味のない広告が表示された場合は、広告にマウスを合わせ、右上の[x]をクリックすれば表示されなくなります。 </span>」</li>
+<li>「<span class="deco" style="font-style:italic;">しくみ: <a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>では、広告<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>(例: スポーツ愛好家、映画ファンなど)を作成し、広告主が広告のターゲットを設定する際に利用できるようにしています。たとえば、映画館のオーナーの方は、「映画ファン」をターゲットにすることができます。映画に関係のある<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>ページに「いいね！」しており、映画について投稿しているユーザーは、「映画ファン」の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>に属すことになります。広告主はトピックやキーワードを使って広告のターゲットを設定することもできます。たとえば、「スポーツ」というトピックを広告のターゲットにすると、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>でスポーツに関連するあらゆるものに「いいね！」している人に広告が表示されます。また、「サウンドオブミュージック」というキーワードを使用すれば、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Facebook">Facebook</a>で「サウンドオブミュージック」に「いいね！」している人や、趣味・関心に「サウンドオブミュージック」が追加されている人に広告が表示されます。</span>」</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a></h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://advertising.yahoo.co.jp/ad/">広告商品 - Yahoo! JAPANへの広告掲載</a> <a href="http://b.hatena.ne.jp/entry/advertising.yahoo.co.jp/ad/"><img src="http://b.hatena.ne.jp/entry/image/http://advertising.yahoo.co.jp/ad/" alt="はてなブックマーク - 広告商品 - Yahoo! JAPANへの広告掲載" border="0" /></a></li>
+<li><a href="http://advertising.yahoo.co.jp/ad/privacy/#pc">ユーザー情報の取り扱いについて - Yahoo! JAPANへの広告掲載</a> <a href="http://b.hatena.ne.jp/entry/advertising.yahoo.co.jp/ad/privacy/%23pc"><img src="http://b.hatena.ne.jp/entry/image/http://advertising.yahoo.co.jp/ad/privacy/%23pc" alt="はてなブックマーク - ユーザー情報の取り扱いについて - Yahoo! JAPANへの広告掲載" border="0" /></a></li>
+<li><a href="http://yahoo-jp-ss.custhelp.com/app/answers/detail/a_id/1648/~/ターゲティングについて">ターゲティングについて | ヘルプ | Yahoo!リスティング広告</a> <a href="http://b.hatena.ne.jp/entry/yahoo-jp-ss.custhelp.com/app/answers/detail/a_id/1648/~/ターゲティングについて"><img src="http://b.hatena.ne.jp/entry/image/http://yahoo-jp-ss.custhelp.com/app/answers/detail/a_id/1648/~/ターゲティングについて" alt="はてなブックマーク - ターゲティングについて | ヘルプ | Yahoo!リスティング広告" border="0" /></a></li>
+</ul><p>Yahooは大きく分けてDisplay広告とlisting広告の2種類があります。それぞれによってTargeting手法も異なります。まずはDisplay広告のTargetingですが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0">行動ターゲティング</a>、時間指定、エリアテーゲティング、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%E2%A5%B0%A5%E9%A5%D5%A5%A3%A5%C3%A5%AF">デモグラフィック</a>ターゲティング、主婦ターテゲィングといった種類です。主婦ターゲティングだけなぜか尖っている種類のように思います。PC/<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>版で行動履歴の扱いが違うようなので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a>広告のユーザ情報の取り扱いについての項目を引用します。</p>
+
+<ul>
+<li>PC版：「<span class="deco" style="font-style:italic;">利用している情報パソコン版の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>のサイトを訪れたお客様の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%A6%A5%B6%A1%BC">ブラウザー</a>のクッキー情報（ウェブサイトにアクセスした際に一時的に作成、保存される情報）を蓄積し、利用しています。蓄積している情報は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>内での検索履歴や、ページ閲覧履歴、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>から配信されている広告のクリック履歴、商品の購入履歴のため、個人情報とは異なります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>に利用される情報は最長で過去180日間蓄積されたものです。 また、取得した個別のクッキー情報または個体を識別する情報を弊社以外に開示することは行っておりません。パソコン版の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>は、ウェブサーバーとウェブ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%A6%A5%B6%A1%BC">ブラウザー</a>間でやり取りされるクッキー情報を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%A6%A5%B6%A1%BC">ブラウザー</a>（パソコン）に格納し、お客様が <a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>およびパートナーメディアを訪れた際に、クッキー情報と行動履歴に基づいて広告を配信しております。やり取りされるクッキー情報は、個人を識別する情報（名前や住所、電話番号など）は含まず、これらのクッキー情報と行動履歴に基づいて、お客様の興味や関心に即した広告を配信することが可能となります。パソコン版の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>のページおよびパートナーメディアを対象に掲載されます（一部対象外のページもあります）。</span>」</li>
+<li>スマフォ版：「<span class="deco" style="font-style:italic;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>版の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%A6%A5%B6%A1%BC">ブラウザー</a>の場合はクッキー情報（ウェブサイトにアクセスした際に一時的に作成、保存される情報）、アプリケーション内のWebView（※1）の場合は個体・アプリケーションを識別する情報（※2）を蓄積し、復元不可能なデータに暗号化して利用しています。蓄積している情報は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>内での検索履歴や、ページ閲覧履歴、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>から配信されている広告のクリック履歴のため、個人情報とは異なります。蓄積している情報源には、パソコン版<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>の行動履歴を利用する場合と、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>版<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>（<a class="keyword" href="http://d.hatena.ne.jp/keyword/iOS">iOS</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Android">Android</a>対応ページ）の行動履歴を利用する場合の2種類があります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>に利用される情報または個体を識別する情報は最長で過去180日間蓄積されたものです。また、取得した個別のクッキー情報または個体を識別する情報を弊社以外に開示することは行っておりません。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>版の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>は、クッキー情報、個体・アプリケーションを識別する情報および<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>端末での行動履歴に基づいて、お客様が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>版<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>（<a class="keyword" href="http://d.hatena.ne.jp/keyword/iOS">iOS</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Android">Android</a>対応ページ）を訪れた際に、広告を配信しております。クッキー情報、個体・アプリケーションを識別する情報および<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>端末での行動履歴は、個人を識別する情報（名前や住所、電話番号など）は含まず、これらの情報に基づいて、お客様の興味や関心に即した広告を配信することが可能となります。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>版の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>版<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>（<a class="keyword" href="http://d.hatena.ne.jp/keyword/iOS">iOS</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Android">Android</a>対応ページ）のページ、または<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21%20JAPAN">Yahoo! JAPAN</a>が提供する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>向け公式アプリケーション内のWebViewを対象に掲載されます（一部対象外のページ・アプリケーション内のWebViewもあります）。</span>」</li>
+</ul><p>listing広告のターゲティングについても見てみます。デバイスターゲティング、地域ターゲティング、曜日/時間帯ターゲティングがあります。地域ターゲティングの方法について詳細が書かれたページがあったのですが、広告主への説明では<span class="deco" style="color:#FF0000;">設定しない(推奨)というのが笑えます</span>。以下地域ターゲティングに対する説明ページの内容を引用します。</p>
+
+<ul>
+<li>「<span class="deco" style="font-style:italic;">広告を配信する地域を選択した場合、インターネットユーザーの所在地や検索キーワードの情報などをもとに、広告を配信する地域を判定しています。その地域判定の元となる情報を下記の項目から選択できます。設定しない（推奨）、ユーザーの所在地、検索キーワードに含まれる地域</span>」</li>
+<li>「<span class="deco" style="font-style:italic;">「ユーザーの所在地」「検索キーワードに含まれる地域」を設定すると、インプレッション数は減少する可能性があります。 機会損失を防ぐためにも広告の配信状況を確認しながら設定を行うことをお勧めします。</span>」</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>NHN/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Livedoor">Livedoor</a></h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://about.naver.jp/press/press_detail?docId=488">まとめインセンティブにおけるAdSense広告配信停止について | プレスリリース・お知らせ - NAVERプレスセンター</a> <a href="http://b.hatena.ne.jp/entry/about.naver.jp/press/press_detail?docId=488"><img src="http://b.hatena.ne.jp/entry/image/http://about.naver.jp/press/press_detail?docId=488" alt="はてなブックマーク - まとめインセンティブにおけるAdSense広告配信停止について | プレスリリース・お知らせ - NAVERプレスセンター" border="0" /></a></li>
+<li><a href="http://corp.livedoor.com/ads/menu/">広告メニュー - 広告掲載 - ライブドア</a> <a href="http://b.hatena.ne.jp/entry/corp.livedoor.com/ads/menu/"><img src="http://b.hatena.ne.jp/entry/image/http://corp.livedoor.com/ads/menu/" alt="はてなブックマーク - 広告メニュー - 広告掲載 - ライブドア" border="0" /></a></li>
+</ul><p>NHN/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Livedoor">Livedoor</a>のTargetingについては残念ながら特に情報が得られませんでした。しかし掲載されている広告を見ると様々な広告を貼っています。種類は3つで自社配信、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a>、Yahooの広告を掲載しています。サービス毎に色々と調べてみたので以下にまとめます。2011年9月までは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Naver">Naver</a>まとめも<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google%20Adsense">Google Adsense</a>だったようです。今<a class="keyword" href="http://d.hatena.ne.jp/keyword/Naver">Naver</a>まとめには<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%BF%A5%EC%A5%B9%A5%C8%A5%DE%A5%C3%A5%C1">インタレストマッチ</a>が表示されています。(笑) この切り替えを境かは分かりませんが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Naver">Naver</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Livedoor">Livedoor</a>は自社と<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a>という契約になっているのでしょうか。</p>
+
+<table>
+<tr>
+<th> サービス </th>
+<th> 掲載AD </th>
+<th> 遷移先Domain </th>
+<td> </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Naver">Naver</a>検索 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a>スポンサードサーチ </td>
+<td> rd.listing.yahoo.co.jp </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Naver">Naver</a>まとめ </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%BF%A5%EC%A5%B9%A5%C8%A5%DE%A5%C3%A5%C1">インタレストマッチ</a> </td>
+<td> rd.ane.yahoo.co.jp/rd </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Livedoor">Livedoor</a>検索 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Adwords">Adwords</a>, <a class="keyword" href="http://d.hatena.ne.jp/keyword/Livedoor">Livedoor</a>自社広告  </td>
+<td> www.<a class="keyword" href="http://d.hatena.ne.jp/keyword/google">google</a>.com/aclk, <a class="keyword" href="http://d.hatena.ne.jp/keyword/api">api</a>.ads.jlisting.jp/click/ </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Livedoor">Livedoor</a>地図 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a> Display,<a class="keyword" href="http://d.hatena.ne.jp/keyword/Livedoor">Livedoor</a>自社広告 </td>
+<td> googleads.g.doubleclick.net/aclk,app.click.<a class="keyword" href="http://d.hatena.ne.jp/keyword/livedoor">livedoor</a>.com/A-affiliate2/mobclick</td>
+</tr>
+</table>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Amoad</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://www.amoad.com/guideline/">行動ターゲティングガイドライン｜AMoAd（アモアド） iPhone,Android等のスマートフォン(スマートデバイス)アドプラットフォーム</a> <a href="http://b.hatena.ne.jp/entry/www.amoad.com/guideline/"><img src="http://b.hatena.ne.jp/entry/image/http://www.amoad.com/guideline/" alt="はてなブックマーク - 行動ターゲティングガイドライン｜AMoAd（アモアド） iPhone,Android等のスマートフォン(スマートデバイス)アドプラットフォーム" border="0" /></a></li>
+</ul><p>Amoadは独自のAmoadIDというものを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>と紐付けて管理しているようです。以下<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0">行動ターゲティング</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AC%A5%A4%A5%C9%A5%E9%A5%A4%A5%F3">ガイドライン</a>ページからの引用になります。</p>
+
+<ul>
+<li>「<span class="deco" style="font-style:italic;">株式会社AMoAdは、お客様の行動履歴情報等をもとに、お客様が興味関心をもたれるであろう情報や広告を推測し、推測内容や属性に合わせて掲載する広告配信「<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>」を行っております。株式会社AMoAdは、お客様に対して適切な広告を表示することを目的とする「<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>」を実施するにあたり、AMoAdの広告が表示される当社の提携媒体（以下「AMoAd広告ネットワーク」という）のウェブサイトを閲覧されるお客様のウェブブラウザを通じ、ページ訪問履歴、お客様が過去に検索した検索履歴、お客様がクリックしたAMoAd広告のデータ、広告の成果情報等（以下「本データ」という）を収集・蓄積しています。AMoAd広告ネットワークのアプリにおいては、お客様が閲覧した広告、クリックした広告、広告の成果情報等を収集・蓄積しています。株式会社AMoAdは、お客様の閲覧端末・ブラウザ毎に、個人識別性を有する情報を含まないAMoAd固有のID番号（以下「AMoAd ID番号」という）を付与し、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>やlocalStorageに格納いたします。 株式会社AMoAdは、お客様がAMoAd広告ネットワークのウェブサイトを訪れた際に、本データとAMoAd ID番号用いて「<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>」の配信、広告の露出回数制御、広告効果の計測、広告配信の最適化、および不正クリックへの対応を行います。また、AMoAd広告ネットワークのアプリにおいては、端末識別ID等を非可逆暗号化して作成したAMoAd ID番号を用いて広告の露出回数制御、広告効果の計測、広告配信の最適化、および不正クリックへの対応を行います。株式会社AMoAdでは、本データによって取得された行動履歴情報を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0%B9%AD%B9%F0">行動ターゲティング広告</a>の配信の為に利用しているデータとして取り扱うことを主としています。株式会社AMoAdとして、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0">行動ターゲティング</a>を配信する広告主に対して開示している情報としては、お客様が当該広告主の広告を閲覧した回数等の統計情報の範囲とし、本データやAMoAd ID番号そのものは開示しておりません。AMoAd ID番号は、単独では特定の個人を識別することができず、特定のお客様の個人情報（氏名、生年月日、その他）や特定のお客様と結びついて使用される情報（メールアドレス、ユーザーID、クレジットカードなどの情報）などの一切を含まないため、法令（個人情報保護関連の法令一切を含む）に規定される個人情報には該当しないと考えております。</span>」</li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>その他ターゲティングに関する情報</h4>
+
+<blockquote>
+    <p>主にオーディエンスターゲティングについての取り組み企業になります。オーディエンスターゲティングとは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%D4%C6%B0%A5%BF%A1%BC%A5%B2%A5%C6%A5%A3%A5%F3%A5%B0">行動ターゲティング</a>の進化版で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のサイトでの行動履歴を統合して生成された<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>に対して配信する事が出来る仕組みです。</p>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Biglobe">Biglobe</a></h5>
+<p><a href="http://www.biglobe.co.jp/pressroom/release/2011/05/19">ネット上の行動から趣味や嗜好に応じた広告を配信する「オーディエンスターゲティング広告」の販売を開始 | プレスルーム | NECビッグローブ株式会社</a> <a href="http://b.hatena.ne.jp/entry/www.biglobe.co.jp/pressroom/release/2011/05/19"><img src="http://b.hatena.ne.jp/entry/image/http://www.biglobe.co.jp/pressroom/release/2011/05/19" alt="はてなブックマーク - ネット上の行動から趣味や嗜好に応じた広告を配信する「オーディエンスターゲティング広告」の販売を開始 | プレスルーム | NECビッグローブ株式会社" border="0" /></a></p>
+
+</div>
+<div class="section">
+<h5>Xrost</h5>
+<p><a href="http://www.xrost.ne.jp/">オープンデータプラットフォーム「Xrost」</a> <a href="http://b.hatena.ne.jp/entry/www.xrost.ne.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://www.xrost.ne.jp/" alt="はてなブックマーク - オープンデータプラットフォーム「Xrost」" border="0" /></a></p>
+
+</div>
+<div class="section">
+<h5>Opt</h5>
+<p><a href="http://jp.techcrunch.com/archives/jp20100722opt-audience-targeting-ad/">[jp]オーディエンスターゲティング広告のプラットフォーム構想を広告代理店のオプトが発表</a> <a href="http://b.hatena.ne.jp/entry/jp.techcrunch.com/archives/jp20100722opt-audience-targeting-ad/"><img src="http://b.hatena.ne.jp/entry/image/http://jp.techcrunch.com/archives/jp20100722opt-audience-targeting-ad/" alt="はてなブックマーク - [jp]オーディエンスターゲティング広告のプラットフォーム構想を広告代理店のオプトが発表" border="0" /></a></p>
+
+</div>
+<div class="section">
+<h5>mediba/ミログ</h5>
+<p><a href="http://www.mediba.jp/news/2011/0928/">mediba とミログ、アジア市場の拡大を狙い業界初となるアプリ情報を基盤としたオーディエンスターゲティング広告で連携 | 2011年 | 株式会社mediba</a> <a href="http://b.hatena.ne.jp/entry/www.mediba.jp/news/2011/0928/"><img src="http://b.hatena.ne.jp/entry/image/http://www.mediba.jp/news/2011/0928/" alt="はてなブックマーク - mediba とミログ、アジア市場の拡大を狙い業界初となるアプリ情報を基盤としたオーディエンスターゲティング広告で連携 | 2011年 | 株式会社mediba" border="0" /></a></p>
+
+</div>
+<div class="section">
+<h5>JIAA</h5>
+<p><a href="http://www.jiaa.org/release/release_bta_100624.html">「行動ターゲティング広告ガイドライン」の改定について│JIAA</a> <a href="http://b.hatena.ne.jp/entry/www.jiaa.org/release/release_bta_100624.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.jiaa.org/release/release_bta_100624.html" alt="はてなブックマーク - 「行動ターゲティング広告ガイドライン」の改定について│JIAA" border="0" /></a></p>
+
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B9%E2%CC%DA%B9%C0%B8%F7">高木浩光</a>＠自宅の日記</h5>
+<p><a href="http://takagi-hiromitsu.jp/diary/20111106.html">高木浩光＠自宅の日記 - 何が個人情報なのか履き違えている日本, テレビ録画機「トルネ」の視聴ジャンルが無断公開されている</a> <a href="http://b.hatena.ne.jp/entry/takagi-hiromitsu.jp/diary/20111106.html"><img src="http://b.hatena.ne.jp/entry/image/http://takagi-hiromitsu.jp/diary/20111106.html" alt="はてなブックマーク - 高木浩光＠自宅の日記 - 何が個人情報なのか履き違えている日本, テレビ録画機「トルネ」の視聴ジャンルが無断公開されている" border="0" /></a></p>
+
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201207110838/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201207110838/">JSONを見やすく表示するにはPythonの-mjson.toolを使うと良いよ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201207230844/">初めての機械学習理論</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201207230844/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

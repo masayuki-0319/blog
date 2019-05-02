@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20101002/1286026895" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>IPアドレスのまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>IPアドレスのまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2010 Oct 02, 22:41</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="network-ipアドレスのまとめ">[network] : IPアドレスのまとめ</h2>
+
+<div class="section">
+<h4>大事なこと</h4>
+<p>・<a class="keyword" href="http://d.hatena.ne.jp/keyword/IPv4">IPv4</a>では３２ビットの整数値。２進数の8ビットずつを４つの組みに分ける。分かりやすいように１０進数で表現されることが多い。<br />
+・<a class="keyword" href="http://d.hatena.ne.jp/keyword/IPv6">IPv6</a>では１２８ビット長になる。<br />
+・<a class="keyword" href="http://d.hatena.ne.jp/keyword/IP%A5%A2%A5%C9%A5%EC%A5%B9">IPアドレス</a>はネットワーク部と<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DB%A5%B9%A5%C8%C9%F4">ホスト部</a>から成り立つ。<br />
+・<a class="keyword" href="http://d.hatena.ne.jp/keyword/IP%A5%A2%A5%C9%A5%EC%A5%B9">IPアドレス</a>の分類はクラスAからクラスEの５つに分類可能。クラスEは使われていない。※詳細は以下を参照<br />
+・ブロードキャストアドレスとは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DB%A5%B9%A5%C8%C9%F4">ホスト部</a>のビットを全部１としたもの。種類は２つあって自分が所属するローカルブロードキャストアドレスと異なるIPネットワークのダイレクトブロードキャストアドレスがある。<br />
+・クラスAやクラスBをそのまま使うのは非効率なので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A5%D6%A5%CD%A5%C3%A5%C8%A5%DE%A5%B9%A5%AF">サブネットマスク</a>の導入により小さく分割する方法がある。<br />
+・例えばクラスBの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A5%D6%A5%CD%A5%C3%A5%C8%A5%DE%A5%B9%A5%AF">サブネットマスク</a>を255.255.255.192とすると上位26ビットをネットワークアドレスとして利用出来る。<br />
+・CIDRとはクラスA,クラスB,クラスCの8ビット単位のクラス分けをなくしたアドレス付けのこと。<br />
+・CIDRを利用して、クラスCの連続するネットワークアドレスを１つのアドレスとして利用する事ができる。<br />
+・私的なネットワーク内部で利用できるプライベート<a class="keyword" href="http://d.hatena.ne.jp/keyword/IP%A5%A2%A5%C9%A5%EC%A5%B9">IPアドレス</a>というものがあり、自由に利用することができる。※詳細は以下を参照</p>
+
+</div>
+<div class="section">
+<h4>クラスA</h4>
+<p>・クラスAは先頭の１ビットが0で始まり、ネットワークアドレス部は戦闘から8ビットとなる。(0.0.0.0-127.255.255.255)<br />
+・残りの２４ビットが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DB%A5%B9%A5%C8%C9%F4">ホスト部</a>となる。2の24乗−２(全て０や１は予約IP)なので割り当て可能数は16777214個となる。</p>
+
+</div>
+<div class="section">
+<h4>クラスB</h4>
+<p>・クラスBは先頭の２ビットが10で始まり、ネットワークアドレス部は先頭から16ビットとなる。(128.0.0.0-191.255.255.255)<br />
+・残りの１６ビットが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DB%A5%B9%A5%C8%C9%F4">ホスト部</a>となる。2の16乗-2(全て０や１は予約IP)なので割り当て可能数は65534個となる。</p>
+
+</div>
+<div class="section">
+<h4>クラスC</h4>
+<p>・クラスCは先頭の３ビットが110で始まり、ネットワークアドレス部は先頭から24ビットとなる。(192.0.0.0-223.255.255.255)<br />
+・残りの8ビットが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DB%A5%B9%A5%C8%C9%F4">ホスト部</a>となる。2の8乗-2(全て０や１は予約IP)なので割り当て可能数は254個となる。</p>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A5%D6%A5%CD%A5%C3%A5%C8%A5%DE%A5%B9%A5%AF">サブネットマスク</a></h4>
+
+<table>
+<tr>
+<th> クラス </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A5%D6%A5%CD%A5%C3%A5%C8%A5%DE%A5%B9%A5%AF">サブネットマスク</a> </th>
+</tr>
+<tr>
+<td> A </td>
+<td> 255.0.0.0 </td>
+<td> </td>
+</tr>
+<tr>
+<td> B </td>
+<td> 255.255.0.0 </td>
+</tr>
+<tr>
+<td> C </td>
+<td> 255.255.255.0 </td>
+<td> </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h4>プライベート<a class="keyword" href="http://d.hatena.ne.jp/keyword/IP%A5%A2%A5%C9%A5%EC%A5%B9">IPアドレス</a></h4>
+
+<table>
+<tr>
+<th> クラス </th>
+<th> プライベートアドレス </th>
+</tr>
+<tr>
+<td> A </td>
+<td> 10.0.0.0 - 10.255.255.255 </td>
+<td> </td>
+</tr>
+<tr>
+<td> B </td>
+<td> 172.16.0.0 - 172.16.255.255 </td>
+</tr>
+<tr>
+<td> C </td>
+<td> 192.168.0.0 - 192.168.255.255 </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/IP%A5%A2%A5%C9%A5%EC%A5%B9">IPアドレス</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A5%D6%A5%CD%A5%C3%A5%C8%A5%DE%A5%B9%A5%AF">サブネットマスク</a>対応表</h4>
+<p>■クラスA</p>
+
+<table>
+<tr>
+<th>記述 </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A5%D6%A5%CD%A5%C3%A5%C8%A5%DE%A5%B9%A5%AF">サブネットマスク</a> </th>
+<th> 個数 </th>
+</tr>
+<tr>
+<td>/8</td>
+<td>255.0.0.0</td>
+<td>16777216</td>
+</tr>
+<tr>
+<td>/9</td>
+<td>255.128.0.0</td>
+<td>8388608</td>
+</tr>
+<tr>
+<td>/10</td>
+<td>255.192.0.0</td>
+<td>4194304</td>
+</tr>
+<tr>
+<td>/11</td>
+<td>255.224.0.0</td>
+<td>2097152</td>
+</tr>
+<tr>
+<td>/12</td>
+<td>255.240.0.0</td>
+<td>1048576</td>
+</tr>
+<tr>
+<td>/13</td>
+<td>255.248.0.0</td>
+<td>524288</td>
+</tr>
+<tr>
+<td>/14</td>
+<td>255.252.0.0</td>
+<td>262144</td>
+</tr>
+<tr>
+<td>/15</td>
+<td>255.254.0.0</td>
+<td>131072</td>
+</tr>
+</table><p>■クラスB</p>
+
+<table>
+<tr>
+<th>記述 </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A5%D6%A5%CD%A5%C3%A5%C8%A5%DE%A5%B9%A5%AF">サブネットマスク</a> </th>
+<th> 個数 </th>
+</tr>
+<tr>
+<td>/16</td>
+<td>255.255.0.0</td>
+<td>65536</td>
+</tr>
+<tr>
+<td>/17</td>
+<td>255.255.128.0</td>
+<td>32768</td>
+</tr>
+<tr>
+<td>/18</td>
+<td>255.255.192.0</td>
+<td>16384</td>
+</tr>
+<tr>
+<td>/19</td>
+<td>255.255.224.0</td>
+<td>8192</td>
+</tr>
+<tr>
+<td>/20</td>
+<td>255.255.240.0</td>
+<td>4096</td>
+</tr>
+<tr>
+<td>/21</td>
+<td>255.255.248.0</td>
+<td>2048</td>
+</tr>
+<tr>
+<td>/22</td>
+<td>255.255.252.0</td>
+<td>1024</td>
+</tr>
+<tr>
+<td>/23</td>
+<td>255.255.254.0</td>
+<td>512</td>
+</tr>
+</table><p>■クラスC</p>
+
+<table>
+<tr>
+<th>記述 </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A5%D6%A5%CD%A5%C3%A5%C8%A5%DE%A5%B9%A5%AF">サブネットマスク</a> </th>
+<th> 個数 </th>
+</tr>
+<tr>
+<td>/24</td>
+<td>255.255.255.0</td>
+<td>256</td>
+</tr>
+<tr>
+<td>/25</td>
+<td>255.255.255.128</td>
+<td>128</td>
+</tr>
+<tr>
+<td>/26</td>
+<td>255.255.255.192</td>
+<td>64</td>
+</tr>
+<tr>
+<td>/27</td>
+<td>255.255.255.224</td>
+<td>32</td>
+</tr>
+<tr>
+<td>/28</td>
+<td>255.255.255.240</td>
+<td>16</td>
+</tr>
+<tr>
+<td>/29</td>
+<td>255.255.255.248</td>
+<td>8</td>
+</tr>
+<tr>
+<td>/30</td>
+<td>255.255.255.252</td>
+<td>4</td>
+</tr>
+<tr>
+<td>/31</td>
+<td>255.255.255.254</td>
+<td>2</td>
+</tr>
+<tr>
+<td>/32</td>
+<td>255.255.255.255</td>
+<td>1</td>
+</tr>
+</table>
+</div>
+<h2>TemplateMethod パターン</h2>
+<div class="section">
+<h4>概要</h4>
+<p>親クラスに共通処理の流れを記述し、子クラスで各処理の具体的な実装を行うパターンです。<br />
+メリットとしては共通処理を一箇所にまとめることができるのと、子クラスで具体的な実装が組めるのでやりたい処理をクラスごとに変更することができます。<br />
+処理の方が決まっているクラス、例えば<a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a>クラス(パラメータ取得して、DBに接続して、結果を返してなど)などの定義では必ずと言っていいほど<br />
+使われているような気がします。</p>
+
+</div>
+<div class="section">
+<h4>ハリウッドの原則</h4>
+<p>これはちょっと面白い話です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/TemplateMethod">TemplateMethod</a>パターンは通常とは"逆"の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>呼び出しをします。というのも抽象クラスから子クラスが<br />
+呼び出されるためです。この状態を示す英文として[ Don't call us. We'll call you ]　我々を呼び出すな、必要なときは我々が君を呼び出す という言葉があるようです。<br />
+ここでの我々は抽象クラス、君は子クラスという意味になりますね。誰が考えたのかわかりませんが、ユーモアを感じますね。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h4>抽象クラス</h4>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synType">abstract</span> <span class="synType">class</span> APIModel <span class="synSpecial">{</span>
+
+<span class="synType">protected</span> <span class="synStatement">$</span><span class="synIdentifier">_params</span> <span class="synStatement">=</span> <span class="synType">array</span><span class="synSpecial">()</span>;
+<span class="synType">protected</span> <span class="synStatement">$</span><span class="synIdentifier">_method</span> <span class="synStatement">=</span> <span class="synType">null</span>;
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> <span class="synStatement">__construct</span><span class="synSpecial">()</span> <span class="synSpecial">{}</span>
+<span class="synType">protected</span> <span class="synPreProc">function</span> <span class="synStatement">__destruct</span><span class="synSpecial">()</span> <span class="synSpecial">{}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> prepare<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//DBの初期化処理を記述　※別クラス化</span>
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> getParams<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>_params <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">_REQUEST</span>;
+<span class="synSpecial">}</span>
+
+<span class="synType">public</span> <span class="synPreProc">function</span> fetch<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>getParams<span class="synSpecial">()</span>;
+<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>validate<span class="synSpecial">()</span>;
+<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>prepare<span class="synSpecial">()</span>;
+<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>execute<span class="synSpecial">()</span>;
+<span class="synStatement">$</span><span class="synIdentifier">result</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>parse<span class="synSpecial">()</span>;
+<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>tearDown<span class="synSpecial">()</span>;
+<span class="synStatement">return</span> <span class="synStatement">$</span><span class="synIdentifier">result</span>;
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> tearDown<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//DBの開放処理などを記述</span>
+<span class="synSpecial">}</span>
+
+
+<span class="synSpecial">}</span>
+</pre><p>共通処理の流れをfetchに書きました。これにより処理の流れを定義できます。その他のprotected関数については子クラスで詳細定義を行ないます。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h4>継承クラス</h4>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+<span class="synType">class</span> TestAPI <span class="synType">extends</span> APIModel <span class="synSpecial">{</span>
+   
+<span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">__construct</span><span class="synSpecial">()</span> <span class="synSpecial">{}</span>
+<span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">__destruct</span><span class="synSpecial">()</span> <span class="synSpecial">{}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> prepare<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//初期化処理を行ないます。</span>
+<span class="synType">parent</span><span class="synStatement">::</span>prepare<span class="synSpecial">()</span>;
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> validate<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//パラメータのvalidateを行ないます。</span>
+<span class="synStatement">$</span><span class="synIdentifier">ret</span> <span class="synStatement">=</span> <span class="synConstant">true</span>;
+<span class="synStatement">if</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">ret</span> <span class="synStatement">===</span> <span class="synConstant">false</span> <span class="synSpecial">)</span> <span class="synSpecial">{</span>
+    <span class="synStatement">throw</span> <span class="synPreProc">new</span> <span class="synIdentifier">Exception</span><span class="synSpecial">()</span>;
+<span class="synSpecial">}</span>
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> execute<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//DBに接続するなど実行を行ないます。</span>
+<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>_data <span class="synStatement">=</span> <span class="synType">array</span><span class="synSpecial">(</span> '<span class="synConstant">Test</span>' <span class="synSpecial">)</span>;
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> parse<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//結果の整形</span>
+<span class="synIdentifier">array_push</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>_data, '<span class="synConstant">API</span>'<span class="synSpecial">)</span>;
+<span class="synStatement">return</span> <span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>_data;
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> tearDown<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//後処理を行ないます。※DBの開放など</span>
+<span class="synSpecial">}</span>
+
+<span class="synSpecial">}</span>
+
+<span class="synType">class</span> SampleAPI <span class="synType">extends</span> APIModel <span class="synSpecial">{</span>
+
+<span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">__construct</span><span class="synSpecial">()</span> <span class="synSpecial">{}</span>
+<span class="synType">public</span> <span class="synPreProc">function</span> <span class="synStatement">__destruct</span><span class="synSpecial">()</span> <span class="synSpecial">{}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> prepare<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//初期化処理を行ないます。</span>
+<span class="synType">parent</span><span class="synStatement">::</span>prepare<span class="synSpecial">()</span>;
+
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> validate<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//パラメータのvalidateを行ないます。</span>
+<span class="synPreProc">echo</span> "<span class="synConstant">aaaa </span><span class="synSpecial">\n</span>"; 
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> execute<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//DBに接続するなど実行を行ないます。</span>
+<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>_data <span class="synStatement">=</span> <span class="synType">array</span><span class="synSpecial">(</span> '<span class="synConstant">Sample</span>' <span class="synSpecial">)</span>;
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> parse<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//結果の整形</span>
+<span class="synIdentifier">array_push</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>_data, '<span class="synConstant">API</span>'<span class="synSpecial">)</span>;
+<span class="synStatement">return</span> <span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-></span>_data;
+<span class="synSpecial">}</span>
+
+<span class="synType">protected</span> <span class="synPreProc">function</span> tearDown<span class="synSpecial">()</span> <span class="synSpecial">{</span>
+<span class="synComment">//後処理を行ないます。※DBの開放など</span>
+<span class="synSpecial">}</span>
+
+<span class="synSpecial">}</span>
+</pre><p>親クラスで抽象化されていた<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>の詳細定義を行っています。クライアントから利用される時は親クラスのfetchを呼び出します。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h4>client</h4>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">//client </span>
+<span class="synStatement">try</span> <span class="synSpecial">{</span>
+  <span class="synStatement">$</span><span class="synIdentifier">test</span> <span class="synStatement">=</span> <span class="synPreProc">new</span> TestAPI<span class="synSpecial">()</span>;
+  <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">test</span><span class="synType">-></span>fetch<span class="synSpecial">()</span>;
+  <span class="synIdentifier">print_r</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span>;
+
+  <span class="synStatement">$</span><span class="synIdentifier">sample</span> <span class="synStatement">=</span> <span class="synPreProc">new</span> SampleAPI<span class="synSpecial">()</span>;
+  <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">sample</span><span class="synType">-></span>fetch<span class="synSpecial">()</span>;
+  <span class="synIdentifier">print_r</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span>;
+<span class="synSpecial">}</span> <span class="synStatement">catch</span><span class="synSpecial">(</span> <span class="synIdentifier">Exception</span> <span class="synStatement">$</span><span class="synIdentifier">e</span> <span class="synSpecial">)</span> <span class="synSpecial">{</span>
+<span class="synStatement">exit</span>;
+<span class="synSpecial">}</span>
+</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>化するクラスを切り替えて実行します。それぞれのクラスで詳細定義した<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>を抽象クラスが呼び出しているので、処理の流れが共通ですが<br />
+結果が異なります。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h4>実行結果</h4>
+<pre class="hljs php" data-lang="php" data-unlink>Array
+(
+[0] =<span class="synError">></span> Test
+[1] =<span class="synError">></span> API
+)
+aaaa 
+Array
+(
+[0] =<span class="synError">></span> Sample
+[1] =<span class="synError">></span> API
+)
+</pre>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201010010144/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201010010144/">Strategyパターン</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201010142353/">findとsedを利用した一行野郎のファイル名変換</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201010142353/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

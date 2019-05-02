@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20111125/1322177659" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>快適なUnixLifeのために覚えておきたい10のTips &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>快適なUnixLifeのために覚えておきたい10のTips</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Nov 25, 08:34</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="linux-快適なunixlifeのために覚えておきたい10のtips">[Linux] : 快適なUnixLifeのために覚えておきたい10のTips</h2>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20111123015311" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20111123/20111123015311.png" alt="f:id:yutakikuchi:20111123015311p:image:h150" title="f:id:yutakikuchi:20111123015311p:image:h150" class="hatena-fotolife" style="height:150px" itemprop="image"></a></span></p>
+
+<p><ul>
+<li>この記事では快適なUnixLifeを送るための便利な開発環境設定とコマンドの基本的なTipsについて紹介する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/.emacs">.emacs</a>などのeditorについて紹介するとキリがないので、また別で紹介したいと思う。</li>
+</ul>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">目次</span></h4></p>
+
+<blockquote>
+    
+<ol>
+<li>screen</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a></li>
+<li>find </li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a> </li>
+<li>mkdir</li>
+<li>diff</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a></li>
+<li>cut,sort,uniq</li>
+<li>その他</li>
+</ol>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;">screen</span></span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/poderosa">poderosa</a>などのタブ機能付きターミナルを使わなくてもscreenコマンドで<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のターミナルウィンドウを管理することが可能。</li>
+<li>サーバ内部のプロセスとしてscreenを管理しているので、restartなどをしない限りscreenのデタッチで一時的終了、アタッチで元々の作業画面を呼び起こす事が可能。よって会社での作業もscreenを使っていれば前日の作業の途中から開始する事ができる。</li>
+</ul>
+<div class="section">
+<h5>設定</h5>
+
+<ul>
+<li>必要な設定ファイルは$HOME/.screenrcとして次のような内容を書き込む。</li>
+</ul><pre class="hljs sh" data-lang="sh" data-unlink>escape ^Z^z  <span class="synComment">#control + zでscreenを操作する</span>
+hardstatus alwayslastline <span class="synStatement">"</span><span class="synConstant">%</span><span class="synSpecial">`%-w%{</span><span class="synStatement">=</span><span class="synSpecial">b bw}%n %t%{-}%+w</span><span class="synStatement">"</span><span class="synConstant">  #</span><span class="synSpecial">接続している</span><span class="synConstant">host</span><span class="synSpecial">名を表示する</span>
+<span class="synConstant">bind s</span>
+<span class="synConstant">startup_message off  # </span><span class="synSpecial">おまけ</span><span class="synConstant">: </span><span class="synSpecial">起動画面</span><span class="synConstant">OFF </span>
+<span class="synConstant">autodetach on        # </span><span class="synSpecial">おまけ</span><span class="synConstant">: </span><span class="synSpecial">回線切断時に自動で</span><span class="synConstant">detach</span>
+<span class="synConstant">defscrollback 1024   # </span><span class="synSpecial">おまけ</span><span class="synConstant">: </span><span class="synSpecial">スクロールバッファ行数を増やす</span>
+
+<span class="synConstant">bind s split #</span><span class="synSpecial">画面分割</span>
+<span class="synConstant">bind i focus #</span><span class="synSpecial">画面移動</span>
+<span class="synConstant">bind 1 only #</span><span class="synSpecial">一画面に戻す</span>
+<span class="synConstant">bind 0 remove #</span><span class="synSpecial">画面削除</span>
+<span class="synConstant">bind r eval </span><span class="synSpecial">‘</span><span class="synConstant">echo </span><span class="synSpecial">“</span><span class="synConstant">Resize window</span><span class="synSpecial">”‘</span><span class="synConstant"> </span><span class="synSpecial">‘</span><span class="synConstant">command -c resize</span><span class="synSpecial">’</span><span class="synConstant"> #Ctrl+tr</span><span class="synSpecial">で分割した画面サイズ</span><span class="synConstant">>></span>
+<span class="synSpecial">を変更｡</span><span class="synConstant"> </span>
+<span class="synConstant">bind -c resize ^] command </span>
+<span class="synConstant">bind -c resize j eval </span><span class="synSpecial">‘</span><span class="synConstant">resize +1</span><span class="synSpecial">′</span><span class="synConstant"> </span><span class="synSpecial">‘</span><span class="synConstant">command -c resize</span><span class="synSpecial">’</span><span class="synConstant"> #j</span><span class="synSpecial">で</span><span class="synConstant">1</span><span class="synSpecial">行大きくきく</span>
+<span class="synConstant">bind -c resize k eval </span><span class="synSpecial">‘</span><span class="synConstant">resize -1</span><span class="synSpecial">′</span><span class="synConstant"> </span><span class="synSpecial">‘</span><span class="synConstant">command -c resize</span><span class="synSpecial">’</span><span class="synConstant"> #k</span><span class="synSpecial">で</span><span class="synConstant">1</span><span class="synSpecial">行小さくさく</span>
+</pre>
+<ul>
+<li>新規で<a class="keyword" href="http://d.hatena.ne.jp/keyword/ssh">ssh</a>した時に新しいscreen windowを開くように$HOME/.zshrcファイルに次の設定を入れる。(<a class="keyword" href="http://d.hatena.ne.jp/keyword/bash">bash</a>の人は.bashrc)</li>
+</ul><pre class="hljs sh" data-lang="sh" data-unlink><span class="synComment">#sshコマンドで別のscreenを開く</span>
+<span class="synIdentifier">function</span> <span class="synIdentifier">ssh_screen(){</span>
+ <span class="synStatement">eval</span> <span class="synIdentifier">server</span>=<span class="synSpecial">\</span><span class="synPreProc">${$#}</span>
+ screen <span class="synSpecial">-t</span> <span class="synPreProc">$server</span> ssh <span class="synStatement">"</span><span class="synPreProc">$@</span><span class="synStatement">"</span>
+<span class="synIdentifier">}</span>
+
+<span class="synStatement">if [</span> x<span class="synPreProc">$TERM</span> <span class="synStatement">=</span> <span class="synConstant">xscreen</span> <span class="synStatement">];</span> <span class="synStatement">then</span>
+ compctl <span class="synStatement">-k</span> _cache_hosts ssh_screen
+ <span class="synStatement">alias </span><span class="synIdentifier">ssh</span><span class="synStatement">=</span>ssh_screen
+<span class="synStatement">fi</span>
+</pre>
+</div>
+<div class="section">
+<h5>起動、デタッチ、アタッチ、消去</h5>
+
+<ul>
+<li>起動中のscreenを確認する</li>
+</ul><pre class="code" data-lang="" data-unlink>$ screen -ls</pre>
+<ul>
+<li>screenを起動する</li>
+</ul><pre class="code" data-lang="" data-unlink>$ screen -S <screen名></pre>
+<ul>
+<li>screenをデタッチ(停止)する</li>
+</ul><pre class="code" data-lang="" data-unlink>control + z + d</pre>
+<ul>
+<li>screenをアタッチ(再会)する</li>
+</ul><pre class="code" data-lang="" data-unlink>$ screen -r <screen名></pre>
+<ul>
+<li>screenを消去する</li>
+</ul><pre class="code" data-lang="" data-unlink>$ kill -9 pid
+$ screen -wipe</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AD%A1%BC%A5%D0%A5%A4%A5%F3%A5%C9">キーバインド</a></h5>
+
+<ul>
+<li>初期学習コストが掛かるが、操作は毎日やっていれば慣れてしまう。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>初学者の段階で学ぶと良いと思う。以下ではデフォルト設定を想定した一部を紹介する。(.screenrcにて背<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AD%A1%BC%A5%D0%A5%A4%A5%F3%A5%C9">キーバインド</a>は変更できるので自分の好みにカスタマイズすると良い。)</li>
+</ul>
+<table>
+<tr>
+<th> コマンド </th>
+<th> 解説 </th>
+</tr>
+<tr>
+<td> ^Zc </td>
+<td> 新しいwindow作成 </td>
+</tr>
+<tr>
+<td> ^Zn </td>
+<td> 次のwindowへ移動 </td>
+</tr>
+<tr>
+<td> ^Zp </td>
+<td> 前のwindowへ移動 </td>
+</tr>
+<tr>
+<td> ^Zt  </td>
+<td> システムの情報を表示する </td>
+</tr>
+<tr>
+<td> ^Zn </td>
+<td> nは数字で、その番号のwindowへ移動 </td>
+</tr>
+<tr>
+<td> ^Zw </td>
+<td> windowのリストを表示する </td>
+</tr>
+<tr>
+<td> ^ZS </td>
+<td> 画面を分割する </td>
+</tr>
+<tr>
+<td> ^Zk </td>
+<td> windowを閉じる </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h5>画面キャプチャ</h5>
+
+<ul>
+<li>screen画面のキャプチャは次のような感じ。画面下に0 <a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a>,1 <a class="keyword" href="http://d.hatena.ne.jp/keyword/localhost">localhost</a>と出ているのが各screen画面で、それらを切り替えて使う。</li>
+</ul><p>[<span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20111123013152" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20111123/20111123013152.png" alt="f:id:yutakikuchi:20111123013152p:image" title="f:id:yutakikuchi:20111123013152p:image" class="hatena-fotolife" itemprop="image"></a></span>:]</p>
+
+</div>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a></span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li>最強のshell。</li>
+<li>補完機能が十分に備わっており、例えばコマンドのタイプ中にオプションを補完してくれたり、外部サーバのディレクトリさえも補完可能。</li>
+<li>参考になるサイトは漢の<a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a> : <a href="http://news.mynavi.jp/column/zsh/001/index.html">http://news.mynavi.jp/column/zsh/001/index.html</a></li>
+</ul>
+<div class="section">
+<h5>設定</h5>
+
+<ul>
+<li>$HOME/.zshrcに次のような設定を記述する。</li>
+</ul><pre class="hljs sh" data-lang="sh" data-unlink><span class="synComment"># 文字コードの設定</span>
+<span class="synStatement">export</span><span class="synIdentifier"> LANG=</span>ja_JP.UTF<span class="synConstant">-8</span>
+
+<span class="synComment"># パスの設定</span>
+<span class="synIdentifier">PATH</span>=<span class="synPreProc">$HOME</span>/<span class="synStatement">local</span>/bin:/sbin:/usr/<span class="synStatement">local</span>/bin:/usr/sbin:<span class="synPreProc">$PATH</span>
+<span class="synStatement">export</span><span class="synIdentifier"> MANPATH=</span><span class="synPreProc">$HOME</span>/<span class="synStatement">local</span>/bin:/sbin:/usr/<span class="synStatement">local</span>/man:/usr/share/man
+
+<span class="synComment">#補完色の設定</span>
+<span class="synStatement">export</span><span class="synIdentifier"> LS_COLORS=</span><span class="synStatement">'</span><span class="synConstant">di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30</span><span class="synStatement">'</span>
+
+<span class="synComment"># 関数</span>
+<span class="synStatement">find</span>-<span class="synStatement">grep</span> <span class="synPreProc">()</span> <span class="synSpecial">{</span> <span class="synStatement">find . </span>-<span class="synStatement">type</span> f -<span class="synStatement">print</span><span class="synConstant"> </span><span class="synStatement">|</span> xargs <span class="synStatement">grep</span> -n --binary-<span class="synIdentifier">files</span>=without-match <span class="synPreProc">$@</span> <span class="synSpecial">}</span>
+
+<span class="synComment">#sshコマンドで別のscreenを開く</span>
+<span class="synIdentifier">function</span> <span class="synIdentifier">ssh_screen(){</span>
+ <span class="synStatement">eval</span> <span class="synIdentifier">server</span>=<span class="synSpecial">\</span><span class="synPreProc">${$#}</span>
+ screen <span class="synSpecial">-t</span> <span class="synPreProc">$server</span> ssh <span class="synStatement">"</span><span class="synPreProc">$@</span><span class="synStatement">"</span>
+<span class="synIdentifier">}</span>
+<span class="synStatement">if [</span> x<span class="synPreProc">$TERM</span> <span class="synStatement">=</span> <span class="synConstant">xscreen</span> <span class="synStatement">];</span> <span class="synStatement">then</span>
+ compctl <span class="synStatement">-k</span> _cache_hosts ssh_screen
+ <span class="synStatement">alias </span><span class="synIdentifier">ssh</span><span class="synStatement">=</span>ssh_screen
+<span class="synStatement">fi</span>
+
+<span class="synComment"># プロンプトの設定 </span>
+<span class="synIdentifier">PROMPT</span>=<span class="synStatement">'</span><span class="synConstant">%n:%~# </span><span class="synStatement">'</span>
+
+<span class="synComment"># ヒストリの設定</span>
+<span class="synIdentifier">HISTFILE</span>=~/.histfile
+<span class="synIdentifier">HISTSIZE</span>=<span class="synConstant">10000</span>
+<span class="synIdentifier">SAVEHIST</span>=<span class="synConstant">10000</span>
+
+<span class="synComment"># 履歴ファイルに時刻を記録</span>
+setopt extended_history
+
+<span class="synComment"># 補完するかの質問は画面を超える時にのみに行う｡</span>
+<span class="synIdentifier">LISTMAX</span>=<span class="synConstant">0</span>
+
+<span class="synComment"># 補完の利用設定</span>
+<span class="synStatement">autoload</span> <span class="synSpecial">-Uz</span> compinit; compinit
+
+<span class="synComment"># sudo でも補完の対象</span>
+zstyle <span class="synStatement">'</span><span class="synConstant">:completion:*:sudo:*</span><span class="synStatement">'</span> command-path /usr/<span class="synStatement">local</span>/sbin /usr/<span class="synStatement">local</span>/bin /usr/sbin /usr/bin /sbin /bin
+
+<span class="synComment"># cdのタイミングで自動的にpushd</span>
+setopt auto_pushd 
+
+<span class="synComment"># 複数の zsh を同時に使う時など history ファイルに上書きせず追加</span>
+setopt append_history
+
+<span class="synComment"># 補完候補が複数ある時に、一覧表示</span>
+setopt auto_list
+
+<span class="synComment"># 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完</span>
+setopt auto_menu
+
+<span class="synComment"># カッコの対応などを自動的に補完</span>
+setopt auto_param_keys
+
+<span class="synComment"># ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える</span>
+setopt auto_param_slash
+
+<span class="synComment"># ビープ音を鳴らさないようにする</span>
+setopt NO_beep
+
+<span class="synComment"># 直前と同じコマンドラインはヒストリに追加しない</span>
+setopt hist_ignore_dups
+
+<span class="synComment"># 重複したヒストリは追加しない</span>
+setopt hist_ignore_all_dups
+
+<span class="synComment"># ヒストリを呼び出してから実行する間に一旦編集できる状態になる</span>
+setopt hist_verify
+
+<span class="synComment"># auto_list の補完候補一覧で、ls -F のようにファイルの種別をマーク表示しない</span>
+setopt NO_list_types
+
+<span class="synComment"># コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる</span>
+setopt magic_equal_subst
+
+<span class="synComment"># ファイル名の展開でディレクトリにマッチした場合末尾に / を付加する</span>
+setopt mark_dirs
+
+<span class="synComment"># 8 ビット目を通すようになり、日本語のファイル名を表示可能</span>
+setopt print_eight_bit
+
+<span class="synComment"># シェルのプロセスごとに履歴を共有</span>
+setopt share_history
+
+<span class="synComment"># Ctrl+wで､直前の/までを削除する｡</span>
+<span class="synIdentifier">WORDCHARS</span>=<span class="synStatement">'</span><span class="synConstant">*?_-.[]~=&;!#$%^(){}<></span><span class="synStatement">'</span>
+
+<span class="synComment"># ファイルリスト補完でもlsと同様に色をつける｡</span>
+zstyle <span class="synStatement">'</span><span class="synConstant">:completion:*</span><span class="synStatement">'</span> list-colors <span class="synPreProc">${</span><span class="synError">(s.:.)LS_COLORS</span><span class="synPreProc">}</span>
+
+<span class="synComment"># cd をしたときにlsを実行する</span>
+<span class="synIdentifier">function</span> <span class="synIdentifier">chpwd() {</span> <span class="synStatement">ls</span> <span class="synIdentifier">}</span>
+
+<span class="synComment"># ^で､cd ..</span>
+<span class="synIdentifier">function</span> <span class="synIdentifier">cdup() {</span>
+<span class="synStatement">echo</span>
+<span class="synStatement">cd</span> ..
+zle reset-prompt
+<span class="synIdentifier">}</span>
+zle <span class="synSpecial">-N</span> cdup
+bindkey <span class="synStatement">'</span><span class="synConstant">\^</span><span class="synStatement">'</span> cdup
+
+<span class="synComment"># ディレクトリ名だけで､ディレクトリの移動をする｡</span>
+setopt auto_cd
+
+<span class="synComment"># C-s, C-qを無効にする。</span>
+setopt NO_flow_control
+</pre>
+<ul>
+<li>shellのデフォルト設定を<a class="keyword" href="http://d.hatena.ne.jp/keyword/zsh">zsh</a>にする</li>
+</ul><pre class="code" data-lang="" data-unlink>$ sudo chsh -s <zshコマンドのパス> <ユーザ名></pre>
+<ul>
+<li>.zshrcの設定を反映する</li>
+</ul><pre class="code" data-lang="" data-unlink>$ source $HOME/.zshrc</pre>
+</div>
+<div class="section">
+<h5>補完の効果</h5>
+
+<ul>
+<li>オプションの補完。-を入力してオプション一覧をタブで補完してくれる。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ ls -
+--author                  -- print the author of each file                                                                
+--block-size              -- specify block size                                                                           
+--classify            -F  -- append file type indicators                                                                  
+--dereference         -L  -- list referenced file for sym link                                                            
+--directory           -d  -- list directory entries instead of contents                                                   
+--dired               -D  -- generate output designed for Emacs' dired mode                                               
+--escape              -b  -- print octal escapes for control characters                                                   
+--file-type           -p  -- append file type indicators except *                                                         
+--full-time               -- list both full date and full time                                                            
+--help                    -- display help information                                                                     
+--hide-control-chars  -q  -- hide control chars                                                                           
+--human-readable      -h  -- print sizes in human readable form                                                           
+--ignore              -I  -- don't list entire matching pattern                                                           
+--ignore-backups      -B  -- don't list entries ending with ~                                                             
+--inode               -i  -- print file inode numbers                                                                     
+--kilobytes           -k  -- use block size of 1k                                                                         
+--literal             -N  -- print raw characters                                                                         
+--no-group            -G  -- inhibit display of group information                                                         
+--numeric-uid-gid     -n  -- numeric uid, gid                                                                             
+--quote-name          -Q  -- quote names                                                                                  
+--recursive           -R  -- list subdirectories recursively                                                              
+--reverse             -r  -- reverse sort order                                                                           
+--si                  -H  -- sizes in human readable form; powers of 1000                                                 
+--size                -s  -- display size of each file in blocks                                                          
+--tabsize             -T  -- specify tab size                                                                             
+--time                    -- specify time to show                                                                         
+--time-style              -- show times using specified style                                                             
+--version                 -- display version information                                                                  
+--width               -w  -- specify screen width                                                                         
+-S                        -- sort by size                                                                                 
+-U                        -- unsorted                                                                                     
+-X                        -- sort by extension                                                                            
+-c                        -- status change time                                                                           
+-f                        -- unsorted, all, short list                                                                    
+-t                        -- sort by modification time                                                                    
+-u                        -- access time                                                                                  
+-v                        -- sort by version (filename treated numerically)                                               
+--dereference-command-line                                   --quoting-style                                            
+--dereference-command-line-symlink-to-dir                    --show-control-chars                                       
+--indicator-style                                            --sort </pre>
+<ul>
+<li>遷移したディレクトリ一覧を表示。cdコマンドで遷移したディレクトリ一覧を表示してくれる。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ cd - 
+4 -- /home/yuta/work
+5 -- /home/yuta/work/test
+6 -- /home/yuta
+7 -- /home/yuta/work
+8 -- /home/yuta/work/dev</pre>
+<ul>
+<li>上記以外にも沢山補完機能が備わっているので、是非試して欲しい。</li>
+</ul>
+</div>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">find</span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li>特定の条件のディレクトリ/ファイルを検索する。<span class="deco" style="color:#FF0000;">-and,-or,-exec,-iname,-mtime,-<a class="keyword" href="http://d.hatena.ne.jp/keyword/regex">regex</a>,-type</span>オプションをよく利用する。また<span class="deco" style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>,xargs</span>と組み合わせて使うとより強力な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>となる。</li>
+</ul>
+<div class="section">
+<h5>使用例</h5>
+
+<ul>
+<li><span class="deco" style="color:#FF0000;">-type:</span>検索するファイルタイプを指定する f:ファイル、d:ディレクトリ</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -type f</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-iname:</span>検索するファイル名の小文字/大文字を無視する。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -iname '検索ファイル名'</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-<a class="keyword" href="http://d.hatena.ne.jp/keyword/regex">regex</a>:</span>検索するファイル名に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>を利用する。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -regex '正規表現ファイル名'</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-and:</span><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の条件をandで指定する。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -type f -and -name '検索ファイル名'</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-or:</span><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の条件をorで指定する。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -type f -or -name '検索ファイル名'</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-exec:</span>.<a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B3%C8%C4%A5%BB%D2">拡張子</a>のファイルに対してsyntax checkをする。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -name '*.php' -exec php -l {} \;</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-mtime:</span>ファイルの最終更新日時を見る。例は3日以内の更新ファイルをバックアップディレクトリに入れる。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -mtime -3 -exec cp {} ~/work/back/ \;</pre>
+<ul>
+<li>ファイル名に検索文字列が含まれるファイルに対して<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>を利用してファイル名を置換する。参考 : <a href="http://d.hatena.ne.jp/yutakikuchi/20101014/1287068005">findとsedを利用した一行野郎のファイル名変換 - 上から目線</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20101014/1287068005"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20101014/1287068005" alt="はてなブックマーク - findとsedを利用した一行野郎のファイル名変換 - 上から目線" border="0" /></a></li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -name '<検索文字列>' | sed -e 's/<正規表現>/mv <後方参照><置換文字列><後方参照>/g' | sh</pre>
+<ul>
+<li>findと<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>を利用してtreeコマンドを作る事が可能。これを見るとtreeコマンドも意外と簡単なんだと実感する。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> | sort | sed -ne 's/[^\/]*\//+--/g;s/+--+/|  +/g;s/+--+/|  +/g;s/+--|/|  |/g;p'
+.
++--perl
+|  +--sample.pl
++--php
+|  +--encrypt.php
+|  +--require.php
++--python
+|  +--encode.py
++--shell
+|  +--curl.sh
+|  +--grep.sh</pre>
+<ul>
+<li>xargsを使って特定のファイルを全て/var/tmpに移動させる。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ find <dir> -name \*~ -print0 | xargs -0 -I{} mv {} /var/tmp
+$ find <dir> -name \*~ -print0 | xargs -0 mv -t /var/tmp</pre>
+</div>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a></span></span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li>ファイル中に含まれる文字列を検索するために利用する超必須コマンド。<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>で利用するオプションは<span class="deco" style="color:#FF0000;">-i,-e,-v,-r,--color</span>が挙げられる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>と同等の機能でackというコマンドもあるので、そちらも参照してほしい。参考:<a href="http://d.hatena.ne.jp/yutakikuchi/20110523/1306111855">ackコマンド - 上から目線</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20110523/1306111855"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20110523/1306111855" alt="はてなブックマーク - ackコマンド - 上から目線" border="0" /></a></li>
+</ul>
+<div class="section">
+<h5>使用例</h5>
+
+<ul>
+<li><span class="deco" style="color:#FF0000;">-r:</span>特定の文字列で特定のディレクトリ以下全てを検索対象としたい。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ grep -r '文字列' dir</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-i:</span>文字列の小文字/大文字を区別しない。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ grep -ir '文字列' dir</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-v:</span>文字列を無視する。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ grep -v '文字列' dir</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">--color:</span>結果として出力する時に指定した文字列の色を変える。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ grep --color '文字列' dir</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;"> -e:</span>文字列のor検索がしたい。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ grep -e '文字列1' -e '文字列2' dir</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-E:</span><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>で文字列のor検索(<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B3%C8%C4%A5%C0%B5%B5%AC%C9%BD%B8%BD">拡張正規表現</a>が使えるegrepコマンドを使っても良い。)</li>
+</ul><pre class="code" data-lang="" data-unlink>$ grep -E '(文字列1|文字列2)' dir</pre>
+<ul>
+<li>文字列のand検索がしたい場合は<span class="deco" style="color:#FF0000;">パイプ</span>を利用する。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ grep '文字列1' dir | grep '文字列2'</pre>
+<ul>
+<li>その他:日本語などのマルチバイト文字列を検索したい場合で、ターミナル上で文字入力が出来ない場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a>のコマンドモードで<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>を利用すると良い。またはvimgrepを利用する。vimgrep : <a href="http://d.hatena.ne.jp/yutakikuchi/20100906/1283790887">http://d.hatena.ne.jp/yutakikuchi/20100906/1283790887</a></li>
+</ul><pre class="code" data-lang="" data-unlink>$ vim
+: !grep -ir '日本語文字列' *</pre>
+</div>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">mkdir</span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>を使っている人であれば誰もが知っているディレクトリ作成コマンド。しかし意外と知られていないのが<span class="deco" style="color:#FF0000;">-pオプションとグルーピング</span>である。-pにて2階層以上のディレクトリが作成可能になる。２階層以上の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>ディレクトリに対して特定のルールに沿って新規にディレクトリを作成したいときは-pとグルーピングを用いると簡単である。下ではfor文を利用した場合と比較する。</li>
+</ul><pre class="code" data-lang="" data-unlink>   |--- conf
+   |    |--- html
+   |    |--- json
+   |    |--- php
+   |    |--- xml
+   |--- doc
+   |    |--- html
+   |    |--- json
+   |    |--- php
+   |    |--- xml
+   |--- lib
+   |    |--- html
+   |    |--- json
+   |    |--- php
+   |    |--- xml
+   |--- src
+   |    |--- html
+   |    |--- json
+   |    |--- php
+   |    |--- xml</pre>
+<ul>
+<li>上の例をfor文で書いてみる。ディレクトリがたくさんある場合はこの方法でも良いが、記述が冗長的。</li>
+</ul><pre class="hljs sh" data-lang="sh" data-unlink><span class="synComment">#!/bin/sh</span>
+<span class="synStatement">for </span>i <span class="synStatement">in</span> conf doc lib src
+<span class="synStatement">do</span>
+<span class="synStatement">for </span>j <span class="synStatement">in</span> xml html json php
+<span class="synStatement">do</span>
+    <span class="synStatement">mkdir</span> <span class="synStatement">-p</span> <span class="synPreProc">$i</span>/<span class="synPreProc">$j</span><span class="synStatement">;</span>
+<span class="synStatement">done</span>
+<span class="synStatement">done</span>
+</pre>
+<ul>
+<li>次は-p とグルーピングを利用した例。記述がすごくシンプルになる。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ mkdir -p {conf,doc,lib,src}/{html,json,php,xml}</pre>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">diff</span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li>ファイル内容の差分を取るコマンド。よく利用するオプションは<span class="deco" style="color:#FF0000;">-r, -u, -I, -exclude</span>。</li>
+<li>ファイルの差分をpatchファイルとして取得し、patchを当て/外しによりファイル内容を変更する事が可能。patchはディレクトリに対しても適用可能。</li>
+</ul>
+<div class="section">
+<h5>使用例</h5>
+
+<ul>
+<li>ファイルの差分を検出。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ diff <file1> <file2></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-r:</span>対象ディレクトリ以下全てを差分取得対象とする。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ diff -r <dir1> <dir2></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-u:</span>unified diff 形式の出力をする。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ diff -ru <dir1> <dir2> </pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-I:</span><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>にマッチした行を差分対象外とする。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ diff -r -I '正規表現' <dir1> <dir2></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-exclude:</span>該当するファイルを差分対象外とする。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ diff -r -exclude '*.txt' <dir1> <dir2></pre>
+<ul>
+<li>diff,<a class="keyword" href="http://d.hatena.ne.jp/keyword/grep">grep</a>,<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>を使って差分があったファイルのみを特定のフォルダにコピー。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ diff -r <dir1> <dir2> | grep 'diff -r' | sed 's/diff -r/cp/g' | sh</pre>
+</div>
+<div class="section">
+<h5>patchを作成</h5>
+
+<ul>
+<li>diffコマンドにてpatchファイルを作成。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ diff -u 元のファイル 変更後のファイル > patch.txt</pre>
+<ul>
+<li>patchを当てる。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ patch -u 元のファイル < patch.txt</pre>
+<ul>
+<li>patchを外す。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ patch -R 元のファイル < patch.txt</pre>
+</div>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;"><span class="deco" style="font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a></span></span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>変換コマンドの代表的なものとして<a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a>とiconvが挙げられる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a>とiconvは使い勝手と性質が異なる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a>が日本語文字を使用しているファイルに対して適用可能という点を考えるとiconvが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>としてより汎用性が高いととらえるべきだろうが個人的には<a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a>のコマンドインタフェースが好きだ。iconvはあまり使った事が無く、ここでは<a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a>について紹介する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a>とはNetwork Kanji Filterの略。<a href="http://sourceforge.jp/projects/nkf/">http://sourceforge.jp/projects/nkf/</a></li>
+<li>よく利用するオプションは<span class="deco" style="color:#FF0000;">-e,-j,-g,-s-w,-x,-z4,-Lu,-Lw,--overwrite</span></li>
+</ul>
+<div class="section">
+<h5>使用例</h5>
+
+<ul>
+<li><span class="deco" style="color:#FF0000;">-g(--guess):</span>ファイルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>を判別して表示。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -g <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">--overwrite:</span>処理の変更をファイルに上書き。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf --overwrite <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-e:</span><a class="keyword" href="http://d.hatena.ne.jp/keyword/EUC">EUC</a>-JPとして出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -e --overwrite <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-s:</span><a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>として出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -s --overwrite <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-j: </span>JISとして出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -j --overwrite <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-w: </span><a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>として出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -w --overwrite <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-z4:</span>全角カタカナを半角カタカナに変換して出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -z4 --overwrite <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-x:</span>半角カタカナを全角カタカナに変換しないで出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -x <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-Lu:</span>改行を<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>形式(ラインフィールド)として出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -Lu -overwrite <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-Lw:</span>改行を<a class="keyword" href="http://d.hatena.ne.jp/keyword/windows">windows</a>形式(キャリッジリターン、ラインフィールド)として出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf -Lw -overwrite <file></pre>
+<ul>
+<li>その他:ファイル中にキャリッジリターンが含まれるかどうかの判定はodコマンドを利用し、'\r\n'が含まれるかを見る。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ od -c <file></pre>
+</div>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a></span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li>scriptとしてではなく、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EF%A5%F3%A5%E9%A5%A4%A5%CA%A1%BC">ワンライナー</a>の文字列書き換えとして利用すると便利。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>を強力に使えるので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/sed">sed</a>やtrの代わりに利用すると良い。</li>
+</ul>
+<div class="section">
+<h5>使用例</h5>
+
+<ul>
+<li>ファイルのバックアップをとって(.bakファイルを生成し)、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>のルールに従ってファイルの内容を置換</li>
+</ul><pre class="code" data-lang="" data-unlink>$ perl -pi.bak -e 's/<置換文字列>/置換後文字列/g' <file></pre>
+<ul>
+<li>改行コードを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Windows">Windows</a>形式(キャリッジリターン、ラインフィールド)から<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>形式(ラインフィールド)に置換</li>
+</ul><pre class="code" data-lang="" data-unlink>$ perl -pi.bak -e 's/\015\012/\012/g' <file></pre>
+<ul>
+<li>スペースで区切られたファイルの0-4番目と6番目の項目を出力</li>
+</ul><pre class="code" data-lang="" data-unlink>$ perl -lane 'print "@F[0..4] $F[6]"' <file></pre>
+<ul>
+<li>タブで区切られたファイルの0-4番目の項目を出力</li>
+</ul><pre class="code" data-lang="" data-unlink>$ perl -F '\t' -lane 'print "@F[0..4] "' <file></pre>
+<ul>
+<li>標準出力をURlEncode</li>
+</ul><pre class="code" data-lang="" data-unlink>$ echo "<Encodeしたい文字列>" | perl -MURI::Escape -ne 'print uri_escape($_)'</pre>
+<ul>
+<li>標準出力をURIDecode</li>
+</ul><pre class="code" data-lang="" data-unlink>$ echo '<Decodeしたい文字列>' | perl -MURI::Escape -ne 'print uri_unescape($_)'</pre>
+<ul>
+<li>標準出力をBase64Encode</li>
+</ul><pre class="code" data-lang="" data-unlink>$ echo "<Encodeしたい文字列>" | perl -MMIME::Base64 -ne 'print encode_base64($_)'</pre>
+<ul>
+<li>標準出力をBase64Decode</li>
+</ul><pre class="code" data-lang="" data-unlink>$ echo "<Decodeしたい文字列>" | perl -MMIME::Base64 -ne 'print decode_base64($_)'</pre>
+</div>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">cut,sort,uniq</span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li>cut:文字列の切り出し、sort:データのsort、uniq:重複行の操作が可能なコマンド。</li>
+<li>それぞれのコマンドのみも使うが、パイプを用いて結果を連結するケースが多い。</li>
+</ul>
+<div class="section">
+<h5>cut使用例</h5>
+
+<ul>
+<li>良く利用するオプションは<span class="deco" style="color:#FF0000;">-b,-c,-d,-f</span></li>
+<li><span class="deco" style="color:#FF0000;">-d,-f:</span>-dがデリミタを指定、-fで何番目の行を表示するか決定。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ cut -d ',' -f2 <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-c:</span>文字数で区切る。-nでマルチバイトの文字列を分割しない。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ cut -c1-4 -n <file> </pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-b:</span>Byte数で区切る。-nでマルチバイトの文字列を分割しない。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ cut -b1-4 -n <file></pre>
+</div>
+<div class="section">
+<h5>sort使用例</h5>
+
+<ul>
+<li>良く利用するオプションは<span class="deco" style="color:#FF0000;">-k,-t,-r,-n</span>。</li>
+<li><span class="deco" style="color:#FF0000;">-t:</span>項目のセパレータを指定。<span class="deco" style="color:#FF0000;">-k:</span>セパレートされた項目数目でsort。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ sort -t ',' -k1 <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-n:</span>数値を基準としてsort。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ sort -k1 -n <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-r:</span>降順にsort。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ sort -r <file></pre>
+</div>
+<div class="section">
+<h5>uniq使用例</h5>
+
+<ul>
+<li>uniqはデータがsortされている事が前提。uniqでは前後行の重複しか見ない。</li>
+<li>良く利用するオプションは<span class="deco" style="color:#FF0000;">-c,-d,-u</span></li>
+<li><span class="deco" style="color:#FF0000;">-c:</span>重複行のカウント数を表示。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ uniq -c <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-d:</span>2回以上あるもののみ出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ uniq -d <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-u:</span>1回のみ表示される行を出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ uniq -u <file></pre>
+</div>
+<div class="section">
+<h5>組み合わせ使用例</h5>
+
+<ul>
+<li>cutで2-4行目を出力し、sortでデータを降順にsortし、uniqで重複行のカウントをして出力 </li>
+</ul><pre class="code" data-lang="" data-unlink>$ cut -d ',' -f2-4 | sort -r | uniq -c</pre>
+</div>
+</blockquote>
+
+<p></div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">その他</span></h4></p>
+
+<blockquote>
+    
+<ul>
+<li>以下は簡単に説明のみする項目。</li>
+</ul>
+<div class="section">
+<h5>dig</h5>
+
+<ul>
+<li>host名と<a class="keyword" href="http://d.hatena.ne.jp/keyword/ip%A5%A2%A5%C9%A5%EC%A5%B9">ipアドレス</a>の対応を<a class="keyword" href="http://d.hatena.ne.jp/keyword/DNS">DNS</a>に問い合わせるコマンド。/etc/hostsに設定を追加する場合などによく使う。</li>
+<li>同じような機能のコマンドとしてnslookupがある。nslookupより結果として表示される情報量が多いのと使い勝手がよいのでdigを使っている。</li>
+<li>digとはdomain information groperの略。</li>
+<li>使用例
+<ul>
+<li>サーバhost名で<a class="keyword" href="http://d.hatena.ne.jp/keyword/DNS">DNS</a>の情報を見る。</li>
+</ul></li>
+</ul><pre class="code" data-lang="" data-unlink>$ dig サーバhost名</pre>
+<ul>
+<li>
+<ul>
+<li>引き当てる<a class="keyword" href="http://d.hatena.ne.jp/keyword/DNS">DNS</a>サーバを指定する。</li>
+</ul></li>
+</ul><pre class="code" data-lang="" data-unlink>$ dig @DNSサーバ サーバhost名</pre>
+<ul>
+<li>
+<ul>
+<li>-x:<a class="keyword" href="http://d.hatena.ne.jp/keyword/IP%A5%A2%A5%C9%A5%EC%A5%B9">IPアドレス</a>からサーバhost名を引く。</li>
+</ul></li>
+</ul><pre class="code" data-lang="" data-unlink>$ dig -x IPアドレス</pre>
+<ul>
+<li>
+<ul>
+<li>メールエクスチェンジ(MXレコード)を引く。</li>
+</ul></li>
+</ul><pre class="code" data-lang="" data-unlink>$ dig MXレコード MX</pre>
+</div>
+<div class="section">
+<h5>base64encode/decode</h5>
+
+<ul>
+<li>標準出力のbase64encode/decodeを行う</li>
+</ul><pre class="code" data-lang="" data-unlink>$ echo '<base64encodeしたい文字列>' | base64 -e
+$ echo '<base64decodeしたい文字列>' | base64 -d</pre>
+<ul>
+<li>ファイルのbase64encode/decodeを行う</li>
+</ul><pre class="code" data-lang="" data-unlink>$ base64 -e file
+$ base64 -d file</pre>
+</div>
+<div class="section">
+<h5>容量表示</h5>
+
+<ul>
+<li>ディスク容量</li>
+</ul><pre class="code" data-lang="" data-unlink>$ df -h</pre>
+<ul>
+<li>ディレクトリ容量</li>
+</ul><pre class="code" data-lang="" data-unlink>$ du -sh</pre>
+</div>
+<div class="section">
+<h5>リンクを張る</h5>
+
+<ul>
+<li>lnコマンド。ディレクトリ/ファイルに対してリンクを張る事が可能。</li>
+<li>ディレクトリの複雑で深い階層を参照するのが面倒なときは$HOME以下に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B7%A5%F3%A5%DC%A5%EA%A5%C3%A5%AF%A5%EA%A5%F3%A5%AF">シンボリックリンク</a>を張っておくと良い。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ ln -s /opt/local/Library/Frameworks/Python.framework/Versions/2.6 $HOME/python2.6</pre>
+</div>
+<div class="section">
+<h5>パイプ + <a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a></h5>
+
+<ul>
+<li>標準出力された内容を<a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a>で閲覧する。パイプを使って<a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a>に流してしまえばリダイレクト等が不要。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ php batch.php | vim -</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a></h5>
+
+<ul>
+<li>単純な処理をしたい時は-rの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EF%A5%F3%A5%E9%A5%A4%A5%CA%A1%BC">ワンライナー</a>で書くと便利。そこそこコード量が必要になる場合はファイルに記述して実行する方が良い。</li>
+<li><span class="deco" style="color:#FF0000;">-l:</span>syntax check</li>
+</ul><pre class="code" data-lang="" data-unlink>$ php -l <file></pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-r:</span>コード解釈、実行。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ php -r 'echo "test";'</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-i:</span><a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>の設定情報出力。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ php -i</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">-a:</span>interactive mode起動。control + dで実行。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ php -a</pre>
+</div>
+<div class="section">
+<h5>設定ファイル配布</h5>
+
+<ul>
+<li>.vimrcなどを修正した時にログインした事があるサーバに対して一斉に配布したい時に利用する。下の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>をdeliverという名前でファイルに保存。</li>
+</ul><pre class="hljs sh" data-lang="sh" data-unlink><span class="synComment">#!/bin/sh</span>
+<span class="synStatement">for </span>i <span class="synStatement">in</span> <span class="synSpecial">`perl -ne </span><span class="synStatement">'</span><span class="synConstant">if (/([a-zA-Z0-9.-]+)/) { print "$1\n";}</span><span class="synStatement">'</span><span class="synSpecial"> ~/.ssh/known_hosts`</span>
+<span class="synStatement">do</span>
+scp ~/.zshrc <span class="synPreProc">$i</span>:
+<span class="synStatement">done</span>
+-------------
+$ deliver .vimrc
+</pre>
+<ul>
+<li>上のようにshellscriptファイルとしても良いが、.zshrcなどに関数として記述すると尚良い。</li>
+</ul><pre class="hljs sh" data-lang="sh" data-unlink><span class="synIdentifier">function</span> <span class="synIdentifier">deliver() {</span>
+<span class="synStatement">for </span>i <span class="synStatement">in</span>  <span class="synSpecial">`perl -ne  </span><span class="synStatement">'</span><span class="synConstant">if (/([a-zA-Z0-9.-]+)/) { print "$1\n";}</span><span class="synStatement">'</span><span class="synSpecial"> ~/.ssh/known_hosts`</span>
+<span class="synStatement">do</span>  
+    <span class="synStatement">echo</span><span class="synConstant"> scp </span><span class="synPreProc">$PWD</span><span class="synConstant">/</span><span class="synPreProc">$1</span><span class="synConstant"> </span><span class="synPreProc">$i</span><span class="synConstant">:</span><span class="synPreProc">$2</span>
+<span class="synStatement">done</span>
+<span class="synIdentifier">}</span>
+-------------
+$ deliver .vimrc
+</pre>
+</div>
+<div class="section">
+<h5>lessを<a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a>のカラーで表示させる</h5>
+
+<ul>
+<li>.zshrcなどに以下の設定を追記。<a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a>のバージョン等によりパスは適宜変更。</li>
+</ul><pre class="hljs sh" data-lang="sh" data-unlink><span class="synStatement">alias </span><span class="synIdentifier">less</span><span class="synStatement">='</span><span class="synConstant">/usr/share/vim/vim72/macros/less.sh</span><span class="synStatement">'</span>
+</pre>
+</div>
+</blockquote>
+
+<p></div></p>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201111240842/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201111240842/">美女サイトのデータハッキング方法をまとめてみた</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201112050830/">CentOSでHadoopを使ってみる</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201112050830/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

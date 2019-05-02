@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110207/1297070966" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Pythonでの暗号化/復号化(AEC-DES,RSA) &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Pythonでの暗号化/復号化(AEC-DES,RSA)</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Feb 07, 18:29</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="python-pythonでの暗号化-復号化-aec-des-rsa">[Python] : Pythonでの暗号化/復号化(AEC-DES,RSA)</h2>
+
+<div class="section">
+<h4>概要</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>で文字列の暗号化を行う場合は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a> Cryptography Toolkitを利用すると簡単に実装ができます。<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a> Cryptography Toolkitは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google%20App%20Engine">Google App Engine</a>でもサポートされています。<br />
+<a href="http://www.amk.ca/python/code/crypto.html">http://www.amk.ca/python/code/crypto.html</a><br />
+<a href="http://code.google.com/intl/ja/appengine/docs/python/tools/libraries.html#PyCrypto">http://code.google.com/intl/ja/appengine/docs/python/tools/libraries.html#PyCrypto</a></p><p>この記事ではAES-DES,<a class="keyword" href="http://d.hatena.ne.jp/keyword/RSA">RSA</a>の実装について説明したいと思います。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>始めに注意</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Google%20App%20Engine">Google App Engine</a>のサーバに下記のプログラムを配布すれば利用ができますが、<br />
+localの場合は最初に<br />
+<a href="http://www.amk.ca/python/code/crypto.html">http://www.amk.ca/python/code/crypto.html</a><br />
+からファイルをダウンロード、installする必要があります。<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mac">Mac</a>でやりましたが、以下の手順でinstallが可能です。</p>
+<pre class="code" data-lang="" data-unlink>fetch http://www.amk.ca/files/python/crypto/pycrypto-2.0.1.tar.gz 
+tar -xzf pycrypto-2.0.1.tar.gz
+cd pycrypto-2.0.1
+python setup.py build
+sudo python setup.py install</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>AES-DES</h4>
+
+<blockquote>
+    <p>メッセージを特定のkEYで暗号化します。しかしこの方法には以下のようなByte数の制限があります。<br />
+<span style="color:#FF0000;">KEY : 16,24,32Byteのいずれか </span><br />
+<span style="color:#FF0000;">MESSAGE : 16Byteの倍数 </span><br />
+以下のサンプルコードでは16ByteのKEYを利用し、unixtimeと文字を結合した文字列を暗号化/復号化しているサンプルになります。</p>
+
+<div class="section">
+<h5>サンプルコード</h5>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+
+<span class="synPreProc">import</span> Crypto.Cipher.AES <span class="synStatement">as</span> AES
+<span class="synPreProc">import</span> datetime,time
+
+<span class="synComment">#16,24,32byteの文字列が暗号化KEY</span>
+CRYPTO_KEY = <span class="synConstant">"16bytes  strings"</span>
+crypto_object = AES.new( CRYPTO_KEY, AES.MODE_ECB )
+
+<span class="synComment">#unixtimeの取得</span>
+d = datetime.datetime.today()
+utime = <span class="synIdentifier">int</span>( time.mktime( d.timetuple() ) )
+
+<span class="synComment">#暗号化できる文字列は16byteの倍数</span>
+message = <span class="synIdentifier">str</span>( utime ) + <span class="synConstant">"string"</span>
+crypto_message = crypto_object.encrypt( message ) 
+decrypto_message = crypto_object.decrypt( crypto_message ) 
+
+html  = <span class="synConstant">'''Content-Type: text/html; charset=UTF-8</span>
+<span class="synConstant"><html></span>
+<span class="synConstant"><head></span>
+<span class="synConstant"><title>web-pro.appspot.com</title></span>
+<span class="synConstant"></head></span>
+<span class="synConstant"><body></span>
+<span class="synConstant"><table></span>
+<span class="synConstant"><tr><th>message     </th><td>%s </td></tr></span>
+<span class="synConstant"><tr><th>encrypto      </th><td>%s </td></tr></span>
+<span class="synConstant"><tr><th>decrypto  </th><td>%s </td></tr></span>
+<span class="synConstant"></table></span>
+<span class="synConstant"></body></span>
+<span class="synConstant"><html></span>
+<span class="synConstant">'''</span>
+<span class="synIdentifier">print</span> html % ( message, crypto_message, decrypto_message )
+</pre>
+</div>
+<div class="section">
+<h5>実行結果</h5>
+<pre class="code" data-lang="" data-unlink>message  1297070807string
+encrypto    &#65533;7]&#65533;Q&#65533;&#60063;&#761;&#65533;
+decrypto    1297070807string</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/RSA">RSA</a></h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/RSA">RSA</a>による暗号化/復号化は以下のようになります。<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/RSA">RSA</a>の場合、暗号化する文字列のByte数の制限をプログラムコード中で指定します。<br />
+( 例 ) <a class="keyword" href="http://d.hatena.ne.jp/keyword/RSA">RSA</a>.generate(128, RANDOM.RandomPool().get_bytes )　← 128bit( 16Byteまで )</p>
+
+<div class="section">
+<h5>サンプルコード</h5>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+
+<span class="synPreProc">import</span> Crypto.PublicKey.RSA <span class="synStatement">as</span> RSA
+<span class="synPreProc">import</span> Crypto.Util.randpool  <span class="synStatement">as</span> RANDOM
+<span class="synPreProc">import</span> datetime,time
+
+<span class="synComment">#鍵オブジェクト( 鍵を16ByteまでOKとする )</span>
+rsa = RSA.generate(<span class="synConstant">128</span>, RANDOM.RandomPool().get_bytes )
+
+<span class="synComment">#公開鍵</span>
+rsa_pub_key = rsa.publickey()
+
+<span class="synComment">#秘密鍵</span>
+rsa_private_key = RSA.construct((rsa.n, rsa.e, rsa.d))
+
+<span class="synComment">#message</span>
+message = <span class="synConstant">"This is RSA Test"</span>
+
+<span class="synComment">#暗号化</span>
+encrypto = rsa_pub_key.encrypt( message, <span class="synConstant">""</span> )
+
+<span class="synComment">#復号化</span>
+decrypto = rsa_private_key.decrypt( encrypto ) 
+
+<span class="synComment">#署名確認</span>
+digest = rsa_private_key.sign( message, <span class="synConstant">""</span> )
+digest_flag = rsa_pub_key.verify( message, digest )
+html  = <span class="synConstant">'''Content-Type: text/html; charset=UTF-8</span>
+<span class="synConstant"><html></span>
+<span class="synConstant"><head></span>
+<span class="synConstant"><title>web-pro.appspot.com</title></span>
+<span class="synConstant"></head></span>
+<span class="synConstant"><body></span>
+<span class="synConstant"><table></span>
+<span class="synConstant"><tr><th>message     </th><td>%s </td></tr></span>
+<span class="synConstant"><tr><th>encrypto      </th><td>%s </td></tr></span>
+<span class="synConstant"><tr><th>decrypto  </th><td>%s </td></tr></span>
+<span class="synConstant"><tr><th>digest flag  </th><td>%s </td></tr></span>
+<span class="synConstant"></table></span>
+<span class="synConstant"></body></span>
+<span class="synConstant"><html></span>
+<span class="synConstant">'''</span>
+</pre>
+</div>
+<div class="section">
+<h5>実行結果</h5>
+<pre class="code" data-lang="" data-unlink>message  This is RSA Test
+encrypto    ('\x1e\xccC\x99w\xe4\xbf\x05\x0bA\x19\xeaLU\xe1}',)
+decrypto    This is RSA Test
+digest flag 1</pre>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201102040134/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201102040134/">超絶簡単 Pythonでの正規表現</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201102102219/">Mysqlの起動に関するメモ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201102102219/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/2018/09/08/034402" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>製造業のAI導入 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>製造業のAI導入</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2018 Sep 08, 03:44</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="ai-製造業のai導入">[AI] : 製造業のAI導入</h2>
+
+<blockquote><h4>Industory4.0、SmartFactory</h4>
+
+<p>Industory4.0, SmartFactoryという言葉があるように製造業の工場ラインに対してIoT・AIを導入し生産工程をデジタル化する計画がある。生産工程のデジタル化の先に人が担っていた作業を補助する目的でのAI・IoT導入検討が進められている。</p>
+
+<p><a href="https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%80%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC4.0">https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%80%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC4.0</a></p>
+
+<p>製造業といってもIoT・AIの活用検証は多岐にわたる。
+1. 製造ライン・プロセスでの検品作業の自動化
+2. 製造機器の故障発生をセンサーログデータなどから予測する予防<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%DD%C1%B4">保全</a>
+3. 製造ラインを効率化するための生産計画の効率化</p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20180908/20180908033746.png" alt="f:id:yutakikuchi:20180908033746p:plain:w400" title="f:id:yutakikuchi:20180908033746p:plain:w400" class="hatena-fotolife" style="width:400px" itemprop="image"></span></p>
+
+<p>引用 : <a href="https://www.projectdesign.jp/201704/ai-business-model/003521.php">https://www.projectdesign.jp/201704/ai-business-model/003521.php</a></p>
+
+<p>上記以外にも様々な検証が進んでおり、2030年にはAI活用業界のTopとして名を連ねることが予想されている。製造物に異常が発生したときの予算ロスはビジネス的な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%D1%A5%AF">インパク</a>トとして非常に大きいので、今後AI導入の注目業界であることは確かである。ただし、現状の製造業はAI導入のための課題はたくさん存在する。下記は製造ラインの異常検知の課題を列挙している。</p>
+
+<h4>データ収集の課題</h4>
+
+<ul>
+<li>紙などで情報を記録、デジタルデータを保存していないケースが存在する</li>
+<li>製造ラインに対してIoTデ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D0%A5%A4%A5%B9">バイス</a>の設定が物理的に難しく、デジタルデータを収集するのに時間を要する。現状の製造ラインがIoTを導入することを前提とした設計になっていない。</li>
+<li>熟練者に依存するタスクが多く、その人でないと判断ができない。また基準化、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%C0%B8%EC%B2%BD">言語化</a>がされていない。作業者の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%C5%CC%DB%C3%CE">暗黙知</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%BC%B0%C3%CE">形式知</a>のそれぞれのナレッジメントとデータが明確化されていない。</li>
+<li>検品作業自動化のための異常データが発生する確率が少なく、これからデータを貯めるフェーズだとAI導入に時間が掛かる。</li>
+<li>各社のデータ管理ポリシーが強固である。製造ラインのオンプレミスな環境から、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%A6%A5%C9">クラウド</a>など外部にデータを預けることはポリシーに反することがある。</li>
+</ul>
+
+
+<h4>AI導入の課題</h4>
+
+<ul>
+<li>検品作業の人が担っているプロセスにおいては異常を検知する精度が高い。またAIが出力可能な精度はまだ100%にないため、作業すべてを置き換えることができない。</li>
+<li>IoT・AIの両方をセットで新規導入するケースについては、IoTで撮像条件を良い状態にしつつ、AIの精度を上げる必要があるので、対応の時間が長期化するケースが多い。仮に精度問題が発生したときに、初期においてはどちらに原因があるかを都度分解する必要がある。</li>
+<li>業務プロセス側の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C9%A5%E1%A5%A4%A5%F3">ドメイン</a>を知らない作業者がAIのモデル運用を続けることで、実運用と乖離した最適化をしてしまうリスクがある。</li>
+<li>AIによる異常検知が目的となってしまい、本質的な製造機やパーツが不良となる原因分析の方にフィードバックができない。</li>
+</ul>
+
+
+<h4>新しい動き</h4>
+
+<p>一方で最近の取り組みとしては良い材料も多い。工場の老朽化により製造ラインを新しく設計するケースも有り、その場合はIoT・AIの導入を見据えた形でリプレイスが検討されている。また製造ラインの担当者も異常検知が主目的ではなく、異常が発生する原因を特定するための製造物の正しい状態把握をデジタルデータで蓄積し、可視化から分かる機械工学の改善シフトに軸を移そうという動きも見受けられる。</p>
+
+<p>製造業のAI導入の課題はまだまだ山積みではあるが、技術的な取り組みとしては非常にチャレンジングな領域であり、今後もこの方面には継続してトライをしていきたい。</p></blockquote>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201808121805/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201808121805/">運のコントロール</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201809090609/">Computer Vision : Visual Importance Mapの研究</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201809090609/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

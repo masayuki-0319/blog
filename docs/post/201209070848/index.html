@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120907/1346975281" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>joinコマンドが便利過ぎて生きるのが辛い &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>joinコマンドが便利過ぎて生きるのが辛い</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Sep 07, 08:48</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="linux-joinコマンドが便利過ぎて生きるのが辛い">[Linux] : joinコマンドが便利過ぎて生きるのが辛い</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113628/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51Oy0hCw4eL._SL160_.jpg" class="hatena-asin-detail-image" alt="Linuxシステムプログラミング" title="Linuxシステムプログラミング"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113628/yutakikuchi-22/">Linuxシステムプログラミング</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Robert Love,ロバートラブ,千住治郎</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2008/04/16</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 5人 <span class="hatena-asin-detail-label">クリック</span>: 181回</li><li><a href="http://d.hatena.ne.jp/asin/4873113628/yutakikuchi-22" target="_blank">この商品を含むブログ (29件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>結合</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Linux">Linux</a>の標準コマンドで2つのファイルの共通keyで連結することができます。共通keyでの結合には<span class="deco" style="color:#FF0000;">join</span>コマンドを利用します。joinにより<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>のinner joinに近いことがコマンドだけで出来てしまいます。今までテキスト処理をコマンドで行う事が少なかったのでjoinの活用方法を知りませんでしたが、今回調べた内容を記録します。似たコマンドとして<span class="deco" style="color:#FF0000;">paste</span>というものもあり、こちらは同じ行数の内容を単純に結合します。そちらについても簡単に紹介します。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>join</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>join前にsort</h5>
+<p>joinコマンドを利用する場合は2つのファイルがそれぞれ結合するフィールドで<span class="deco" style="color:#FF0000;">sortしておく必要があります</span>。sortしないで実行すると期待通りの結果が得られません。</p>
+
+</div>
+<div class="section">
+<h5>joinコマンドオプション</h5>
+
+<table>
+<tr>
+<th> オプション </th>
+<th> 役割 </th>
+</tr>
+<tr>
+<td> -1 n </td>
+<td> File1のn番目のフィールドを用いてjoinする </td>
+</tr>
+<tr>
+<td> -2 n </td>
+<td> File2のn番目のフィールドを用いてjoinする </td>
+</tr>
+<tr>
+<td> -a File </td>
+<td> ファイルにあるペアにならなかった行を通常の出力に追加 </td>
+</tr>
+<tr>
+<td> -e string </td>
+<td> 入力にFieldがなかった場合はそれに対応する出力フィールドをstringにする </td>
+</tr>
+<tr>
+<td> -i, --inore-case </td>
+<td> キーを比較する時に英大文字小文字の違いを無視 </td>
+</tr>
+<tr>
+<td> -j n </td>
+<td> -1 n ,-2 nと同じ </td>
+</tr>
+<tr>
+<td> -o Field-list </td>
+<td> 出力のフォーマットにField-listを用いる </td>
+<td> </td>
+</tr>
+<tr>
+<td> -t char </td>
+<td> 入力/出力フィールド区切り文字にcharを指定 </td>
+</tr>
+<tr>
+<td> -v File </td>
+<td> ペアにならなかった行だけを出力 </td>
+<td> </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h5>先頭カラムでjoin</h5>
+<pre class="code" data-lang="" data-unlink>$ cat AA.txt
+AA 100円
+BB 300円
+CC 200円
+DD 400円
+EE 500円
+
+$ cat BB.txt
+AA Category1
+BB Category2
+CC Category3
+DD Category4
+
+$ join AA.txt BB.txt
+AA 100円 Category1
+BB 300円 Category2
+CC 200円 Category3
+DD 400円 Category4</pre>
+</div>
+<div class="section">
+<h5>結合カラムを指定してjoin</h5>
+<pre class="code" data-lang="" data-unlink>$ cat AA.txt 
+AA 100円
+BB 300円
+CC 200円
+DD 400円
+EE 500円
+
+$ cat BB.txt 
+labelA AA Category1
+labelB BB Category2
+labelC CC Category3
+labelD DD Category4
+
+$ join -1 1 -2 2 AA.txt BB.txt
+AA 100円 labelA Category1
+BB 300円 labelB Category2
+CC 200円 labelC Category3
+DD 400円 labelD Category4</pre>
+</div>
+<div class="section">
+<h5>ペアにならなかった行も含めて結合</h5>
+<pre class="code" data-lang="" data-unlink>$ cat AA.txt 
+AA 100円
+BB 300円
+CC 200円
+DD 400円
+EE 500円
+
+$ cat BB.txt 
+labelA AA Category1
+labelB BB Category2
+labelC CC Category3
+labelD DD Category4
+
+$ join -1 1 -2 2 -a 1 AA.txt BB.txt
+AA 100円 labelA Category1
+BB 300円 labelB Category2
+CC 200円 labelC Category3
+DD 400円 labelD Category4
+EE 500円</pre>
+</div>
+<div class="section">
+<h5>ペアにならなかった行だけ出力</h5>
+<pre class="code" data-lang="" data-unlink>$ cat AA.txt 
+AA 100円
+BB 300円
+CC 200円
+DD 400円
+EE 500円
+
+$ cat BB.txt 
+labelA AA Category1
+labelB BB Category2
+labelC CC Category3
+labelD DD Category4
+
+$ join -1 1 -2 2 -v 1 AA.txt BB.txt
+EE 500円</pre>
+</div>
+<div class="section">
+<h5>keyの大文字/小文字を無視</h5>
+<pre class="code" data-lang="" data-unlink>$ cat AA.txt 
+AA 100円
+BB 300円
+CC 200円
+DD 400円
+EE 500円
+
+$ cat BB.txt 
+labelA aa Category1
+labelB bb Category2
+labelC cc Category3
+labelD dd Category4
+
+$ join -1 1 -2 2 -i AA.txt BB.txt
+AA 100円 labelA Category1
+BB 300円 labelB Category2
+CC 200円 labelC Category3
+DD 400円 labelD Category4</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>paste</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>pasteコマンドオプション</h5>
+
+<table>
+<tr>
+<th> オプション </th>
+<th> 役割 </th>
+</tr>
+<tr>
+<td> -d delim-list, delimiters=delim-list </td>
+<td> ファイル間の結合を<TAB>ではなく、delim-listを順番に利用 </td>
+</tr>
+<tr>
+<td> -s, --serial </td>
+<td> ファイル単位で 1 行にまとめていく </td>
+<td> </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h5>単純なpaste</h5>
+<pre class="code" data-lang="" data-unlink>$ cat AA.txt 
+AA 100円
+BB 300円
+CC 200円
+DD 400円
+EE 500円
+
+$ cat BB.txt 
+labelA AA Category1
+labelB BB Category2
+labelC CC Category3
+labelD DD Category4
+
+$ paste AA.txt BB.txt 
+AA 100円   labelA AA Category1
+BB 300円   labelB BB Category2
+CC 200円   labelC CC Category3
+DD 400円   labelD DD Category4
+EE 500円 </pre>
+</div>
+<div class="section">
+<h5>delimiterを指定してpaste</h5>
+<pre class="code" data-lang="" data-unlink>$ cat AA.txt 
+AA 100円
+BB 300円
+CC 200円
+DD 400円
+EE 500円
+
+$ cat BB.txt 
+labelA AA Category1
+labelB BB Category2
+labelC CC Category3
+labelD DD Category4
+
+$ paste -d ' ' AA.txt BB.txt 
+AA 100円 labelA AA Category1
+BB 300円 labelB BB Category2
+CC 200円 labelC CC Category3
+DD 400円 labelD DD Category4
+EE 500円 </pre>
+</div>
+<div class="section">
+<h5>ファイルを1行にまとめて行を追加</h5>
+<pre class="code" data-lang="" data-unlink>$ cat AA.txt 
+AA 100円
+BB 300円
+CC 200円
+DD 400円
+EE 500円
+
+$ cat BB.txt 
+labelA AA Category1
+labelB BB Category2
+labelC CC Category3
+labelD DD Category4
+
+$ paste -s AA.txt BB.txt 
+AA 100円 BB 300円 CC 200円 DD 400円 EE 500円
+labelA AA Category1 labelB BB Category2 labelC CC Category3 labelD DD Category4</pre>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201209040835/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201209040835/">Support Vector Machinesを用いた「魔法少女まどか☆マギカ」人物予測モデル</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201209100835/">そろそろ本気で機械学習の評価方法について学習するよ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201209100835/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

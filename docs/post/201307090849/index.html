@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130709/1373327347" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>【進撃の巨大データ】Log集計用DBとシステム構成の美しい設計を考える &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>【進撃の巨大データ】Log集計用DBとシステム構成の美しい設計を考える</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Jul 09, 08:49</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="mysql-進撃の巨大データ-log集計用dbとシステム構成の美しい設計を考える">[Mysql] : 【進撃の巨大データ】Log集計用DBとシステム構成の美しい設計を考える</h2>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20130702220000" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20130702/20130702220000.png" alt="f:id:yutakikuchi:20130702220000p:image:W560" title="f:id:yutakikuchi:20130702220000p:image:W560" class="hatena-fotolife" style="width:560px" itemprop="image"></a></span><br />
+</p>
+
+<div class="section">
+<h4>Log集計用DB設計</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>考える問題</h5>
+<p>Document無しの<a class="keyword" href="http://d.hatena.ne.jp/keyword/Agile">Agile</a>開発をガチで推奨したい<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。【進撃の巨大データ】の第2回目として巨大アクセスLog集計用DBの設計について勉強した内容についてメモしたいと思います。DB周りはそこまで詳しく無いので詳しい皆様からの突っ込み大歓迎でございます。また図々しいですが知恵をください(笑)。<br />
+今日の主目的は下の2要件を叶えるためのDB設計を考える事です。特に問題になるのがRealTimeの話でTableにLogDataを書き込む処理と集計の<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>をどのように組み立てるか、それ以外にもSystemPerformanceとArchitectureにも関わってきます。</p>
+
+<ol>
+<li><span class="deco" style="font-weight:bold;font-style:italic;">リアルタイムで大量データを集計したい</span></li>
+<li><span class="deco" style="font-weight:bold;font-style:italic;">定期処理で大量データを集計したい</span></li>
+</ol>
+</div>
+<div class="section">
+<h5>使うもの</h5>
+
+<ol>
+<li><span class="deco" style="font-style:italic;">Fluentd</span> : <a href="http://fluentd.org/">Fluentd: Open Source Log Management</a> <a href="http://b.hatena.ne.jp/entry/fluentd.org/"><img src="http://b.hatena.ne.jp/entry/image/http://fluentd.org/" alt="はてなブックマーク - Fluentd: Open Source Log Management" border="0" /></a></li>
+<li><span class="deco" style="font-style:italic;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Innodb">Innodb</a></span> : <a href="http://dev.mysql.com/doc/refman/5.1/ja/innodb-configuration.html">MySQL :: MySQL 5.1 リファレンスマニュアル :: 13.5.3 InnoDB 設定</a> <a href="http://b.hatena.ne.jp/entry/dev.mysql.com/doc/refman/5.1/ja/innodb-configuration.html"><img src="http://b.hatena.ne.jp/entry/image/http://dev.mysql.com/doc/refman/5.1/ja/innodb-configuration.html" alt="はてなブックマーク - MySQL :: MySQL 5.1 リファレンスマニュアル :: 13.5.3 InnoDB 設定" border="0" /></a></li>
+<li><span class="deco" style="font-style:italic;"> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a> Infinidb</span> <a href="http://infinidb.org/">InfiniDB – the high performance, column oriented analytic database</a> <a href="http://b.hatena.ne.jp/entry/infinidb.org/"><img src="http://b.hatena.ne.jp/entry/image/http://infinidb.org/" alt="はてなブックマーク - InfiniDB – the high performance, column oriented analytic database" border="0" /></a></li>
+</ol><p><a href="http://d.hatena.ne.jp/yutakikuchi/20130522/1369179562">Fluentdを使ってNginxLogをMysqlにリアルタイムで格納する - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20130522/1369179562"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20130522/1369179562" alt="はてなブックマーク - Fluentdを使ってNginxLogをMysqlにリアルタイムで格納する - Yuta.Kikuchiの日記" border="0" /></a><br />
+FluentdはRealTimeでLogをLog収集用のサーバに転送とDBへの書き込み、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Innodb">Innodb</a>はLogデータを格納するDBです。以前これらを用いてNginxのLogをリアルタイムで格納することを試したのでよければ上のリンクを参照してください。なぜ<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>か？という質問が出そうですが、<span class="deco" style="font-weight:bold;font-style:italic;">安定と実績を買います</span>。Mongodbのような<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>レスの方が後から柔軟に集計が可能という話もでてきそうですが、必要なデータ項目だけを抽出して<span class="deco" style="font-weight:bold;font-style:italic;">ディスク容量を抑えることと集計の高速化</span>を目指します。そんなことしないで最初からTresureData使えよって話もありそうですが、<span class="deco" style="font-weight:bold;font-style:italic;">自前で作りたいというプライド</span>のためです(笑) <a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>の種類も行指向の<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>と<span class="deco" style="font-weight:bold;font-style:italic;">集計処理に向いているとされる列指向のinfinidb</span>の両方を使ってみます。<br />
+<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5>リアルタイム大量データの格納をどうするか？</h5>
+<p>リアルタイム大量データ格納の方法を決める上で重要ポイントとなのが<span class="deco" style="font-style:italic;font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>のrowをどのように使うか</span>です。取り得る方法とそれぞれのメリット/デメリットを考えて下にまとめました。もしMongodbのようなKVSを使ったLog集計でも<span class="deco" style="font-weight:bold;font-style:italic;">KeyとValueをどのように使うか</span>という同じ問題になると思います。</p>
+
+<table>
+<tr>
+<th> No </th>
+<th> Method </th>
+<th> merit </th>
+<th> demerit </th>
+</tr>
+<tr>
+<td> 1 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>を使う。格納時点でデータを集計。<br>1行中の集計用カラムを都度Update。 </td>
+<td> 特定のデータ集計を1行で管理可能。<br>行数が膨らまない。<br>集計<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>のPerformanceを出す事ができる。 </td>
+<td>  書き込み口が<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>あると行ロックが心配なので、<br>サーバ構成を工夫しなければ行けない。<br>格納時にデータを集約してしまうので、<br>シンプルで特定の集計しかできない </td>
+</tr>
+<tr>
+<td> 2 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>を使う。格納時点でデータを1行ずつ書き込む。<br>集計時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>で行数をSUMる。</td>
+<td>  行ロックの心配が無くなる。 </td>
+<td> 行数が膨大になる。<br>集計用<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>も重くなるし、GROUP BYにも限界がある。<br>行数が膨らまないように<br>定期的に古いデータは削除するなどの処理が必要。 </td>
+</tr>
+<tr>
+<td> 3 </td>
+<td> InfiniDBを使う。格納時点でデータを1行ずつ書き込む。<br>集計時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>で行数をSUMる。</td>
+<td>  列指向なので集計が速い。 </td>
+<td> InfiniDBは制限が多くて使いづらい。<br>行数が膨大になる。<br>INSERTに時間がかかる。<br>行数が膨らまないように<br>定期的に古いデータは削除するなどの処理が必要。 </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h5>Server構成はどうなるの？</h5>
+<p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20130705164819" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20130705/20130705164819.png" alt="f:id:yutakikuchi:20130705164819p:image:w760" title="f:id:yutakikuchi:20130705164819p:image:w760" class="hatena-fotolife" style="width:760px" itemprop="image"></a></span></p><p>Logを集約する専用Serverを設ける事を重点に上のようなServer構成を考えました。この構成だとDBに書き込むComponentが1つになるのでマルチプロセスで無いプログラム処理で<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>をちゃんと組み立てれば行ロックの心配が解消されます。<br />
+図中左の各種AppServerはFluetndを使ってLogAggregatorのMasterにLogを常にForwardします。また<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BE%E9%C4%B9%B2%BD">冗長化</a>としてLogAggregatorのMasterがDownして転送できない時のためにSlaveにもLogをForwardするためのFailOver機能を入れておきます。ただしLogAggregatorのSlaveは基本的にMasterからFowardされるようにします。今回の本題とはあまり関係ありませんが、LogAggregatorから<a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a>にLogを書き込む事もしておいた方が良いと思います。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>でLogを集計して結果を<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>に流すなどの処理を予め想定しておくこと、そこまでしなくても単にFileSystemとして使ってもいいですし。<br />
+LogAggregatorにLogが集約されているのでそこから<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>にDataを書き込みに行きます。書き込みはFluentdのin_tailを使います。SELECTからのINSERTをすると処理が重たくなるのでINSERT/UPSERTを垂れ流すイメージです。各種Serverの役割を表で整理します。</p>
+
+<table>
+<tr>
+<th> Component </th>
+<th> Role </th>
+</tr>
+<tr>
+<td> AppServer </td>
+<td> Fluentdを使ってLogをLogAggregator MasterにForwardする。<br>FailOver用としてLogAggregator Slaveも設定する。 </td>
+</tr>
+<tr>
+<td> LogAggregator Master </td>
+<td> AppServerからLogを受け取り<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>にRealTimeでDataを書き込む。 </td>
+</tr>
+<tr>
+<td> LogAggregator Slave </td>
+<td> LogAggregatorのSlave用。MasterからLogを受け取り定期処理で<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>にDataを書き込む </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/HDFS">HDFS</a> </td>
+<td> LogAggregatorからLogを受け取る。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>をしたり単なるFileSystemとして利用 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a> Master </td>
+<td> LogDataを書き込む </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a> Slave </td>
+<td> MasterからLogを転送しLogDataを書き込む </td>
+<td> </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h5>Fluentdの設定はどうなるの？</h5>
+<p><a href="http://docs.fluentd.org/articles/high-availability">Fluentd High Availability Configuration | Fluentd</a> <a href="http://b.hatena.ne.jp/entry/docs.fluentd.org/articles/high-availability"><img src="http://b.hatena.ne.jp/entry/image/http://docs.fluentd.org/articles/high-availability" alt="はてなブックマーク - Fluentd High Availability Configuration | Fluentd" border="0" /></a><br />
+</p>
+
+<blockquote>
+    <p><span class="deco" style="font-style:italic;">When the active aggregator (192.168.0.1) dies, the logs will instead be sent to the backup aggregator (192.168.0.2). If both servers die, the logs are buffered on-disk at the corresponding forwarder nodes.</span></p>
+
+</blockquote>
+<p>WebAppサーバでLogAggregatorにRealTimeでLogをForwardするための設定として/etc/td-agent/td-agent.confを以下のように設定します。192.168.0.1がLogAggregatorのMaster、192.168.0.2がSlaveになります。もしSlaveにもDataがForwardできなかった場合にはpos_fileで指定しているファイルに最終読み込みに関するデータを登録します。</p>
+<pre class="hljs conf" data-lang="conf" data-unlink><source>
+  type tail
+  path /var/log/nginx/access.log
+  format apache
+  tag nginx.access
+  pos_file /var/log/td-agent/nginx.pos
+</source>
+
+<match nginx.access>
+  type forward
+  <server>
+host 192.168.0.1
+port 24224
+  </server>
+
+  <span class="synComment"># use secondary host</span>
+  <server>
+host 192.168.0.2
+port 24224
+standby
+  </server>
+
+  <span class="synComment"># use file buffer to buffer events on disks.</span>
+  buffer_type file
+  buffer_path /var/log/td-agent/buffer/forward
+
+  <span class="synComment"># use longer flush_interval to reduce CPU usage.</span>
+  <span class="synComment"># note that this is a trade-off against latency.</span>
+  flush_interval 30s
+</match>
+</pre><p>LogAggregator側の設定は以下のようになります。AppServerからForwardされたLogを/var/log/nginx/<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>.logに落として、in_tailで<a class="keyword" href="http://d.hatena.ne.jp/keyword/Mysql">Mysql</a>に転送するようにします。</p>
+<pre class="hljs conf" data-lang="conf" data-unlink>  <source>
+type forward
+port 24224
+  </source>
+
+  <match nginx.access>
+type file
+path /var/log/nginx/access.log
+  </match>
+
+  <source>
+type tail
+format apache
+path /var/log/nginx/access.log
+tag nginx.realtimeaccess
+pos_file /var/log/td-agent/nginx.pos
+  </source>
+
+  <match nginx.realtimeaccess>
+type mysql
+host localhost
+database nginx
+key_names code,path,agent
+sql INSERT INTO access_log_realtime1 (code, path, agent, count, curdate, created_at) VALUES( ?, ?, ?, 1, CURDATE() + 0 , NOW() ) ON DUPLICATE KEY UPDATE count = count + 1;
+username root
+flush_interval 10s
+  </match>
+</pre>
+</div>
+<div class="section">
+<h5>Tableの設計と実行結果はどうなるか？</h5>
+<p>例として特定のURLをDailyで何回閲覧されたかをリアルタイムで集計するという問題のTableを設計したいと思います。<br />
+No.1) <span class="deco" style="font-weight:bold;font-style:italic;">格納時点でデータを集計。1行中の集計用カラムを都度UPDATE。</span><br />
+CREATE,INSERT,SELECTをそれぞれ次のように定義します。まずは<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>で作ります。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink><span class="synComment">/* Table作成 */</span>
+<span class="synStatement">CREATE</span> DATABASE <span class="synSpecial">IF</span> <span class="synStatement">NOT</span> <span class="synStatement">EXISTS</span> `nginx`;
+<span class="synStatement">DROP</span> <span class="synSpecial">TABLE</span> <span class="synSpecial">IF</span> <span class="synStatement">EXISTS</span> `nginx.access_log_realtime1`;
+<span class="synStatement">CREATE</span> <span class="synSpecial">TABLE</span> `nginx.access_log_realtime1` (
+  `code` int(<span class="synConstant">3</span>) unsigned <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  `path` <span class="synType">varchar</span>(<span class="synConstant">255</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  `agent` <span class="synType">varchar</span>(<span class="synConstant">255</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  `curdate` <span class="synType">char</span>(<span class="synConstant">8</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  `count` int(<span class="synConstant">11</span>) unsigned <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  `created_at` datetime <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  PRIMARY KEY (`code`,`path`,`agent`,`curdate`),
+  KEY `count_index` (`code`,`path`,`agent`,`curdate`,`count`)
+) ENGINE=InnoDB <span class="synSpecial">DEFAULT</span> CHARSET=utf8;
+
+<span class="synComment">/* 格納 */</span>
+<span class="synStatement">INSERT</span> <span class="synSpecial">INTO</span> access_log_realtime1 (code, path, agent, count, curdate, created_at) <span class="synSpecial">VALUES</span>( ?, ?, ?, <span class="synConstant">1</span>, CURDATE() + <span class="synConstant">0</span> , NOW() ) <span class="synSpecial">ON</span> DUPLICATE KEY <span class="synStatement">UPDATE</span> count = count + <span class="synConstant">1</span>;
+
+<span class="synComment">/* 集計 */</span>
+<span class="synStatement">SELECT</span> code,path,curdate,agent,code <span class="synSpecial">FROM</span> nginx.access_log_realtime1 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synStatement">AND</span> curdate = CURDATE();
+<span class="synStatement">EXPLAIN</span> <span class="synStatement">SELECT</span> code,path,curdate,agent,count <span class="synSpecial">FROM</span> nginx.access_log_realtime1 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synStatement">AND</span> curdate = CURDATE();
++<span class="synComment">----+-------------+----------------------+-------+---------------+-------------+---------+------+------+--------------------------+</span>
+| id | select_type | <span class="synSpecial">table</span>                | <span class="synSpecial">type</span>  | possible_keys | key         | key_len | ref  | <span class="synSpecial">rows</span> | Extra                    |
++<span class="synComment">----+-------------+----------------------+-------+---------------+-------------+---------+------+------+--------------------------+</span>
+|  <span class="synConstant">1</span> | SIMPLE      | access_log_realtime1 | <span class="synSpecial">index</span> | <span class="synSpecial">NULL</span>          | count_index | <span class="synConstant">1566</span>    | <span class="synSpecial">NULL</span> |    <span class="synConstant">1</span> | <span class="synSpecial">Using</span> <span class="synSpecial">where</span>; <span class="synSpecial">Using</span> <span class="synSpecial">index</span> |
++<span class="synComment">----+-------------+----------------------+-------+---------------+-------------+---------+------+------+--------------------------+</span>
+<span class="synConstant">1</span> <span class="synSpecial">row</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+</pre><p>では実際に50万件アクセスがあった場合の集計結果ですが、当然格納時にアクセス数が集計されているのですぐに結果が返ってきます。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink><span class="synComment">#!/bin/sh</span>
+
+<span class="synStatement">for </span>i <span class="synStatement">in</span> <span class="synSpecial">`seq </span><span class="synConstant">1</span><span class="synSpecial"> </span><span class="synConstant">500000</span><span class="synSpecial">`</span>; <span class="synStatement">do</span>
+   curl http://localhost/foo.html
+<span class="synStatement">done</span>
+</pre><pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">SELECT</span> code,path,curdate,agent,count <span class="synSpecial">FROM</span> nginx.access_log_realtime1 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synStatement">AND</span> curdate = CURDATE();
++<span class="synComment">------+-----------+----------+--------------------------------------------------------------------------------------------------------+--------+</span>
+| code | path      | curdate  | agent                                                                                                  | count  |
++<span class="synComment">------+-----------+----------+--------------------------------------------------------------------------------------------------------+--------+</span>
+|  <span class="synConstant">200</span> | /foo.html | <span class="synConstant">20130706</span> | curl/<span class="synConstant">7</span>.<span class="synConstant">19.7</span> (x86_64-redhat-linux-gnu) libcurl/<span class="synConstant">7</span>.<span class="synConstant">19.7</span> NSS/<span class="synConstant">3</span>.<span class="synConstant">14.0</span>.<span class="synConstant">0</span> zlib/<span class="synConstant">1.2</span>.<span class="synConstant">3</span> libidn/<span class="synConstant">1</span>.<span class="synConstant">18</span> libssh2/<span class="synConstant">1.4</span>.<span class="synConstant">2</span> | <span class="synConstant">500000</span> |
++<span class="synComment">------+-----------+----------+--------------------------------------------------------------------------------------------------------+--------+</span>
+<span class="synConstant">1</span> <span class="synSpecial">row</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+</pre><p>No.2) <span class="deco" style="font-weight:bold;font-style:italic;">格納時点でデータを1行ずつ書き込む。集計時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>で行数をSUMる。</span><br />
+CREATE,INSERT,SELECTをそれぞれ次のように定義します。こちらもまずは<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>で作ります。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink><span class="synComment">/* Table作成 */</span>
+<span class="synStatement">CREATE</span> DATABASE <span class="synSpecial">IF</span> <span class="synStatement">NOT</span> <span class="synStatement">EXISTS</span> `nginx`;
+<span class="synStatement">DROP</span> <span class="synSpecial">TABLE</span> <span class="synSpecial">IF</span> <span class="synStatement">EXISTS</span> `nginx.access_log_realtime2`;
+<span class="synStatement">CREATE</span> <span class="synSpecial">TABLE</span> `access_log_realtime2` (
+  `id` int(<span class="synConstant">11</span>) unsigned <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span> AUTO_INCREMENT,
+  `code` int(<span class="synConstant">3</span>) unsigned <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  `path` <span class="synType">varchar</span>(<span class="synConstant">255</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  `agent` <span class="synType">varchar</span>(<span class="synConstant">255</span>) <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  `created_at` datetime <span class="synStatement">NOT</span> <span class="synSpecial">NULL</span>,
+  PRIMARY KEY (`id`),
+  KEY `count_index` (`code`,`path`,`agent`,`created_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=<span class="synConstant">500001</span> <span class="synSpecial">DEFAULT</span> CHARSET=utf8
+
+<span class="synComment">/* INSERT */</span>
+<span class="synStatement">INSERT</span> <span class="synSpecial">INTO</span> access_log_realtime2 (code, path, agent, created_at) <span class="synSpecial">VALUES</span>( ?, ?, ?, NOW() );
+
+<span class="synComment">/* 集計 */</span>
+<span class="synStatement">SELECT</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>) <span class="synSpecial">AS</span> created_at , agent, COUNT(*) <span class="synSpecial">AS</span> count <span class="synSpecial">FROM</span> access_log_realtime2 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synSpecial">GROUP</span> <span class="synSpecial">BY</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y%m%d'</span>), agent;
+<span class="synStatement">EXPLAIN</span> <span class="synStatement">SELECT</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>) <span class="synSpecial">AS</span> created_at , agent, COUNT(*) <span class="synSpecial">AS</span> count <span class="synSpecial">FROM</span> access_log_realtime2 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synSpecial">GROUP</span> <span class="synSpecial">BY</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y%m%d'</span>), agent;
++<span class="synComment">----+-------------+----------------------+-------+---------------+-------------+---------+------+--------+-----------------------------------------------------------+</span>
+| id | select_type | <span class="synSpecial">table</span>                | <span class="synSpecial">type</span>  | possible_keys | key         | key_len | ref  | <span class="synSpecial">rows</span>   | Extra                                                     |
++<span class="synComment">----+-------------+----------------------+-------+---------------+-------------+---------+------+--------+-----------------------------------------------------------+</span>
+|  <span class="synConstant">1</span> | SIMPLE      | access_log_realtime2 | <span class="synSpecial">index</span> | <span class="synSpecial">NULL</span>          | count_index | <span class="synConstant">1546</span>    | <span class="synSpecial">NULL</span> | <span class="synConstant">500074</span> | <span class="synSpecial">Using</span> <span class="synSpecial">where</span>; <span class="synSpecial">Using</span> <span class="synSpecial">index</span>; <span class="synSpecial">Using</span> temporary; <span class="synSpecial">Using</span> filesort |
++<span class="synComment">----+-------------+----------------------+-------+---------------+-------------+---------+------+--------+-----------------------------------------------------------+</span>
+<span class="synConstant">1</span> <span class="synSpecial">row</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">17</span> sec)
+</pre><p>50万件アクセスがあった場合の集計結果ですが、INDEXを貼ってはいますが6秒以上処理に掛かっています。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">SELECT</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>) <span class="synSpecial">AS</span> created_at , agent, COUNT(*) <span class="synSpecial">AS</span> count <span class="synSpecial">FROM</span> access_log_realtime2 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synSpecial">GROUP</span> <span class="synSpecial">BY</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y%m%d'</span>), agent;
++<span class="synComment">------------+--------------------------------------------------------------------------------------------------------+--------+</span>
+| created_at | agent                                                                                                  | count  |
++<span class="synComment">------------+--------------------------------------------------------------------------------------------------------+--------+</span>
+| <span class="synConstant">2013-07-06</span> | curl/<span class="synConstant">7</span>.<span class="synConstant">19.7</span> (x86_64-redhat-linux-gnu) libcurl/<span class="synConstant">7</span>.<span class="synConstant">19.7</span> NSS/<span class="synConstant">3</span>.<span class="synConstant">14.0</span>.<span class="synConstant">0</span> zlib/<span class="synConstant">1.2</span>.<span class="synConstant">3</span> libidn/<span class="synConstant">1</span>.<span class="synConstant">18</span> libssh2/<span class="synConstant">1.4</span>.<span class="synConstant">2</span> | <span class="synConstant">500000</span> |
++<span class="synComment">------------+--------------------------------------------------------------------------------------------------------+--------+</span>
+<span class="synConstant">1</span> <span class="synSpecial">row</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">6</span>.<span class="synConstant">34</span> sec)
+</pre><p>No.3) <span class="deco" style="font-weight:bold;font-style:italic;">No.2のやり方でInfiniDBを使う</span><br />
+CREATE,INSERT,SELECTをそれぞれ次のように定義します。こちらはInfiniDBで作ります。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink><span class="synComment">/* Table作成 */</span>
+<span class="synStatement">CREATE</span> DATABASE <span class="synSpecial">IF</span> <span class="synStatement">NOT</span> <span class="synStatement">EXISTS</span> `nginx`;
+<span class="synStatement">DROP</span> <span class="synSpecial">TABLE</span> <span class="synSpecial">IF</span> <span class="synStatement">EXISTS</span> `nginx.access_log_realtime3`;
+<span class="synStatement">CREATE</span> <span class="synSpecial">TABLE</span> `access_log_realtime3` (
+  `code` int(<span class="synConstant">3</span>) <span class="synSpecial">DEFAULT</span> <span class="synSpecial">NULL</span>,
+  `path` <span class="synType">varchar</span>(<span class="synConstant">255</span>) <span class="synSpecial">DEFAULT</span> <span class="synSpecial">NULL</span>,
+  `agent` <span class="synType">varchar</span>(<span class="synConstant">255</span>) <span class="synSpecial">DEFAULT</span> <span class="synSpecial">NULL</span>,
+  `created_at` datetime <span class="synSpecial">DEFAULT</span> <span class="synSpecial">NULL</span>
+) ENGINE=InfiniDB <span class="synSpecial">DEFAULT</span> CHARSET=utf8;
+
+<span class="synComment">/* 格納 */</span>
+<span class="synStatement">INSERT</span> <span class="synSpecial">INTO</span> access_log_realtime3 (code, path, agent, created_at) <span class="synSpecial">VALUES</span>( ?, ?, ?, NOW() );
+
+<span class="synComment">/* 集計 */</span>
+<span class="synStatement">SELECT</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>) <span class="synSpecial">AS</span> created_at, COUNT(*) <span class="synSpecial">AS</span> count <span class="synSpecial">FROM</span> access_log_realtime3 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synSpecial">GROUP</span> <span class="synSpecial">BY</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>);
+<span class="synStatement">EXPLAIN</span> <span class="synStatement">SELECT</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>) <span class="synSpecial">AS</span> created_at, COUNT(*) <span class="synSpecial">AS</span> count <span class="synSpecial">FROM</span> access_log_realtime3 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synSpecial">GROUP</span> <span class="synSpecial">BY</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>);
++<span class="synComment">----+-------------+----------------------+------+---------------+------+---------+------+------+--------------------------------------------------------------------+</span>
+| id | select_type | <span class="synSpecial">table</span>                | <span class="synSpecial">type</span> | possible_keys | key  | key_len | ref  | <span class="synSpecial">rows</span> | Extra                                                              |
++<span class="synComment">----+-------------+----------------------+------+---------------+------+---------+------+------+--------------------------------------------------------------------+</span>
+|  <span class="synConstant">1</span> | SIMPLE      | access_log_realtime3 | <span class="synStatement">ALL</span>  | <span class="synSpecial">NULL</span>          | <span class="synSpecial">NULL</span> | <span class="synSpecial">NULL</span>    | <span class="synSpecial">NULL</span> | <span class="synConstant">2000</span> | <span class="synSpecial">Using</span> <span class="synSpecial">where</span> <span class="synSpecial">with</span> pushed condition; <span class="synSpecial">Using</span> temporary; <span class="synSpecial">Using</span> filesort |
++<span class="synComment">----+-------------+----------------------+------+---------------+------+---------+------+------+--------------------------------------------------------------------+</span>
+<span class="synConstant">1</span> <span class="synSpecial">row</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">01</span> sec)
+</pre><p>50万件アクセスがあった場合の集計結果ですが、INDEXを貼ってはいませんが0.75秒で処理が返ってきます。<span class="deco" style="font-weight:bold;font-style:italic;">InfiniDBで注意したいのは長い文字列が格納されるとGROUP BYで条件指定できない</span>ようです。例えば今回のagentがそうです。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">SELECT</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>) <span class="synSpecial">AS</span> created_at, COUNT(*) <span class="synSpecial">AS</span> count <span class="synSpecial">FROM</span> access_log_realtime2 <span class="synSpecial">WHERE</span> path = <span class="synConstant">'/foo.html'</span> <span class="synSpecial">GROUP</span> <span class="synSpecial">BY</span> DATE_FORMAT(created_at, <span class="synConstant">'%Y-%m-%d'</span>);
++<span class="synComment">------------+--------+</span>
+| created_at | count  |
++<span class="synComment">------------+--------+</span>
+| <span class="synConstant">2013-07-06</span> | <span class="synConstant">500000</span> |
++<span class="synComment">------------+--------+</span>
+<span class="synConstant">3</span> <span class="synSpecial">rows</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">75</span> sec)
+</pre>
+</div>
+<div class="section">
+<h5>結局何を採用すべきか？</h5>
+<p>今回のRealTime集計DBの実験結果をまとめると次のようになります。※INSERTの時間ですが、Fluentd経由でやると時間がかかりすぎるため、直接<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>を実行して計測しました。結果としてはNo.1の<span class="deco" style="font-weight:bold;font-style:italic;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>を使う。格納時点でデータを集計。1行中の集計用カラムを都度Update</span>の結果がINSERT、SELECTともに良い結果が出ていて効率が良さそうです。僕が今まで見て来た開発現場ではNo.2の<span class="deco" style="font-weight:bold;font-style:italic;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>を使う。格納時点ではデータを1行ずつ書き込み、集計時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>で行数をSUMる</span>手法の方が多かったように思います。おそらくNo.2は一番安定した手法でどこの企業でも取り入れているなのではないでしょうか。No.3の<span class="deco" style="font-weight:bold;font-style:italic;">InfiniDBを使う。格納時点でデータを1行ずつ書き込む。集計時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>で行数をSUMる</span>はInfiniDB自体の実績があまり無い事と、INSERTに時間がかかりすぎるのですが大量データのGROUP BYをどうしても使わざるを得ない場合はInnfiniDB(列指向DB)で実行すると良いと思います。</p>
+
+<table>
+<tr>
+<th> No </th>
+<th> 方法 </th>
+<th> 50万件 INSERT時間 </th>
+<th> 50万件 SELECT時間 </th>
+</tr>
+<tr>
+<td> 1 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>を使う。格納時点でデータを集計。<br>1行中の集計用カラムを都度Update。</td>
+<td> 0.6 hour </td>
+<td> 0.00 sec </td>
+</tr>
+<tr>
+<td> 2 </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>を使う。格納時点でデータを1行ずつ書き込む。<br>集計時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>で行数をSUMる。</td>
+<td> 2.15 hour </td>
+<td> 6.34 sec </td>
+</tr>
+<tr>
+<td> 3 </td>
+<td> InfiniDBを使う。格納時点でデータを1行ずつ書き込む。<br>集計時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>で行数をSUMる。</td>
+<td> 39 hour </td>
+<td> 0.75 sec </td>
+</tr>
+</table><p>また今回定期処理の件については検証をしませんでしたが、バッチプログラムの中で集計をして集計結果をDBに格納すれば良いだけなので<span class="deco" style="font-weight:bold;font-style:italic;">No.1の手法を採用すれば良い</span>と思います。</p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>おまけ：Infinidbの設定方法と制限</h4>
+
+<blockquote>
+    <p>少しだけInfinidbの設定手順について記載します。凄く簡単です。無料のCommunity版について書きます。<a href="http://success.calpont.com/InfiniDBCommunitySofware.html"></a> <a href="http://b.hatena.ne.jp/entry/success.calpont.com/InfiniDBCommunitySofware.html"><img src="http://b.hatena.ne.jp/entry/image/http://success.calpont.com/InfiniDBCommunitySofware.html" alt="はてなブックマーク - " border="0" /></a>必要な項目を記載してDownloadします。僕の環境は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Centos">Centos</a>なので<a class="keyword" href="http://d.hatena.ne.jp/keyword/rpm">rpm</a>パッケージを落としてきます。socketファイルのパスがデフォルトと変わっているので起動時に注意してください。起動時のoptionでsocketファイルのパスを指定するよりはDefaultのPathにsymlinkを貼るのがいいかもしれないです。またinfinidbのパッケージだと何故か<a class="keyword" href="http://d.hatena.ne.jp/keyword/innodb">innodb</a>が入っていないのでINSTALL PLUGINします。<br />
+<span class="deco" style="font-weight:bold;font-style:italic;">InfinidbはPRIMARY KEY/AUTO_INCREMENTの指定、NOT NULLやDEFAULTの制限、INDEXの作成ができません。その代わりにINDEXの作成やパーティショニングはInfinidb側で自動的に行ってくれるようです。</span></p>
+<pre class="hljs sql" data-lang="sql" data-unlink>$ wget <span class="synConstant">"Download Path"</span>
+$ tar xzf calpont-infinidb<span class="synConstant">-2.2</span>.<span class="synConstant">11-1</span>.x86_64.rpm.tar.gz
+$ sudo rpm -ivh calpont*.rpm
+$ sudo /etc/init.d/mysqld stop
+$ sudo /usr/local/Calpont/bin/install-infinidb.sh
+$ sudo /etc/init.d/infinidb <span class="synSpecial">start</span>
+$ sudo ln -s /usr/local/Calpont/mysql/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock
+//socketを指定して起動
+$ mysql -u root -p <span class="synComment">--socket=/usr/local/Calpont/mysql/lib/mysql/mysql.sock</span>
+//通常起動
+$ mysql -u root -p 
+mysql> show engines;
++<span class="synComment">------------+---------+-----------------------------------------------------------+--------------+------+------------+</span>
+| Engine     | Support | <span class="synStatement">Comment</span>                                                   | Transactions | XA   | Savepoints |
++<span class="synComment">------------+---------+-----------------------------------------------------------+--------------+------+------------+</span>
+| CSV        | YES     | CSV storage engine                                        | NO           | NO   | NO         |
+| InfiniDB   | YES     | Calpont InfiniDB storage engine                           | YES          | NO   | NO         |
+| MEMORY     | YES     | Hash based, stored <span class="synStatement">in</span> memory, useful <span class="synSpecial">for</span> temporary tables | NO           | NO   | NO         |
+| MyISAM     | <span class="synSpecial">DEFAULT</span> | <span class="synSpecial">Default</span> engine <span class="synSpecial">as</span> <span class="synSpecial">of</span> MySQL <span class="synConstant">3</span>.<span class="synConstant">23</span> <span class="synSpecial">with</span> great performance    | NO           | NO   | NO         |
+| MRG_MYISAM | YES     | Collection <span class="synSpecial">of</span> identical MyISAM tables                     | NO           | NO   | NO         |
++<span class="synComment">------------+---------+-----------------------------------------------------------+--------------+------+------------+</span>
+<span class="synConstant">5</span> <span class="synSpecial">rows</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">03</span> sec)
+
+mysql> INSTALL PLUGIN INNODB SONAME <span class="synConstant">'ha_innodb.so'</span>;
+mysql> INSTALL PLUGIN INNODB_TRX SONAME <span class="synConstant">'ha_innodb_plugin.so'</span>;
+mysql> INSTALL PLUGIN INNODB_LOCKS SONAME <span class="synConstant">'ha_innodb_plugin.so'</span>;
+mysql> show engines;
++<span class="synComment">------------+---------+------------------------------------------------------------+--------------+------+------------+</span>
+| Engine     | Support | <span class="synStatement">Comment</span>                                                    | Transactions | XA   | Savepoints |
++<span class="synComment">------------+---------+------------------------------------------------------------+--------------+------+------------+</span>
+| CSV        | YES     | CSV storage engine                                         | NO           | NO   | NO         |
+| InnoDB     | YES     | Supports transactions, <span class="synSpecial">row</span>-<span class="synSpecial">level</span> locking, <span class="synStatement">and</span> foreign keys | YES          | YES  | YES        |
+| MEMORY     | YES     | Hash based, stored <span class="synStatement">in</span> memory, useful <span class="synSpecial">for</span> temporary tables  | NO           | NO   | NO         |
+| MyISAM     | <span class="synSpecial">DEFAULT</span> | <span class="synSpecial">Default</span> engine <span class="synSpecial">as</span> <span class="synSpecial">of</span> MySQL <span class="synConstant">3</span>.<span class="synConstant">23</span> <span class="synSpecial">with</span> great performance     | NO           | NO   | NO         |
+| MRG_MYISAM | YES     | Collection <span class="synSpecial">of</span> identical MyISAM tables                      | NO           | NO   | NO         |
+| InfiniDB   | YES     | Calpont InfiniDB storage engine                            | YES          | NO   | NO         |
++<span class="synComment">------------+---------+------------------------------------------------------------+--------------+------+------------+</span>
+<span class="synConstant">6</span> <span class="synSpecial">rows</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">01</span> sec)
+
+mysql> show plugins;
++<span class="synComment">--------------+--------+--------------------+---------------------+-------------+</span>
+| Name         | Status | <span class="synSpecial">Type</span>               | Library             | License     |
++<span class="synComment">--------------+--------+--------------------+---------------------+-------------+</span>
+| binlog       | ACTIVE | STORAGE ENGINE     | <span class="synSpecial">NULL</span>                | GPL         |
+| CSV          | ACTIVE | STORAGE ENGINE     | <span class="synSpecial">NULL</span>                | GPL         |
+| MEMORY       | ACTIVE | STORAGE ENGINE     | <span class="synSpecial">NULL</span>                | GPL         |
+| MyISAM       | ACTIVE | STORAGE ENGINE     | <span class="synSpecial">NULL</span>                | GPL         |
+| MRG_MYISAM   | ACTIVE | STORAGE ENGINE     | <span class="synSpecial">NULL</span>                | GPL         |
+| InfiniDB     | ACTIVE | STORAGE ENGINE     | libcalmysql.so      | PROPRIETARY |
+| InnoDB       | ACTIVE | STORAGE ENGINE     | ha_innodb.so        | GPL         |
+| INNODB_TRX   | ACTIVE | INFORMATION SCHEMA | ha_innodb_plugin.so | GPL         |
+| INNODB_LOCKS | ACTIVE | INFORMATION SCHEMA | ha_innodb_plugin.so | GPL         |
++<span class="synComment">--------------+--------+--------------------+---------------------+-------------+</span>
+</pre>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201307030856/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201307030856/">【進撃の巨大データ】自作ApacheModuleとRedisでWebBrowserを一つ残らずUnique管理する</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201307170850/">【進撃の巨大データ】RealTimeLog集計を目的としたRedisの活用</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201307170850/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20111212/1323670662" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>NLP(自然言語処理)用語まとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>NLP(自然言語処理)用語まとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Dec 12, 15:17</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="自然言語処理-nlp-自然言語処理-用語まとめ">[自然言語処理] : NLP(自然言語処理)用語まとめ</h2>
+
+<div class="section">
+<h4>一般用語</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/NLP">NLP</a></h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C1%B3%B8%C0%B8%EC%BD%E8%CD%FD">自然言語処理</a>のこと。Natural language processing : <a class="keyword" href="http://d.hatena.ne.jp/keyword/NLP">NLP</a>。</li>
+<li>コンピュータが人間の言葉を処理する事。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C1%B3%B8%C0%B8%EC">自然言語</a>の反対は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%BC%B0%B8%C0%B8%EC">形式言語</a>。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C6%A5%AD%A5%B9%A5%C8%A5%DE%A5%A4%A5%CB%A5%F3%A5%B0">テキストマイニング</a></h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C1%B3%B8%C0%B8%EC%BD%E8%CD%FD">自然言語処理</a>と<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A1%BC%A5%BF%A5%DE%A5%A4%A5%CB%A5%F3%A5%B0">データマイニング</a>の技術を合わせてテキストから知識発見を行う技術。
+<ul>
+<li>知らない知識をテキストから発見するのを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C6%A5%AD%A5%B9%A5%C8%A5%DE%A5%A4%A5%CB%A5%F3%A5%B0">テキストマイニング</a>。</li>
+<li>既知の情報の位置を特定するのを情報検索。 </li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>素性</h5>
+
+<ul>
+<li>属性/属性値</li>
+</ul>
+</div>
+<div class="section">
+<h5>自立語</h5>
+
+<ul>
+<li>他の単語が無くても意味をなす単語。助詞/助動詞以外。</li>
+</ul>
+</div>
+<div class="section">
+<h5>bag of words</h5>
+
+<ul>
+<li>与えられたテキストの集合で並び順が無視されること。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/N-Gram">N-Gram</a></h5>
+
+<ul>
+<li>連続するn個の要素。要素が何を表すかによって表現が異なる。
+<ul>
+<li>"文字<a class="keyword" href="http://d.hatena.ne.jp/keyword/N-gram">N-gram</a>"</li>
+<li>"単語<a class="keyword" href="http://d.hatena.ne.jp/keyword/N-gram">N-gram</a>"</li>
+</ul></li>
+<li>2-gram(bigram)、3-gram(trigram)をよく使う。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7%B2%F2%C0%CF">形態素解析</a>では文字<a class="keyword" href="http://d.hatena.ne.jp/keyword/n-gram">n-gram</a>を利用する。</li>
+</ul>
+</div>
+<div class="section">
+<h5>TF・IDF</h5>
+
+<ul>
+<li>索引後の重み付け方法。</li>
+<li>TF(Term Frequency)は文書に置ける単語の頻度</li>
+<li>IDF(Inverted Document Frequency)は索引語が現れる相対文書頻度の逆数の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C2%D0%BF%F4">対数</a></li>
+<li>1文書に同一の索引語が多く出現すればTF・IDFの値は大きくなる。多くの文書に索引後が出現すれば値は小さくなる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>コサイン類似度</h5>
+
+<ul>
+<li>二つのデータが似ているかどうかをデータベクトルの距離により算出すること。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A1%BC%A5%D1%A5%B9">コーパス</a></h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C1%B3%B8%C0%B8%EC">自然言語</a>の大量のテキスト集合。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B7%A5%BD%A1%BC%A5%E9%A5%B9">シソーラス</a></h5>
+
+<ul>
+<li>単語の関係(上位/下位、部分/全体、同義、類義)によって分類し体系づけた辞書。</li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>機会学習</h4>
+
+<blockquote>
+    
+<ul>
+<li>人間が自然と行っている<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D1%A5%BF%A1%BC%A5%F3%C7%A7%BC%B1">パターン認識</a>や経験則に基づく判断をコンピュータを用いて行う技術や理論。</li>
+</ul>
+<div class="section">
+<h5>ナイーブ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%A4%A5%BA">ベイズ</a>(単純分類器)</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%A4%A5%BA">ベイズ</a>の定理を適用することに基づいた単純な確率分類器。</li>
+<li>テキスト分類に頻繁に用いられている。</li>
+<li>パラメータ推定には最尤法が使われる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>決定木</h5>
+
+<ul>
+<li>葉と根を利用した予測モデル。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A1%BC%A5%BF%A5%DE%A5%A4%A5%CB%A5%F3%A5%B0">データマイニング</a>でよく利用され、葉が分類、枝がその分類に至るまでの特徴の集合。</li>
+</ul>
+</div>
+<div class="section">
+<h5>K-平均</h5>
+
+<ul>
+<li>距離ベースの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a>で事前に決められた数の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>にデータを割り振る。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/SVM">SVM</a></h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Support%20Vector%20Machine">Support Vector Machine</a>。２値分類器。</li>
+<li>座標上にサンプル値をプロットし、正値/負例の集合からもっとも距離が大きくなる識別面</li>
+</ul><p>を決定。</p>
+
+<ul>
+<li>データを入れるとそこそこの精度の結果が出る。しかしサンプルが多いと最適化が大変。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D1%A1%BC%A5%BB%A5%D7%A5%C8%A5%ED%A5%F3">パーセプトロン</a></h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CB%A5%E5%A1%BC%A5%E9%A5%EB%A5%CD%A5%C3%A5%C8">ニューラルネット</a>の最も基本的な形式。式により２クラスにクラス分類を行う。</li>
+<li>線形分離可能なモデルにのみ適用可能。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C8%F3%C0%FE%B7%C1">非線形</a>問題でも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AB%A1%BC%A5%CD%A5%EB%A5%C8%A5%EA%A5%C3%A5%AF">カーネルトリック</a>を利用すると線形分離に適用できる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>教師あり学習</h5>
+
+<ul>
+<li>特定のデータとそれに関連する付随情報があり、付随情報が無いデータが与えられた時に付随情報を予測する関数や規則を取得する学習。</li>
+</ul>
+</div>
+<div class="section">
+<h5>教師無し学習</h5>
+
+<ul>
+<li>特定のデータとそれに関連する付随情報が与えられず、データの分布などから特徴的なパターンを見つける学習。</li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7%B2%F2%C0%CF">形態素解析</a></h4>
+
+<blockquote>
+    
+<ul>
+<li>文法ルールに従い<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%AB%C1%B3%B8%C0%B8%EC">自然言語</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7">形態素</a>(言語で意味を持つ最小単位)に分割する。</li>
+</ul>
+<div class="section">
+<h5>MA</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7%B2%F2%C0%CF">形態素解析</a>のこと。Morphological Analysis。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%AC%A4%AB%A4%C1%BD%F1%A4%AD">分かち書き</a></h5>
+
+<ul>
+<li>文章の語に区切りとして空白を挟んで記述。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B7%C1%C2%D6%C1%C7%B2%F2%C0%CF">形態素解析</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a></h5>
+
+<ul>
+<li>代表的な物を以下に挙げる。</li>
+</ul>
+<table>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>名 </th>
+<th> URL </th>
+<td> </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/mecab">mecab</a> </td>
+<td> <a href="http://mecab.sourceforge.net/">http://mecab.sourceforge.net/</a> </td>
+</tr>
+<tr>
+<td> kakashi </td>
+<td> <a href="http://kakasi.namazu.org/index.html.ja">http://kakasi.namazu.org/index.html.ja</a> </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/chasen">chasen</a> </td>
+<td> <a href="http://chasen-legacy.sourceforge.jp/">http://chasen-legacy.sourceforge.jp/</a> </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a>JAPAN WebAPI </td>
+<td> <a href="http://developer.yahoo.co.jp/webapi/jlp/">http://developer.yahoo.co.jp/webapi/jlp/</a> </td>
+</tr>
+</table>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%AB%A4%CA%B4%C1%BB%FA%CA%D1%B4%B9">かな漢字変換</a></h5>
+
+<ul>
+<li>日本語入力システムの一つ。読みを入力した内容に対して漢字を出力すること。</li>
+<li>MS <a class="keyword" href="http://d.hatena.ne.jp/keyword/IME">IME</a>(<a class="keyword" href="http://d.hatena.ne.jp/keyword/Microsoft">Microsoft</a>)、<a class="keyword" href="http://d.hatena.ne.jp/keyword/ATOK">ATOK</a>(<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B8%A5%E3%A5%B9%A5%C8%A5%B7%A5%B9%A5%C6%A5%E0">ジャストシステム</a>)、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google%C6%FC%CB%DC%B8%EC%C6%FE%CE%CF">Google日本語入力</a>などが有名。</li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>リンク</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://nlp.nagaokaut.ac.jp/%E7%94%A8%E8%AA%9E%E9%9B%86">用語集- 長岡技科大 自然言語処理研究室</a></li>
+<li><a href="http://nltk.googlecode.com/svn/trunk/doc/book-jp/ch12.html">Python による日本語自然言語処理</a></li>
+<li><a href="http://www.tanimoto.to/nlp/index.html">自然言語処理関係</a></li>
+<li><a href="http://ibisforest.org/index.php?FrontPage">朱鷺の杜Wiki</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/machine-learning">機会学習　はじめよう</a></li>
+</ul>
+</blockquote>
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114705/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51EoFqAGo1L._SL160_.jpg" class="hatena-asin-detail-image" alt="入門 自然言語処理" title="入門 自然言語処理"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114705/yutakikuchi-22/">入門 自然言語処理</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Steven Bird,Ewan Klein,Edward Loper,萩<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B8%B6%C0%B5%BF%CD">原正人</a>,中山敬広,水野貴明</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2010/11/11</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 20人 <span class="hatena-asin-detail-label">クリック</span>: 639回</li><li><a href="http://d.hatena.ne.jp/asin/4873114705/yutakikuchi-22" target="_blank">この商品を含むブログ (44件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201112091947/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201112091947/">HerokuでNodeJSを動かしてみる</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201112190830/">Hadoopをより便利に使う！HiveでのMapReduceまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201112190830/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120704/1341358560" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>CentOSでR言語を使ってみたことのまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>CentOSでR言語を使ってみたことのまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Jul 04, 08:36</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="centos-centosでr言語を使ってみたことのまとめ">[CentOs] : CentOSでR言語を使ってみたことのまとめ</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873115337/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51zklTjsgbL._SL160_.jpg" class="hatena-asin-detail-image" alt="Rクックブック" title="Rクックブック"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873115337/yutakikuchi-22/">Rクックブック</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Paul Teetor,大橋真也,木下哲也</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2011/12/22</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 9人 <span class="hatena-asin-detail-label">クリック</span>: 61回</li><li><a href="http://d.hatena.ne.jp/asin/4873115337/yutakikuchi-22" target="_blank">この商品を含むブログ (13件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>はじめに</h4>
+
+<blockquote>
+    <p>統計的処理と結果のグラフ化をするために学生時代は<a class="keyword" href="http://d.hatena.ne.jp/keyword/matlab">matlab</a>を利用していました。<a class="keyword" href="http://d.hatena.ne.jp/keyword/matlab">matlab</a>は行列演算に優れ使い易い言語だったのですが、一番の難点は<a class="keyword" href="http://d.hatena.ne.jp/keyword/MathWorks">MathWorks</a>社の商用製品である事です。しかも高い。<a href="http://www.mathworks.co.jp/">MathWorks 日本 - MATLAB / Simulinkによる数値計算 - マスワークス公式日本語サイト</a> <a href="http://b.hatena.ne.jp/entry/www.mathworks.co.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://www.mathworks.co.jp/" alt="はてなブックマーク - MathWorks 日本 - MATLAB / Simulinkによる数値計算 - マスワークス公式日本語サイト" border="0" /></a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/matlab">matlab</a>と同様の機能をもつ(互換性は無い)<a class="keyword" href="http://d.hatena.ne.jp/keyword/scilab">scilab</a>というFreeの言語もありますが、イマ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%C1%CE%AE">イチ流</a>行っている感はありません。<a href="http://www.scilab.org/">Home - Scilab WebSite</a> <a href="http://b.hatena.ne.jp/entry/www.scilab.org/"><img src="http://b.hatena.ne.jp/entry/image/http://www.scilab.org/" alt="はてなブックマーク - Home - Scilab WebSite" border="0" /></a> Freeの言語で統計処理をやるのは<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>が主流のようなので、それに習って<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>を使って行きます。今日は<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>/RCommander周りの説明を行います。多少癖がある言語なので学習が面倒ですが慣れると優れものと聞くので頑張って勉強します。<a href="http://www.r-project.org/">The R Project for Statistical Computing</a> <a href="http://b.hatena.ne.jp/entry/www.r-project.org/"><img src="http://b.hatena.ne.jp/entry/image/http://www.r-project.org/" alt="はてなブックマーク - The R Project for Statistical Computing" border="0" /></a></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/CentOS">CentOS</a>へのInstall</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>環境</h5>
+<p>CentOS5.7、64bit環境、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Core2Duo">Core2Duo</a>です。</p>
+<pre class="code" data-lang="" data-unlink>$ cat /etc/redhat-release 
+CentOS release 5.7 (Final)
+
+$ cat /proc/cpuinfo
+cat /proc/cpuinfo 
+processor   : 0
+vendor_id   : GenuineIntel
+cpu family  : 6
+model       : 23
+model name  : Intel(R) Core(TM)2 Duo CPU     E7600  @ 3.06GHz
+
+$ uname -m
+x86_64</pre>
+</div>
+<div class="section">
+<h5>install手順のまとめ</h5>
+<p>次の項目で失敗した内容も含めて手順を記載していますが、簡単にまとめると以下のパッケージが必要です。それぞれのパッケージが単純な<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> reposに登録されていないので/etc/<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>.repos.d/R.repoの登録とrpmforge経由でのinstallが必要になります。</p>
+
+<ul>
+<li>R.<a class="keyword" href="http://d.hatena.ne.jp/keyword/x86">x86</a>_64 0:2.10.0-2.el5 (R.repoの登録)</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>-File-Copy-Recursive.noarch 0:0.38-1.el5.rf (rpmforge経由)</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> install手順</h5>
+<p>R.repoを作成して<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>でinstallできるようにします。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo vim /etc/yum.repos.d/R.repo
+[R-project]
+name=R project for Statistical Computing repository
+baseurl=http://rm.mirror.garr.it/mirrors/CRAN/bin/linux/redhat/el5/x86_64/
+failovermethod=priority
+enabled=1
+gpgcheck=0
+priority=15</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> installします。しかし<a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>(File::Copy::Recursive)が無いということでinstallができません。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo yum install R
+R-project                                                                                            | 1.0 kB     00:00     
+R-project/primary                                                                                    | 2.8 kB     00:00     
+R-project                                                                                                               5/5
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package R.x86_64 0:2.10.0-2.el5 set to be updated
+--> Processing Dependency: R-devel = 2.10.0-2.el5 for package: R
+--> Processing Dependency: libRmath-devel = 2.10.0-2.el5 for package: R
+--> Running transaction check
+(略)
+R-core-2.10.0-2.el5.x86_64 from R-project has depsolving problems
+  --> Missing Dependency: perl(File::Copy::Recursive) is needed by package R-core-2.10.0-2.el5.x86_64 (R-project)
+Error: Missing Dependency: perl(File::Copy::Recursive) is needed by package R-core-2.10.0-2.el5.x86_64 (R-project)</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/CPAN">CPAN</a>でFile::Copy::Recursiveを探すとあるので<a class="keyword" href="http://d.hatena.ne.jp/keyword/cpan">cpan</a>経由でinstallします。install後に<a class="keyword" href="http://d.hatena.ne.jp/keyword/cpan">cpan</a>コマンドでinstallされているかを確認します。<a href="http://search.cpan.org/~dmuey/File-Copy-Recursive-0.38/Recursive.pm">File::Copy::Recursive - search.cpan.org</a> <a href="http://b.hatena.ne.jp/entry/search.cpan.org/~dmuey/File-Copy-Recursive-0.38/Recursive.pm"><img src="http://b.hatena.ne.jp/entry/image/http://search.cpan.org/~dmuey/File-Copy-Recursive-0.38/Recursive.pm" alt="はてなブックマーク - File::Copy::Recursive - search.cpan.org" border="0" /></a></p>
+<pre class="code" data-lang="" data-unlink>$ sudo cpan
+cpan> install File::Copy::Recursive
+Going to read /home/yuta/.cpan/Metadata
+  Database was generated on Mon, 02 Jul 2012 03:58:03 GMT
+Running install for module File::Copy::Recursive
+Running make for D/DM/DMUEY/File-Copy-Recursive-0.38.tar.gz
+(略)
+Installing /usr/lib/perl5/site_perl/5.8.8/File/Copy/Recursive.pm
+Installing /usr/share/man/man3/File::Copy::Recursive.3pm
+Writing /usr/lib64/perl5/site_perl/5.8.8/x86_64-linux-thread-multi/auto/File/Copy/Recursive/.packlist
+Appending installation info to /usr/lib64/perl5/5.8.8/x86_64-linux-thread-multi/perllocal.pod
+  /usr/bin/make install  -- OK
+cpan> quit
+
+$ cpan -a | grep -i Recursive
+File::Copy::Recursive          0.38      0.38  D/DM/DMUEY/File-Copy-Recursive-0.38.tar.gz</pre><p>再度<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> installに挑戦しましたが、また同じエラーが出ます。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo yum install R -y
+R-core-2.10.0-2.el5.x86_64 from R-project has depsolving problems
+  --> Missing Dependency: perl(File::Copy::Recursive) is needed by package R-core-2.10.0-2.el5.x86_64 (R-project)
+Error: Missing Dependency: perl(File::Copy::Recursive) is needed by package R-core-2.10.0-2.el5.x86_64 (R-project)
+ You could try using --skip-broken to work around the problem
+ You could try running: package-cleanup --problems
+                    package-cleanup --dupes
+                    rpm -Va --nofiles --nodigest</pre><p>File::Copy::Recursiveをrmpforge経由でinstallすることを試みます。まずは<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>-prioritiesをinstallします。さらに<a class="keyword" href="http://d.hatena.ne.jp/keyword/CentOS">CentOS</a>-Base.repoの各項目にpriority=1を追記します。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo yum install yum-priorities -y
+yum-priorities-1.1.16-21.el5.centos.noarch.rpm                                                       |  16 kB     00:00     
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : yum-priorities                                                                                       1/1 
+
+Installed:
+  yum-priorities.noarch 0:1.1.16-21.el5.centos                                                                              
+
+Complete!
+
+$ sudo vi /etc/yum.repos.d/CentOS-Base.repo
+[base]
+name=CentOS-$releasever - Base
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
+#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
+priority=1  #<== 追記
+
+(略)</pre><p>rpmforge-release-0.5.2-2.el5.rf.<a class="keyword" href="http://d.hatena.ne.jp/keyword/x86">x86</a>_64.<a class="keyword" href="http://d.hatena.ne.jp/keyword/rpm">rpm</a>を取得してinstallします。さらにrpmforge.repoのpriority=10を追記します。</p>
+<pre class="code" data-lang="" data-unlink>$ wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm
+
+$ sudo rpm -ivh rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm
+警告: rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm: ヘッダ V3 DSA signature: NOKEY, key ID 6b8d79e6
+準備中...                ########################################### [100%]
+   1:rpmforge-release       ########################################### [100%]
+
+$ sudo vim /etc/yum.repos.d/rpmforge.repo
+[rpmforge]
+name = RHEL $releasever - RPMforge.net - dag 
+baseurl = http://apt.sw.be/redhat/el5/en/$basearch/rpmforge
+mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge
+#mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge
+enabled = 1 
+protect = 0 
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
+gpgcheck = 1 
+priority = 10</pre><p>sudo <a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> install <a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>-File-Copy-Recursiveをします。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo yum install perl-File-Copy-Recursive -y
+(略)
+Downloading Packages:
+perl-File-Copy-Recursive-0.38-1.el5.rf.noarch.rpm                                                    |  22 kB     00:00     
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : perl-File-Copy-Recursive                                                                             1/1 
+
+Installed:
+  perl-File-Copy-Recursive.noarch 0:0.38-1.el5.rf                                                                           
+
+Complete!</pre><p>再度<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> install Rに挑戦します。今度はうまく行きます。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo yum install R -y
+(略)
+Installed:
+  R.x86_64 0:2.10.0-2.el5                                                                                                   
+
+Dependency Installed:
+  R-core.x86_64 0:2.10.0-2.el5             R-devel.x86_64 0:2.10.0-2.el5              bzip2-devel.x86_64 0:1.0.3-6.el5_5    
+  dialog.x86_64 0:1.0.20051107-1.2.2       gcc-gfortran.x86_64 0:4.1.2-52.el5_8.1     libRmath.x86_64 0:2.10.0-2.el5        
+  libRmath-devel.x86_64 0:2.10.0-2.el5     libgfortran.x86_64 0:4.1.2-52.el5_8.1      pcre-devel.x86_64 0:6.6-6.el5_6.1     
+  tetex.x86_64 0:3.0-33.13.el5             tetex-dvips.x86_64 0:3.0-33.13.el5         tetex-fonts.x86_64 0:3.0-33.13.el5    
+  tetex-latex.x86_64 0:3.0-33.13.el5       xdg-utils.noarch 0:1.0.2-2.el5.centos     
+
+Dependency Updated:
+  cpp.x86_64 0:4.1.2-52.el5_8.1          gcc.x86_64 0:4.1.2-52.el5_8.1                gcc-c++.x86_64 0:4.1.2-52.el5_8.1   
+  libgcc.i386 0:4.1.2-52.el5_8.1         libgcc.x86_64 0:4.1.2-52.el5_8.1             libstdc++.i386 0:4.1.2-52.el5_8.1   
+  libstdc++.x86_64 0:4.1.2-52.el5_8.1    libstdc++-devel.x86_64 0:4.1.2-52.el5_8.1   
+
+Complete!</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>を起動してみます。問題なく起動します。とりあえずinstallはこれにて終了です。</p>
+<pre class="code" data-lang="" data-unlink>$ R
+
+R version 2.10.0 (2009-10-26)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+Rは、自由なソフトウェアであり、「完全に無保証」です。 
+一定の条件に従えば、自由にこれを再配布することができます。 
+配布条件の詳細に関しては、'license()'あるいは'licence()'と入力してください。 
+
+Rは多くの貢献者による共同プロジェクトです。 
+詳しくは'contributors()'と入力してください。 
+また、RやRのパッケージを出版物で引用する際の形式については
+'citation()'と入力してください。 
+
+'demo()'と入力すればデモをみることができます。 
+'help()'とすればオンラインヘルプが出ます。 
+'help.start()'でHTMLブラウザによるヘルプがみられます。 
+'q()'と入力すればRを終了します。 
+
+> </pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>簡単に触ってみる</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Demoを実行</h5>
+<p>R起動後に「'demo()'と入力すればデモをみることができます。 」という説明文が表示されるのでdemo()を見てみます。demo()と入力すると表示可能なもの一覧が取得できるので、その中からgraphicsというものを見てみます。Rを起動後に<span class="deco" style="color:#FF0000;">demo(graphics)</span>と実行します。コンソールにplotの式と<a class="keyword" href="http://d.hatena.ne.jp/keyword/GUI">GUI</a>には画像が出力されると思います。<br />
+<span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20120703210717" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20120703/20120703210717.png" alt="f:id:yutakikuchi:20120703210717p:image:w360" title="f:id:yutakikuchi:20120703210717p:image:w360" class="hatena-fotolife" style="width:360px" itemprop="image"></a></span><br />
+<span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20120703210719" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20120703/20120703210719.png" alt="f:id:yutakikuchi:20120703210719p:image:w360" title="f:id:yutakikuchi:20120703210719p:image:w360" class="hatena-fotolife" style="width:360px" itemprop="image"></a></span><br />
+</p>
+
+</div>
+<div class="section">
+<h5>利用できるライブラリを確認</h5>
+<p>/usr/lib64/R/library以下にある使用可能なライブラリ一覧を表示します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>で<span class="deco" style="color:#FF0000;">library()</span>と実行します。</p>
+<pre class="code" data-lang="" data-unlink>> library()
+
+
+  ライブラリ （パッケージ '/usr/lib64/R/library' 中): 
+
+KernSmooth              Functions for kernel smoothing for Wand & Jones
+                    (1995)
+MASS                    Main Package of Venables and Ripley's MASS
+Matrix                  Sparse and Dense Matrix Classes and Methods
+base                    The R Base Package
+boot                    Bootstrap R (S-Plus) Functions (Canty)
+class                   Functions for Classification
+cluster                 Cluster Analysis Extended Rousseeuw et al.
+codetools               Code Analysis Tools for R
+datasets                The R Datasets Package
+foreign                 Read Data Stored by Minitab, S, SAS, SPSS,
+                    Stata, Systat, dBase, ...
+grDevices               The R Graphics Devices and Support for Colours
+                    and Fonts
+graphics                The R Graphics Package
+grid                    The Grid Graphics Package
+lattice                 Lattice Graphics
+methods                 Formal Methods and Classes
+mgcv                    GAMs with GCV/AIC/REML smoothness estimation
+                    and GAMMs by PQL
+nlme                    Linear and Nonlinear Mixed Effects Models
+nnet                    Feed-forward Neural Networks and Multinomial
+                    Log-Linear Models
+rpart                   Recursive Partitioning
+spatial                 Functions for Kriging and Point Pattern
+                    Analysis
+splines                 Regression Spline Functions and Classes
+stats                   The R Stats Package
+stats4                  Statistical Functions using S4 Classes
+survival                Survival analysis, including penalised
+                    likelihood.
+tcltk                   Tcl/Tk Interface
+tools                   Tools for Package Development
+utils                   The R Utils Package</pre>
+</div>
+<div class="section">
+<h5>とりえあずはPlot</h5>
+<p>2次元データのplotをしてみます。sin関数を利用した波形です。<span class="deco" style="color:#FF0000;">plot(sin,-pi,2*pi)</span>という一行でplotできます。</p>
+<pre class="code" data-lang="" data-unlink>> plot(sin, -pi, 2*pi)</pre><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20120703222718" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20120703/20120703222718.png" alt="f:id:yutakikuchi:20120703222718p:image:w360" title="f:id:yutakikuchi:20120703222718p:image:w360" class="hatena-fotolife" style="width:360px" itemprop="image"></a></span><br />
+</p>
+
+</div>
+<div class="section">
+<h5>外部ソースファイルの読み込み</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>で毎回命令文を実行すると面倒です。そんな時は外部ファイルに落とし込んでRの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>から<span class="deco" style="color:#FF0000;">source()</span>で読み込みます。ここではplot(cos,-pi,2*pi)という一行をcos.Rというファイルに保存してRから読み込ませます。</p>
+<pre class="code" data-lang="" data-unlink>$ vi /home/yuta/work/dev/R/cos.R
+plot(cos,-pi,2*pi) #記述
+
+$ R
+> source("/home/yuta/work/dev/R/cos.R")</pre><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20120703224536" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20120703/20120703224536.png" alt="f:id:yutakikuchi:20120703224536p:image:w360" title="f:id:yutakikuchi:20120703224536p:image:w360" class="hatena-fotolife" style="width:360px" itemprop="image"></a></span><br />
+</p>
+
+</div>
+<div class="section">
+<h5>install.packages()</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/CPAN">CPAN</a>のようにRにはCRANというネットワークがあります。様々なRユーザが便利なプログラムを開発し、配布可能なパッケージングにしてCRANからダウンロードできます。CRANのパッケージをinstallして使えるようにするには<span class="deco" style="color:#FF0000;">install.packages()</span>を実行します。ここではrglという3次元plotのパッケージをinstallします。rglをinstallしようとすると<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>エラーになります。GL/glu.hというincludeファイルが見当たらないようです。glu.hはfreeglut-develに含まれているので先にsudo <a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> install freeglut-devel -yをすると良いと思います。freeglut-develをinstallした後にサイドinstall.package("rgl")を行うと問題なく<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>が通り、library(rgl)で読み込みが可能になります。search()というコマンドで読み込みが完了しているパッケージ一覧にもrglが載ります。library(rgl)を読み込んだ後にopen3d()とexample(rgl.<a class="keyword" href="http://d.hatena.ne.jp/keyword/surface">surface</a>)の実行により3dグラフが表示されます。install.packages()を利用する際はsudo Rで起動すると良いと思います。</p>
+<pre class="code" data-lang="" data-unlink>> install.packages("rgl")
+* installing *source* package ‘rgl’ ...
+checking for gcc... gcc -m64 -std=gnu99
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc -m64 -std=gnu99 accepts -g... yes
+checking for gcc -m64 -std=gnu99 option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -m64 -std=gnu99 -E
+checking for gcc... (cached) gcc -m64 -std=gnu99
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc -m64 -std=gnu99 accepts -g... (cached) yes
+checking for gcc -m64 -std=gnu99 option to accept ISO C89... (cached) none needed
+checking for libpng-config... yes
+configure: using libpng-config
+configure: using libpng dynamic linkage
+checking for X... libraries , headers 
+checking GL/gl.h usability... yes
+checking GL/gl.h presence... yes
+checking for GL/gl.h... yes
+checking GL/glu.h usability... no
+checking GL/glu.h presence... no
+checking for GL/glu.h... no
+configure: error: missing required header GL/glu.h
+* removing ‘/usr/lib64/R/library/rgl’
+
+> quit()
+
+$ sudo yum install freeglut-devel -y
+Running Transaction
+  Installing     : mesa-libGLU-devel                                                                               1/3 
+  Installing     : freeglut-devel                                                                                       2/3 
+  Installing     : freeglut-devel                                                                                       3/3 
+
+Installed:
+  freeglut-devel.i386 0:2.4.0-7.1.el5                         freeglut-devel.x86_64 0:2.4.0-7.1.el5                        
+
+Dependency Installed:
+  mesa-libGLU-devel.x86_64 0:6.5.1-7.10.el5                                                                                 
+
+Complete!
+
+$ sudo R
+
+> install.packages("rgl")
+ install.packages("rgl") 中で警告がありました： 
+  引数 'lib' が欠けています：/usr/lib64/R/library を使います  
+ URL 'http://cran.md.tsukuba.ac.jp/src/contrib/rgl_0.92.880.tar.gz' を試しています 
+Content type 'application/x-gzip' length 1742168 bytes (1.7 Mb)
+ 開かれた URL 
+==================================================
+downloaded 1.7 Mb
+
+* installing *source* package ‘rgl’ ...
+checking for gcc... gcc -m64 -std=gnu99
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc -m64 -std=gnu99 accepts -g... yes
+checking for gcc -m64 -std=gnu99 option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -m64 -std=gnu99 -E
+checking for gcc... (cached) gcc -m64 -std=gnu99
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc -m64 -std=gnu99 accepts -g... (cached) yes
+checking for gcc -m64 -std=gnu99 option to accept ISO C89... (cached) none needed
+checking for libpng-config... yes
+configure: using libpng-config
+configure: using libpng dynamic linkage
+checking for X... libraries , headers 
+checking GL/gl.h usability... yes
+checking GL/gl.h presence... yes
+checking for GL/gl.h... yes
+checking GL/glu.h usability... yes
+checking GL/glu.h presence... yes
+checking for GL/glu.h... yes
+checking for glEnd in -lGL... yes
+checking for gluProject in -lGLU... yes
+checking for freetype-config... yes
+configure: using Freetype and FTGL
+configure: creating ./config.status
+config.status: creating src/Makevars
+
+(略)
+
+** R
+** demo
+** inst
+** preparing package for lazy loading
+** help
+*** installing help indices
+** building package indices ...
+* DONE (rgl)
+
+ ダウンロードされたパッケージは、以下にあります 
+    ‘/tmp/RtmpvsHjUt/downloaded_packages’ 
+ '.Library' 中のパッケージの HTML 索引を更新します
+
+> library(rgl) 
+> search()  
+[1] ".GlobalEnv"        "package:rgl"       "package:stats"      
+[4] "package:graphics"  "package:grDevices" "package:utils"      
+[7] "package:datasets"  "package:methods"   "Autoloads"         
+[10] "package:base"
+
+> open3d()
+[1] 1
+> example(rgl.surface)</pre><p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20120703222717" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20120703/20120703222717.png" alt="f:id:yutakikuchi:20120703222717p:image:w360" title="f:id:yutakikuchi:20120703222717p:image:w360" class="hatena-fotolife" style="width:360px" itemprop="image"></a></span></p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>RCommander</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>install</h5>
+<p>Rを総合的な実行環境<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>としてRCommanderというものがあります。これもCRANでpackageが配布されているのでinstall.packagesで入れます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/CentOS">CentOS</a>で試してみたところCRANのmirrorサーバからなぜかパッケージが取得できなかったので(package ‘Rcmdr’ is not availableというエラーが表示されてしまう)、<span class="deco" style="color:#FF0000;">直接tar.gzファイルを落としてきてlocalのディレクトリからinstall.packagesを試みます。</span>localのディレクトリからinstall.packagesを使うには落としてきたtar.gzを第一引数に指定し、destdir、reposというオプションをそれぞれ指定します。ここではdestdirはRを立ち上げたカレントディレクトリ、reposはNULLを指定しています。最新のRCommanderはVersionが1.8-4ですが、RのVersionを2.14以上を求められるので自分の環境に合わせて1.6-1を取得しています。RのVersionはsessioninfo()というコマンドで分かります。私の環境はR version 2.10.0 (2009-10-26)でした。またRCommanderのVersionに合わせたcarも取得しています。install後にLibrary(Rcmdr)と入力すると必要なパッケージを更に追加でinstallして、その後に起動します。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo R
+> install.packages("Rcmdr")
+ install.packages("Rcmdr") 中で警告がありました： 
+  引数 'lib' が欠けています：/usr/lib64/R/library を使います  
+ 警告メッセージ： 
+In getDependencies(pkgs, dependencies, available, lib) :
+  package ‘Rcmdr’ is not available
+
+> sessionInfo()
+R version 2.10.0 (2009-10-26) 
+x86_64-redhat-linux-gnu
+
+> quit()
+
+$ wget http://essrc.hyogo-u.ac.jp/cran/src/contrib/Archive/Rcmdr/Rcmdr_1.6-1.tar.gz
+$ wget http://essrc.hyogo-u.ac.jp/cran/src/contrib/Archive/car/car_2.0-0.tar.gz
+$ sudo R
+
+> install.packages("leaps")
+> install.packages( "car_2.0-0.tar.gz", destdir=".", repos=NULL )
+> install.packages( "Rcmdr_1.6-1.tar.gz", destdir=".", repos=NULL )
+> Library(Rcmdr)</pre>
+</div>
+<div class="section">
+<h5>実行</h5>
+<p>上と同じくcosのグラフをplotすることをしてみます。操作はとても簡単で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>ウィンドという箇所にplot文を入力するだけです。入力後に右にある実行というボタンを押下します。そうすると上で表示されたcosグラフが表示されます。<br />
+<span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20120703224538" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20120703/20120703224538.png" alt="f:id:yutakikuchi:20120703224538p:image:w640" title="f:id:yutakikuchi:20120703224538p:image:w640" class="hatena-fotolife" style="width:640px" itemprop="image"></a></span></p>
+
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>初心者向け<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>資料</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/slideshare">slideshare</a>で<a class="keyword" href="http://d.hatena.ne.jp/keyword/R%B8%C0%B8%EC">R言語</a>について初心者向けの解説をしている内容を二つほど見つけました。今後はこれらの内容について学習を進めて行きたいと思います。<div style="width:425px" id="__ss_9822899"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/aad34210/tokyo-r18" title="Tokyo r18" target="_blank">Tokyo r18</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9822899" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/aad34210" target="_blank">aad34210</a> </div> </div><div style="width:425px" id="__ss_13346404"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/langstat/kgr2-r" title="KGR_2: Rによるテキストマイニング" target="_blank">KGR_2: Rによるテキストマイニング</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/13346404" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/langstat" target="_blank">Yuichiro Kobayashi</a> </div> </div></p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Links</h4>
+
+<blockquote>
+    
+<ul>
+<li><a href="http://cse.naro.affrc.go.jp/takezawa/r-tips/r.html">R-Tips</a> <a href="http://b.hatena.ne.jp/entry/cse.naro.affrc.go.jp/takezawa/r-tips/r.html"><img src="http://b.hatena.ne.jp/entry/image/http://cse.naro.affrc.go.jp/takezawa/r-tips/r.html" alt="はてなブックマーク - R-Tips" border="0" /></a></li>
+<li><a href="http://www.okada.jp.org/RWiki/">RjpWiki - RjpWiki</a> <a href="http://b.hatena.ne.jp/entry/www.okada.jp.org/RWiki/"><img src="http://b.hatena.ne.jp/entry/image/http://www.okada.jp.org/RWiki/" alt="はてなブックマーク - RjpWiki - RjpWiki" border="0" /></a></li>
+<li><a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a> <a href="http://b.hatena.ne.jp/entry/cran.r-project.org/"><img src="http://b.hatena.ne.jp/entry/image/http://cran.r-project.org/" alt="はてなブックマーク - The Comprehensive R Archive Network" border="0" /></a></li>
+<li><a href="http://socserv.socsci.mcmaster.ca/jfox/Misc/Rcmdr/">R Commander</a> <a href="http://b.hatena.ne.jp/entry/socserv.socsci.mcmaster.ca/jfox/Misc/Rcmdr/"><img src="http://b.hatena.ne.jp/entry/image/http://socserv.socsci.mcmaster.ca/jfox/Misc/Rcmdr/" alt="はてなブックマーク - R Commander" border="0" /></a></li>
+<li><a href="http://seekr.jp/">seekR - 統計分析プログラミング言語 R のための検索エンジン</a> <a href="http://b.hatena.ne.jp/entry/seekr.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://seekr.jp/" alt="はてなブックマーク - seekR - 統計分析プログラミング言語 R のための検索エンジン" border="0" /></a></li>
+</ul>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201207030838/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201207030838/">これだけ覚えれば安心！ネット広告に関する重要指標と算出方法のまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201207090829/">R言語のことは知らん。だがCRANパッケージのrimageを使ってLennaタン全身画像を解析してみる</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201207090829/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

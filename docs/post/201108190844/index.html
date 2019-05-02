@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110819/1313711055" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>MongoDBをpythonから利用する &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>MongoDBをpythonから利用する</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Aug 19, 08:44</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="python-mongodbをpythonから利用する">[Python] : MongoDBをpythonから利用する</h2>
+
+<div class="section">
+<h4><span class="deco" style="font-size:large;">MongoDB</span></h4>
+<p><img src="http://media.mongodb.org/logo-mongodb.png" /><br />
+</p>
+
+<div class="section">
+<h5>特徴</h5>
+
+<ul>
+<li>アメリカの10gen社によって<a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>で書かれたドキュメント指向データベース。</li>
+<li>DBへのアクセスは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>によって行う。</li>
+<li>ドキュメント指向データベースとは、自由なデータ構造のドキュメントを登録する事が可能。</li>
+<li>MongoDBのデータベースはそれぞれ独立している。</li>
+<li>テーブルの構造を事前に決めないので<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>レス。</li>
+<li>１つのデータベースには1つ以上のコレクションとコレクションにはドキュメント(オブジェクト)から成り立つ。</li>
+<li>コレクションとはドキュメントのグループ。<a class="keyword" href="http://d.hatena.ne.jp/keyword/RDBMS">RDBMS</a>のテーブルに相当。</li>
+<li>ドキュメントとは登録データ(オブジェクト)。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/RDBMS">RDBMS</a>にオブジェクトを登録することはプログラムが複雑化するが、ドキュメント指向データベースならオブジェクトをそのまま保存。</li>
+<li>ドキュメント指向データベースに他に<a class="keyword" href="http://d.hatena.ne.jp/keyword/CouchDB">CouchDB</a>がある。</li>
+<li>RDMBSと比較して簡単にスケールアウトできる仕組み。</li>
+<li>BSONというバイナリ形式のデータを内部で保存。BSONとは<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>を元にしたKey-Value型のデータ構造。</li>
+<li>BSONのStringCodeは<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>。</li>
+<li>indexの設定が可能。</li>
+<li>データを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のデータベースに分割するShardingが可能。</li>
+<li>JOIN機能が無いのでテーブルの結合などの必要がある場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/RDBMS">RDBMS</a>を利用する。</li>
+</ul>
+</div>
+<div class="section">
+<h5>BSONのデータ構造</h5>
+
+<ul>
+<li>MongoDBの各ドキュメントは_idというuniq keyを保持。</li>
+<li>idはBSONのobject idでといった12Byteの値。</li>
+<li>idはコレクション内でユニークであり、コレクションがindexを持つ場合はユニークが強制される。</li>
+<li>ユーザ自身で_idを指定する事も可能だが、指定しなかった場合は自動で付与される。</li>
+<li>idは12バイトの値でほとんどのケースでユニークになるようにデザイン。</li>
+<li>MongoDBのシェルとして提供されているObjectId()はidを生成するために使う。Object( 'e4d1a14651d0f018e0000004' )のように使い16進数文字列から生成。</li>
+<li>idは4バイトのタイムスタンプ(epoch秒)、3バイトのマシーンID、2バイトのプロセスID、3バイトのカウンターで構成され、計12Byte。</li>
+<li>タイムスタンプカウンターフィールドはbig <a class="keyword" href="http://d.hatena.ne.jp/keyword/endian">endian</a>で格納。バイト毎に比較した時に必ず昇順になることを保証。</li>
+</ul>
+</div>
+<div class="section">
+<h5>install</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/macOSX">macOSX</a>に対しての手順を記述する。<br />
+<del>1. port install</del> <span class="deco" style="color:#FF0000;">port installは時間が掛かりすぎてやめた。</span></p>
+
+<blockquote>
+    <p><del>$ sudo port install mongodb</del></p>
+
+</blockquote>
+<p>1. download and install <br />
+<a href="http://www.mongodb.org/downloads">Downloads - MongoDB</a></p>
+
+<blockquote>
+    <p>$ tar xzf mongodb-<a class="keyword" href="http://d.hatena.ne.jp/keyword/osx">osx</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/x86">x86</a>_64-1.8.2.tar<br />
+$ sudo cp -R mongodb-<a class="keyword" href="http://d.hatena.ne.jp/keyword/osx">osx</a>-<a class="keyword" href="http://d.hatena.ne.jp/keyword/x86">x86</a>_64-1.8.2/ /usr/local/mongodb/</p>
+
+</blockquote>
+<p>2. make directory</p>
+
+<blockquote>
+    <p>$ sudo mkdir -p /data/db</p>
+
+</blockquote>
+<p>3. start up</p>
+
+<blockquote>
+    <p>$ sudo /usr/local/mongodb/bin/mongod</p>
+
+</blockquote>
+<p>4. connection</p>
+
+<blockquote>
+    <p>$ sudo /usr/local/mongodb/bin/mongo<br />
+Password:<br />
+MongoDB shell version: 1.8.2<br />
+connecting to: test<br />
+> db.foo.save( { a: 1 } )<br />
+> db.foo.find()<br />
+{ "_id" : ObjectId("4e4934874764ff0cf48a480c"), "a" : 1 }</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h5>webtool</h5>
+<p>http://<domain>:28017/</p>
+
+<ul>
+<li>admin用の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>が用意されている。</li>
+<li><span class="deco" style="color:#FF0000;">28017</span>がデフォルトのport番号。</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">pymongo</span></h4>
+
+<div class="section">
+<h5>特徴</h5>
+
+<ul>
+<li>MongoDBを<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>から扱うためのdriver。</li>
+<li>easy_installで設定可能。</li>
+<li><a href="http://api.mongodb.org/python/">このページにAPIドキュメントが存在。</a></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>-MongoDB間の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>処理を自動で変換。
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>内部では<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>を扱うのが一般的だが、BSONは<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>形式なので注意が必要。Pymongoではどうやらencode/decodeが自動的に行われている様子。</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>install</h5>
+
+<blockquote>
+    <p>$ sudo easy_install pymongo</p>
+
+</blockquote>
+<p>※easy_installしたpackageはeggファイルとしてsite-packages以下に保存される。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B4%C4%B6%AD%CA%D1%BF%F4">環境変数</a>の設定</h5>
+<p>この項目は必要に応じて設定。pymongoへのpathが設定されていないとimport時にエラーが発生する。今回は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>での実行になるので.zshrcにexport文を追記する。</p>
+
+<blockquote>
+    <p>$ <a class="keyword" href="http://d.hatena.ne.jp/keyword/vim">vim</a> ~/.zshrc<br />
+export PYTHONPATH=/Library/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>/2.6/site-packages/:$PYTHONPATH</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h5>pymongo サンプルコードの実行</h5>
+<p>mongodbを起動した状態で以下のサンプルコードファイルを実行する。実行は当然<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>コマンドを使う。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">import</span> sys
+<span class="synPreProc">from</span> pymongo <span class="synPreProc">import</span> Connection
+
+<span class="synComment">#connection</span>
+connect = Connection(<span class="synConstant">'localhost'</span>, <span class="synConstant">27017</span>)
+
+<span class="synComment">#testdbを取得</span>
+db = connect.test
+<span class="synComment">#次のような記述もOK db = con['test']</span>
+
+<span class="synComment">#db名を出力</span>
+<span class="synIdentifier">print</span> <span class="synConstant">"db name is = "</span>
+<span class="synIdentifier">print</span> db.name
+
+<span class="synComment">#foo collection</span>
+collect = db.foo
+<span class="synComment">#次のような記述もOK col = db['foo']</span>
+
+<span class="synComment">#save</span>
+collect.save({<span class="synConstant">'x'</span>:<span class="synConstant">10</span>})
+collect.save({<span class="synConstant">'x'</span>:<span class="synConstant">8</span>})
+collect.save({<span class="synConstant">'x'</span>:<span class="synConstant">11</span>})
+
+<span class="synComment">#最初に格納されているドキュメントを検索</span>
+<span class="synIdentifier">print</span> <span class="synConstant">"find_one = "</span>
+<span class="synIdentifier">print</span> collect.find_one()
+
+<span class="synComment">#コレクションに登録されているドキュメント全部を検索</span>
+<span class="synIdentifier">print</span> <span class="synConstant">"find = "</span>
+<span class="synStatement">for</span> data <span class="synStatement">in</span> collect.find():
+<span class="synIdentifier">print</span> data
+
+<span class="synComment">#条件を指定してドキュメントを検索</span>
+<span class="synIdentifier">print</span> <span class="synConstant">"find_query = "</span>
+<span class="synStatement">for</span> data <span class="synStatement">in</span> collect.find({<span class="synConstant">'x'</span>:<span class="synConstant">10</span>}):
+<span class="synIdentifier">print</span> data
+</pre>
+</div>
+<div class="section">
+<h5>pymongo 実行結果</h5>
+<pre class="code" data-lang="" data-unlink>db name is = 
+test
+find_one = 
+{u'x': 10, u'_id': ObjectId('4e4aa5ac651d0f0200000000')}
+find =
+{u'x': 10, u'_id': ObjectId('4e4aa5ac651d0f0200000000')}
+{u'x': 8, u'_id': ObjectId('4e4aa5ac651d0f0200000001')}
+{u'x': 11, u'_id': ObjectId('4e4aa5ac651d0f0200000002')}
+{u'x': 10, u'_id': ObjectId('4e4aa631651d0f0206000000')}
+{u'x': 8, u'_id': ObjectId('4e4aa631651d0f0206000001')}
+{u'x': 11, u'_id': ObjectId('4e4aa631651d0f0206000002')}
+(略)
+find_query = 
+{u'x': 10, u'_id': ObjectId('4e4aa5ac651d0f0200000000')}
+{u'x': 10, u'_id': ObjectId('4e4aa631651d0f0206000000')}
+{u'x': 10, u'_id': ObjectId('4e4aa63e651d0f0208000000')}
+{u'x': 10, u'_id': ObjectId('4e4d1a14651d0f018e000000')}</pre><p>結果から分かるように同一のKey-valueの値が登録できてしまう。これはObjectIdとしてタイムスタンプ、マシーンID、プロセスID、カウンタ<br />
+が管理されているからである。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h5>pymongo tutorial</h5>
+<p><a href="http://api.mongodb.org/python/current/tutorial.html">こちら</a>に掲載されている内容をもう少し詳しく見てみる。</p><p>1.Connection生成<br />
+簡単な指定。</p>
+
+<blockquote>
+    <p>from pymongo import Connection<br />
+connection = Connection()</p>
+
+</blockquote>
+<p>hostとportを指定。</p>
+
+<blockquote>
+    <p>connection = Connection('<a class="keyword" href="http://d.hatena.ne.jp/keyword/localhost">localhost</a>', 27017)</p>
+
+</blockquote>
+<p>2.Databaseの取得<br />
+test_databaseを取得。</p>
+
+<blockquote>
+    <p>db = connection.test_database</p>
+
+</blockquote>
+<p>以下のように記述も可能。</p>
+
+<blockquote>
+    <p>db = connection['test-database']</p>
+
+</blockquote>
+<p>3.Collectionを取得<br />
+test_collectionを取得。</p>
+
+<blockquote>
+    <p>collection = db.test_collection</p>
+
+</blockquote>
+<p>以下のように記述も可能。</p>
+
+<blockquote>
+    <p>collection = db['test-collection']</p>
+
+</blockquote>
+<p>4.Documentの定義<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>-styleのオブジェクトを定義。Documentは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>型のデータを保持する事は可能だが、保存される時に自動的にBSON型に変換される。</p>
+
+<blockquote>
+    <p>import datetime<br />
+post = {"author": "Mike",<br />
+ "text": "My first blog post!",<br />
+"tags": ["mongodb", "<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>", "pymongo"],<br />
+"date": datetime.datetime.utcnow()}</p>
+
+</blockquote>
+<p>5.Documentの登録<br />
+collectionに対してDocumentを登録。insert<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>を利用する。</p>
+
+<blockquote>
+    <p>posts = db.posts<br />
+posts.insert(post)</p>
+
+</blockquote>
+<p>登録後はcollectionをDBの中で修正/参照可能。</p>
+
+<blockquote>
+    <p>db.collection_names()</p>
+
+</blockquote>
+<p>6.単一のDocument検索<br />
+find_oneを利用。条件に一致したものか、一致した最小のDocumentを返す。</p>
+
+<blockquote>
+    <p>posts.find_one()</p>
+
+</blockquote>
+<p>find_oneの中に検索条件を指定する事が可能。条件指定を謝ると検査結果は得られない。</p>
+
+<blockquote>
+    <p>posts.find_one({"author": "Mike"})</p>
+
+</blockquote>
+<p>7. Bulk Insert<br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/RDBMS">RDBMS</a>と同じようにBulk Insertが可能。</p>
+
+<blockquote>
+    <p>new_posts = [{"author": "Mike",<br />
+"text": "Another post!",<br />
+"tags": ["bulk", "insert"],<br />
+"date": datetime.datetime(2009, 11, 12, 11, 14)},<br />
+{"author": "Eliot",<br />
+"title": "MongoDB is fun",<br />
+"text": "and pretty easy too!",<br />
+"date": datetime.datetime(2009, 11, 10, 10, 45)}]<br />
+posts.insert(new_posts)</p>
+
+</blockquote>
+<p>8.一つ以上のDocumentを取得したい<br />
+find<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>を利用する。</p>
+
+<blockquote>
+    <p>for post in posts.find():<br />
+ post</p>
+
+</blockquote>
+<p>find_oneと同じように条件の指定が可能。</p>
+
+<blockquote>
+    <p>for post in posts.find({"author": "Mike"}):<br />
+ post</p>
+
+</blockquote>
+<p>9.countの取得<br />
+Documentの個数を取得</p>
+
+<blockquote>
+    <p>posts.count()</p>
+
+</blockquote>
+<p>条件に一致したDocumentの個数を取得</p>
+
+<blockquote>
+    <p>posts.find({"author": "Mike"}).count()</p>
+
+</blockquote>
+<p>10.特定の条件指定とsort<br />
+変数での条件指定で検索し、特定のkeyでソートする。</p>
+
+<blockquote>
+    <p>d = datetime.datetime(2009, 11, 12, 12)<br />
+for post in posts.find({"date": {"$lt": d}}).sort("author"):<br />
+post</p>
+
+</blockquote>
+<p>11.index<br />
+queryを速くするためにindexを利用する。explain<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>でindexの状況を知る事ができる。</p>
+
+<blockquote>
+    <p>posts.find({"date": {"$lt": d}}).sort("author").explain()["cursor"]<br />
+posts.find({"date": {"$lt": d}}).sort("author").explain()["nscanned"]</p>
+
+</blockquote>
+<p>create_indexでindexの設定が可能。</p>
+
+<blockquote>
+    <p>from pymongo import ASCENDING, DESCENDING<br />
+posts.create_index([("date", DESCENDING), ("author", ASCENDING)])<br />
+posts.find({"date": {"$lt": d}}).sort("author").explain()["cursor"]<br />
+posts.find({"date": {"$lt": d}}).sort("author").explain()["nscanned"]</p>
+
+</blockquote>
+
+</div>
+</div>
+<div class="section">
+<h4>次回</h4>
+<p>次回はMongoDBの内部構造や設定についてもう少し詳しく追ってみたいと思う。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">link</span></h4>
+
+<ul>
+<li><a href="http://api.mongodb.org/python/">MongoDB API Docs for python</a></li>
+<li><a href="http://www.mongodb.org/pages/viewpage.action?pageId=5079208">マニュアル</a></li>
+<li><a href="http://pypi.python.org/pypi/pymongo/">Pymongo</a></li>
+<li><a href="http://www.mongodb.org/display/DOCS/Quickstart+OS+X">Quickstart MacOSX</a></li>
+<li><a href="http://slashdot.jp/~taro-nishino/journal/494057">非リレーショナルデータベースを選ぶ（私達がMySQLからMongoDBへ移行した理由） - taro-nishino の日記</a>  </li>
+<li><a href="http://blog.madoro.org/mn/35">CouchDBとMongoDBを比較してみた</a></li>
+<li><a href="http://thinkit.co.jp/story/2010/10/15/1798">第3回 ドキュメント指向データベースと列指向データベース</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/various-nosql/0004">NoSQLデータベースを試してみる 第4回　スキーマレスで柔軟に扱えるMongoDB</a></li>
+</ul>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201108141230/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201108141230/">各キャリアのメール添付のまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201108200857/">Android端末のOpenSSL経由でファイルダウンロードができない問題</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201108200857/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

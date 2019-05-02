@@ -1,0 +1,107 @@
+baseurl = "https://yutakikuchi.github.io/" # Make sure to end baseurl with a '/'
+languageCode = "ja-jp"
+title = "Y's note"
+author = "菊池佑太"
+# Shown in the side menu
+copyright = "&copy; 2019. All rights reserved."
+canonifyurls = true
+paginate = 10
+publishDir="docs"
+
+[indexes]
+  tag = "startup,AI"
+  topic = "スタートアップ,AIに関わる内容を書きます"
+
+[params]
+  # Shown in the home page
+  brand = "Y's note"
+  googleAnalytics = "UA-20616165-3"
+  # CSS name for highlight.js
+  highlightjs = "androidstudio"
+  highlightjs_extra_languages = ["yaml"]
+  # dateFormat = "02 Jan 2006, 15:04"
+  dateFormat = "2006 Jan 02, 15:04"
+  # Include any custom CSS and/or JS files
+  # (relative to /static folder)
+  custom_css = ["css/my.css"]
+  custom_js = ["js/my.js"]
+  # canonicalurl
+  canonicalurl = "http://yut.hatenablog.com"
+
+  #[params.piwikAnalytics]
+  #  siteid = 2
+  #  piwikroot = "//analytics.example.com/"
+
+[menu]
+  # Shown in the side menu.
+  [[menu.main]]
+    name = "Home"
+    pre = "<i class='fa fa-home fa-fw'></i>"
+    weight = 1
+    identifier = "home"
+    url = "/"
+  [[menu.main]]
+    name = "Posts"
+    pre = "<i class='fa fa-list fa-fw'></i>"
+    weight = 2
+    identifier = "post"
+    url = "/post/"
+  [[menu.main]]
+    name = "About"
+    pre = "<i class='fa fa-user fa-fw'></i>"
+    weight = 3
+    identifier = "about"
+    url = "/about/"
+  #[[menu.main]]
+  #  name = "Contact"
+  #  pre = "<i class='fa fa-phone fa-fw'></i>"
+  #  weight = 4
+  #  url = "/contact/"
+
+[social]
+  # Link your social networking accounts to the side menu
+  # by entering your username or ID.
+
+  # SNS microblogging
+  twitter = "yutakikuchi_"
+  # gnusocial = "*" # Specify href (e.g. https://quitter.se/yourusername)
+  facebook = "yuta.kikuchi.007"
+  # googleplus = "*"
+  # weibo = "*"
+  # tumblr = "*"
+
+  # SNS photo/video sharing
+  # Instagram = "*"
+  # Flickr = "*"
+  # Photo500px = "*"
+  # Pinterest = "*"
+  # Youtube = "*"
+  # Vimeo = "*"
+  # Vine = "*"
+  slideshare = "https://www.slideshare.net/yutakikuchi58/"
+
+  # SNS career oriented
+  linkedin = "https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/"
+  # xing = "*"
+
+  # SNS news
+  # reddit = "*"
+  # hackernews = "*"
+
+  # Techie
+  github = "yutakikuchi"
+  # gitlab = "*"
+  # bitbucket = "*"
+  # stackoverflow = "*"
+  # serverfault = "*"
+
+  # Gaming
+  # steam = "*"
+  # mobygames = "*"
+
+  # Music
+  # lastfm = "*"
+  # discogs = "*"
+
+  # Other
+  # keybase = "*"

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110609/1307581865" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Mysqlのユーザ/権限管理 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Mysqlのユーザ/権限管理</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Jun 09, 10:11</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="mysql-mysqlのユーザ-権限管理">[Mysql] : Mysqlのユーザ/権限管理</h2>
+
+<div class="section">
+<h4><span class="deco" style="font-size:large;">GRANT文でユーザ設定をする!</span></h4>
+
+<ul>
+<li>GRANT構文はユーザの追加とユーザに対して与える権限の指定や接続可能元のhost名やパスワードの設定が可能。</li>
+<li>GRANT文実行後はFLUSH PRIVILEGES;の実行により権限テーブルの再読み込みを行い、権限データを反映させる。</li>
+<li>権限の範囲は全てのDB、特定DB内部の全てのテーブル、特定テーブルの全てのカラム、指定テーブルの特定テーブルの計4種類。</li>
+</ul>
+<div class="section">
+<h5>構文</h5>
+<pre class="code" data-lang="" data-unlink>GRANT 付与する権限の種類[(カラムリスト)] [,付与する権限の種類[(カラムリスト) …] 
+ON データベース名.テーブル名 
+TO ユーザー名@ホスト名 [,ユーザー名@ホスト名 …]
+[IDENTIFIED BY [パスワード]]
+[WITH [GRANT_OPTION | MAX_QUERIES_PER_HOUR # |
+                      MAX_UPDATES_PER_HOUR # |
+                      MAX_CONNECTIONS_PER_HOUR #]]</pre>
+</div>
+<div class="section">
+<h5>全データベースに何でもできる権限を与える。</h5>
+<p><span class="deco" style="color:#FF0000;">sample</span></p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/google">google</a>ユーザを作成。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/google">google</a>ユーザに対して全ての権限(ALL PRIVILEGES)を付与。</li>
+<li>権限の範囲は全てのDB(*.*)。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/localhost">localhost</a>からの接続を許可する。</li>
+<li>パスワードは'all'として設定。</li>
+</ul><pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">GRANT</span> <span class="synStatement">ALL</span> <span class="synSpecial">PRIVILEGES</span> <span class="synSpecial">ON</span> *.* <span class="synSpecial">TO</span> google@localhost <span class="synSpecial">IDENTIFIED</span> <span class="synSpecial">BY</span> <span class="synConstant">'all'</span>;
+mysql> FLUSH <span class="synSpecial">PRIVILEGES</span>;
+</pre>
+</div>
+<div class="section">
+<h5>特定のデータベースにのみ特定の権限を与える。</h5>
+<p><span class="deco" style="color:#FF0000;">sample</span></p>
+
+<ul>
+<li>yahooユーザを作成。</li>
+<li>yahooユーザに対して特定の権限を付与(SELECT,INSERT)。</li>
+<li>権限の範囲はtestDB内の全てのテーブル(test.*)。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/127.0.0.1">127.0.0.1</a>というIPからの接続を許可する。</li>
+<li>パスワードは'db'として設定。</li>
+</ul><pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">GRANT</span> <span class="synStatement">SELECT</span>,<span class="synStatement">INSERT</span> <span class="synSpecial">ON</span> test.* <span class="synSpecial">TO</span> yahoo@<span class="synConstant">127.0</span>.<span class="synConstant">0.1</span> <span class="synSpecial">IDENTIFIED</span> <span class="synSpecial">BY</span> <span class="synConstant">'db'</span>;
+mysql> FLUSH <span class="synSpecial">PRIVILEGES</span>;
+</pre>
+</div>
+<div class="section">
+<h5>特定のテーブルにのみ特定の権限を与える。</h5>
+<p><span class="deco" style="color:#FF0000;">sample</span></p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/gree">gree</a>ユーザを作成。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/gree">gree</a>ユーザに対して特定の権限を付与(INSERT)。</li>
+<li>権限の範囲はtestDB内のbenchテーブル(test.bench)。</li>
+<li>dev-serverというhostからの接続を許可する。</li>
+<li>パスワードは'table'として設定。</li>
+</ul><pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">GRANT</span> <span class="synStatement">SELECT</span>,<span class="synStatement">INSERT</span> <span class="synSpecial">ON</span> test.bench <span class="synSpecial">TO</span> gree@<span class="synConstant">'dev-server'</span> <span class="synSpecial">IDENTIFIED</span> <span class="synSpecial">BY</span> <span class="synConstant">'table'</span>;
+mysql> FLUSH <span class="synSpecial">PRIVILEGES</span>;
+</pre>
+</div>
+<div class="section">
+<h5>特定のカラムにのみ特定の権限を与える。</h5>
+<p><span class="deco" style="color:#FF0000;">sample</span></p>
+
+<ul>
+<li>mobagaユーザを作成。</li>
+<li>mobagaユーザに対して特定の権限を付与(SELECT,INSERT)。</li>
+<li>権限の範囲はtestDB内のdataテーブルのnameとmailaddressカラム。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/localhost">localhost</a>からの接続を許可する。</li>
+<li>パスワードは'column'として設定。</li>
+</ul><pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">GRANT</span> <span class="synStatement">SELECT</span>(name,mailaddress),<span class="synStatement">INSERT</span>(name,mailaddress) <span class="synSpecial">ON</span> test.data <span class="synSpecial">TO</span> mobaga@localhost <span class="synSpecial">IDENTIFIED</span> <span class="synSpecial">BY</span> <span class="synConstant">'column'</span>;
+mysql> FLUSH <span class="synSpecial">PRIVILEGES</span>;
+</pre>
+</div>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">どこにデータが格納されるか？</span></h4>
+
+<ul>
+<li>GRANTにより設定したデータはどこに格納されるのか？→ <a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>という名前のDBに権限設定を行ったデータが格納される。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.user,<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.db,msyql.tables_priv,<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.columns_privなどにデータが格納される。それぞれの権限レベルでデータの格納先が異なるので注意が必要。</li>
+</ul>
+<table>
+<tr>
+<th>table名 </th>
+<th>格納データ </th>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.user </td>
+<td> 全てのユーザ </td>
+<td> </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.db </td>
+<td> 特定のDBに対して権限を持つユーザ </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.tables_priv </td>
+<td> 特定のTABLEに対して権限を持つユーザ </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.columns_priv </td>
+<td> 特定のCOLUMNに対して権限を持つユーザ </td>
+</tr>
+</table><p>上の例で指定した<a class="keyword" href="http://d.hatena.ne.jp/keyword/gree">gree</a>ユーザのデータを見てみる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/gree">gree</a>は特定のTABLEに対してのみ権限を付与している。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">SELECT</span> * <span class="synSpecial">FROM</span> mysql.<span class="synSpecial">user</span> <span class="synSpecial">where</span> <span class="synSpecial">user</span>=<span class="synConstant">'gree'</span>\G
+*************************** <span class="synConstant">1</span>. <span class="synSpecial">row</span> ***************************
+             Host: dev-server
+             <span class="synSpecial">User</span>: gree
+         Password: *673B711112AA80C2AA1714270F281E4FBFA0D15C
+      Select_priv: N
+      Insert_priv: N
+      Update_priv: N
+      Delete_priv: N
+      Create_priv: N
+        Drop_priv: N
+      Reload_priv: N
+    Shutdown_priv: N
+     Process_priv: N
+        File_priv: N
+       Grant_priv: N
+  References_priv: N
+       Index_priv: N
+       Alter_priv: N
+     Show_db_priv: N
+       Super_priv: N
+Create_tmp_table_priv: N
+ Lock_tables_priv: N
+     Execute_priv: N
+  Repl_slave_priv: N
+ Repl_client_priv: N
+ Create_view_priv: N
+   Show_view_priv: N
+  Create_routine_priv: N
+   Alter_routine_priv: N
+ Create_user_priv: N
+       Event_priv: N
+     Trigger_priv: N
+         ssl_type: 
+       ssl_cipher: 
+      x509_issuer: 
+     x509_subject: 
+    max_questions: <span class="synConstant">0</span>
+      max_updates: <span class="synConstant">0</span>
+  max_connections: <span class="synConstant">0</span>
+ max_user_connections: <span class="synConstant">0</span>
+<span class="synConstant">1</span> <span class="synSpecial">row</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> * <span class="synSpecial">FROM</span> mysql.db <span class="synSpecial">where</span> <span class="synSpecial">user</span>=<span class="synConstant">'gree'</span>\G
+Empty <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> * <span class="synSpecial">FROM</span> mysql.tables_priv <span class="synSpecial">where</span> <span class="synSpecial">user</span>=<span class="synConstant">'gree'</span>\G
+*************************** <span class="synConstant">1</span>. <span class="synSpecial">row</span> ***************************
+   Host: dev-server
+     Db: test
+   <span class="synSpecial">User</span>: gree
+ Table_name: bench
+Grantor: root@localhost
+  Timestamp: <span class="synConstant">2011-06-08</span> <span class="synConstant">23</span>:<span class="synConstant">46</span>:<span class="synConstant">51</span>
+ Table_priv: <span class="synStatement">Select</span>,<span class="synStatement">Insert</span>
+Column_priv: 
+<span class="synConstant">1</span> <span class="synSpecial">row</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> * <span class="synSpecial">FROM</span> mysql.columns_priv <span class="synSpecial">where</span> <span class="synSpecial">user</span>=<span class="synConstant">'gree'</span>\G
+Empty <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+</pre><p><span class="deco" style="color:#FF0000;">データの格納されていたのは<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.userと<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.tables_privのみ。</span></p><p></p>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">権限を剥奪する</span></h4>
+
+<div class="section">
+<h5>構文</h5>
+<pre class="code" data-lang="" data-unlink>REVOKE 取消する権限の種類[(カラムリスト)] [,取消する権限の種類[(カラムリスト) …] 
+ON データベース名.テーブル名 
+FROM ユーザー名@ホスト名 [,ユーザー名@ホスト名 …]</pre>
+</div>
+<div class="section">
+<h5>特定のテーブルの権限を剥奪する</h5>
+<p>上の例で権限を与えた<a class="keyword" href="http://d.hatena.ne.jp/keyword/gree">gree</a>ユーザのtest.benchに対する権限を全て剥奪する。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">REVOKE</span> <span class="synStatement">ALL</span> <span class="synSpecial">PRIVILEGES</span> <span class="synSpecial">ON</span> test.bench <span class="synSpecial">FROM</span> gree@<span class="synConstant">'dev-server'</span>;
+mysql> FLUSH <span class="synSpecial">PRIVILEGES</span>;
+
+mysql> <span class="synStatement">SELECT</span> * <span class="synSpecial">FROM</span> mysql.<span class="synSpecial">user</span> <span class="synSpecial">where</span> <span class="synSpecial">user</span>=<span class="synConstant">'gree'</span>\G
+*************************** <span class="synConstant">1</span>. <span class="synSpecial">row</span> ***************************
+             Host: dev-server
+             <span class="synSpecial">User</span>: gree
+         Password: *673B711112AA80C2AA1714270F281E4FBFA0D15C
+      Select_priv: N
+      Insert_priv: N
+      Update_priv: N
+      Delete_priv: N
+      Create_priv: N
+        Drop_priv: N
+      Reload_priv: N
+    Shutdown_priv: N
+     Process_priv: N
+        File_priv: N
+       Grant_priv: N
+  References_priv: N
+       Index_priv: N
+       Alter_priv: N
+     Show_db_priv: N
+       Super_priv: N
+Create_tmp_table_priv: N
+ Lock_tables_priv: N
+     Execute_priv: N
+  Repl_slave_priv: N
+ Repl_client_priv: N
+ Create_view_priv: N
+   Show_view_priv: N
+  Create_routine_priv: N
+   Alter_routine_priv: N
+ Create_user_priv: N
+       Event_priv: N
+     Trigger_priv: N
+         ssl_type: 
+       ssl_cipher: 
+      x509_issuer: 
+     x509_subject: 
+    max_questions: <span class="synConstant">0</span>
+      max_updates: <span class="synConstant">0</span>
+  max_connections: <span class="synConstant">0</span>
+ max_user_connections: <span class="synConstant">0</span>
+<span class="synConstant">1</span> <span class="synSpecial">row</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+
+mysql> <span class="synStatement">SELECT</span> * <span class="synSpecial">FROM</span> mysql.tables_priv <span class="synSpecial">where</span> <span class="synSpecial">user</span>=<span class="synConstant">'gree'</span>\G
+Empty <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+</pre><p><span class="deco" style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.tables_privからはデータが消えるが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>.userにはデータが残る。</span></p><p></p>
+
+</div>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-size:large;">リンク</span></h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a> refman grant<br />
+<a href="http://dev.mysql.com/doc/refman/5.1/ja/grant.html">http://dev.mysql.com/doc/refman/5.1/ja/grant.html</a></p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201106051924/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201106051924/">注目各社のTechBlogまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201107031259/">5分で分かるCakePHPの基礎</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201107031259/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

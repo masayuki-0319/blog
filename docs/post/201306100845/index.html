@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130610/1370821545" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>MongoDBのAggregation Framework/MapReduceを使ってより賢く集計を行うためのまとめ &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>MongoDBのAggregation Framework/MapReduceを使ってより賢く集計を行うためのまとめ</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Jun 10, 08:45</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="mongodb-mongodbのaggregation-framework-mapreduceを使ってより賢く集計を行うためのまとめ">[MongoDB] : MongoDBのAggregation Framework/MapReduceを使ってより賢く集計を行うためのまとめ</h2>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><a href="http://f.hatena.ne.jp/yutakikuchi/20130608025501" class="hatena-fotolife" itemprop="url"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20130608/20130608025501.png" alt="f:id:yutakikuchi:20130608025501p:image" title="f:id:yutakikuchi:20130608025501p:image" class="hatena-fotolife" itemprop="image"></a></span><br />
+</p>
+
+<div class="section">
+<h4>Mogodb集計</h4>
+
+<blockquote>
+    <p><a href="http://d.hatena.ne.jp/yutakikuchi/20130426/1366947548">MongoDBの集計機能が便利過ぎて泣けてくるお話し - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20130426/1366947548"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20130426/1366947548" alt="はてなブックマーク - MongoDBの集計機能が便利過ぎて泣けてくるお話し - Yuta.Kikuchiの日記" border="0" /></a><br />
+1月程前にMongoDBを使った集計機能の紹介をさせていただいた<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。内容は全く大した事無かったのですが、タイトルで誘導を引っ張って200近いbookmarkを集める事ができました笑。みなさんの参考にしていただけたこと、大変嬉しく思います。今日はMongoDBの集計をもう一歩踏み込んだ内容を紹介して行きたいと思います。題材としてはAggregation Frameworkと<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>についてです。因に今回試してみたMongoDB-Versionは2.2.3です。Versionによって挙動が変わると思うので注意してください。</p>
+<pre class="code" data-lang="" data-unlink>$ mongo --version
+MongoDB shell version: 2.2.3</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Aggregation Framework</h4>
+
+<blockquote>
+    <p><a href="http://docs.mongodb.org/manual/aggregation/">Aggregation ― MongoDB Manual 2.4.4</a> <a href="http://b.hatena.ne.jp/entry/docs.mongodb.org/manual/aggregation/"><img src="http://b.hatena.ne.jp/entry/image/http://docs.mongodb.org/manual/aggregation/" alt="はてなブックマーク - Aggregation ― MongoDB Manual 2.4.4" border="0" /></a><br />
+<a href="http://docs.mongodb.org/manual/reference/sql-aggregation-comparison/">SQL to Aggregation Framework Mapping Chart ― MongoDB Manual 2.4.4</a> <a href="http://b.hatena.ne.jp/entry/docs.mongodb.org/manual/reference/sql-aggregation-comparison/"><img src="http://b.hatena.ne.jp/entry/image/http://docs.mongodb.org/manual/reference/sql-aggregation-comparison/" alt="はてなブックマーク - SQL to Aggregation Framework Mapping Chart ― MongoDB Manual 2.4.4" border="0" /></a><br />
+Aggregation Frameworkは<a class="keyword" href="http://d.hatena.ne.jp/keyword/RDBMS">RDBMS</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>に備わっている便利機能をMongoDBに付与したFrameworkという説明が分かりやすいと思います。MongodbのVerson2.2以降に備わった機能です。以下はMongodbのAggregation Operatorと<a class="keyword" href="http://d.hatena.ne.jp/keyword/RDBMS">RDBMS</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>の対応表になります。一つずつのOperatorはFilterに近いイメージで、Chainをして<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D1%A5%A4%A5%D7%A5%E9%A5%A4%A5%F3">パイプライン</a>処理とすることができます。最終的にはChainした結果を取得します。</p>
+
+<table>
+<tr>
+<th> MongoDB Aggregation Operator </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a> Term,Function,Concepts </th>
+</tr>
+<tr>
+<td> $match </td>
+<td> WHERE </td>
+</tr>
+<tr>
+<td> $group </td>
+<td> GROUP BY </td>
+</tr>
+<tr>
+<td> $project </td>
+<td> SELECT </td>
+</tr>
+<tr>
+<td> $sort </td>
+<td> ORDER BY </td>
+</tr>
+<tr>
+<td> $limit </td>
+<td> LIMIT </td>
+</tr>
+<tr>
+<td> $sum </td>
+<td> SUM(),COUNT()</td>
+</tr>
+<tr>
+<td> $<a class="keyword" href="http://d.hatena.ne.jp/keyword/avg">avg</a> </td>
+<td> AVERAGE() </td>
+</tr>
+</table><p><a href="http://d.hatena.ne.jp/yutakikuchi/20130220/1361316293">CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20130220/1361316293"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20130220/1361316293" alt="はてなブックマーク - CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する - Yuta.Kikuchiの日記" border="0" /></a><br />
+では少し例を出してみます。MongoDBへのDataInsertはNginxAccessLogを使います。NginxからMongoDBへの格納にはFluentdを使っています。設定の詳細は上のエントリーを見てください。以下はMongoDBのサンプル出力です。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>> db.nginx_access.find()
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5123476fe138231086000001"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"200"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"612"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"w3m/0.5.2"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-02-19T09:35:35Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"51234790e138231086000002"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"200"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"612"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"w3m/0.5.2"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-02-19T09:36:14Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c10ee138231b1b000001"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/api/user/test"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"404"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"570"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:24:53Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c10ee138231b1b000002"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"GET"</span>, <span class="synConstant">"path"</span> : <span class="synConstant">"/favicon.ico"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"404"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"570"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:24:53Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c119e138231b1b000003"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"400"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:25:06Z"</span>) }
+</pre><p>ここから条件指定をしてみます。通常のMongoDBではfind()に設定します。StatusCodeを400だけを抽出するとします。Aggregation Frameworkとの両方の例を見てみましょう。find()の場合はdb.nginx_<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>.find({code:"400"})としていすると<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>形式がそのまま結果として得る事ができます。それに対してAggregation Framewrokではresultというkeyに対して結果を格納、結果が正常に取得できたのかどうかをokというkeyの<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>形式で結果を返します。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>> db.nginx_access.find({code:<span class="synConstant">"400"</span>})
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c119e138231b1b000003"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"400"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:25:06Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c150e138231b1b000007"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"400"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:26:06Z"</span>) }
+{ <span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c187e138231b1b00000f"</span>), <span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"method"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"code"</span> : <span class="synConstant">"400"</span>, <span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>, <span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"agent"</span> : <span class="synConstant">"-"</span>, <span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:26:56Z"</span>) }
+</pre><pre class="hljs sql" data-lang="sql" data-unlink>> db.nginx_access.aggregate([{$match : {code:<span class="synConstant">"400"</span>}}]);
+{
+<span class="synConstant">"result"</span> : [
+{
+<span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c119e138231b1b000003"</span>),
+<span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>,
+<span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"method"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"code"</span> : <span class="synConstant">"400"</span>,
+<span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>,
+<span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"agent"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:25:06Z"</span>)
+},
+{
+<span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c150e138231b1b000007"</span>),
+<span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>,
+<span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"method"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"code"</span> : <span class="synConstant">"400"</span>,
+<span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>,
+<span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"agent"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:26:06Z"</span>)
+},
+{
+<span class="synConstant">"_id"</span> : ObjectId(<span class="synConstant">"5177c187e138231b1b00000f"</span>),
+<span class="synConstant">"host"</span> : <span class="synConstant">"127.0.0.1"</span>,
+<span class="synConstant">"user"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"method"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"code"</span> : <span class="synConstant">"400"</span>,
+<span class="synConstant">"size"</span> : <span class="synConstant">"0"</span>,
+<span class="synConstant">"referer"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"agent"</span> : <span class="synConstant">"-"</span>,
+<span class="synConstant">"time"</span> : ISODate(<span class="synConstant">"2013-04-24T11:26:56Z"</span>)
+}
+],
+<span class="synConstant">"ok"</span> : <span class="synConstant">1</span>
+}
+</pre><p>これだけだとAggregation Frameworkを使う意味は薄れてしまうので、groupを使ってそれぞれのStatusCodeの<a class="keyword" href="http://d.hatena.ne.jp/keyword/Access">Access</a>を集計します。通常のMongoDBではfindとcountを使ってそれぞれのStatusCode毎に集計をすると思いますが、Aggregation Frameworkでは1回で可能になります。Aggregation Frameworkを使う上で気をつける必要があるのが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/JSON">JSON</a>のValueに指定する"$code"のような記述です。"$code"とすると元々データが格納されているMongoDBのKey<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AB%A5%E9%A5%E0%CC%BE">カラム名</a>になります。ダブルクォートが付かないとOperator、付くとKey<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AB%A5%E9%A5%E0%CC%BE">カラム名</a>になると覚えます。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>> db.nginx_access.find( {code : <span class="synConstant">"200"</span>} ).count()
+<span class="synConstant">2</span>
+> db.nginx_access.find( {code : <span class="synConstant">"304"</span>} ).count()
+<span class="synConstant">3</span>
+> db.nginx_access.find( {code : <span class="synConstant">"400"</span>} ).count()
+<span class="synConstant">3</span>
+> db.nginx_access.find( {code : <span class="synConstant">"404"</span>} ).count()
+<span class="synConstant">9</span>
+</pre><pre class="hljs sql" data-lang="sql" data-unlink>> db.nginx_access.aggregate([{ $<span class="synSpecial">group</span> : { <span class="synConstant">"_id"</span> : <span class="synConstant">"$code"</span> , <span class="synConstant">"count"</span> : { $sum : <span class="synConstant">1</span>} }}]);
+{
+<span class="synConstant">"result"</span> : [
+{
+<span class="synConstant">"_id"</span> : <span class="synConstant">"304"</span>,
+<span class="synConstant">"count"</span> : <span class="synConstant">3</span>
+},
+{
+<span class="synConstant">"_id"</span> : <span class="synConstant">"400"</span>,
+<span class="synConstant">"count"</span> : <span class="synConstant">3</span>
+},
+{
+<span class="synConstant">"_id"</span> : <span class="synConstant">"404"</span>,
+<span class="synConstant">"count"</span> : <span class="synConstant">9</span>
+},
+{
+<span class="synConstant">"_id"</span> : <span class="synConstant">"200"</span>,
+<span class="synConstant">"count"</span> : <span class="synConstant">2</span>
+}
+],
+<span class="synConstant">"ok"</span> : <span class="synConstant">1</span>
+}
+</pre><p>AccessLogでは良くdailyでUniqueUserの集計を行うと思います。そこでMongDBのdistinctを使った例とAggregation Frameworkでのcount方法について記述します。distinctはデータサイズが肥大すると使えなくなるのでそこは注意してください。distinctではcount()の代わりにlengthプロパティを指定します。Aggregation Frameworkでは2回の$groupをChainさせて最終的には$sumでカウント数を出力します。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>> db.nginx_access.<span class="synStatement">distinct</span>( <span class="synConstant">"user"</span>, { time : { $gte :ISODate(<span class="synConstant">"2013-02-19T00:00:00Z"</span>), $lte : ISODate(<span class="synConstant">"2013-02-19T23:59:59Z"</span>) } } ).length;
+<span class="synConstant">1</span>
+</pre><pre class="hljs sql" data-lang="sql" data-unlink>> db.nginx_access.aggregate([ { $match : { time : { $gte :ISODate(<span class="synConstant">"2013-02-19T00:00:00Z"</span>), $lte : ISODate(<span class="synConstant">"2013-02-19T23:59:59Z"</span>) } } }, 
+                                            { $<span class="synSpecial">group</span> : { _id : <span class="synConstant">"$user"</span> } }, 
+                                            { $<span class="synSpecial">group</span> : { _id : <span class="synConstant">"uu"</span>, count : { $sum :<span class="synConstant">1</span> } } } ]);
+{ <span class="synConstant">"result"</span> : [ { <span class="synConstant">"_id"</span> : <span class="synConstant">"uu"</span>, <span class="synConstant">"count"</span> : <span class="synConstant">1</span> } ], <span class="synConstant">"ok"</span> : <span class="synConstant">1</span> }
+</pre><p>上のAggregation Frameworkの集計を365日間繰り返しで回す場合は以下のようなJavasciptでQueryを書くとやり易いと思います。外部ファイルとして実行する場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>から$mongo db名 < jsファイル のように実行してください。</p>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synStatement">for</span>( <span class="synIdentifier">var</span> month=1; month<=12; month++ ) <span class="synIdentifier">{</span> 
+   <span class="synStatement">for</span>( <span class="synIdentifier">var</span> day=1; day<=31; day++ ) <span class="synIdentifier">{</span> 
+  <span class="synIdentifier">var</span> iso_month = month;
+  <span class="synIdentifier">var</span> iso_day = day;
+  <span class="synStatement">if</span>( month < 10 ) <span class="synIdentifier">{</span> iso_month = <span class="synConstant">"0"</span> + month <span class="synIdentifier">}</span>
+  <span class="synStatement">if</span>( day < 10 ) <span class="synIdentifier">{</span> iso_day = <span class="synConstant">"0"</span> + day <span class="synIdentifier">}</span>
+  <span class="synIdentifier">var</span> iso_date = <span class="synConstant">"2013-"</span> + iso_month + <span class="synConstant">"-"</span> + iso_day;
+  <span class="synIdentifier">var</span> start_time = iso_date + <span class="synConstant">"T00:00:00Z"</span>;
+  <span class="synIdentifier">var</span> end_time   = iso_date + <span class="synConstant">"T23:59:59Z"</span>;
+  <span class="synIdentifier">var</span> res = db.nginx_access.aggregate(<span class="synIdentifier">[</span> <span class="synIdentifier">{</span> $match : <span class="synIdentifier">{</span> time : <span class="synIdentifier">{</span> $gte :ISODate( start_time ), $lte : ISODate( end_time) <span class="synIdentifier">}</span> <span class="synIdentifier">}</span> <span class="synIdentifier">}</span>, <span class="synIdentifier">{</span> $group : <span class="synIdentifier">{</span> _id : <span class="synConstant">"$user"</span> <span class="synIdentifier">}</span> <span class="synIdentifier">}</span>, <span class="synIdentifier">{</span> $group : <span class="synIdentifier">{</span> _id : <span class="synConstant">"uu"</span>, count : <span class="synIdentifier">{</span> $sum :1 <span class="synIdentifier">}</span> <span class="synIdentifier">}</span> <span class="synIdentifier">}</span> <span class="synIdentifier">]</span>); 
+  <span class="synStatement">if</span>( <span class="synStatement">typeof</span> res.result<span class="synIdentifier">[</span>0<span class="synIdentifier">]</span> != <span class="synConstant">'undefined'</span> ) <span class="synIdentifier">{</span> 
+     print( <span class="synConstant">"Date = "</span> + iso_date + <span class="synConstant">", UU = "</span> + res.result<span class="synIdentifier">[</span>0<span class="synIdentifier">]</span>.count );
+  <span class="synIdentifier">}</span>   
+   <span class="synIdentifier">}</span>   
+<span class="synIdentifier">}</span>
+
+<span class="synComment">/*出力結果</span>
+<span class="synComment">Date = 2013-02-19, UU = 1</span>
+<span class="synComment">Date = 2013-04-24, UU = 1</span>
+<span class="synComment">*/</span>
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a></h4>
+
+<blockquote>
+    <p><a href="http://docs.mongodb.org/manual/core/map-reduce/">Map-Reduce ― MongoDB Manual 2.4.4</a> <a href="http://b.hatena.ne.jp/entry/docs.mongodb.org/manual/core/map-reduce/"><img src="http://b.hatena.ne.jp/entry/image/http://docs.mongodb.org/manual/core/map-reduce/" alt="はてなブックマーク - Map-Reduce ― MongoDB Manual 2.4.4" border="0" /></a><br />
+<a href="http://docs.mongodb.org/manual/tutorial/map-reduce-examples/">Map-Reduce Examples ― MongoDB Manual 2.4.4</a> <a href="http://b.hatena.ne.jp/entry/docs.mongodb.org/manual/tutorial/map-reduce-examples/"><img src="http://b.hatena.ne.jp/entry/image/http://docs.mongodb.org/manual/tutorial/map-reduce-examples/" alt="はてなブックマーク - Map-Reduce Examples ― MongoDB Manual 2.4.4" border="0" /></a><br />
+MapRudeceは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>でも有名なようにKey/Valueの値をMapperが作成し、ReducerでKey毎の集計を行う仕組みです。Keyの値によって処理を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>台のサーバに分散させる事ができる優れものでMongoDBにも備わっています。MongoDBでの<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>はMapper関数の中でKey/Value形式のデータをemitにて作成します。それをReducer側で呼び出す事ができるので、ReducerにてKey毎の集計処理を作れば処理ができます。特徴的な処理としてはMongoDBの<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>処理中にはKey/Valueデータの保持に一次的なCollectionが生成されます。<br />
+私は1台のMongoDBで利用していますが、ShardingModeの場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>処理を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>台で並列処理をします。Keyの値によって処理されるMongoDBサーバは自動的に割り当てられるようです。そもそもShardingって何だよって人はググってください笑。簡単に説明しておくと大きなデータを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>サーバに分散して保存する仕組みです。メリットとしては負荷の軽減とストレージ使用領域が分散できます。ShardingModeでのInputは分散され、Outputの取得はDefaultでは1台となるようです。Outputの出力もShardingさせることはできます。この内容についてはMongoDB本家のDocumentに書いてありましたので以下に転載します。<br />
+<span class="deco" style="font-style:italic;">Sharded Input When using sharded collection as the input for a map-reduce operation, mongos will automatically dispatch the map-reduce job to each shard in parallel. There is no special option required. mongos will wait for jobs on all shards to finish.Sharded OutputBy default the output collection is not sharded. </span></p><br />
+<p>MongoDBの<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>はかなり癖が強いです。僕が実験的に試して見た結果、以下の条件を守ることをお勧めします。</p>
+
+<ul>
+<li>MapperでemitするKeyに紐づくValueの数はできるだけ少なくなるような集計をする。</li>
+<li>MapperでemitしたKey/Valueのデータ構造をReducerで変更してはいけない。</li>
+<li>ReducerでValueに配列形式のデータを繰り返しでpushしようとすると思うように動作しない時がある。</li>
+<li>Reducerではインクリメントの集計処理だけを記載する方が良い。</li>
+<li>Mapper/Reducerを多段で実行する際は一次的にCollectionに書き込むよう指定し、2度目の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>で一次Collectionからデータを読み込むようにする。</li>
+</ul><p>それでは少し<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>のコードを書いてみます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Javascript">Javascript</a>のコードが書き易いように外部ファイルに保存して実行してください。例題は上のAggregation Frameworkで書いたUniqueUserを求めるためのScriptです。処理としては1段階目の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>で日付とUserをKey、ValueをCountとしてemitし、2段階目の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>で日付のKeyをCountします。MongoDBが自動で生成する一次Collectionとは別に、2段階の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>をそれぞれの処理で1次Collectionに格納しています。分かり易いように2段階処理の一次Collectionの中身も出力してみます。データの受け渡し方法が少しややこしいですがreducerの引数に指定するkey,valueにはmapperでemitしたkeyの重複するvalueがあればそれらの全てが格納されます。</p>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synIdentifier">var</span> date_user_mapper = <span class="synIdentifier">function</span>()<span class="synIdentifier">{</span>
+  <span class="synIdentifier">var</span> date_format = <span class="synIdentifier">function</span>(x) <span class="synIdentifier">{</span> <span class="synStatement">return</span> (x < 10) ? <span class="synConstant">'0'</span> + x : <span class="synConstant">''</span> + x <span class="synIdentifier">}</span>; 
+  <span class="synIdentifier">var</span> getDay = <span class="synIdentifier">function</span> (date) <span class="synIdentifier">{</span>
+<span class="synIdentifier">var</span> year = date.getFullYear();  
+<span class="synIdentifier">var</span> month = date_format(date.getMonth() + 1);
+<span class="synIdentifier">var</span> day = date_format(date.getDate());  
+<span class="synStatement">return</span> year + month + day;
+  <span class="synIdentifier">}</span>;
+  emit(<span class="synIdentifier">{</span>timestamp: getDay(<span class="synIdentifier">this</span>.time), user:<span class="synIdentifier">this</span>.user<span class="synIdentifier">}</span>, 1);
+<span class="synIdentifier">}</span>;
+
+<span class="synIdentifier">var</span> date_mapper = <span class="synIdentifier">function</span>()<span class="synIdentifier">{</span>
+  emit(<span class="synIdentifier">this</span>._id.timestamp, 1);
+<span class="synIdentifier">}</span>;
+
+<span class="synIdentifier">var</span> reducer = <span class="synIdentifier">function</span>(key, value)<span class="synIdentifier">{</span>
+  <span class="synIdentifier">var</span> sum = 0;
+  value.forEach(<span class="synIdentifier">function</span>(v)<span class="synIdentifier">{</span>  sum += v <span class="synIdentifier">}</span>);
+  <span class="synStatement">return</span> sum;
+<span class="synIdentifier">}</span>;
+
+db.nginx_access.mapReduce(date_user_mapper, reducer, <span class="synIdentifier">{</span>out:<span class="synIdentifier">{</span>replace : <span class="synConstant">"tmp_daily"</span><span class="synIdentifier">}}</span>);
+db.tmp_daily.mapReduce(date_mapper, reducer, <span class="synIdentifier">{</span>out:<span class="synIdentifier">{</span>replace : <span class="synConstant">"daily_uu"</span><span class="synIdentifier">}}</span>);
+<span class="synIdentifier">var</span> uu = db.daily_uu.find();
+uu.forEach( <span class="synIdentifier">function</span>( uu ) <span class="synIdentifier">{</span> print( <span class="synConstant">"Date = "</span> + uu._id + <span class="synConstant">", UU = "</span> + uu.value );<span class="synIdentifier">}</span>);
+
+<span class="synComment">/*出力結果</span>
+<span class="synComment">Date = 20130219, UU = 1</span>
+<span class="synComment">Date = 20130424, UU = 1</span>
+<span class="synComment">*/</span>
+</pre><pre class="hljs sql" data-lang="sql" data-unlink>> db.tmp_daily.find()
+{ <span class="synConstant">"_id"</span> : { <span class="synConstant">"timestamp"</span> : <span class="synConstant">"20130219"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span> }, <span class="synConstant">"value"</span> : <span class="synConstant">2</span> }
+{ <span class="synConstant">"_id"</span> : { <span class="synConstant">"timestamp"</span> : <span class="synConstant">"20130424"</span>, <span class="synConstant">"user"</span> : <span class="synConstant">"-"</span> }, <span class="synConstant">"value"</span> : <span class="synConstant">15</span> }
+
+> db.daily_uu.find()
+{ <span class="synConstant">"_id"</span> : <span class="synConstant">"20130219"</span>, <span class="synConstant">"value"</span> : <span class="synConstant">1</span> }
+{ <span class="synConstant">"_id"</span> : <span class="synConstant">"20130424"</span>, <span class="synConstant">"value"</span> : <span class="synConstant">1</span> }
+</pre><p>上の2段階<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>が面倒だと思った方もいると思うので、1段階の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>版もソースを上げておきます。mapper/reducer/finalizerという流れで1段階の<a class="keyword" href="http://d.hatena.ne.jp/keyword/MapReduce">MapReduce</a>にしています。mapperではkeyに日付、valueでuser名を出力し、reducerでvalueを人数分のuserの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>を持ちます。上の例と異なりfinalizerを定義しています。finalizerはReducerの後処理ですね。finalizerではkeyに指定された日付と、valueの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CF%A2%C1%DB%C7%DB%CE%F3">連想配列</a>の大きさをカウントしてUniqueUserの計算をしています。但しこの方法は先に書いたお勧め条件に反してValueに配列データを入れてしまっているので、もしかしたらうまくいかないケースがあるかもしれないです。</p>
+<pre class="hljs javascript" data-lang="javascript" data-unlink><span class="synIdentifier">var</span> mapper = <span class="synIdentifier">function</span>() <span class="synIdentifier">{</span>
+ <span class="synIdentifier">var</span> date_format = <span class="synIdentifier">function</span>(x) <span class="synIdentifier">{</span><span class="synStatement">return</span> (x < 10) ? <span class="synConstant">'0'</span> + x : <span class="synConstant">''</span> + x ;<span class="synIdentifier">}</span>;
+ <span class="synIdentifier">var</span> getDay = <span class="synIdentifier">function</span> (date) <span class="synIdentifier">{</span>
+   <span class="synIdentifier">var</span> year = date.getFullYear();  
+   <span class="synIdentifier">var</span> month = date_format(date.getMonth() + 1);
+   <span class="synIdentifier">var</span> day = date_format(date.getDate());  
+   <span class="synStatement">return</span> year + month + day;
+ <span class="synIdentifier">}</span>;
+ <span class="synIdentifier">var</span> value = <span class="synIdentifier">{</span>users:<span class="synIdentifier">[]}</span>;
+ value.users.push(<span class="synIdentifier">this</span>.user); 
+ emit(getDay(<span class="synIdentifier">this</span>.time), value );
+<span class="synIdentifier">}</span>;
+
+<span class="synIdentifier">var</span> reducer = <span class="synIdentifier">function</span>(key,value) <span class="synIdentifier">{</span>
+  <span class="synIdentifier">var</span> res = <span class="synIdentifier">{</span>users:<span class="synIdentifier">[]}</span>;
+  value.forEach(<span class="synIdentifier">function</span>(v)<span class="synIdentifier">{</span>
+res.users.push(v.users<span class="synIdentifier">[</span>0<span class="synIdentifier">]</span>);
+  <span class="synIdentifier">}</span>);
+  <span class="synStatement">return</span> res;
+<span class="synIdentifier">}</span>;
+
+<span class="synIdentifier">var</span> finalizer = <span class="synIdentifier">function</span>(key,value) <span class="synIdentifier">{</span>
+ <span class="synIdentifier">var</span> sum = 0;
+ <span class="synIdentifier">var</span> hash = <span class="synIdentifier">{}</span>;
+ <span class="synStatement">for</span>( <span class="synIdentifier">var</span> i=0; i<value.users.length; i++ ) <span class="synIdentifier">{</span>
+   <span class="synStatement">if</span>( <span class="synStatement">typeof</span> hash<span class="synIdentifier">[</span>value.users<span class="synIdentifier">[</span>i<span class="synIdentifier">]]</span> == <span class="synConstant">"undefined"</span> )<span class="synIdentifier">{</span>
+ hash<span class="synIdentifier">[</span>value.users<span class="synIdentifier">[</span>i<span class="synIdentifier">]]</span> = 1;
+   <span class="synIdentifier">}</span>
+ <span class="synIdentifier">}</span>
+ <span class="synStatement">for</span>( <span class="synIdentifier">var</span> j <span class="synStatement">in</span> hash) <span class="synIdentifier">{</span>
+  sum++;
+ <span class="synIdentifier">}</span>
+ <span class="synStatement">return</span> sum;
+<span class="synIdentifier">}</span>
+
+db.nginx_access.mapReduce(mapper, reducer,<span class="synIdentifier">{</span>finalize:finalizer,out:<span class="synIdentifier">{</span>replace:<span class="synConstant">"daily_uu"</span><span class="synIdentifier">}}</span>);
+<span class="synIdentifier">var</span> uu = db.daily_uu.find();
+uu.forEach( <span class="synIdentifier">function</span>( uu ) <span class="synIdentifier">{</span> print( <span class="synConstant">"Date = "</span> + uu._id + <span class="synConstant">", UU = "</span> + uu.value ); <span class="synIdentifier">}</span> );
+
+<span class="synComment">/*出力結果</span>
+<span class="synComment">Date = 20130219, UU = 1</span>
+<span class="synComment">Date = 20130424, UU = 1</span>
+<span class="synComment">*/</span>
+</pre>
+</blockquote>
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/1449381561/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51RucbMZqDL._SL160_.jpg" class="hatena-asin-detail-image" alt="MongoDB: The Definitive Guide" title="MongoDB: The Definitive Guide"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/1449381561/yutakikuchi-22/">MongoDB: The Definitive Guide</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Kristina Chodorow,Michael Dirolf</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> Oreilly & Associates Inc</li><li><span class="hatena-asin-detail-label">発売日:</span> 2010/09/23</li><li><span class="hatena-asin-detail-label">メディア:</span> ペーパーバック</li><li> <span class="hatena-asin-detail-label">クリック</span>: 34回</li><li><a href="http://d.hatena.ne.jp/asin/1449381561/yutakikuchi-22" target="_blank">この商品を含むブログ (8件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201306060837/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201306060837/">一日も早く起業したい人が「やっておくこと、知っておくべきこと」読了</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201306170835/">誰もが一度は陥る日付処理。各種プログラミング言語におけるDateTime型/TimeStamp型の変換方法のまとめ</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201306170835/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

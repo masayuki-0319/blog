@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120528/1338161618" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>標準入出力プログラミング &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>標準入出力プログラミング</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 May 28, 08:33</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="centos-標準入出力プログラミング">[CentOs] : 標準入出力プログラミング</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873111056/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51128TP89TL._SL160_.jpg" class="hatena-asin-detail-image" alt="入門Unixオペレーティングシステム" title="入門Unixオペレーティングシステム"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873111056/yutakikuchi-22/">入門Unixオペレーティングシステム</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> ジェリーピーク,ジョンストラング,グレーストディノ,Jerry Peek,John Strang,Grace Todino,羽山博</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2002/12</li><li><span class="hatena-asin-detail-label">メディア:</span> 単行本</li><li> <span class="hatena-asin-detail-label">クリック</span>: 5回</li><li><a href="http://d.hatena.ne.jp/asin/4873111056/yutakikuchi-22" target="_blank">この商品を含むブログ (6件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>標準入力</h4>
+
+<blockquote>
+    <p>今日は簡単なメモ書きです。標準入力の使い方について少しだけ話します。<br />
+プログラム中で容量があるデータを一度ファイルに落として、その落としたファイルに対して別のプログラムを呼び出すような処理がかかれているのを時たま目にします。見る度に良い方法ではないと感じます。例えば1processで1fileを生成するような場合は、processに比例してfile数とDisk圧迫が重なります。重要なシステムでログファイルを記録するなどの使い方ではない限り<span class="deco" style="color:#FF0000;">fileを中継する方法は辞めましょう</span>。代わりに実行コマンドへの<span class="deco" style="color:#FF0000;">標準入力</span>で対応する方が効率的です。<br />
+標準入力とは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Linux">Linux</a>で広く用いられているプログラムへの入力方法で、Keybord入力の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>引数、プログラムから別のプログラムへ入力する方法などを意味します。BigData処理の<span class="deco" style="color:#FF0000;">HadoopStreamingも標準入出力を利用しています</span>。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>標準出力</h4>
+
+<blockquote>
+    <p>標準入力によるデータ受け取りを行うプログラムに対して標準出力により受け渡しを行います。標準出力は<span class="deco" style="color:#FF0000;">プログラム内部でprint</span>される結果であったり、単純な<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Linux">Linux</a><span class="deco" style="color:#FF0000;">コマンドのecho</span>だったり、<span class="deco" style="color:#FF0000;">ヒアドキュメント</span>で作る事も可能です。標準入力に複雑なデータ構成を必要とする場合はプログラム言語で記述、それ以外はechoやヒアドキュメントで十分だと思います。Sampleを以下に記述します。</p>
+
+<div class="section">
+<h5>プログラム言語での出力</h5>
+<p>ただprintするだけです。2列のデータを作ります。列の表現をタブ(\t)で、行を改行(\n)で表現します。このファイルをoutput.plとします。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/bin/perl</span>
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+<span class="synStatement">print</span> <span class="synConstant">"title</span><span class="synSpecial">\t</span><span class="synConstant">detail</span><span class="synSpecial">\n</span><span class="synConstant">こんにちは</span><span class="synSpecial">\t</span><span class="synConstant">こんにちはYutaKikuchiさん</span><span class="synSpecial">\n</span><span class="synConstant">こんばんは</span><span class="synSpecial">\t</span><span class="synConstant">こんばんはYutaKikuchiさん"</span>;
+</pre><pre class="code" data-lang="" data-unlink>title  detail
+こんにちは   こんにちはYutaKikuchiさん
+こんばんは   こんばんはYutaKikuchiさん</pre>
+</div>
+<div class="section">
+<h5>echoコマンドでの出力</h5>
+<p>echoは代表的な<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unix">Unix</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/Linux">Linux</a>の出力コマンドです。<span class="deco" style="color:#FF0000;">-eオプション</span>を利用してタブや改行によるデータを出力します。</p>
+<pre class="code" data-lang="" data-unlink>$ man echo
+オプション
+   -n     行末の改行を行わない。
+   -e     string   中の、バックスラッシュでエスケープされた文字の解釈を有効にする。それぞれの意味は以下の通り:
+          \a     アラート (ベル)
+          \b     バックスペース
+          \c     行末の改行を出力しない
+          \f     フォームフィード (form feed)
+          \n     改行 (newline)
+          \r     復帰 (carriage return)
+          \t     水平タブ
+          \v     垂直タブ
+          \\     バックスラッシュ
+          \0nnn  アスキーコードが nnn (8 進) の文字
+
+$ echo -e "title\tdetail\nこんにちは\tこんにちはYutaKikuchiさん\nこんばんは\tこんばんはYutaKikuchiさん"
+title   detail
+こんにちは   こんにちはYutaKikuchiさん
+こんばんは   こんばんはYutaKikuchiさん</pre>
+</div>
+<div class="section">
+<h5>ヒアドキュメント</h5>
+<p><span class="deco" style="color:#FF0000;">リダイレクト(<<)を利用して<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DE%A5%F3%A5%C9%A5%E9%A5%A4%A5%F3">コマンドライン</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>ファイル中に入力データを記述する事ができます。</span>簡単な標準入力を利用する時はヒアドキュメントが最も利用されるかもしれません。リダイレクトの後に<span class="deco" style="color:#FF0000;">_EOT_やEOT</span>などの文字列を入力し改行するとheredocを入力モードに切り替わります。ちなみにEOTはEnd Of Textの略です。入力が終わった時に再度_EOT_と実行すると結果が出力されます。</p>
+<pre class="code" data-lang="" data-unlink>$ cat << _EOT_
+heredoc> title  detail
+heredoc> こんにちは     こんにちはYutaKikuchiさん
+heredoc> こんばんは     こんばんはYutaKikuchiさん       
+heredoc> _EOT_
+title   detail
+こんにちは   こんにちはYutaKikuchiさん
+こんばんは       こんばんはYutaKikuchiさん</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>入出力の実行</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>入力受け取りプログラム</h5>
+<p>上で定義した標準入出力を受け取るプログラムを以下のように定義します。1行目のデータ項目の削除とdetail部分のみを抽出するようなプログラムです。このファイルをinput.plとします。</p>
+<pre class="hljs perl" data-lang="perl" data-unlink><span class="synPreProc">#!/usr/bin/perl</span>
+<span class="synStatement">use strict</span>;
+<span class="synStatement">use warnings</span>;
+
+<span class="synStatement">my</span> <span class="synIdentifier">$i</span>=<span class="synConstant">0</span>;
+<span class="synStatement">while</span>( <span class="synIdentifier"><STDIN></span> ) {
+  <span class="synStatement">chomp</span> <span class="synIdentifier">$_</span>;
+  <span class="synIdentifier">$i</span>++;
+  <span class="synStatement">my</span> <span class="synIdentifier">@data</span> = <span class="synStatement">split</span>( <span class="synStatement">/</span><span class="synSpecial">\t</span><span class="synStatement">/</span>, <span class="synIdentifier">$_</span> );
+  <span class="synStatement">if</span>( <span class="synIdentifier">$i</span> == <span class="synConstant">1</span> ) {
+<span class="synStatement">print</span> <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+<span class="synStatement">next</span>;
+  }
+  <span class="synStatement">print</span> <span class="synIdentifier">$data[</span><span class="synConstant">1</span><span class="synIdentifier">]</span> . <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span>;
+}
+</pre>
+</div>
+<div class="section">
+<h5>プログラムとパイプを利用した入力</h5>
+<p>上で定義したoutput.plとinput.plを<span class="deco" style="color:#FF0000;">パイプ(|)</span>でつなぎます。パイプは別のプログラムへの入力に渡すため命令です。</p>
+<pre class="code" data-lang="" data-unlink>$ perl output.pl | perl input.pl 
+
+こんにちはYutaKikuchiさん
+こんばんはYutaKikuchiさん</pre>
+</div>
+<div class="section">
+<h5>echoとパイプを利用した入力</h5>
+<p>上のプログラムの例と同様でパイプでつなぎます。</p>
+<pre class="code" data-lang="" data-unlink>$ echo -e "title\tdetail\nこんにちは\tこんにちはYutaKikuchiさん\nこんばんは\tこんばんはYutaKikuchiさん" | perl input.pl 
+
+こんにちはYutaKikuchiさん
+こんばんはYutaKikuchiさん</pre>
+</div>
+<div class="section">
+<h5>ヒアドキュメントでの入力</h5>
+<p>先ほどはcatとしていた部分を<a class="keyword" href="http://d.hatena.ne.jp/keyword/perl">perl</a>実行ブログラムに変更します。</p>
+<pre class="code" data-lang="" data-unlink>$ perl input.pl << _EOT_
+title   detail
+こんにちは      こんにちはYutaKikuchiさん
+こんばんは      こんばんはYutaKikuchiさん
+_EOT_
+
+こんにちはYutaKikuchiさん
+こんばんはYutaKikuchiさん</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>まとめ</h4>
+
+<blockquote>
+    
+<ul>
+<li>標準入出力は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hadoop">Hadoop</a>のStreamingでも利用されています。</li>
+<li>標準入出力を利用すれば入力データを一時的なファイルに落としこまなくて済みます。</li>
+<li>パイプとリダイレクトの使い方を覚えて標準入出力を使います。</li>
+<li>標準入力を利用するにはいくつか方法があります。
+<ul>
+<li>出力をするプログラムと入力を受けるプログラムをパイプ(|)で連結します。</li>
+<li>出力側がechoコマンドで出力し、パイプ(|)で入力側に渡します。</li>
+<li>ヒアドキュメントで出力し、リダイレクト(<<)で入力側に渡します。</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201205210841/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201205210841/">PHPのマルチスレッドプログラミングを使ってシステム処理を爆速化するお話し</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201206040834/">初心者から見たPerl言語I/Fは気持ち悪いが、たった一行の記述が素晴らしく強力な件について</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201206040834/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

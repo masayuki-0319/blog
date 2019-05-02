@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130220/1361316293" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Feb 20, 08:24</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="mongodb-centosでnginxのログをfluentdを使ってmongodbにリアルタイムで格納する">[MongoDB] : CentOSでNginxのログをFluentdを使ってMongodbにリアルタイムで格納する</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048702270/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51xpswg%2BkkL._SL160_.jpg" class="hatena-asin-detail-image" alt="ハイパフォーマンスHTTPサーバ Nginx入門" title="ハイパフォーマンスHTTPサーバ Nginx入門"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048702270/yutakikuchi-22/">ハイパフォーマンスHTTPサーバ Nginx入門</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Clement Nedelcu,長尾高弘</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%B9%A5%AD%A1%BC%A1%A6%A5%E1%A5%C7%A5%A3%A5%A2%A5%EF%A1%BC%A5%AF%A5%B9">アスキー・メディアワークス</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2011/04/21</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 2人 <span class="hatena-asin-detail-label">クリック</span>: 714回</li><li><a href="http://d.hatena.ne.jp/asin/4048702270/yutakikuchi-22" target="_blank">この商品を含むブログ (23件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>このエントリーで試したいこと</h4>
+
+<blockquote>
+    <p>Nginxのログをfluentdを使ってMongoDBに格納することをリアルタイムで行うことを試してみたいと思います。参考にしたサイトは以下のものです。</p>
+
+<div class="section">
+<h5>fluentd</h5>
+
+<ul>
+<li><a href="http://documents.mazgi.com/fluentd/doc/">Fluentdのドキュメントへようこそ ― fluentd 0.10 documentation</a> <a href="http://b.hatena.ne.jp/entry/documents.mazgi.com/fluentd/doc/"><img src="http://b.hatena.ne.jp/entry/image/http://documents.mazgi.com/fluentd/doc/" alt="はてなブックマーク - Fluentdのドキュメントへようこそ ― fluentd 0.10 documentation" border="0" /></a></li>
+<li><a href="http://codezine.jp/article/detail/6958">Fluentdで始めるリアルタイムでのログ有効活用 （1/4）：CodeZine</a> <a href="http://b.hatena.ne.jp/entry/codezine.jp/article/detail/6958"><img src="http://b.hatena.ne.jp/entry/image/http://codezine.jp/article/detail/6958" alt="はてなブックマーク - Fluentdで始めるリアルタイムでのログ有効活用 （1/4）：CodeZine" border="0" /></a></li>
+<li><a href="http://tech.naver.jp/blog/?p=1143">Introduction of ‘fluentd’ « NAVER Engineers' Blog</a> <a href="http://b.hatena.ne.jp/entry/tech.naver.jp/blog/?p=1143"><img src="http://b.hatena.ne.jp/entry/image/http://tech.naver.jp/blog/?p=1143" alt="はてなブックマーク - Introduction of ‘fluentd’ « NAVER Engineers' Blog" border="0" /></a></li>
+<li><a href="http://www.slideshare.net/hotchpotch/20120204fluent-logging">fluentd を利用した大規模ウェブサービスのロギング</a> <a href="http://b.hatena.ne.jp/entry/www.slideshare.net/hotchpotch/20120204fluent-logging"><img src="http://b.hatena.ne.jp/entry/image/http://www.slideshare.net/hotchpotch/20120204fluent-logging" alt="はてなブックマーク - fluentd を利用した大規模ウェブサービスのロギング" border="0" /></a></li>
+<li><a href="http://yosuke-furukawa.hatenablog.com/entry/2012/08/12/094802">dstatの結果をfluentdで取得して、WebSocketで送りつけるリアルタイムリソース監視アプリを作ってみた。 - from scratch</a> <a href="http://b.hatena.ne.jp/entry/yosuke-furukawa.hatenablog.com/entry/2012/08/12/094802"><img src="http://b.hatena.ne.jp/entry/image/http://yosuke-furukawa.hatenablog.com/entry/2012/08/12/094802" alt="はてなブックマーク - dstatの結果をfluentdで取得して、WebSocketで送りつけるリアルタイムリソース監視アプリを作ってみた。 - from scratch" border="0" /></a></li>
+<li><a href="http://d.hatena.ne.jp/tagomoris/20121029/1351491111">#fluentd でアクセスログからメトリクス生成/リアルタイム監視するための設定例 - tagomorisのメモ置き場</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/tagomoris/20121029/1351491111"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/tagomoris/20121029/1351491111" alt="はてなブックマーク - #fluentd でアクセスログからメトリクス生成/リアルタイム監視するための設定例 - tagomorisのメモ置き場" border="0" /></a></li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Nginxの導入</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>install</h5>
+<p>Nginxを<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>コマンドでinstallします。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+
+$ sudo yum install nginx -y
+
+$ yum installed list | grep nginx
+nginx.x86_64           1.2.7-1.el6.ngx  @nginx                                  
+nginx-release-centos.noarch</pre>
+</div>
+<div class="section">
+<h5>LogFormatを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>と同じにする</h5>
+<p>NginxのDefaultLogFormatは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>と異なります。/etc/nginx/nginx.confを修正して<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>と同じLogFormatに変更します。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo vim /etc/nginx/nginx.conf
+
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+worker_connections  1024;
+}
+
+
+http {
+include       /etc/nginx/mime.types;
+default_type  application/octet-stream;
+
+#log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+#                  '$status $body_bytes_sent "$http_referer" '
+#                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                  '$status $body_bytes_sent "$http_referer" '
+                  '"$http_user_agent"';
+
+access_log  /var/log/nginx/access.log  main;
+
+sendfile        on;
+#tcp_nopush     on;
+
+keepalive_timeout  65;
+
+#gzip  on;
+
+include /etc/nginx/conf.d/*.conf;
+}</pre>
+</div>
+<div class="section">
+<h5>Nginx起動</h5>
+<p>Nginxの設定ファイルのsyntax確認をしたあとに起動をします。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo /etc/init.d/nginx configtest
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+$ sudo /etc/init.d/nginx start</pre>
+</div>
+<div class="section">
+<h5>Nginxのプロセスと起動確認</h5>
+<p>psコマンドでプロセス、<a class="keyword" href="http://d.hatena.ne.jp/keyword/w3m">w3m</a>でhtmlを読み込めるか確認します。</p>
+<pre class="code" data-lang="" data-unlink>$ ps auxww | grep nginx    
+root      1821  0.0  0.0  44644   104 ?        Ss   10:39   0:00 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+nginx     1823  0.0  0.0  45052   896 ?        S    10:39   0:00 nginx: worker process  
+
+$ w3m "http://localhost:80"
+Welcome to nginx!
+
+If you see this page, the nginx web server is successfully installed and working. Further configuration is required.
+
+For online documentation and support please refer to nginx.org.
+Commercial support is available at nginx.com.
+
+Thank you for using nginx.</pre>
+</div>
+<div class="section">
+<h5>Log確認</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%AF%A5%BB%A5%B9%A5%ED%A5%B0">アクセスログ</a>は/var/log/nginx/<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>.logに格納されます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/error">error</a>.logも同じディレクトリに生成されます。</p>
+<pre class="code" data-lang="" data-unlink>cat /var/log/nginx/access.log
+127.0.0.1 - - [19/Feb/2013:18:35:35 +0900] "GET / HTTP/1.0" 200 612 "-" "w3m/0.5.2"
+127.0.0.1 - - [19/Feb/2013:18:36:14 +0900] "GET / HTTP/1.0" 200 612 "-" "w3m/0.5.2"</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>MongoDBの導入</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Install</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>.repos.d以下に10gen.repoを追加して<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> installします。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo vim /etc/yum.repos.d/10gen.repo
+//記述内容
+[10gen]
+name=10gen Repository
+baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64
+gpgcheck=0
+enabled=0
+
+$ sudo yum --enablerepo=10gen install mongo-10gen-server.x86_64 -y 
+
+Installed:
+  mongo-10gen-server.x86_64 0:2.2.3-mongodb_1                                                                               
+
+Dependency Installed:
+  mongo-10gen.x86_64 0:2.2.3-mongodb_1                                                                                      
+
+Complete!</pre>
+</div>
+<div class="section">
+<h5>Mongdbの起動とプロセス確認</h5>
+<p>serviceコマンドで起動します。プロセスの確認はpsで行います。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo /sbin/service mongod start
+Starting mongod: forked process: 3413
+all output going to: /var/log/mongo/mongod.log
+child process started successfully, parent exiting
+                                                       [  OK  ]
+
+$ ps auxww | grep mongod
+mongod    3413  6.5  3.0 150336 30068 ?        Sl   11:37   0:04 /usr/bin/mongod -f /etc/mongod.conf</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Fluentd</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Install</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a>.repos.d以下にtd.repoを追加して<a class="keyword" href="http://d.hatena.ne.jp/keyword/yum">yum</a> installできるようにします。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo vim /etc/yum.repos.d/td.repo
+[treasuredata]
+name=TreasureData
+baseurl=http://packages.treasure-data.com/redhat/$basearch
+gpgcheck=0
+
+$ sudo yum install td-agent -y
+
+Installed:
+  td-agent.x86_64 0:1.1.11-0                                                                                                
+
+Dependency Installed:
+  compat-libtermcap.x86_64 0:2.0.8-49.el6                         compat-readline5.x86_64 0:5.2-17.1.el6                    
+  openssl098e.x86_64 0:0.9.8e-17.el6.centos.2                     td-libyaml.x86_64 0:0.1.4-1                               
+
+Complete!</pre>
+</div>
+<div class="section">
+<h5>Td-agentの設定ファイル修正</h5>
+<p>/etc/td-agent/td-agent.confを修正してNginxのLogをMongodbに格納するように指定します。設定の意味はsourceがLogFileに関する設定、matchが条件に一致したLogを扱う設定を書いています。ここではmongodbに格納したいので、typeをmongo、databaseにnginx、扱うテーブルにnginx_<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>としています。sourceのformatをnginxと指定出来れば簡単なのですが、nginxを指定してもダメなようです。この記事ではnginxのLogFormatを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>と同じにしているのでformat <a class="keyword" href="http://d.hatena.ne.jp/keyword/apache">apache</a>としましたが、nginxのLogFormatをそのまま使いたい場合は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>で指定することもできます。(例) format /^(?[^ ]*) [^ ]* (?[^ ]*) \[(?[^\]]*)\] "(?\S+)(?: +(?[^ ]*) +\S*)?" (?[^ ]*) (?[^ ]*)(?: "(?[^\"]*)" "(?[^\"]*)" (?[^ ]*))?$/</p>
+<pre class="code" data-lang="" data-unlink><source>
+  type tail
+  format apache
+  path /var/log/nginx/access.log
+  tag nginx.access
+</source>
+ 
+<match nginx.access>
+  type mongo
+  host localhost 
+  database nginx
+  collection nginx_access
+  port 27017
+  flush_interval 10s
+</match></pre>
+</div>
+<div class="section">
+<h5>fluent-plugin-mongo install</h5>
+<p>Fluentd経由でLogをMongodbに格納するためのpluginをinstallします。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-mongo
+Fetching: fluent-plugin-mongo-0.6.13.gem (100%)
+Successfully installed fluent-plugin-mongo-0.6.13
+1 gem installed
+Installing ri documentation for fluent-plugin-mongo-0.6.13...
+Installing RDoc documentation for fluent-plugin-mongo-0.6.13...</pre>
+</div>
+<div class="section">
+<h5>fluentd 起動</h5>
+<pre class="code" data-lang="" data-unlink>$ sudo /sbin/service td-agent start
+Starting td-agent:                                         [  OK  ]</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Mongodbのデータを確認</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>Logの確認</h5>
+<p>NginxのAccessLogがリアリタイムでMongodbに格納されているかを見てみます。上で指定した通りにnginxというdatabaseのnginx_<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>というtableにデータが格納されていることが分かります。Mongodbなのでbson(<a class="keyword" href="http://d.hatena.ne.jp/keyword/json">json</a>)形式でのデータ格納になります。</p>
+<pre class="code" data-lang="" data-unlink>$ mongo
+MongoDB shell version: 2.2.3
+connecting to: test
+> show dbs;
+local   (empty)
+nginx   0.203125GB
+> use nginx
+switched to db nginx
+> show collections
+nginx_access
+system.indexes
+> db.nginx_access.find()
+{ "_id" : ObjectId("5123476fe138231086000001"), "host" : "127.0.0.1", "user" : "-", "method" : "GET", "path" : "/", "code" : "200", "size" : "612", "referer" : "-", "agent" : "w3m/0.5.2", "time" : ISODate("2013-02-19T09:35:35Z") }
+{ "_id" : ObjectId("51234790e138231086000002"), "host" : "127.0.0.1", "user" : "-", "method" : "GET", "path" : "/", "code" : "200", "size" : "612", "referer" : "-", "agent" : "w3m/0.5.2", "time" : ISODate("2013-02-19T09:36:14Z") }</pre>
+</div>
+<div class="section">
+<h5>Logの活用</h5>
+<p>Mondbのdb.nginx_<a class="keyword" href="http://d.hatena.ne.jp/keyword/access">access</a>.find()の条件に例えば<a class="keyword" href="http://d.hatena.ne.jp/keyword/Cookie">Cookie</a>やSessionIDのようなものを指定して、AccessUserの行動履歴をリアルタイムで追うことが出来るような仕組みを設けておくとログ解析する人は大変重宝されると思います。</p>
+
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201302150823/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201302150823/">Mecab Pythonを使ったTF・IDFによるWikipediaの重要単語抽出</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201303100457/">Perlの衰退議論について一言言っておくか</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201303100457/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

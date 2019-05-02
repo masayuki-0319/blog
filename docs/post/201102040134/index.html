@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110204/1296750892" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>超絶簡単 Pythonでの正規表現 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>超絶簡単 Pythonでの正規表現</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Feb 04, 01:34</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="python-超絶簡単-pythonでの正規表現">[Python] : 超絶簡単 Pythonでの正規表現</h2>
+
+<div class="section">
+<h4>概要</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>での<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>の使い方についてまとめます。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4>r'a'表記</h4>
+
+<blockquote>
+    <p>raw string表記を示します。余分な\を省くことが可能です。<br />
+例えば改行はr'\n'とすれば<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>として扱うことが出来ます。 </p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a></h4>
+
+<blockquote>
+    
+<table>
+<tr>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a> </th>
+<th> 役割 </th>
+</tr>
+<tr>
+<td> match </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>が文字列の先頭と一致するかチェック </td>
+</tr>
+<tr>
+<td> search </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>による文字列を走査 </td>
+</tr>
+<tr>
+<td> split </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>に一致するもので配列に分離 </td>
+</tr>
+<tr>
+<td> sub  </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>による置換 </td>
+</tr>
+<tr>
+<td> subn </td>
+<td> subと同じだが、個数を制限可能 </td>
+</tr>
+</table>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>matchとsearch</h4>
+
+<blockquote>
+    <p>※matchとsearchでは役割が異なるので注意が必要です。<br />
+matchは先頭との一致、searchは最後まで走査を行います。<br />
+searchとmatchにより一致したMatchObjectの属性は次のものになります。</p>
+
+<table>
+<tr>
+<th> 属性 </th>
+<th> 内容 </th>
+</tr>
+<tr>
+<td> group </td>
+<td> 一致した文字列の取得 </td>
+</tr>
+<tr>
+<td> start </td>
+<td> 一致した文字列の開始位置 </td>
+</tr>
+<tr>
+<td> end   </td>
+<td> 一致した文字列の終了位置 </td>
+</tr>
+<tr>
+<td> span  </td>
+<td> 一致した文字列の開始、終了位置の組 </td>
+</tr>
+</table><p>サンプルコードを以下に挙げておきます。group(1)とすることで後方参照が可能です。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+<span class="synPreProc">import</span> re
+<span class="synIdentifier">print</span> re.match( <span class="synConstant">r'o'</span>, <span class="synConstant">'google vs yahoo'</span> )  <span class="synComment">#None</span>
+<span class="synIdentifier">print</span> re.search( <span class="synConstant">r'oo'</span>, <span class="synConstant">'google vs yahoo'</span> ).group()  <span class="synComment">#oo</span>
+<span class="synIdentifier">print</span> re.match( <span class="synConstant">r'go'</span>, <span class="synConstant">'google vs yahoo'</span> ).start()  <span class="synComment"># 0</span>
+<span class="synIdentifier">print</span> re.search( <span class="synConstant">r'google'</span>, <span class="synConstant">'google vs yahoo'</span> ).end() <span class="synComment">#6</span>
+<span class="synIdentifier">print</span> re.search( <span class="synConstant">r'(([a-z]+)\svs\s([a-z]+))'</span>, <span class="synConstant">'google vs yahoo'</span> ).group(<span class="synConstant">1</span>) <span class="synComment">#google vs yahoo</span>
+<span class="synIdentifier">print</span> re.search( <span class="synConstant">r'(([a-z]+)\svs\s([a-z]+))'</span>, <span class="synConstant">'google vs yahoo'</span> ).group(<span class="synConstant">2</span>) <span class="synComment">#google</span>
+<span class="synIdentifier">print</span> re.search( <span class="synConstant">r'(([a-z]+)\svs\s([a-z]+))'</span>, <span class="synConstant">'google vs yahoo'</span> ).group(<span class="synConstant">3</span>) <span class="synComment">#yahoo</span>
+<span class="synIdentifier">print</span> re.search( <span class="synConstant">r'([a-z]+\svs\s[a-z]+)'</span>, <span class="synConstant">'google vs yahoo'</span> ).span() <span class="synComment">#(0, 15)</span>
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>分離</h4>
+
+<blockquote>
+    <p>split<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BD%A5%C3%A5%C9">メソッド</a>により<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>での文字列の分離になります。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+<span class="synPreProc">import</span> re
+data = re.split( <span class="synConstant">r','</span>, <span class="synConstant">'google,yahoo,gree,mixi'</span> )
+<span class="synStatement">for</span> i <span class="synStatement">in</span> data:
+<span class="synIdentifier">print</span> i 
+<span class="synComment">#出力結果</span>
+<span class="synConstant">'''</span>
+<span class="synConstant">google</span>
+<span class="synConstant">yahoo</span>
+<span class="synConstant">gree</span>
+<span class="synConstant">mixi</span>
+<span class="synConstant">'''</span>
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>置換</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>と後方参照を用いて置換を行います。<br />
+sub関数の第一引数でグループ化した<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>が、第二引数の内部で\1などのような形式で後方参照することが出来ます。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">import</span> re
+<span class="synIdentifier">print</span> re.sub( <span class="synConstant">r'(http.*:google.)(com)'</span>, <span class="synConstant">r'\1co.jp'</span>, <span class="synConstant">'http://www.google.com'</span> )
+<span class="synComment">#出力結果</span>
+<span class="synComment">#http://www.google.com</span>
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a></h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>することが出来ます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>することによって後で記述するフラグを利用することが可能です。もしかしたら速度的にも速いかもしれません。<br />
+re.comple( <a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a> ).search()などの法則での記述です。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+
+<span class="synPreProc">import</span> re
+<span class="synIdentifier">print</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">'o'</span> ).match( <span class="synConstant">'google vs yahoo'</span> )
+<span class="synIdentifier">print</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">'o'</span> ).search( <span class="synConstant">'google vs yahoo'</span> ).group()
+</pre><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>時には以下のフラグを設定出来ます。</p>
+
+<table>
+<tr>
+<th> フラグ </th>
+<th> 説明 </th>
+</tr>
+<tr>
+<td> DOTALL, S </td>
+<td> .が改行も含めて全てのマッチングとさせる </td>
+</tr>
+<tr>
+<td> IGNORECASE, I </td>
+<td> 大小文字区別無し </td>
+</tr>
+<tr>
+<td> LOCALE, L </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A5%B1%A1%BC%A5%EB">ロケール</a>を考慮したマッチング </td>
+</tr>
+<tr>
+<td> MULTILINE, M </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>行にマッチング </td>
+</tr>
+<tr>
+<td> VERBOSE, X </td>
+<td> 冗長な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a> </td>
+</tr>
+</table><p>以下は例で、IGNORECASEを利用した場合になります。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#! /usr/bin/env python</span>
+<span class="synComment"># -*- coding:utf-8 -*-</span>
+<span class="synPreProc">import</span> re
+<span class="synIdentifier">print</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">'google'</span>, re.I ).search( <span class="synConstant">'GOOGLE'</span> ).group()
+<span class="synComment">#出力結果</span>
+<span class="synComment">#GOOGLE</span>
+</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>リンク</h4>
+
+<blockquote>
+    <p><a href="http://www.python.jp/Zope/articles/tips/regex_howto/regex_howto_3">http://www.python.jp/Zope/articles/tips/regex_howto/regex_howto_3</a></p>
+
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201102020154/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201102020154/">system callのtraceについて</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201102071829/">Pythonでの暗号化/復号化(AEC-DES,RSA)</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201102071829/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20130325/1364167177" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>急上昇Buzzword抽出器 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>急上昇Buzzword抽出器</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Mar 25, 08:19</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="python-急上昇buzzword抽出器">[Python] : 急上昇Buzzword抽出器</h2>
+
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Buzzword">Buzzword</a>抽出</h4>
+
+<blockquote>
+    <p>先日Yahooさんの検索ランキングがリニューアルされたこともあり、今流行っている<a class="keyword" href="http://d.hatena.ne.jp/keyword/Buzzword">Buzzword</a>を自動抽出可能なプログラムを作成します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Buzzword">Buzzword</a>を抽出する対象はYahoo検索ランキング、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a>トレンド、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Naver">Naver</a>トピックワードランキング、<a class="keyword" href="http://d.hatena.ne.jp/keyword/kizasi">kizasi</a>、TweetBuzzです。これらのメディアから現在の検索、ブログ、<a class="keyword" href="http://d.hatena.ne.jp/keyword/twitter">twitter</a>での<a class="keyword" href="http://d.hatena.ne.jp/keyword/Buzzword">Buzzword</a>を把握出来ます。</p>
+
+<ul>
+<li><a href="http://searchranking.yahoo.co.jp/">急上昇ワード ピックアップ - Yahoo!検索データ</a> <a href="http://b.hatena.ne.jp/entry/searchranking.yahoo.co.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://searchranking.yahoo.co.jp/" alt="はてなブックマーク - 急上昇ワード ピックアップ - Yahoo!検索データ" border="0" /></a></li>
+<li><a href="http://www.google.co.jp/trends/">Google トレンド</a> <a href="http://b.hatena.ne.jp/entry/www.google.co.jp/trends/"><img src="http://b.hatena.ne.jp/entry/image/http://www.google.co.jp/trends/" alt="はてなブックマーク - Google トレンド" border="0" /></a></li>
+<li><a href="http://topicwords.naver.jp/">NAVER トピックワードランキング</a> <a href="http://b.hatena.ne.jp/entry/topicwords.naver.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://topicwords.naver.jp/" alt="はてなブックマーク - NAVER トピックワードランキング" border="0" /></a></li>
+<li><a href="http://kizasi.jp/">kizasi.jp:ブログから、話題を知る、きざしを見つける</a> <a href="http://b.hatena.ne.jp/entry/kizasi.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://kizasi.jp/" alt="はてなブックマーク - kizasi.jp:ブログから、話題を知る、きざしを見つける" border="0" /></a></li>
+<li><a href="http://tweetbuzz.jp/">TweetBuzz - いま、Twitterで人気のサイトがまるわかり</a> <a href="http://b.hatena.ne.jp/entry/tweetbuzz.jp/"><img src="http://b.hatena.ne.jp/entry/image/http://tweetbuzz.jp/" alt="はてなブックマーク - TweetBuzz - いま、Twitterで人気のサイトがまるわかり" border="0" /></a></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>BuzzwordSample</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Buzzword">Buzzword</a>抽出器により出力したデータは以下の内容になりました。定性的な評価から一番旬なデータで量を持ったページは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a> SearchRankingだと思います。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a> Trendは1日のデータが1件ずつで過去1週間のデータを記録しているので、Yahooに比べると劣ってしまいます。またブログや<a class="keyword" href="http://d.hatena.ne.jp/keyword/Tweet">Tweet</a>情報はやや新鮮さに欠けるのと現在のTrendを表している単語が少ないように感じました。</p>
+
+<div class="section">
+<h5>DataFormat</h5>
+<pre class="code" data-lang="" data-unlink>Lavel : data1 \t data2 \t data3 .....</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Yahoo%21">Yahoo!</a> SearchRanking</h5>
+<pre class="code" data-lang="" data-unlink>YahooBuzzword : 菅野美穂 オサート    河西里音    福岡大仏    武井咲 ガンバ大阪   トキハソース  青山草太    高橋愛 北総鉄道    ロアッソくん</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a> Trend</h5>
+<pre class="code" data-lang="" data-unlink>GoogleBuzzword : 堺雅人 仲里依紗    南海トラフ   プエルトリコ  Wbc ローマ法王   メタンハイドレート   ＷＢＣ 野球</pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Naver">Naver</a> TopicwordRanking</h5>
+<pre class="code" data-lang="" data-unlink>NaverBuzzword : 平愛梨  ももいろクローバ... Aimer   大島優子    白鵬  一休.com  田中れいな   由紀さおり   市井紗耶香   小泉麻耶    藤井フミヤ   ナイナイ岡村  IKEA 朝食 全ツイート履歴 神田愛花    菅野美穂    江角マキコ   東京 桜    </pre>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Kizasi">Kizasi</a></h5>
+<pre class="code" data-lang="" data-unlink>KizasiBuzzword : 阿部主将    放送記念日   小学校卒業式  吉田美和    センバツ高校野球    春分  パルテナ    修了式 女満別 泉佐野市</pre>
+</div>
+<div class="section">
+<h5>TweetBuzz Hotkeyword</h5>
+<pre class="code" data-lang="" data-unlink>TweetBuzzword : フィギュアスケート    民主党 香川真司    AKB48   山口組 本田圭佑    キム・ヨナ   安倍晋三    サイバー攻撃  シャープ    自民党 台湾  WBC TPP IPS細胞   サムスン    新垣結衣    広島  キプロス    パク・シフ   名古屋市    北海道 佳子  IPアドレス</pre>
+</div>
+<div class="section">
+<h5>All</h5>
+<pre class="code" data-lang="" data-unlink>All : 菅野美穂   オサート    河西里音    福岡大仏    武井咲 ガンバ大阪   トキハソース  青山草太    高橋愛 北総鉄道    ロアッソくん  堺雅人 仲里依紗    南海トラフ   プエルトリコ  Wbc ローマ法王   メタンハイドレート   ＷＢＣ 野球  平愛梨 ももいろクローバ... Aimer   大島優子    白鵬  一休.com  田中れいな   由紀さおり   市井紗耶香   小泉麻耶    藤井フミヤ   ナイナイ岡村  IKEA 朝食 全ツイート履歴 神田愛花    江角マキコ   東京 桜    阿部主将    放送記念日   小学校卒業式  吉田美和    センバツ高校野球    春分  パルテナ    修了式 女満別 泉佐野市    フィギュアスケート   民主党 香川真司    AKB48   山口組 本田圭佑    キム・ヨナ   安倍晋三    サイバー攻撃  シャープ    自民党 台湾  WBC TPP IPS細胞   サムスン    新垣結衣    広島  キプロス    パク・シフ   名古屋市    北海道 佳子  IPアドレス</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Buzzword">Buzzword</a>抽出器</h4>
+
+<blockquote>
+    <p>下の<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>コードを実行すると上のメディアに掲載されている<a class="keyword" href="http://d.hatena.ne.jp/keyword/Buzzword">Buzzword</a>を出力します。</p>
+<pre class="hljs python" data-lang="python" data-unlink><span class="synComment">#!/usr/bin/env python</span>
+<span class="synComment"># -*- coding: utf-8 -*-</span>
+<span class="synComment"># buzzword抽出器</span>
+
+<span class="synPreProc">import</span> sys,re,urllib,urllib2
+f = <span class="synIdentifier">open</span>( <span class="synConstant">'buzzword.txt'</span>, <span class="synConstant">'w'</span> )
+opener = urllib2.build_opener()
+ua = <span class="synConstant">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/    534.51.22'</span>
+referer = <span class="synConstant">'http://www.yahoo.co.jp/'</span>
+opener.addheaders = [( <span class="synConstant">'User-Agent'</span>, ua ),( <span class="synConstant">'Referer'</span>, referer )]
+buzzword = []
+
+<span class="synComment">## yahoo module</span>
+yahoo_url = <span class="synConstant">"http://searchranking.yahoo.co.jp/"</span>
+<span class="synStatement">try</span>: 
+   content = opener.<span class="synIdentifier">open</span>( yahoo_url ).read()
+   <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<ul class="patB">(.|\n)*?</ul>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+  tmp  = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<ul class="patB">(.|\n)*?</ul>'</span>, re.M ).search( content ).group(<span class="synConstant">0</span>)
+  data = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<a href=.*?>(.*?)</a>'</span>, re.M ).findall( tmp )
+  info  = <span class="synConstant">"YahooBuzzword : "</span> 
+  <span class="synStatement">for</span> node <span class="synStatement">in</span> data:
+     buzzword.append( node )
+     info = info + node + <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span> 
+  f.write( info + <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span> )
+<span class="synStatement">except</span> <span class="synType">Exception</span>:
+   <span class="synIdentifier">print</span> <span class="synConstant">"Failed Yahoo Buzzword"</span>
+
+<span class="synComment">## google module</span>
+google_url = <span class="synConstant">"http://www.google.co.jp/trends/"</span>
+<span class="synStatement">try</span>: 
+   content = opener.<span class="synIdentifier">open</span>( google_url ).read()
+   <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<span class="hottrends-carousel-single-trend-title">.*?</span>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+  data = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<span class="hottrends-carousel-single-trend-title">(.*?)</span>'</span>, re.M ).findall( content )
+  info = <span class="synConstant">"GoogleBuzzword : "</span> 
+  <span class="synStatement">for</span> node <span class="synStatement">in</span> data:
+     buzzword.append( node )
+     info = info + node + <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span> 
+  f.write( info + <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span> )
+<span class="synStatement">except</span> <span class="synType">Exception</span>:
+   <span class="synIdentifier">print</span> <span class="synConstant">"Failed Google Buzzword"</span>
+
+<span class="synComment">## naver module</span>
+naver_url = <span class="synConstant">"http://topicwords.naver.jp/"</span>
+<span class="synStatement">try</span>: 
+   content = opener.<span class="synIdentifier">open</span>( naver_url ).read()
+   <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<span class="mdSRList01TtlTxt">.*?</span>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+  data = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<span class="mdSRList01TtlTxt">(.*?)</span>'</span>, re.M ).findall( content )
+  info = <span class="synConstant">"NaverBuzzword : "</span> 
+  <span class="synStatement">for</span> node <span class="synStatement">in</span> data:
+     buzzword.append( node )
+     info = info + node + <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span> 
+  f.write( info + <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span> )
+<span class="synStatement">except</span> <span class="synType">Exception</span>:
+   <span class="synIdentifier">print</span> <span class="synConstant">"Failed Naver Buzzword"</span>
+
+<span class="synComment">## kizasi module</span>
+kizasi_url = <span class="synConstant">"http://kizasi.jp/"</span>
+<span class="synStatement">try</span>: 
+   content = opener.<span class="synIdentifier">open</span>( kizasi_url ).read()
+   <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<td><a href=".*?">(.*?)</a></td>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+  data = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<td><a href=".*?">(.*?)</a></td>'</span>, re.M ).findall( content )
+  info = <span class="synConstant">"KizasiBuzzword : "</span> 
+  <span class="synStatement">for</span> node <span class="synStatement">in</span> data:
+     buzzword.append( node )
+     info = info + node + <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span> 
+  f.write( info + <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span> )
+<span class="synStatement">except</span> <span class="synType">Exception</span>:
+   <span class="synIdentifier">print</span> <span class="synConstant">"Failed Kizasi Buzzword"</span>
+
+<span class="synComment">## tweetbuzz module</span>
+tweetbuzz_url = <span class="synConstant">"http://tweetbuzz.jp/"</span>
+<span class="synStatement">try</span>: 
+   content = opener.<span class="synIdentifier">open</span>( tweetbuzz_url ).read()
+   <span class="synStatement">if</span> re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<div class="section-lv3" id="cloud"><h3>.*?</h3><ol><li><strong>(.*?)</strong></li></ol></div>'</span>, re.M ).search( content ) <span class="synStatement">is</span> <span class="synStatement">not</span> <span class="synIdentifier">None</span>:
+  tmp  = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<div class="section-lv3" id="cloud"><h3>.*?</h3><ol><li><strong>(.*?)</strong></li></ol></div>'</span>, re.M ).search( content ).group(<span class="synConstant">0</span>)
+  data = re.<span class="synIdentifier">compile</span>( <span class="synConstant">r'<a href=".*?">(.*?)</a>'</span>, re.M ).findall( tmp )
+  info = <span class="synConstant">"TweetBuzzword : "</span> 
+  <span class="synStatement">for</span> node <span class="synStatement">in</span> data:
+     buzzword.append( node )
+     info = info + node + <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span> 
+  f.write( info + <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span> )
+<span class="synStatement">except</span> <span class="synType">Exception</span>:
+   <span class="synIdentifier">print</span> <span class="synConstant">"Failed Tweet Buzzword"</span>
+
+
+<span class="synComment">## all</span>
+<span class="synIdentifier">all</span> = <span class="synIdentifier">sorted</span>( <span class="synIdentifier">set</span>( buzzword ), key=buzzword.index )
+info = <span class="synConstant">"All : "</span>
+<span class="synStatement">for</span> node <span class="synStatement">in</span> <span class="synIdentifier">all</span>:
+   info = info + node + <span class="synConstant">"</span><span class="synSpecial">\t</span><span class="synConstant">"</span>
+f.write( info + <span class="synConstant">"</span><span class="synSpecial">\n</span><span class="synConstant">"</span> )
+f.close()
+</pre>
+</blockquote>
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873112761/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/41XWUXpgeuL._SL160_.jpg" class="hatena-asin-detail-image" alt="Python クックブック 第2版" title="Python クックブック 第2版"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873112761/yutakikuchi-22/">Python クックブック 第2版</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Alex Martelli,Anna Martelli Ravenscroft,David Ascher,鴨澤眞夫,當山仁健,<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B5%C8%C5%C4%C1%EF">吉田聡</a>,吉宗貞紀</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A1%A6%A5%B8%A5%E3%A5%D1%A5%F3">オライリー・ジャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2007/06/26</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 11人 <span class="hatena-asin-detail-label">クリック</span>: 423回</li><li><a href="http://d.hatena.ne.jp/asin/4873112761/yutakikuchi-22" target="_blank">この商品を含むブログ (85件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201303180838/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201303180838/">業種別企業の平均年齢と年収の辞書データを公開しました</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201304040851/">Yahoo!を退職します。</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201304040851/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

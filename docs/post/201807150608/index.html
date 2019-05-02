@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/2018/07/15/060852" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>ソリューション型とプロダクト型 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>ソリューション型とプロダクト型</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2018 Jul 15, 06:08</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="etc-ソリューション型とプロダクト型">[etc] : ソリューション型とプロダクト型</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00TCM8TB4/yutakikuchi-22/"><img src="https://images-fe.ssl-images-amazon.com/images/I/41u0jJ-CbvL._SL160_.jpg" class="hatena-asin-detail-image" alt="Inspired: 顧客の心を捉える製品の創り方" title="Inspired: 顧客の心を捉える製品の創り方"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00TCM8TB4/yutakikuchi-22/">Inspired: 顧客の心を捉える製品の創り方</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> マーティケイガン</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> 株式会社　マーレアッズーロ</li><li><span class="hatena-asin-detail-label">発売日:</span> 2015/02/07</li><li><span class="hatena-asin-detail-label">メディア:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Kindle">Kindle</a>版</li><li><a href="http://d.hatena.ne.jp/asin/B00TCM8TB4/yutakikuchi-22" target="_blank">この商品を含むブログ (1件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<blockquote><h3>経営者が考えるビジネスのロジック</h3>
+
+<p>会社の経営は一言で言ってしまえばビジネス(営利・非営利の事業)を作ることであり、そのために人・モノ・金を動かす権限を持つ。ビジネスには様々なモデルが存在し、どのようなエコシステムを目指すかはその会社の経営者が自身で判断しなければならない。最近良く話す内容としては会社経営も成功ロジックを書くことであり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B7%A5%B9%A5%C6%A5%E0%A5%A8%A5%F3%A5%B8%A5%CB%A5%A2">システムエンジニア</a>が処理手続きを書く事と非常に似ている。成功までの最短となるプロセスをロジックを積んだ言語によって書き起こしているだけである。</p>
+
+<h3>ソリューション型</h3>
+
+<p>成功ロジックの中身をどう書くか。経営でよく上がる話として、ソリューション型、プロダクト型のどちらのビジネスを目指すべきかという点。または両社を目指す場合のコミット度合いの配分をどのように線を引くか。ソリューションは"顧客の課題を解決すること"であり、コンサル、SIなどはここでは含まれる。顧客のビジネスの深い業務知識を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%DD%CD%AD">保有</a>し、そこに対して他の誰も届けることが出来ない課題解決のコミットメントが継続できるのであれば、顧客の成功体験サポートをし満足度を得ることで、安定的な収益を重ねることができる非常に有効なビジネスだ。その一方で顧客に向き合う人数と時間を必要とする人工型になってしまう。</p>
+
+<h3>プロダクト型</h3>
+
+<p>対してプロダクト型とは"自社が開発した製品・商品を必要とされる市場に提供する事"とここでは定義する。モノやサービスを中心として顧客の需要に応えていく方針を持ち、自発的なプロセスを回していく。プロダクト型でも製品の提供結果として顧客の課題を解決する(上記のソリューション)ことは可能なので、ソリューション型の定義の中にプロダクト型も含まれるという定義がより近いであろう。自身たちが作るプロダクトの定義や展開先の市場特定も<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%A2%A5%AF%A5%C6%A5%A3%A5%D6">プロアクティブ</a>な意思決定が可能であり、課題に対する時間のコン<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%ED%A1%BC%A5%EB">トロール</a>が可能。その一方で開発初期においては本当に市場を取れるかどうかの不安が常に残る。</p>
+
+<h3>決定的な違いはなにか</h3>
+
+<p>ソリューション型、プロダクト型の決定的な違いはなにか。それは顧客課題解決に対しての時間の使い方とキャッシュの発生である。どちらを会社の中心ビジネスとして採用するかによって対応する人の姿勢とスキル要件が大きくことなってくるので、会社全体としての顧客課題への向き合い方というものが自然と決定される。ソリューション型は役務ベースでのコミット成果に対する収益であり、プロダクト型は市場浸透に対しての収益となる。両方の型をビジネス目指す会社も多く、特にソリューション型で得られた具体的な知見をヒントに汎用化プロダクト型にシフトしていくやり方だ。ソリューション型の具体例を基に共<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C4%CC%B2%BD">通化</a>して使える部分を抽象化した形で汎用型のテンプレートを開発し、ビジネスや業務の効率を目指すスタンスはソフトウェアの開発業務でもよく行う。会社内でビジネス変換を個別ソリューション型 => 汎用型プロダクト型に行う場合は全社にその戦略転換を伝達し共通理解と認識を持ち、採用要件が異なる中で集められたメンバーで役割を担う組織を作り、実行していく必要がある。</p></blockquote>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201807130219/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201807130219/">久しぶりの投稿</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201807230022/">何を問題とし、どのように解くか</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201807230022/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

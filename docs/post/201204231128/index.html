@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120423/1335148127" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>C&#43;&#43;最速マスター その3 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>C&#43;&#43;最速マスター その3</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Apr 23, 11:28</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="c-c-最速マスター-その3">[C++] : C++最速マスター その3</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873110637/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/516MBZPYNSL._SL160_.jpg" class="hatena-asin-detail-image" alt="C++プログラミング入門" title="C++プログラミング入門"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873110637/yutakikuchi-22/">C++プログラミング入門</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> グレゴリーサティア,ダウグブラウン,Gregory Satir,Doug Brown,望月康司,谷口功</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A1%A6%A5%B8%A5%E3%A5%D1%A5%F3">オライリー・ジャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2001/11</li><li><span class="hatena-asin-detail-label">メディア:</span> 単行本</li><li><span class="hatena-asin-detail-label">購入</span>: 9人 <span class="hatena-asin-detail-label">クリック</span>: 147回</li><li><a href="http://d.hatena.ne.jp/asin/4873110637/yutakikuchi-22" target="_blank">この商品を含むブログ (29件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>index</h4>
+
+<blockquote>
+    
+<ul>
+<li>Char Pointer</li>
+<li>String Function
+<ul>
+<li>wide character / wstring</li>
+<li>atof/atoi/atol</li>
+<li>join/split</li>
+<li>character encoding conversion</li>
+<li>zen2han / han2zen</li>
+<li>kata2hira / hira2kata / latin2kata /  latin2kata / kata2latin/ latin2hira / hira2latin</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Regex">Regex</a>
+<ul>
+<li>regcomp / regexec / regfree / regerror</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>Char Pointer</h4>
+
+<blockquote>
+    <p><a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>の場合string型を使ってしまいがちですが、標準関数がcharにしか対応していない(stringがNG)ことも多くcharの性質を理解しておきます。charは1文字を表す型で配列にすると文字列が表現できます。ポインタにはデータのアドレスが格納、ポインタ変数には配列の先頭アドレスが格納されるのでインクリメントしてアドレスの中身であるデータを取得します。char配列はint配列と性質が異なります。例えばint *pp = {1,2,3,4,5}; は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>エラーになりますが、char *stp = "abcedf";は格納できます。char型だけ特別と考えると良いと思います。<br />
+※RiSKさんからの指摘でint配列の繰り返し文が参照してはいけない添字にアクセスしているという事が分かり、while文を修正しました。(2012/5/1)</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+
+<span class="synType">int</span> main() {
+<span class="synType">int</span> p[] = {<span class="synConstant">1</span>,<span class="synConstant">2</span>,<span class="synConstant">3</span>,<span class="synConstant">4</span>,<span class="synConstant">5</span>};
+<span class="synType">int</span> *pp = &p[<span class="synConstant">0</span>];
+<span class="synComment">// 下はerrorになる</span>
+<span class="synComment">// int *pp = {1,2,3,4,5}; </span>
+<span class="synType">int</span> psize = <span class="synStatement">sizeof</span>( p ) / <span class="synStatement">sizeof</span>( p[<span class="synConstant">0</span>] ); 
+
+   <span class="synType">int</span> n = <span class="synConstant">0</span>;
+<span class="synComment">// int配列の中身を一つずつ出力</span>
+cout << <span class="synConstant">"int array"</span> << endl;
+<span class="synStatement">while</span>( n < psize ) {
+    cout << p[n] << endl;
+    n++;
+}
+
+<span class="synComment">/*</span>
+<span class="synComment">    while( p[n] != '\0' ) {</span>
+<span class="synComment">        cout << p[n] << endl;</span>
+<span class="synComment">        ++n;</span>
+<span class="synComment">    }</span>
+<span class="synComment">    */</span>
+
+putchar( <span class="synSpecial">'\n'</span> );
+
+<span class="synComment">// int配列の中身をポインタで出力</span>
+cout << <span class="synConstant">"int pointer"</span> << endl;
+
+n = <span class="synConstant">0</span>;
+<span class="synStatement">while</span>( n < psize ) {
+    cout << pp << endl;
+    cout << *pp << endl;
+    ++pp;
+    ++n;
+}
+
+<span class="synComment">/*</span>
+<span class="synComment">    while( *pp != '\0' ) {</span>
+<span class="synComment">        cout <<  pp << endl;</span>
+<span class="synComment">        cout <<  *pp << endl;</span>
+<span class="synComment">        ++pp;</span>
+<span class="synComment">    }</span>
+<span class="synComment">    */</span>
+
+putchar( <span class="synSpecial">'\n'</span> );
+
+<span class="synComment">// 文字配列をポインタで参照し一つずつ出力</span>
+cout << <span class="synConstant">"char pointer"</span> << endl;
+<span class="synStatement">while</span>( *stp != <span class="synSpecial">'\0'</span> ) {
+    cout <<  &stp << endl;
+    cout <<  *stp << endl;
+    ++stp;
+}
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>int array
+1
+2
+3
+4
+5
+
+int pointer
+0x7fffb08963e0
+1
+0x7fffb08963e4
+2
+0x7fffb08963e8
+3
+0x7fffb08963ec
+4
+0x7fffb08963f0
+5
+
+char array
+a
+b
+c
+e
+d
+f
+
+char pointer
+0x7fffb08963c8
+a
+0x7fffb08963c8
+b
+0x7fffb08963c8
+c
+0x7fffb08963c8
+e
+0x7fffb08963c8
+d
+0x7fffb08963c8
+f</pre>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>String Function</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>wide character / wstring</h5>
+<p>wstringとは<a class="keyword" href="http://d.hatena.ne.jp/keyword/UNICODE">UNICODE</a>用の文字列格納型です。文字を宣言する時に<span class="deco" style="font-weight:bold;color:#FF0000;">Lの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%C6%A5%E9%A5%EB">リテラル</a></span>を指定することと、単純なcoutでは文字化けするので<span class="deco" style="color:#FF0000;font-weight:bold;">locale設定</span>と<span class="deco" style="color:#FF0000;font-weight:bold;">wcout</span>を使うようにします。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synPreProc">#include </span><span class="synConstant"><string></span>
+<span class="synPreProc">#include </span><span class="synConstant"><locale></span>
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+
+<span class="synType">int</span> main() {
+locale::global(locale(<span class="synConstant">"ja_JP.UTF-8"</span>));
+wstring wstr = <span class="synConstant">L"あいうえお"</span>;
+wcout << wstr << endl;
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>あいうえお</pre>
+</div>
+<div class="section">
+<h5>atof/atoi/atol</h5>
+<p>char型文字列を変換する関数です。atof:double型へ、atoi:int型へ、atol:long型へ変換します。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+
+<span class="synType">int</span> main() {
+
+<span class="synType">char</span> str_i[] = <span class="synConstant">"12345"</span>;
+<span class="synType">char</span> str_d[] = <span class="synConstant">"123.45a"</span>;
+
+<span class="synType">double</span> d = atof( str_d );
+<span class="synType">int</span> i = atoi( str_i );
+<span class="synType">long</span> l = atol( str_d );
+
+cout << i << endl;
+cout << d << endl;
+cout << l << endl;
+
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>12345
+123.45
+123</pre>
+</div>
+<div class="section">
+<h5>join/split</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>の文字列/配列処理でjoin/splitが残念ながら用意されていないので自前で作成します。<a class="keyword" href="http://d.hatena.ne.jp/keyword/vector">vector</a>とstringのappendを使ってjoin、stringstreamとgetlineを利用して<a class="keyword" href="http://d.hatena.ne.jp/keyword/vector">vector</a>にpush_backさせるsplitを簡単に書いてみました。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synPreProc">#include </span><span class="synConstant"><string></span>
+<span class="synPreProc">#include </span><span class="synConstant"><sstream></span>
+<span class="synPreProc">#include </span><span class="synConstant"><vector></span>
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+
+string join( vector<string> &vect, <span class="synType">const</span> string &delimiter ) {
+    vector<string>::iterator it = vect.begin();
+    string result;
+    <span class="synStatement">for</span>( ; it != vect.end(); it++ ) {
+            result.append( *it );
+            <span class="synStatement">if</span>( it + <span class="synConstant">1</span> != vect.end() ) {
+                    result.append( delimiter );
+            }
+    }
+    <span class="synStatement">return</span> result;
+}
+
+vector<string> split( <span class="synType">const</span> string &str, <span class="synType">const</span> <span class="synType">char</span> delimiter ) {
+    vector<string> result;
+    stringstream ss( str );
+    string item;
+    <span class="synStatement">while</span>( getline( ss, item, delimiter ) ) {
+            result.push_back( item );
+    }
+    <span class="synStatement">return</span> result;
+}
+
+<span class="synType">template</span> <<span class="synType">typename</span> T>
+<span class="synType">void</span> show_vector( vector<T> &vect ) {
+    vector<T>::iterator it = vect.begin();
+    cout << <span class="synConstant">"vector values"</span> << endl;
+    <span class="synStatement">for</span>( ; it != vect.end(); it++ ) {
+            cout << *it << endl;
+    }
+}
+
+<span class="synType">int</span> main() {
+    vector<string> v;
+    v.push_back( <span class="synConstant">"a"</span> );
+    v.push_back( <span class="synConstant">"b"</span> );
+    v.push_back( <span class="synConstant">"c"</span> );
+    string r = join( v, <span class="synConstant">","</span> );
+    cout << <span class="synConstant">"join result = "</span> + r << endl;
+    vector<string> vr = split( r, <span class="synConstant">','</span> );
+    show_vector( vr );
+    <span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>join result = a,b,c
+vector values
+a
+b
+c</pre>
+</div>
+<div class="section">
+<h5>character encoding conversion</h5>
+
+<ul>
+<li><a href="http://www.gnu.org/software/libiconv/">libiconv - GNU Project - Free Software Foundation (FSF)</a> <a href="http://b.hatena.ne.jp/entry/www.gnu.org/software/libiconv/"><img src="http://b.hatena.ne.jp/entry/image/http://www.gnu.org/software/libiconv/" alt="はてなブックマーク - libiconv - GNU Project - Free Software Foundation (FSF)" border="0" /></a></li>
+<li><a href="http://site.icu-project.org/">ICU - International Components for Unicode</a> <a href="http://b.hatena.ne.jp/entry/site.icu-project.org/"><img src="http://b.hatena.ne.jp/entry/image/http://site.icu-project.org/" alt="はてなブックマーク - ICU - International Components for Unicode" border="0" /></a></li>
+</ul><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>変換をするにはライブラリを用います。<span class="deco" style="color:#FF0000;font-weight:bold;">libiconv</span>または<span class="deco" style="font-weight:bold;color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/icu">icu</a></span>を用いるのが一般的なようです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/icu">icu</a>のUnicodeStringオブジェクトを介して<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>の変換を行います。以下の例では<a class="keyword" href="http://d.hatena.ne.jp/keyword/utf-8">utf-8</a>の文字列を<a class="keyword" href="http://d.hatena.ne.jp/keyword/euc">euc</a>-jpに変換してファイル保存します。まずは<a class="keyword" href="http://d.hatena.ne.jp/keyword/icu">icu</a>のライブラリが必要になりますが、以下では<a class="keyword" href="http://d.hatena.ne.jp/keyword/centos">centos</a>でのパッケージを載せています。またcompile時に<a class="keyword" href="http://d.hatena.ne.jp/keyword/icu">icu</a>を使うオプションを指定しないとエラーが出るので注意が必要です。</p>
+<pre class="code" data-lang="" data-unlink>$ sudo yum install icu libicu libicu-devel -y</pre><pre class="code" data-lang="" data-unlink>$ g++ `icu-config --cppflags --ldflags` encoding.cpp</pre><pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><string></span>
+<span class="synPreProc">#include </span><span class="synConstant"><fstream></span>
+<span class="synPreProc">#include </span><span class="synConstant"><unicode/unistr.h></span>
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+
+<span class="synType">int</span> main() {
+
+<span class="synComment">// utf-8文字列をファイルから読み込み</span>
+ifstream ifs( <span class="synConstant">"utf8.txt"</span> );
+string str;
+ifs >> str;
+
+<span class="synComment">// Unicodeオブジェクト設定</span>
+UnicodeString src( str.c_str(), <span class="synConstant">"utf8"</span> );
+<span class="synType">char</span> *res = <span class="synStatement">new</span> <span class="synType">char</span>[<span class="synConstant">100</span>];
+
+<span class="synComment">//変換</span>
+src.extract(<span class="synConstant">0</span>, src.length(), res, <span class="synConstant">"euc-jp"</span> );
+
+<span class="synComment">// euc-jpとして保存</span>
+ofstream ofs;
+ofs.open( <span class="synConstant">"euc-jp.txt"</span> );
+ofs << res << endl;
+ofs.close();
+
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><pre class="code" data-lang="" data-unlink>$ nkf -g utf8.txt                                   
+UTF-8
+$ nkf -g euc-jp.txt 
+EUC-JP</pre>
+</div>
+<div class="section">
+<h5>zen2han / han2zen</h5>
+<p><a href="http://icu-project.org/apiref/icu4c/classTransliterator.html">ICU 49.1.1: Transliterator Class Reference</a> <a href="http://b.hatena.ne.jp/entry/icu-project.org/apiref/icu4c/classTransliterator.html"><img src="http://b.hatena.ne.jp/entry/image/http://icu-project.org/apiref/icu4c/classTransliterator.html" alt="はてなブックマーク - ICU 49.1.1: Transliterator Class Reference" border="0" /></a><br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/icu">icu</a>ライブラリを使って全角<=>半角の変換処理を行います。#include "<a class="keyword" href="http://d.hatena.ne.jp/keyword/unicode">unicode</a>/translit.h"設定し<span class="deco" style="color:#FF0000;font-weight:bold;">Transliteratorクラスを使います。</span>Transliteratorクラスに対して変換方法とUnicodeString文字列を渡すだけで変換してくれます。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant">"unicode/translit.h"</span> 
+<span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+
+<span class="synComment">// 変換内部処理</span>
+string ConvertString( UnicodeString str, <span class="synType">const</span> UnicodeString convert_type ) {
+UErrorCode status = U_ZERO_ERROR;
+Transliterator *myTrans = myTrans->createInstance( convert_type, UTRANS_FORWARD, status );
+myTrans->transliterate(str);
+<span class="synType">char</span>* result = <span class="synStatement">new</span> <span class="synType">char</span>[ str.length() + <span class="synConstant">1</span> ];
+str.extract( <span class="synConstant">0</span>, str.length(), result, <span class="synConstant">"utf8"</span> );
+<span class="synStatement">return</span> result; 
+}
+
+<span class="synComment">// 全角 -> 半角IF</span>
+string zen2han( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Fullwidth-Halfwidth"</span> );
+}
+
+<span class="synComment">// 半角-> 全角IF</span>
+string han2zen( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Halfwidth-Fullwidth"</span> );
+}
+
+<span class="synType">int</span> main() {
+cout << zen2han( <span class="synConstant">"アイウエオ"</span> ) << endl;
+cout << han2zen( <span class="synConstant">"ｱｲｳｴｵ"</span> ) << endl;
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>ｱｲｳｴｵ
+アイウエオ</pre>
+</div>
+<div class="section">
+<h5>kata2hira / hira2kata / latin2kata /  latin2kata / kata2latin/ latin2hira / hira2latin</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/icu">icu</a>ライブラリでzen2han,han2zenと同じ方法で<span class="deco" style="color:#FF0000;font-weight:bold;">カタカナ<=>ひらがな、ローマ字<=>カタカナ、ローマ字 <=> ひらがなの変換もできます。</span></p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant">"unicode/translit.h"</span> 
+<span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+
+<span class="synComment">// 変換内部処理</span>
+string ConvertString( UnicodeString str, <span class="synType">const</span> UnicodeString convert_type ) {
+UErrorCode status = U_ZERO_ERROR;
+Transliterator *myTrans = myTrans->createInstance( convert_type, UTRANS_FORWARD, status );
+myTrans->transliterate(str);
+<span class="synType">char</span>* result = <span class="synStatement">new</span> <span class="synType">char</span>[ str.length() + <span class="synConstant">1</span> ];
+str.extract( <span class="synConstant">0</span>, str.length(), result, <span class="synConstant">"utf8"</span> );
+<span class="synStatement">return</span> result; 
+}
+
+<span class="synComment">// 全角 -> 半角IF</span>
+string zen2han( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Fullwidth-Halfwidth"</span> );
+}
+
+<span class="synComment">// 半角-> 全角IF</span>
+string han2zen( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Halfwidth-Fullwidth"</span> );
+}
+
+<span class="synComment">// カタカナ->ひらがな</span>
+string kata2hira( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Katakana-Hiragana"</span> );
+}
+
+<span class="synComment">// ひらがな->カタカナ</span>
+string hira2kata( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Hiragana-Katakana"</span> );
+}
+
+<span class="synComment">// ローマ字->カタカナ </span>
+string latin2kata( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Latin-Katakana"</span> );
+}
+
+<span class="synComment">// カタカナ->ローマ字 </span>
+string kata2latin( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Katakana-Latin"</span> );
+}
+
+<span class="synComment">// ローマ字->ひらがな</span>
+string latin2hira( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Latin-Hiragana"</span> );
+}
+
+<span class="synComment">// ローマ字->ひらがな</span>
+string hira2latin( <span class="synType">const</span> UnicodeString str ) {
+<span class="synStatement">return</span> ConvertString( str, <span class="synConstant">"Hiragana-Latin"</span> );
+}
+
+<span class="synType">int</span> main() {
+cout << zen2han( <span class="synConstant">"アイウエオ"</span> ) << endl;
+cout << han2zen( <span class="synConstant">"ｱｲｳｴｵ"</span> ) << endl;
+cout << kata2hira( <span class="synConstant">"アイウエオ"</span> ) << endl;
+cout << hira2kata( <span class="synConstant">"あいうえお"</span> ) << endl;
+cout << latin2kata( <span class="synConstant">"aiueo"</span> ) << endl;
+cout << kata2latin( <span class="synConstant">"アイウエオ"</span> ) << endl;
+cout << latin2hira( <span class="synConstant">"aiueo"</span> ) << endl;
+cout << hira2latin( <span class="synConstant">"あいうえお"</span> ) << endl;
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>ｱｲｳｴｵ
+アイウエオ
+あいうえお
+アイウエオ
+アイウエオ
+aiueo
+あいうえお
+aiueo</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Regex">Regex</a></h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>regcomp / regexec / regfree / regerror</h5>
+<p><a href="http://www.jp.freebsd.org/cgi/mroff.cgi?sect=3&subdir=man&lc=1&cmd=&dir=jpman-8.1.2/man&man=regcomp">On-line Manual of "regcomp"</a> <a href="http://b.hatena.ne.jp/entry/www.jp.freebsd.org/cgi/mroff.cgi?sect=3&subdir=man&lc=1&cmd=&dir=jpman-8.1.2/man&man=regcomp"><img src="http://b.hatena.ne.jp/entry/image/http://www.jp.freebsd.org/cgi/mroff.cgi?sect=3&subdir=man&lc=1&cmd=&dir=jpman-8.1.2/man&man=regcomp" alt="はてなブックマーク - On-line Manual of "regcomp"" border="0" /></a><br />
+boostライブラリを使うと<a class="keyword" href="http://d.hatena.ne.jp/keyword/regex">regex</a>が簡単に実装できますが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/regex">regex</a>を入れるのは面倒なのでできるかぎり標準関数で使いたいです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>というよりはCの記述ですが以下のように実装可能です。regcomp : <a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%EB">コンパイル</a>、regexec : <a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>検索、regfree:<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C0%B5%B5%AC%C9%BD%B8%BD">正規表現</a>の記憶域をfreeにする、regerror:エラーコードのメッセージを人が読めるように変形。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synPreProc">#include </span><span class="synConstant"><regex.h></span>
+<span class="synPreProc">#include </span><span class="synConstant"><iostream></span>
+<span class="synStatement">using</span> <span class="synType">namespace</span> std;
+
+<span class="synType">void</span> print_match( <span class="synType">char</span> *str, <span class="synType">int</span> start, <span class="synType">int</span> end ) {
+<span class="synType">char</span> tmp[<span class="synConstant">10</span>];
+str += start;
+end -= start;
+strncpy( tmp, str, end );
+tmp[end] = <span class="synSpecial">'\0'</span>;
+cout << tmp << endl;
+}
+
+<span class="synType">int</span> main() {
+<span class="synComment">//正規表現 </span>
+<span class="synType">char</span> *regex = <span class="synConstant">"(reg)no(test)"</span>;
+<span class="synComment">//検索文字列</span>
+<span class="synType">char</span> *str = <span class="synConstant">"koreha regnotest desu"</span>;
+
+<span class="synComment">//コンパイルする正規表現文字列</span>
+regex_t regext;
+<span class="synComment">//マッチ件数</span>
+regmatch_t match[<span class="synConstant">3</span>];
+
+<span class="synComment">//コンパイル</span>
+<span class="synStatement">if</span>( regcomp( &regext, regex, REG_EXTENDED | REG_NEWLINE ) ) {
+    cout << <span class="synConstant">"regex compile failed"</span> << endl;
+    <span class="synStatement">return</span> <span class="synConstant">1</span>;
+}
+
+<span class="synComment">//実行</span>
+<span class="synStatement">if</span>( regexec( &regext, str, <span class="synConstant">3</span>, match, <span class="synConstant">0</span> ) ) {
+    cout << <span class="synConstant">"Not Found"</span> << endl;
+    <span class="synStatement">return</span> <span class="synConstant">1</span>;
+}
+
+<span class="synComment">//出力</span>
+print_match( str, match[<span class="synConstant">0</span>].rm_so, match[<span class="synConstant">0</span>].rm_eo );
+print_match( str, match[<span class="synConstant">1</span>].rm_so, match[<span class="synConstant">1</span>].rm_eo );
+print_match( str, match[<span class="synConstant">2</span>].rm_so, match[<span class="synConstant">2</span>].rm_eo );
+
+<span class="synComment">//解放</span>
+regfree( &regext );
+<span class="synStatement">return</span> <span class="synConstant">0</span>;
+}
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>regnotest
+reg
+test</pre>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201204200839/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201204200839/">C&#43;&#43;最速マスター その2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201204270829/">Javaを最速でマスターするための予備知識7項目</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201204270829/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

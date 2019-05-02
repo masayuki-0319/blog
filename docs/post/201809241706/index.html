@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/2018/09/24/170650" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Kerasでお試しCNN &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Kerasでお試しCNN</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2018 Sep 24, 17:06</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="etc-kerasでお試しcnn">[etc] : Kerasでお試しCNN</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117585/yutakikuchi-22/"><img src="https://images-fe.ssl-images-amazon.com/images/I/512ru2i5gyL._SL160_.jpg" class="hatena-asin-detail-image" alt="ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装" title="ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117585/yutakikuchi-22/">ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> 斎藤康毅</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2016/09/24</li><li><span class="hatena-asin-detail-label">メディア:</span> 単行本（ソフトカバー）</li><li><a href="http://d.hatena.ne.jp/asin/4873117585/yutakikuchi-22" target="_blank">この商品を含むブログ (18件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<p>30分でDeepLearningを実行できるようにお試しするキット。手っ取り早く始めるためにkeras(Tensorflow backend)をinstall。kerasについては下記のページで紹介されている。 尚、下にinstallのlogを残しているがkerasの前にBackendとなるTensorflowをinstallすると良い。</p>
+
+<p><i>引用 : Kerasは，<a class="keyword" href="http://d.hatena.ne.jp/keyword/Python">Python</a>で書かれた，TensorFlowまたはCNTK，Theano上で実行可能な高水準の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CB%A5%E5%A1%BC%A5%E9%A5%EB%A5%CD%A5%C3%A5%C8%A5%EF%A1%BC%A5%AF">ニューラルネットワーク</a>ライブラリです． Kerasは，迅速な実験を可能にすることに重点を置いて開発されました． ア<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%C7%A5%A2">イデア</a>から結果に到達するまでのリードタイムをできるだけ小さくすることが，良い研究をするための鍵になります．</i>
+<a href="https://keras.io/ja/">Keras Documentation</a></p>
+
+<pre class="hljs sh" data-lang="sh" data-unlink>$ sudo pip install keras
+
+Cannot uninstall <span class="synStatement">'</span><span class="synConstant">six</span><span class="synStatement">'</span>. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial
+ uninstall.
+
+// sixを再度install
+$ sudo pip install keras <span class="synSpecial">--ignore-installed</span> six
+
+Installing collected packages: six, numpy, h5py, keras-applications, scipy, keras-preprocessing, pyyaml, keras
+  Running setup.py install <span class="synStatement">for</span> pyyaml ... <span class="synError">done</span>
+Successfully installed h5py-2.8.0 keras-2.2.2 keras-applications-1.0.4 keras-preprocessing-1.0.2 numpy-1.15.2 pyyaml-3.13 scipy-1.1.0 six-1.11.0
+
+// pythonで実行するが失敗
+$ python
+python
+Python 2.7.10 <span class="synPreProc">(</span>default, Oct  <span class="synConstant">6</span> <span class="synConstant">2017</span>, <span class="synConstant">22</span>:<span class="synConstant">29</span>:<span class="synConstant">07</span><span class="synPreProc">)</span>
+<span class="synStatement">[</span>GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.31)<span class="synStatement">]</span> on darwin
+Type <span class="synStatement">"</span><span class="synConstant">help</span><span class="synStatement">"</span>, <span class="synStatement">"</span><span class="synConstant">copyright</span><span class="synStatement">"</span>, <span class="synStatement">"</span><span class="synConstant">credits</span><span class="synStatement">"</span> or <span class="synStatement">"</span><span class="synConstant">license</span><span class="synStatement">"</span> <span class="synStatement">for</span> more information.
+<span class="synStatement">>>></span> from keras.models import Sequential
+
+ImportError: No module named tensorflow
+
+// tensorflowをinstall
+$ sudo pip install tensorflow tf-nightly
+
+Successfully installed absl-py-0.5.0 astor-0.7.1 backports.weakref-1.0.post1 enum34-1.1.6 funcsigs-1.0.2 gast-0.2.0 grpcio-1.15.0 keras-applications-1.0.5 keras-preprocessing-1.0.3 markdown-3.0 mock-2.0.0 numpy-1.14.5 pbr-4.2.0 protobuf-3.6.1 tb-nightly-1.11.0a20180923 tensorboard-1.10.0 tensorflow-1.10.1 termcolor-1.1.0 tf-nightly-1.12.0.dev20180923 werkzeug-0.14.1 wheel-0.31.1
+
+// 再度pythonで実行
+$ python
+python
+Python 2.7.10 <span class="synPreProc">(</span>default, Oct  <span class="synConstant">6</span> <span class="synConstant">2017</span>, <span class="synConstant">22</span>:<span class="synConstant">29</span>:<span class="synConstant">07</span><span class="synPreProc">)</span>
+<span class="synStatement">[</span>GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.31)<span class="synStatement">]</span> on darwin
+Type <span class="synStatement">"</span><span class="synConstant">help</span><span class="synStatement">"</span>, <span class="synStatement">"</span><span class="synConstant">copyright</span><span class="synStatement">"</span>, <span class="synStatement">"</span><span class="synConstant">credits</span><span class="synStatement">"</span> or <span class="synStatement">"</span><span class="synConstant">license</span><span class="synStatement">"</span> <span class="synStatement">for</span> more information.
+<span class="synStatement">>>></span> from keras.models import Sequential
+Using TensorFlow backend.
+</pre>
+
+<p>Kerasのexampleは下記の<a class="keyword" href="http://d.hatena.ne.jp/keyword/github">github</a>にまとまっている。その中でもCIFAR-10の画像を分類する問題を解く。CIFAR-10は32x32pixelの6000枚x10Classの合計60000枚の画像Datasetである。60000枚のうちTrainingが50000枚、残りはEvaluation用として利用される。DownloadしたDatasetの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%A3%A5%EC%A5%AF%A5%C8">ディレクト</a>リ以下のpickleファイルは下記のように置かれている。batches.metaには各Classの画像数とラベル名、data_batch_xには<a class="keyword" href="http://d.hatena.ne.jp/keyword/python">python</a>のdictionaryオブジェクト、これらを意味するのは各画像ファイル名とそれが属するClass名を含む形式で保存されている。
+<a href="https://github.com/keras-team/keras/tree/master/examples">keras/examples at master &middot; keras-team/keras &middot; GitHub</a>
+<a href="http://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10 and CIFAR-100 datasets</a></p>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20180924/20180924042148.png" alt="f:id:yutakikuchi:20180924042148p:plain" title="f:id:yutakikuchi:20180924042148p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+<pre class="hljs sh" data-lang="sh" data-unlink>$ tree cifar<span class="synConstant">-10</span>-batches-py
+cifar<span class="synConstant">-10</span>-batches-py
+├──    batches.meta
+├──    data_batch_1
+├──    data_batch_2
+├──    data_batch_3
+├──    data_batch_4
+├──    data_batch_5
+├──    readme.html
+└── test_batch
+</pre>
+
+<pre class="hljs python" data-lang="python" data-unlink>$ less read.py
+<span class="synPreProc">import</span> pickle
+<span class="synPreProc">import</span> sys
+
+file_name = sys.argv[<span class="synConstant">1</span>]
+f = <span class="synIdentifier">file</span>(file_name, <span class="synConstant">'rb'</span>)
+<span class="synIdentifier">print</span> pickle.load(f)
+
+$ python read.py batches.meta
+{<span class="synConstant">'num_cases_per_batch'</span>: <span class="synConstant">10000</span>, <span class="synConstant">'label_names'</span>: [<span class="synConstant">'airplane'</span>, <span class="synConstant">'automobile'</span>, <span class="synConstant">'bird'</span>, <span class="synConstant">'cat'</span>, <span class="synConstant">'deer'</span>, <span class="synConstant">'dog'</span>, <span class="synConstant">'frog'</span>, <span class="synConstant">'horse'</span>, <span class="synConstant">'ship'</span>, <span class="synConstant">'truck'</span>], <span class="synConstant">'num_vis'</span>: <span class="synConstant">3072</span>}
+$ python read.py data_batch_1
+... <span class="synConstant">'estate_car_s_001433.png'</span>, <span class="synConstant">'cur_s_000170.png'</span>]}
+</pre>
+
+<p>次にkerasの<a class="keyword" href="http://d.hatena.ne.jp/keyword/github">github</a>からexampleを落としてくる。example<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%A3%A5%EC%A5%AF%A5%C8">ディレクト</a>リ配下にある<code>cifar10_cnn.py</code>の実行を行う。cifar10_cnn.pyはCIFAR10のDataset、CNN(Convolutional Neural Network)を用いた実装のsampleとなる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/github">github</a>にあるサンプルをそのまま実行するとエラーが生じるので、下記のdiffを反映する必要がある。</p>
+
+<p>ref : <a href="https://github.com/keras-team/keras/blob/master/examples/cifar10_cnn.py">https://github.com/keras-team/keras/blob/master/examples/cifar10_cnn.py</a></p>
+
+<pre class="hljs python" data-lang="python" data-unlink>$ git clone git<span class="synPreProc">@</span><span class="synIdentifier">github.com</span>:keras-team/keras.git
+$ cd keras/examples
+$ python cifar10_cnn.py
+
+<span class="synType">ValueError</span>: `data_format` should be `<span class="synConstant">"channels_last"</span>` (channel after row <span class="synStatement">and</span> column) <span class="synStatement">or</span> `<span class="synConstant">"channels_first"</span>` (channel before row <span class="synStatement">and</span> column). Received: <span class="synIdentifier">None</span>
+<span class="synType">ValueError</span>: `steps_per_epoch=<span class="synIdentifier">None</span>` <span class="synStatement">is</span> only valid <span class="synStatement">for</span> a generator based on the `keras.utils.Sequence` <span class="synStatement">class</span>. Please specify `steps_per_epoch` <span class="synStatement">or</span> use the `keras.utils.Sequence` <span class="synStatement">class</span>.
+
+$ diff -u cifar10_cnn.py.bak cifar10_cnn.py
+--- cifar10_cnn.py.bak  <span class="synConstant">2018</span>-09-<span class="synConstant">24</span> <span class="synConstant">03</span>:<span class="synConstant">24</span>:<span class="synConstant">17.000000000</span> +0900
++++ cifar10_cnn.py      <span class="synConstant">2018</span>-09-<span class="synConstant">24</span> <span class="synConstant">05</span>:<span class="synConstant">00</span>:<span class="synConstant">33.000000000</span> +0900
+<span class="synPreProc">@@</span> -<span class="synConstant">11</span>,<span class="synConstant">6</span> +<span class="synConstant">11</span>,<span class="synConstant">7</span> <span class="synPreProc">@@</span>
+ <span class="synPreProc">from</span> keras.models <span class="synPreProc">import</span> Sequential
+ <span class="synPreProc">from</span> keras.layers <span class="synPreProc">import</span> Dense, Dropout, Activation, Flatten
+ <span class="synPreProc">from</span> keras.layers <span class="synPreProc">import</span> Conv2D, MaxPooling2D
++<span class="synPreProc">import</span> numpy <span class="synStatement">as</span> np
+ <span class="synPreProc">import</span> os
+
+ batch_size = <span class="synConstant">32</span>
+<span class="synPreProc">@@</span> -<span class="synConstant">102</span>,<span class="synConstant">7</span> +<span class="synConstant">103</span>,<span class="synConstant">7</span> <span class="synPreProc">@@</span>
+     <span class="synComment"># set function that will be applied on each input</span>
+     preprocessing_function=<span class="synIdentifier">None</span>,
+     <span class="synComment"># image data format, either "channels_first" or "channels_last"</span>
+-        data_format=<span class="synIdentifier">None</span>,
++        data_format=<span class="synConstant">"channels_last"</span>,
+     <span class="synComment"># fraction of images reserved for validation (strictly between 0 and 1)</span>
+     validation_split=<span class="synConstant">0.0</span>)
+
+<span class="synPreProc">@@</span> -<span class="synConstant">113</span>,<span class="synConstant">6</span> +<span class="synConstant">114</span>,<span class="synConstant">7</span> <span class="synPreProc">@@</span>
+ <span class="synComment"># Fit the model on the batches generated by datagen.flow().</span>
+ model.fit_generator(datagen.flow(x_train, y_train,
+                                  batch_size=batch_size),
++                        steps_per_epoch=<span class="synIdentifier">int</span>(np.ceil(x_train.shape[<span class="synConstant">0</span>] / <span class="synIdentifier">float</span>(batch_size))),
+                     epochs=epochs,
+                     validation_data=(x_test, y_test),
+                     workers=<span class="synConstant">4</span>)
+</pre>
+
+<p><code>cifar10_cnn.py</code>でやっていることは簡単で、KerasのSequential Modelを利用して複数層を追加している。最終的に出力する分類数(Class数)は前述の通り10個、Data AugmentationをTrueにしているので画像あえて加工したものを水増ししてCNNの入力とし、Modelの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A5%D0%A5%B9%A5%C8">ロバスト</a>性を高める目的でflagが設定されている。(もちろんFalseで実行することもできる。) batch_sizeの指定はミニバッチとして1度に取り組むデータ(画像)の数であり、全てのClassからbatch_size分のデータをランダムで取得する。1epochとはバッチサイズで指定したサンプルデータを全て使用した状態を示す。よって今回のTrainingで利用する画像数は50000枚、それを32のバッチサイズで画像数を定義するので、<code>50000 / 32 = 1563</code> 1563回のバッチを実施する。1バッチでパラメータを更新するので、1563回の更新が1epoch内で繰り返される。epochsで指定されている100回は1epochを100回実行すること。ややこしいので再度まとめると以下のようになる。</p>
+
+<ul>
+<li>batch_size : Datasetの中で何個のDataをサンプルして1回のバッチで利用するかを定義する。</li>
+<li>steps_per_epoch : 1epoch内において何回バッチにてパラメータを更新するかを定義する。</li>
+<li>1epoch : batch_sizeをsteps_per_epoch回繰り返して全てのDatasetを参照した状態を1epochとする。</li>
+</ul>
+
+<pre class="hljs python" data-lang="python" data-unlink>batch_size = <span class="synConstant">32</span>
+num_classes = <span class="synConstant">10</span>
+epochs = <span class="synConstant">100</span>
+data_augmentation = <span class="synIdentifier">True</span>
+</pre>
+
+<p>Sequential Modelのaddを利用して層を追加。例えば下記は2次元の畳み込みレイヤーを追加している。Conv2Dの最初の引数は畳み込みにおける出力フィルタの数、第二引数は<a class="keyword" href="http://d.hatena.ne.jp/keyword/3x3">3x3</a>の畳み込み処理を適用することを意味する。input_shapeについては今回1画像のサイズが32x32、RGBなので3層あるということで、x_train.shape[1:]の値は(32, 32, 3)となっている。Sequential Modelの最初の層にはinput_shapeの情報が必ず必要。
+<a href="https://keras.io/ja/getting-started/sequential-model-guide/">Sequentialモデルのガイド - Keras Documentation</a></p>
+
+<pre class="hljs python" data-lang="python" data-unlink>model = Sequential()
+model.add(Conv2D(<span class="synConstant">32</span>, (<span class="synConstant">3</span>, <span class="synConstant">3</span>), padding=<span class="synConstant">'same'</span>,
+             input_shape=x_train.shape[<span class="synConstant">1</span>:]))
+</pre>
+
+<p>model.summary()で各LayerとOutput Shape、Paramを確認することができる。ネットワークの構成としては次のもの。<code>INPUT => CONV * 2 => POOL  => CONV *2 => POOL => DENSE * 2 => OUTPUT</code>。CNNの基本は畳み込み層とプーリング層で構成される。間に活性化関数を挟んでいるが、層としては取り扱わない(実際にはCONV層の活性化を図っている)。</p>
+
+<ul>
+<li>CONV : 畳み込み層。フィルタの大きさを指定し、入力データの特徴マップを作成するために各フィルタでの畳込みの結果を出力する。</li>
+<li>RELU : ここではCONVの出力に対して活性化関数(ランプ関数)を適用。</li>
+<li>POOL : プーリング演算を適用。CONV層の後に適用され、画像データ等の入力データを扱いやすくするために重要な情報は残しながら圧縮するDown Samplingを行う。</li>
+<li>DENSE : 全結合層。出力層の手前で実行され、出力はClassに分類される確率といった重みになる。  出力層の数は判別したいClass数に一致する必要がある。</li>
+</ul>
+
+<pre class="hljs python" data-lang="python" data-unlink>_________________________________________________________________
+Layer (<span class="synIdentifier">type</span>)                 Output Shape              Param <span class="synComment">#   </span>
+=================================================================
+conv2d_5 (Conv2D)            (<span class="synIdentifier">None</span>, <span class="synConstant">32</span>, <span class="synConstant">32</span>, <span class="synConstant">32</span>)        <span class="synConstant">896</span>       
+_________________________________________________________________
+activation_7 (Activation)    (<span class="synIdentifier">None</span>, <span class="synConstant">32</span>, <span class="synConstant">32</span>, <span class="synConstant">32</span>)        <span class="synConstant">0</span>         
+_________________________________________________________________
+conv2d_6 (Conv2D)            (<span class="synIdentifier">None</span>, <span class="synConstant">30</span>, <span class="synConstant">30</span>, <span class="synConstant">32</span>)        <span class="synConstant">9248</span>      
+_________________________________________________________________
+activation_8 (Activation)    (<span class="synIdentifier">None</span>, <span class="synConstant">30</span>, <span class="synConstant">30</span>, <span class="synConstant">32</span>)        <span class="synConstant">0</span>         
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (<span class="synIdentifier">None</span>, <span class="synConstant">15</span>, <span class="synConstant">15</span>, <span class="synConstant">32</span>)        <span class="synConstant">0</span>         
+_________________________________________________________________
+dropout_4 (Dropout)          (<span class="synIdentifier">None</span>, <span class="synConstant">15</span>, <span class="synConstant">15</span>, <span class="synConstant">32</span>)        <span class="synConstant">0</span>         
+_________________________________________________________________
+conv2d_7 (Conv2D)            (<span class="synIdentifier">None</span>, <span class="synConstant">15</span>, <span class="synConstant">15</span>, <span class="synConstant">64</span>)        <span class="synConstant">18496</span>     
+_________________________________________________________________
+activation_9 (Activation)    (<span class="synIdentifier">None</span>, <span class="synConstant">15</span>, <span class="synConstant">15</span>, <span class="synConstant">64</span>)        <span class="synConstant">0</span>         
+_________________________________________________________________
+conv2d_8 (Conv2D)            (<span class="synIdentifier">None</span>, <span class="synConstant">13</span>, <span class="synConstant">13</span>, <span class="synConstant">64</span>)        <span class="synConstant">36928</span>     
+_________________________________________________________________
+activation_10 (Activation)   (<span class="synIdentifier">None</span>, <span class="synConstant">13</span>, <span class="synConstant">13</span>, <span class="synConstant">64</span>)        <span class="synConstant">0</span>         
+_________________________________________________________________
+max_pooling2d_4 (MaxPooling2 (<span class="synIdentifier">None</span>, <span class="synConstant">6</span>, <span class="synConstant">6</span>, <span class="synConstant">64</span>)          <span class="synConstant">0</span>         
+_________________________________________________________________
+dropout_5 (Dropout)          (<span class="synIdentifier">None</span>, <span class="synConstant">6</span>, <span class="synConstant">6</span>, <span class="synConstant">64</span>)          <span class="synConstant">0</span>         
+_________________________________________________________________
+flatten_2 (Flatten)          (<span class="synIdentifier">None</span>, <span class="synConstant">2304</span>)              <span class="synConstant">0</span>         
+_________________________________________________________________
+dense_3 (Dense)              (<span class="synIdentifier">None</span>, <span class="synConstant">512</span>)               <span class="synConstant">1180160</span>   
+_________________________________________________________________
+activation_11 (Activation)   (<span class="synIdentifier">None</span>, <span class="synConstant">512</span>)               <span class="synConstant">0</span>         
+_________________________________________________________________
+dropout_6 (Dropout)          (<span class="synIdentifier">None</span>, <span class="synConstant">512</span>)               <span class="synConstant">0</span>         
+_________________________________________________________________
+dense_4 (Dense)              (<span class="synIdentifier">None</span>, <span class="synConstant">10</span>)                <span class="synConstant">5130</span>      
+_________________________________________________________________
+activation_12 (Activation)   (<span class="synIdentifier">None</span>, <span class="synConstant">10</span>)                <span class="synConstant">0</span>         
+=================================================================
+Total params: <span class="synConstant">1</span>,<span class="synConstant">250</span>,<span class="synConstant">858</span>
+Trainable params: <span class="synConstant">1</span>,<span class="synConstant">250</span>,<span class="synConstant">858</span>
+Non-trainable params: <span class="synConstant">0</span>
+_________________________________________________________________
+</pre>
+
+<p>Modelの学習にはcompileメソッドを利用する。loss関数として交差<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%C8%A5%ED%A5%D4%A1%BC">エントロピー</a>、最適化手法としてRMSprop、評価指標としてはaccuracyを出力する。学習済みモデルと重みは指定したファイルに出力することができる。100epoch回した結果としての最終Accuracyは73.4%ということが分かる。</p>
+
+<pre class="hljs python" data-lang="python" data-unlink>
+<span class="synComment"># Let's train the model using RMSprop</span>
+model.<span class="synIdentifier">compile</span>(loss=<span class="synConstant">'categorical_crossentropy'</span>,
+          optimizer=opt,
+          metrics=[<span class="synConstant">'accuracy'</span>])
+
+<span class="synComment"># Save model and weights</span>
+<span class="synStatement">if</span> <span class="synStatement">not</span> os.path.isdir(save_dir):
+os.makedirs(save_dir)
+model_path = os.path.join(save_dir, model_name)
+model.save(model_path)
+<span class="synIdentifier">print</span>(<span class="synConstant">'Saved trained model at %s '</span> % model_path)
+
+<span class="synComment"># Score trained model.</span>
+scores = model.evaluate(x_test, y_test, verbose=<span class="synConstant">1</span>)
+<span class="synIdentifier">print</span>(<span class="synConstant">'Test loss:'</span>, scores[<span class="synConstant">0</span>])
+<span class="synIdentifier">print</span>(<span class="synConstant">'Test accuracy:'</span>, scores[<span class="synConstant">1</span>])
+
+Epoch <span class="synConstant">99</span>/<span class="synConstant">100</span>
+<span class="synConstant">1563</span>/<span class="synConstant">1563</span> [==============================] - 225s 144ms/step - loss: <span class="synConstant">0.8315</span> - acc: <span class="synConstant">0.7239</span> - val_loss: <span class="synConstant">0.7454</span> - val_acc: <span class="synConstant">0.7533</span>
+Epoch <span class="synConstant">100</span>/<span class="synConstant">100</span>
+<span class="synConstant">1563</span>/<span class="synConstant">1563</span> [==============================] - 221s 142ms/step - loss: <span class="synConstant">0.8340</span> - acc: <span class="synConstant">0.7233</span> - val_loss: <span class="synConstant">0.7877</span> - val_acc: <span class="synConstant">0.7354</span>
+Saved trained model at /xxxx/git/keras/examples/saved_models/keras_cifar10_trained_model.h5
+<span class="synConstant">10000</span>/<span class="synConstant">10000</span> [==============================] - 12s 1ms/step
+Test loss: <span class="synConstant">0.7876939533233642</span>
+Test accuracy: <span class="synConstant">0.7354</span>
+</pre>
+
+<p>出力されたh5のファイルからモデルを参照する事も可能。ただし、これを実行する上ではいくつかのpydot系のmoduleをpip installと<a class="keyword" href="http://d.hatena.ne.jp/keyword/graphviz">graphviz</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/brew">brew</a> installしなしなければならないので注意が必要。plot_modelの結果は図のように出力される。</p>
+
+<pre class="hljs python" data-lang="python" data-unlink>$ pip install pydot
+$ brew install graphviz
+
+<span class="synPreProc">from</span> keras.models <span class="synPreProc">import</span> load_model
+model= load_model(<span class="synConstant">'./saved_models/keras_cifar10_trained_model.h5'</span>)
+model.summary()
+
+<span class="synPreProc">from</span> keras.utils <span class="synPreProc">import</span> plot_model
+plot_model(model, <span class="synConstant">'model.png'</span>)
+</pre>
+
+<p><span itemscope itemtype="http://schema.org/Photograph"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/y/yutakikuchi/20180924/20180924170532.png" alt="f:id:yutakikuchi:20180924170532p:plain:h300" title="f:id:yutakikuchi:20180924170532p:plain:h300" class="hatena-fotolife" style="height:300px" itemprop="image"></span></p>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201809180049/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201809180049/">tmux : powerlineの表示ズレを解消する</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201904292103/">Docker for Macのメモリ制限の調整</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201904292103/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

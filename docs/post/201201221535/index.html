@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20120122/1327214127" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>実践 ハイパフォーマンスMySQL(第2版)を斜め読みして前半の重要なポイントだけをまとめてみた &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>実践 ハイパフォーマンスMySQL(第2版)を斜め読みして前半の重要なポイントだけをまとめてみた</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2012 Jan 22, 15:35</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="mysql-実践-ハイパフォーマンスmysql-第2版-を斜め読みして前半の重要なポイントだけをまとめてみた">[Mysql] : 実践 ハイパフォーマンスMySQL(第2版)を斜め読みして前半の重要なポイントだけをまとめてみた</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114268/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/51ifm2PPAaL._SL160_.jpg" class="hatena-asin-detail-image" alt="実践ハイパフォーマンスMySQL 第2版" title="実践ハイパフォーマンスMySQL 第2版"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114268/yutakikuchi-22/">実践ハイパフォーマンスMySQL 第2版</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Baron Schwartz,Peter Zaitsev,Vadim Tkachenko,Jeremy D. Zawodny,Arjen Lentz,Derek J. Balling,<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%CB%C6%A3%C4%BE%CC%E9">伊藤直也</a>(監訳),田中慎司(監訳),吉川英興(監訳),<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B3%F4%BC%B0%B2%F1%BC%D2%A5%AF%A5%A4%A1%BC%A5%D7">株式会社クイープ</a></li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2009/12/14</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 17人 <span class="hatena-asin-detail-label">クリック</span>: 373回</li><li><a href="http://d.hatena.ne.jp/asin/4873114268/yutakikuchi-22" target="_blank">この商品を含むブログ (46件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<blockquote>
+    <p>実践ハイパフォーマンス<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>ですが<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>開発者にとっては誰もが目を通しておいた方が良いと推薦される本なので重要なポイントだけをまとめてみたいと思います。まだ前半しか読んでいませんが<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>の細かいテクニックが載っていて感動です。全部で700ページ近くある本なので斜め読みをした結果を載せて行きます。内容としては実践的なものをカットし、理論的なものだけを抽出しています。今回の記事だけでなく<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4%B2%F3">複数回</a>に分けて内容を紹介したいと思います。この記事とは関係なく過去にIndexについての記事を書いたのでそちらも参照してもらえればと思います。<a href="http://d.hatena.ne.jp/yutakikuchi/20110418/1303083112">MYSQL INDEXのまとめ - Yuta.Kikuchiの日記</a> <a href="http://b.hatena.ne.jp/entry/d.hatena.ne.jp/yutakikuchi/20110418/1303083112"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/yutakikuchi/20110418/1303083112" alt="はてなブックマーク - MYSQL INDEXのまとめ - Yuta.Kikuchiの日記" border="0" /></a></p>
+
+</blockquote>
+
+<div class="section">
+<h4>目次</h4>
+
+<blockquote>
+    
+<ol>
+<li>1章 <a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A1%BC%A5%AD%A5%C6%A5%AF%A5%C1%A5%E3">アーキテクチャ</a>
+<ol>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>の論理<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A1%BC%A5%AD%A5%C6%A5%AF%A5%C1%A5%E3">アーキテクチャ</a></li>
+<li>平行性の制御</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a></li>
+<li>マルチバージョンの平行性制御(MVCC)</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>のストレージエンジン</li>
+</ol></li>
+<li>2章 <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DC%A5%C8%A5%EB%A5%CD%A5%C3%A5%AF">ボトルネック</a>の検出:<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>とプロファイリング
+<ol>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>を実行する理由</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>戦略</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>戦術</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a></li>
+</ol></li>
+<li>3章 <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>の最適化とインデックス
+<ol>
+<li>最適なデータ型の戦略</li>
+<li>インデックスの基礎</li>
+<li>高いパフォーマンスを実現するためのインデックス戦略</li>
+<li>インデックスの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B1%A1%BC%A5%B9%A5%B9%A5%BF%A5%C7%A5%A3">ケーススタディ</a></li>
+<li>インデックスとテーブルの管理</li>
+<li>正規化と非正規化</li>
+<li>ALTER TABLEの高速化</li>
+<li>ストレージエンジンに関する注意点</li>
+</ol></li>
+</ol>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A1%BC%A5%AD%A5%C6%A5%AF%A5%C1%A5%E3">アーキテクチャ</a></h4>
+
+<blockquote>
+    
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>の論理<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A1%BC%A5%AD%A5%C6%A5%AF%A5%C1%A5%E3">アーキテクチャ</a></h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>の論理的な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A1%BC%A5%AD%A5%C6%A5%AF%A5%C1%A5%E3">アーキテクチャ</a>は以下の3つのレイヤから構成される。
+<ul>
+<li>接続管理とセキュリティ</li>
+<li>最適化と実行</li>
+<li>ストレージエンジン</li>
+</ul></li>
+<li>最適化と実行例レイヤが<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>の中枢であり、Query解析、分析、最適化、キャッシュ、組み込み関数、ストアドプロシージャ、トリガ、ビューなどが含まれる。</li>
+<li>ストレージエンジン間の違いを吸収するためサーバとエンジンは<a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a>を経由してデータのやり取りを行う。</li>
+<li>クライアントから接続されるときは1つのスレッドを作成し、スレッドはコアやCPUと関連付けられる。スレッドは常にキャッシュされる。</li>
+<li>接続は<a class="keyword" href="http://d.hatena.ne.jp/keyword/SSL">SSL</a>でも可能である。</li>
+<li>最適化のレイヤではQueryを解析して内部構造を作成し、Queryの書き換え、テーブルを読み取る順序、使用するインデックスの選択などが行われる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザが最適化を試みる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザについては後で詳しく説明。</li>
+<li>発行したQueryに対する結果がキャッシュされていれば(クエリキャッシュ)ばその結果を返すだけ。</li>
+</ul>
+</div>
+<div class="section">
+<h5>平行性の制御</h5>
+
+<ul>
+<li>データベースの世界ではロック問題が絶え間なく発生する。ロックシステムの実装は大きく分けて次の２点
+<ul>
+<li>共有ロック(読み取りロック)</li>
+<li>排他ロック(書き込みロック)</li>
+</ul></li>
+<li>ロックの粒度でロック対象のデータ容量を最小に抑える事が望ましい。</li>
+<li>ロックのオーバヘッド(ロックの取得、チェック、解除)にリソースが取られパフォーマンスが低下する可能性がある。</li>
+<li>テーブルロックは最もオーバヘッドが低い。テーブル全体をロックするから1クライアントが書き込み中は他のクライアントからの読み取りや書き込みは全て拒否される。</li>
+<li>書き込みロックは読み取りロックよりも常に優先される。</li>
+<li>行ロックは平行性が最も高いがオーバーヘッドも同様に高い。行ロックはストレージエンジンで実装されている。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a></h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>とは1つの作業単位として不可分に扱われるSQLQueryの集まり。処理を一つにまとめて失敗した時は処理全体を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%EB%A5%D0%A5%C3%A5%AF">ロールバック</a>する事を可能にする。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>はACID特性を持つ必要がある。Atomicity(不可分性)、Consistency(一貫性)、Isolaction(分離性)、Durability(永続性)</li>
+<li>トランザクジョンもパフォーマンスを下げるので、不必要であれば<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>に対応しないストレージエンジンを選ぶ事によって改善できる可能性がある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>は4つの分離レベルが定義されている。分離レベルが低いほど平行性が高くなる。READ UNCOMMITTED、READ COMMITTED、REPEEATABLE READ、SERIALIZABLE。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%C3%A5%C9%A5%ED%A5%C3%A5%AF">デッドロック</a>とは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>が互いに拘束し合うこと。トランザクジョンが異なる順序でリソースをロックしようとした時に発生する。ロックの解放を永遠に待ち続けてしまう。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%C3%A5%C9%A5%ED%A5%C3%A5%AF">デッドロック</a>を回避するために検知システムと<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BF%A5%A4%A5%E0%A5%A2%A5%A6%A5%C8">タイムアウト</a>を実装している。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>などは循環依存に気づいてすぐにエラーを返す。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%C3%A5%C9%A5%ED%A5%C3%A5%AF">デッドロック</a>への対処法は排他ロック行がもっとも少ない<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%EB%A5%D0%A5%C3%A5%AF">ロールバック</a>することである。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>ログをは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>の効率化に役立つ。ストレージエンジンは変更が発生する度にディスク上のデータを更新するのではなく、データのメモリ上のコピーを変更する。その後に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>ログに変更を記録する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>デフォルトではAUTOCOMMITモードで動作している。トランザクジョンを明示的に開始しない限り各Queryを別々の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>で実行する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>と<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>の併用をしたときに、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A1%BC%A5%EB%A5%D0%A5%C3%A5%AF">ロールバック</a>が発生した場合は注意しないといけない。理由は非<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>テーブルへの変更を取り消す事ができないからデータの矛盾が発生してしまう可能性がある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>マルチバージョンの平行性制御(MVCC)</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>をサポートしているエンジンは行ロックとMVCCを組み合わせている。MVCCはバージョンを基にしたスナップショットを作成する仕組み。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>のMVCCは各イベントが発生した時のバージョンを記録している。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>のストレージエンジン</h5>
+
+<ul>
+<li>各<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>ストレージエンジンのまとめ</li>
+</ul>
+<table>
+<tr>
+<th>ストレージエンジン </th>
+<th><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>バージョン </th>
+<th><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a> </th>
+<th>ロックの粒度 </th>
+<th>用途 </th>
+<th> 使用すべきでない状況 </th>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a> </td>
+<td> 全て </td>
+<td> 不可 </td>
+<td> 同時挿入が可能なテーブル </td>
+<td> SELECT、INSERT、一括読み込み </td>
+<td> 読み取りと書き込みの混在 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a> Merge </td>
+<td> 全て </td>
+<td> 不可 </td>
+<td> 同時挿入が可能なテーブル </td>
+<td> セグメント化されたアーカイブ、データウェアハウジング </td>
+<td> 多くのグローバルルックアップ </td>
+</tr>
+<tr>
+<td> Memory(ヒープ) </td>
+<td> 全て </td>
+<td> 不可 </td>
+<td> テーブル </td>
+<td> 中間計算、静的なルックアップデータ </td>
+<td> 大きなデー<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BF%A5%BB%A5%C3%A5%C8">タセット</a>、永続ストレージ </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a> </td>
+<td> 全て </td>
+<td> 可 </td>
+<td> MVCCを使用する行レベル </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>処理 </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> Falcon </td>
+<td> 6.0 </td>
+<td> 可 </td>
+<td> MVCCを使用する行レベル </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>処理 </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> Archive </td>
+<td> 4.1 </td>
+<td> 可 </td>
+<td> MVCCを使用する行レベル </td>
+<td> ログ、集計分析 </td>
+<td> 無し </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/CSV">CSV</a> </td>
+<td> 4.1 </td>
+<td> 不可 </td>
+<td> テーブル </td>
+<td> ログ、外部データの一括読み込み </td>
+<td> ランダムアクセスの必要性、インデックスの処理 </td>
+</tr>
+<tr>
+<td> Blackhole </td>
+<td> 4.1 </td>
+<td> 可 </td>
+<td> MVCCを使用する行レベル </td>
+<td> アーカイブのログ、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EC%A5%D7%A5%EA%A5%B1%A1%BC%A5%B7%A5%E7%A5%F3">レプリケーション</a> </td>
+<td> 意図された用途以外 </td>
+</tr>
+<tr>
+<td> Federated </td>
+<td> 5.0 </td>
+<td> - </td>
+<td> - </td>
+<td> 分散データソース </td>
+<td> 意図された用途以外 </td>
+</tr>
+<tr>
+<td> NDB Cluster </td>
+<td> 5.0 </td>
+<td> 可 </td>
+<td> 行レベル </td>
+<td> 高可用性 </td>
+<td> ほとんどの典型的な用途 </td>
+</tr>
+<tr>
+<td> PBXT </td>
+<td> 5.0 </td>
+<td> 可 </td>
+<td> MVCCを使用する行レベル </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>処理、ログ </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>化インデックスの必要性 </td>
+</tr>
+<tr>
+<td> solidDB </td>
+<td> 5.0 </td>
+<td> 可 </td>
+<td> MVCCを使用する行レベル </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>処理 </td>
+<td> なし </td>
+</tr>
+<tr>
+<td> Maria </td>
+<td> 6.x </td>
+<td> 可 </td>
+<td> MVCCを使用する行レベル </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>の代替 </td>
+<td> なし </td>
+</tr>
+</table>
+<ul>
+<li>ストレージエンジンの変換では固有の機能が全て無効となる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>から<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>に変換し、再度<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>に変換すると外部キーは全て失われる。</li>
+<li>以下はストレージエンジンの実例を考える。
+<ul>
+<li>ログへの記録をスピードが求められる場合<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>、Archive、PBXT。Mergeテーブルを使用してテーブル名を名前/年/付きが含まれるように定義し、そこに対して記録するようにする。</li>
+<li>読み取り専用もしくは読み取り主体の場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>より高速というのは鵜呑みにしてはならない。</li>
+<li>注文処理で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>を使う場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>。</li>
+<li>株指標を独自に分析する場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>。ただしQueryが待たされる事があってはならない。</li>
+</ul></li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DC%A5%C8%A5%EB%A5%CD%A5%C3%A5%AF">ボトルネック</a>の検出:<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>とプロファイリング</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>を実行する理由</h5>
+
+<ul>
+<li>現在のパッフォーマンス測定、システムのスケーラビリティ、成長予測、環境の変化、設定をテストするような状況で役立つ可能性がある。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>戦略</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EB%A5%B9%A5%BF%A5%C3%A5%AF">フルスタック</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>と単一<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%DD%A1%BC%A5%CD%A5%F3%A5%C8">コンポーネント</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>の両方の戦略に意図がある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>で測定するもの
+<ul>
+<li>時間単位当たりの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>数：<a class="keyword" href="http://d.hatena.ne.jp/keyword/TPC">TPC</a>-Cという標準<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%FE%C5%FA%BB%FE%B4%D6">応答時間</a>または遅延：パーセンタイル<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%FE%C5%FA%BB%FE%B4%D6">応答時間</a>を利用。</li>
+<li>スケーラビリティ：キャパシティの計画に役立つ。</li>
+<li>並行性：webサーバの平行性が高くなればDBレベルの平行性も高くなるかもしれないが言語と<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>セットの影響を受ける。コネクションプールを使った場合、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Java">Java</a>は永続接続を行う<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>より<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>サーバへの同時接続数が少ない。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>で本当に注意しなければならないのは実効平行性、つまり同時に作業を行うスレッドまたは接続の数である。</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>戦術</h5>
+
+<ul>
+<li>以下<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>での<span class="deco" style="color:#FF0000;">誤り</span>
+<ul>
+<li>実際のデータサイズの一部しか使用しない、不正確に分散されたデータを使用する事。</li>
+<li>分散されたQueryパラメータを使用する事。</li>
+<li>マルチユーザアプリケーションに対してシングルユーザのシナリオを使用する事。</li>
+<li>1台のサーバ上で分散アプリケーションの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>を実行する事。</li>
+<li>現実のユーザの振る舞いと一致しない事。間髪入れずにリンクを次から次へとクリックする事はない。</li>
+<li>ループを使って同じリンクをクリックする事。</li>
+<li>エラーをチェックしない事。</li>
+<li>再起動直後でのパフォーマンス測定。</li>
+<li>デフォルトのサーバ設定を使用する事。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>は自動化できると望ましい。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4%B2%F3">複数回</a>実行した結果の全体平均か、効果が良かった何回かの平均が望ましい。</li>
+</ul>
+</div>
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a></h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EB%A5%B9%A5%BF%A5%C3%A5%AF">フルスタック</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>
+<ul>
+<li>ab</li>
+<li>http_load</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/JMeter">JMeter</a></li>
+</ul></li>
+<li>単一<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%DD%A1%BC%A5%CD%A5%F3%A5%C8">コンポーネント</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C4%A1%BC%A5%EB">ツール</a>
+<ul>
+<li>mysqlslap</li>
+<li>sysbench</li>
+<li>Database Test Suite</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a> Benchmark Suite</li>
+<li>Super Smack</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>のBENCHMARK関数があるが、<span class="deco" style="color:#FF0000;">実際の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D9%A5%F3%A5%C1%A5%DE%A1%BC%A5%AF">ベンチマーク</a>では利用しない。</span></li>
+<li>sysbenchはCPU、ファイルI/O、OSスケジューラ、メモリの割り当て、転送速度、<a class="keyword" href="http://d.hatena.ne.jp/keyword/POSIX">POSIX</a>スレッドなどを測定する事ができる。</li>
+<li> </li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>の最適化とインデックス</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5>最適なデータ型の選択</h5>
+
+<ul>
+<li>データ型は最も小さいものを使用するように心がける。</li>
+<li>文字よりも整数など単純なものがより良い。</li>
+<li><span class="deco" style="color:#FF0000;">フィールドはNOT NULLとして定義すべき。</span></li>
+<li>NULL値を設定できる列はインデックス、インデックス統計、値の比較を複雑にする。またより多くの記憶域を使用し、<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>内部で特殊な処理を要求する。このような列にインデックスを付けるとエントリごとに必要なバイト数が増え固定長のインデックスが<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>で可変長のインデックスに書き換えられる事もある。</li>
+<li>NULLの代わりに0や特殊な値、空の文字列を使用するよう検討する。</li>
+<li>DATETIMEとTIMESTAMP型は同じ種類のデータを格納する事が出来る。TIMESTAMP型は半分の記憶域しか使用せず、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BF%A5%A4%A5%E0%A5%BE%A1%BC%A5%F3">タイムゾーン</a>に対応し、特殊な自動更新機能も備えている。その反面、許容値の範囲はずっと狭く、特殊な機能があだになることがある。</li>
+<li>整数型(TINYINT,SMALLINT,MEDIUMINT,INT,BIGINT)のどれか一つを使用する。整数型はUNSIGNED属性を持つ事で整数の上限を約2倍にする事ができる。</li>
+<li>整数の計算には32ビット<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A1%BC%A5%AD%A5%C6%A5%AF%A5%C1%A5%E3">アーキテクチャ</a>であっても64ビットで計算される。</li>
+<li>実数型(DOUBLE,FLOUT,DECIMAL)がある。DECIMAL型はMySQL5.0以降小数計算の正確な演算をサポートする。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%C9%E2%C6%B0%BE%AE%BF%F4">浮動小数</a>点型(DOBULE,FLOUT)の記憶領域はDECIMAL型より少ない。DECIMAL型は記憶領域と計算コストが増えるので正確な結果が必要な場合のみ利用する。</li>
+<li>文字型はVARCHARとCHAR。</li>
+<li>VARCHARは可変長文字列を格納する。必要な記憶域しか使用しないから固定長の方ほど多くの記憶域を要求しない。ROW_FORMAT=FIXEDで作成された<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>テーブルでは例外があり、行ごとに一定量のディスク領域を使用するため記憶域を無駄にする可能性がある。</li>
+<li>VARCHARはデータの長さを記録するために255バイト以下は1バイト、255バイト以上は2バイト余分に使用する。</li>
+<li>VARCHARは記憶域を節約するために役立つが、更新時に大きくなる可能性があり、余分な作業が増える。</li>
+<li>CHARは固定長の文字列データ型。CHAR型の値を格納する場合、<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>は末尾のスペースを全て削除する。</li>
+<li>CHARは非常に短い文字列を格納する場合、全ての値がほぼ同じ長さである場合に役立つ。</li>
+<li>CHARはデータの断片化が発生しにくい。頻繁に変化するデータに対してはVARCHARよりも適している。また非常に短い文字列を格納する場合にも役立つ。</li>
+<li>バイナリ文字列を格納するのはBINARYとVARBINARY。バイナリ文字列は文字列と似ているが文字の代わりにバイトを利用する。</li>
+<li>BINARYとVARBINARYはバイナリデータを格納する必要があり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>に値を文字ではなくバイトとして比較させたい場合に役立つ。バイト比較は大文字/小文字の区別が無いなどの利点がある。BINARY型の文字列を1バイトずつ数値として比較する。よって文字列の比較よりずっと単純である可能性があり、高速。</li>
+<li>大量のバイナリや文字列を格納したい型はBLOBとTEXTである。文字型にはTINYTEXT,SMALLTEXT,TEXT,MEDIUMTEXT,LONGTEXT、バイナリ型にはTINYBLOB,SMALLBLOB,BLOB,MEDIUMBLOB,LONGBLOBがある。</li>
+<li>BLOB、TEXT型の値を独自のIDを持つオブジェクトとして処理する。</li>
+<li>BLOB、TEXT型のデータは文字列全体でソートするのではなく、最初のmax_sort_lengthだけをソートする。変更したい場合はmax_sort_lengthを調整するかORDER BY SUBSTRINGを利用する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>は<span class="deco" style="color:#FF0000;">BINARY、TEXT型にはインデックスを付ける事ができない。</span></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/ENUM">ENUM</a>型は文字列値を65535個まで格納可能。非常にコンパクトに格納する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/ENUM">ENUM</a>のソートは文字列ではなく、内部の整数値で行われる。FILED関数を使ってsortの順序を明示的に指定する事も可能だが、インデックスを使用しなくなる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/ENUM">ENUM</a>は文字列のリストが固定であり、文字列の追加削除にはALTER TABLEを使用する必要がある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/ENUM">ENUM</a>は整数値として格納するため、文字列表現のルックアップなどオーバーヘッドが伴う。</li>
+<li>日付と時刻型にはDATETIMEとTIMESTAMP型がある。</li>
+<li>DATETIMEは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BF%A5%A4%A5%E0%A5%BE%A1%BC%A5%F3">タイムゾーン</a>に関係なくYYYYMMDDHHMMSS形式で整数にパックする。記憶には8バイト使用される。</li>
+<li>TIMESTAMPは<a class="keyword" href="http://d.hatena.ne.jp/keyword/UNIX">UNIX</a>タイムスタンプと同じ。記憶領域を4バイトしか使用しない。FROM_UNIXTIMEと<a class="keyword" href="http://d.hatena.ne.jp/keyword/UNIX">UNIX</a>_TIMESTAMP関数で日付間の変換を行う。TIMESTAMPは指定せずに挿入すると自動的に現在時刻を入れる。またデフォルト設定がNOT NULL。<span class="deco" style="color:#FF0000;">TIMESTAMPはDATETIMEよりもストレージ効率が良い</span>ため使用できるのであれば使用すべき。</li>
+<li>ビットデータ型にはBITとSETがある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>ではBITを数値型ではなく文字列型で扱う。中に含まれているのはバイナリの0または1であるが、結果を取得したときに文字列に変換される。BIT型は使用しない方が良い。</li>
+<li>真偽値を格納する場合SETを使って<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の列を一つにまとめることを検討する。SETはストレージ効率が良い、FIND_IN_SETやFIELDといったqueryを使用しやすい関数がある。列変更のコストがかかる。SET型のルックアップにインデックスを使う事ができない。</li>
+<li>SETの代わりとしてぱっくされたビットの集合に整数を利用するとビット演算で操作可能。SETに対する利点はALTER TABLEを使用しないでフィールドが表す列挙を変更可能。欠点はqueryを記述したり理解する事が難しくなる。</li>
+<li>識別子としての選択で、整数型は素早く処理されAUTOINCREMENTに対応するので一番良い。<a class="keyword" href="http://d.hatena.ne.jp/keyword/ENUM">ENUM</a>とSETは注文状況、製品の種類、性別等の情報を格納するのに適している。</li>
+<li>文字列型も識別子に利用しない方が良い。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>ではデフォルトでパックされたインデックスを使用するがルックアップが低速になる事がある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>インデックス</h5>
+
+<ul>
+<li>インデックスの重要性は<span class="deco" style="color:#FF0000;">データサイズに比例</span>する。</li>
+<li>インデックスはサーバレイヤではなくストレージレイヤで実装される。エンジンごとに少しずつ動作が異なる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>のほとんどのストレージエンジンでサポートされているのはB-Treeインデックス。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>ではインデックスを小さくするためプレフィックス圧縮を利用する。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では最適化の一部においては圧縮されたインデックスを圧縮できないのでインデックスを圧縮しない。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>は行格納時の物理的な位置に寄ってインデックスがついた行を参照するが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>はそれらの主キーで参照する。</li>
+<li>ツリーのノードは子リーフへのポインタを保持する。ストレージエンジンはそのポインタを辿る。</li>
+<li>B-Treeインデックスは完全なキーの値、キーの範囲、キーのプレフィックスによる検索に適している。</li>
+<li>ツリーのノードはソートされているので検索とORDER BYクエリの両方に使用する事が出来る。</li>
+<li>B-Treeにはインデックス付きの列の左から検索が始まらないと効果がない、インデックス列をスキップできない、LIKEのような範囲条件ではその列のインデックスが使用されない。</li>
+<li>ハッシュインデックスをサポートしているのはMemoryストレージエンジンだけ。ストレージエンジンはハッシュコードをインデックスに格納し各行へのポインタをハッシュテーブルに格納する。インデックスは短い<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%C3%CD">ハッシュ値</a>の格納だけで非常にコンパクト。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%C3%CD">ハッシュ値</a>の長さは列の型に依存しない。</li>
+<li>ハッシュインデックスにはインデックスの値を使用する事で行の読み取りを回避することはできない、ソートに使用できない、部分マッチングをサポートしない、等価比較をサポートし範囲クエリを高速化できない、競合が発生した場合はリンクリストを辿り正しい値を比較しなければならない、競合の数が多いとメンテナンスに時間がかかる。</li>
+<li>NDB Clusterでは一意なハッシュインデックスをサポート、<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では適応ハッシュインデックスという機能を備えている。</li>
+<li>URLのような長い文字列を条件指定する場合はカスタムハッシュを使う。URLのハッシュにより整数等を生成してそれに対してインデックスを付与する。しかしこの方法の欠点はハッシュの値を管理しなければならないこと。 <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%CF%A5%C3%A5%B7%A5%E5%B4%D8%BF%F4">ハッシュ関数</a>には<a class="keyword" href="http://d.hatena.ne.jp/keyword/SHA1">SHA1</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/MD5">MD5</a>などの長い文字列を返す関数を使用するとスペースや比較のパフォーマンスを下げる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/SHA1">SHA1</a>や<a class="keyword" href="http://d.hatena.ne.jp/keyword/MD5">MD5</a>は競合をほぼ排除するための設計であるが、カスタムハッシュインデックスの主目的は単純な関数でほぼほぼの競合率でより高いパフォーマンスを出す事。</li>
+<li>カスタムハッシュの競合を回避するためには元のキーワードもWHERE句のANDで指定するなど対応が必要。</li>
+<li>その他のインデックスとして空間(Rツリー)インデックス、全文インデックスなどがある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>高いパフォーマンスを実現するためのインデックス戦略</h5>
+
+<ul>
+<li>列が式の一部や関数に含まれていてはならない。</li>
+<li>BLOB、TEXT、長いVARCHARには完全なインデックスを付ける事ができないのでプレフィックスインデックス(部分インデックス)を利用する。プレフィックスの長さには最頻出値を洗い出す必要がある。</li>
+<li>プレフィックスインデックスはORDER BYやGROUP BYクエリに使用する事ができない。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>化インデックスをサポートするのはsolidDBと<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>だけである。B-Treeインデックスと行をまとめて同じ構造に格納する。隣接するキーを持つ行が近くに格納されることを意味する。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では主キーで<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>化する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>化インデックスは関連データを近くに配置、データアクセスが高速、カバ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%F3%A5%B0%A5%A4%A5%F3">リングイン</a>デックスを使用するクエリはリーフノードに含まれている主キーの値を使用する事などの利点がある。その反面、データがメモリに収まる場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>化はそれほど効果的ではない、挿入速度は挿入の順序に大きく依存する、行更新のコストがかかる、行挿入や手キーの変更によりページ分割の対象となる、行密度が低かったり行が不連続である場合はフルスキャンになる、セカンダリインデックスが大きくなる場合がある、セカンダリインデックスへのアクセスは検索が２回必要などの問題がある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>と<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>ではデータのレイアウトが異なる。詳細は後から説明。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>の主キーはシーケンシャルなので１つ前のレコードの直後に格納される。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では新しい主キーが前の主キーよりも大きいとは限らないので、新たに追加する行を配置できる場所を探す。そしてその領域確保のために余分な処理が増えてデータレイアウトも最適なものとは言えない状態になる。</li>
+<li>ランダムな値を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>化インデックスに読み込んだ後にOPTIMIZE TABLEを実行して再構築し、ページがデータとして最適にみたされた状態にする必要がある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>を使用する際には<span class="deco" style="color:#FF0000;">主キーの順序でデータを挿入</span>するようにすべき。また新しい行ごとに規則的に増加する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>化キーを使用すべき。</li>
+<li>ワークロードの平行性が高い場合<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では主キー順序での挿入がSPOF(Single Point Of Failure)を生み出す可能性がある。ただワークロードにうまく適用できるような調整がかのうかもしれない。</li>
+<li>カバ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%F3%A5%B0%A5%A4%A5%F3">リングイン</a>デックスとはQueryを処理するために必要なデータをすべて含んでいるようなインデックスのこと。つまりデータを読み取る事無くインデックスの読み込みだけで全てが解決するインデックスの事。</li>
+<li>カバ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%F3%A5%B0%A5%A4%A5%F3">リングイン</a>デックスの利点としては、インデックスサイズはデータサイズより小さいのでアクセスしやすい/メモリに収まりやすい、データキャッシュよりもインデックスをキャッシュする方が良い。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では特にカバ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%F3%A5%B0%A5%A4%A5%F3">リングイン</a>デックスが有効。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>ではセカンダリインデックスがリーフノードに主キーを格納できる。</li>
+<li>カバ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%F3%A5%B0%A5%A4%A5%F3">リングイン</a>デックスは全てのストレージエンジンでサポートされていない。</li>
+<li>インデックスカバークエリを実行するとEXPLAINのExtra列に<span class="deco" style="color:#FF0000;">Uisng Index</span>が表示される。</li>
+<li>テーブルの全ての列をカバーするインデックスは存在しない。WHERE句はインデックスがカバーする列にのみ言及するため<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>はインデックスを使ってアクセスをする事ができる。</li>
+<li>インデックスでLIKE演算する事ができない。インデックス演算は単純な比較しかしない。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>のセカンダリインデックスにはQueryをカバーするために使用できる「追加の列」があることを意味する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySql">MySql</a>の順序付き結果にはファイルソートとインデックスソートの2種類方法がある。EXPLAINのtype列でindexをスキャンするタイミングが分かる。</li>
+<li>行のソートと検索に同じインデックスを使用するよう設計するのが望ましい。インデックスで順番付けがうまくいくのはインデックスの順番がORDER BY句と全く同じで全ての列が同じ方向にソートされている場合だけ。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のテーブルを結合する場合はORDER BY句の全ての列が１つ目のテーブルを参照する場合のみである。ORDER BY句にはインデックスの左端のプレフィックスを形成している必要がある。その他全ての状況では<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>はファイルソートを行う。ORDER BY句がインデックスの左端のプレフィックスをし指定しなて良いケースは先頭の列に対する定数が存在するとき。WHERE句またはJOIN句がそれらの列の定数を指定する場合はインデックスの穴埋めを行う。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>は圧縮されたインデックスを利用してメモリに収まるインデックスを増やしパフォーマンスを劇的に改善可能かもしれない。デフォルトでは文字列を圧縮するが整数値を圧縮することもできる。</li>
+<li>圧縮された<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>のインデックスブロックはサイズは小さくなるが特定の操作で失速させる。圧縮プレフィックスの値は前の値に寄って決まる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>はブロックから目的の値を検出するためには２分探索を実行する事ができず先頭から<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%ED%A5%C3%A5%AF%A5%B9">ブロックス</a>キャンをする。シーケンシャルな前方スキャンはうまくできるが、後方スキャン(ORDER BY DESCなど)はうまくいかない。ブロックの途中で１行のレコードを検出しなければならない操作は全て平均でブロックの半分をスキャンしなければならない。</li>
+<li>テーブルのインデックス圧縮の指定はPACK_KEYSのオプションで制御可能。</li>
+<li>同じ列で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>のインデックスを作成できる。重複インデックスは別々に管理する必要があり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザはQueryを最適化する時にそれぞれのインデックスを考慮する。重複インデックスは出来る限り作成されないように細心の注意が必要。またインデックスが冗長インデックスとならないようにもすべき。冗長インデックスは新しいインデックスを追加する時に発生する。例えば途中からインデックスを張り直して単一列でのインデックスが増えたとしてもそれぞれのインデックスを残しておくべきである。</li>
+<li>新しいインデックスの追加はINSERT/UPDEATE/DELETEの操作パフォーマンスに影響がでる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>はインデックスを使用する場合であっても実際には必要のない行をロックする可能性がある。行の検索とロックにインデックスを使用する事ができない場合はフルテーブルスキャンを実行し全ての行をロックする。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>はセカンダリインデックスに共有ロックを配置できるが排他ロックは主キーへのアクセスを要求するためカバ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%F3%A5%B0%A5%A4%A5%F3">リングイン</a>デックスを使用する可能性は排除され、SELECT FOR UPDATEがLOCK IN SHARE MODEや非ロッククエリよりも遥かに低速になる可能性がある。</li>
+</ul>
+</div>
+<div class="section">
+<h5>インデックスの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B1%A1%BC%A5%B9%A5%B9%A5%BF%A5%C7%A5%A3">ケーススタディ</a></h5>
+
+<ul>
+<li>インデックスを使用する上で最初に決定しなければならないのはインデックススペースのソートを使用するのかファイルソートを容認するかである。インデックスベースのソートはインデックスとQeury構築方法を制限する。Queryの範囲条件にインデックスを使用する場合、順序の指定に別のインデックスを使用することはできない。</li>
+<li>識別可能な値とWHERE句で最も使用する列を調べる。識別可能な値を持つ列ではインデックスの選択性(カーディナリティ度)が高い。</li>
+<li>選択性が非常に高い列にインデックスを付けても無駄というのが今までの見方。インデックスを作成する場合は全ての選択性を考慮すべき。</li>
+<li>結果が限定的なQueryが実行されたとしてもWHERE句にIN構文を追加するとインデックスが使用される。列の識別可能な値が多いとINのリストが大きくなるのでうまくいかない。</li>
+<li>インデックスの数が増えすぎることも良くないのでインデックスを再利用する事にして条件の組み合わせが多くならないのであるとすれば上のINの手法が利用できる。</li>
+<li>テーブルの中であまり使用されず一般的ではない選択肢に対するインデックスを設計するには単に省略して<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>に余分にスキャンさせれば良い。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>が値の範囲を指定する最初の条件まで左端のプレフィックスだけを利用するのでインデックスの最後に指定すると良い。できるだけ多くのインデックスを<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>に使用させる。</li>
+<li>インデックスにより多くの列を追加してそれらの列がWHERE句の一部でないケースをINにしてカバーする事は可能だがやりすぎは禁物。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザが評価しなければならない組み合わせが増えて結果的にパフォーマンスを低下させる。Queryの実行よりも最適化のほうに時間がかかるだけでなくメモリを大量に使用する可能性があった。</li>
+<li>2つ以上の範囲条件指定( BETWEENや大なり小なり等)がある場合<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>のインデックスは両方を使用できない。その場合は範囲の一つを等価比較にできるようテーブル設計を見直す等。</li>
+<li>復号インデックスを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>用意するのがQuery実行の観点からは効率が良いと思えるが、全てを管理するオーバーヘッドとそれに必要な余分な領域を考えるとベストな方法であるとは言えない。これは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザの変更が最適なインデックス戦略に影響を及ぼしかねないケースである。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>の将来のバージョンで本物のルーズインデックススキャンを実行できるようになれば1つのインデックスで<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>の範囲条件が指定できるはずなのでINリストを使用することはなくなるだろう。</li>
+<li>ソートの最適はとしてはカバ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%F3%A5%B0%A5%A4%A5%F3">リングイン</a>デックスを使用し最終的に取得する行の主キー列だけを取得するのも効果的な方法。<span class="deco" style="color:#FF0000;">結果を再びテーブルに結合すれば行の全てを取得する事ができる。</span>これにより<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>が結局は捨ててしまうデータを収集するために必要な作業が最小限で済む。</li>
+</ul>
+</div>
+<div class="section">
+<h5>インデックスとテーブル管理</h5>
+
+<ul>
+<li>ハードウェアや<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>/<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%DA%A5%EC%A1%BC%A5%C6%A5%A3%A5%F3%A5%B0%A5%B7%A5%B9%A5%C6%A5%E0">オペレーティングシステム</a>のバグが原因でインデックスの破損に直面する可能性がある。インデックスがは損するQueryは正しい結果を返さなくなり、重複した値が無いにも関わらずキーの重複エラーが発生しロックアップやクラッシュを引き起こす。おかしな状態が出たらCHECK TABLEを実行して破損が無いかを確認する。破損したテーブルはREPAIR TABLEコマンドで修正ができるが全てのストレージエンジンでサポートされていない。その場合は「何もしない」ALTER コマンドを実行する事ができる。myisamchkといったストレージエンジン固有の修復Utilityを使用するかデータをダンプして読み戻すことができる。行データの部分で破損が発生している場合はテーブルバックアップから復元するか、破損したデータからの復元をしなければならない。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザはインデックスの使用方法を決定するために2つの<a class="keyword" href="http://d.hatena.ne.jp/keyword/API">API</a>呼び出しを使用する。1つはrecords_in_rangeで入力として範囲の先頭と末尾を受け取り、その範囲に含まれているレコードの数を返す。もう一つはinfo呼び出しでありインデックスの濃度を含め、様々なデータを返す事ができる。行に関する情報がインデックスから<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザに渡されない場合<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザはANALYZE TABLEを使ってインデックス統計を再生成する。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザのコストはQueryがアクセスするデータ量で決まる。統計が生成されていないまたは無効である場合は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%D7%A5%C6%A5%A3%A5%DE">オプティマ</a>イザが謝った判断を下す可能性がある。解決策はANALYZE TABLEを利用すること。</li>
+<li>Memoryストレージエンジンはインデックスの統計データを格納しない、<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>ストレージエンジンは統計データをディスク上に格納しANALYZE TABLEは濃度計算のためにフルインデックススキャンを実行し、そのプロセス間の間テーブル全体がロックされる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では統計データをディスク上に格納せずに最初にテーブルが開かれた特にランダムなインデックスダイプでそれらを予測する。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>の統計データは正確さに欠けるかもしれないが、手動で更新する必要も無い。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>のANALAYZE TABLEはノン<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%ED%A5%C3%A5%AD%A5%F3%A5%B0">ブロッキング</a>であり、比較的コストがかからない。</li>
+<li>SHOW INDEX FROMコマンドで得られるCardinality列はストレージエンジンが予測した識別可能な値がインデックスにいくつ含まれているかを示す。</li>
+<li>B-Treeインデックスが断片化してパフォーマンスを低下させる可能性がある。B-Treeは元々リーフにアクセスするためにはランダムなディスクアクセスが必要となる規則である。しかしリーフページが物理的に連続していればパフォーマンスが向上できる。テーブルのデータ記憶域も断片化する可能性がありインデックスの断片化よりも複雑。データの断片化には行の断片化と行内の断片化の2種類がある。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>では2種類の断片化が発生する可能性があるが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では短い行が断片化することはない。データの<span class="deco" style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D5%A5%E9%A5%B0">デフラグ</a>を実行するにはOPTIMIZE TABLE</span>を実行するかデータをダンプして読み戻す。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>ではインデックスをソート順で作成する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%EB%A5%B4%A5%EA%A5%BA%A5%E0">アルゴリズム</a>でインデックスを再構築することで<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D5%A5%E9%A5%B0">デフラグ</a>を実行できる。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>ではインデックスを<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D5%A5%E9%A5%B0">デフラグ</a>する方法はない。<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>ではインデックスを削除し再構築したとしてもデータによってはインデックスが断片化する可能性がある。そのような場合は<span class="deco" style="color:#FF0000;">何もしないALTER TABLE</span>でテーブルを再定義することができる。</li>
+</ul>
+</div>
+<div class="section">
+<h5>正規化と非正規化</h5>
+
+<ul>
+<li>正規化されたデータベースではファクトはそれぞれ一回出現する。非正規化のデータベースでは情報が重複してしまう。</li>
+<li>パフォーマンス問題の解決策の一つとして<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>の正規化は良いアドバイスとなる。理由は正規化された更新は非正規化よりも高速、正規化されていればデータの重複がほとんどないため変更するデータが少なくなる。正規化されたテーブルの方がデータが小さいためメモリにうまく収まる。冗長データがないのでリストを取得する時にDISTINCTまたはGROUP BYのQueryを実行する必要があまり無い。</li>
+<li><span class="deco" style="color:#FF0000;">正規化の欠点はテーブルの結合</span>が発生すること。これにより一部のインデックスの仕様が不可能になるケースがある。</li>
+<li>非正規化された<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>の定義は全てが同じテーブルに含まれていて結合が不要になる。テーブル結合が発生しない場合のQueryにとっての最悪なケースはフルテーブルスキャンであり、これはランダムなI/Oを回避するためデータがメモリ内に収まらない場合の結合よりもパフォーマンスが良い可能性がある。また単一なテーブルではより効率的なインデックスの使い方が可能。</li>
+<li>非正規化の問題は結合であり1つのインデックスでソートとフィルタリングを同時に行う事ができない。</li>
+<li>正規化/非正規化の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>にそれぞれ長所/短所が存在する。</li>
+<li>非正規化する最も一般的な方法は1つのテーブルから選択された列を別のテーブルに複製するかキャッシュすることである。MySQL5.0以降ではキャッシュされた値の更新にトリガを使用できるので実装が容易。非正規化の場合はデータの更新箇所が増える可能性があるので、データの更新時間とSELECTの実行時間を照らし合わせての判断が必要。</li>
+<li>親テーブルから子テーブルにデータの移動をするもう一つの理由はソートである。正規化されたテーブルではソートにコストが掛かるが、別テーブルにカラムをキャッシュしそれに対してインデックスを付けるとソートの効率が良くなる。</li>
+<li>キャッシュテーブルとは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AD%A1%BC%A5%DE">スキーマ</a>から容易にデータを取得できるデータが含まれたテーブル。サマリーテーブルとはGROUP BY Queryからの集計データが含まれたテーブルという意味で使用。これらは取得するデータが多少古くても良い事が許容な場合に利用される。</li>
+<li>メインテーブルに<a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>、キャッシュテーブルに<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>を利用するとインデックスのサイズが小さくなり<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C1%B4%CA%B8%B8%A1%BA%F7">全文検索</a>を実行できるようになる。</li>
+<li>キャッシュテーブルとサマリテーブルの使用はリアルタイム性を管理するかどうかの判断による。定期的な再構築でも良い方法である場合はこれらのテーブルを利用するとリソース節約だけでなく、断片化が無くソートされたインデックスを持ちより効率的。これらのテーブルを<span class="deco" style="color:#FF0000;">再構築している間に利用するデータがある場合はシャドウテーブルを利用すると良い</span>。シャドウテーブルは一度現在参照しているテーブル(table)のコピーを作成(table_newなど)し、作成したテーブル(table_new)に対して新しいデータの再構築を行う。構築がおわった時点で参照テーブルにリネームさせる。その時に参照テーブルのバックアップを取るとよい。(table_bak)</li>
+<li>カウントを記録するようなテーブルの場合、カラムを+1などの管理で考えると平行性問題にあたることがある。カラムを更新する際の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>全て直列化してしまう。これを回避するためには<span class="deco" style="color:#FF0000;">行を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%A3%BF%F4">複数</a>用意しておいてランダムなカラムを更新するようにすると平行性が保てる</span>。</li>
+</ul>
+</div>
+<div class="section">
+<h5>ALTER TABLEの高速化</h5>
+
+<ul>
+<li>メモリが不足していてテーブルやインデックスサイズが大きい場合はALTER TABLEに時間がかかってしまう。これを改善しようと各ストレージエンジンで改善の取り組みが行われている。</li>
+<li>MODIFY COLUMNはテーブルの再構築を引き起こすがALTER COLUMNは.frmファイルを変更しテーブルには手をつけないため高速である。</li>
+<li>テーブルの再構築をせずに行える操作はAUTO_INCREMENT属性の削除(追加は行えない)、<a class="keyword" href="http://d.hatena.ne.jp/keyword/ENUM">ENUM</a>定数とSET定数の追加、削除、変更。基本的な手法としては適切なテーブルを持つ.frmファイルを作成し、既存の.frmがある場所にコピーすること。
+<ul>
+<li>1.目的の変更を除いて全く同じレイアウトで空のテーブルを作成する。</li>
+<li>2.FLUSH TABLES WITH READ LOCKを実行して使用中の全てのテーブルを閉じ、テーブルが開かれないようにする。</li>
+<li>3..frmファイルを交換。</li>
+<li>4.UNLOCK TABLESを実行して読み取りロックを解除する。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>のインデックスを素早く構築するにはキーの有効/無効を使う事。DISABLE KEYS ENABLE KEYS。これがうまく行くのは全てのデータが読み込まれるまで<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>にインデックスの構築を先送りさせ、その時点でのインデックスをソートに基づいて構築させるため。これにより<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D5%A5%E9%A5%B0">デフラグ</a>されたコンパクトなインデックスを得る事ができる。DISABLE KEYSは一意でないインデックスにのみ適用される。<a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>は一意なインデックスをメモリ内で構築し、行を読み込む時に確認する。インデックスのサイズがメモリ容量を超えた時点で一気にパフォーマンスが低下する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>のインデックス再構築手順は以下で示す。
+<ul>
+<li>1.テーブルのみ作成。</li>
+<li>2.データをテーブルに読み込み.MYDファイルを構築。</li>
+<li>3.適切な構造を持つ別テーブルを空の状態で作成、インデックスを追加する。これで必要な.frm、.MYIファイルが作成される。</li>
+<li>4.読み取りロックを使う。</li>
+<li>5.2つ目のテーブルの.frmファイルと.MYIファイルの名前を変更し1つ目のテーブルの代わりに使用させる。</li>
+<li>6.読み取りロックを解除。</li>
+<li>7.REPAIR TABLEを使ってテーブルのインデックスを構築させる。</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h5>ストレージエンジンに関する注意点</h5>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>ストレージエンジン
+<ul>
+<li>テーブルレベルのロックが発生</li>
+<li>クラッシュに対する自動データリカバリ機能が欠如</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>の欠如と一つの文が完了した事を保証しない</li>
+<li>メモリ内でのインデックスのみキャッシュ</li>
+<li>データがコンパクトになる。行は順番にパックされるためディスク消費量が少なくなる。</li>
+</ul></li>
+<li>Memoryストレージエンジン
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/MyISAM">MyISAM</a>と同様にテーブルロックが発生する。</li>
+<li>可変長なデータ型をサポートしない。BLOB/TEXT型を全くサポートしない。VARCHARもCHARに変換。</li>
+<li>インデックスがハッシュインデックス</li>
+<li>インデックス統計の欠如</li>
+<li>ディスクを使用しないため再起動したときにコンテンツが消失する。</li>
+</ul></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>
+<ul>
+<li>4つの分離レベルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C8%A5%E9%A5%F3%A5%B6%A5%AF%A5%B7%A5%E7%A5%F3">トランザクション</a>をサポートする。</li>
+<li>外部キーをサポートする唯一の標準ストレージエンジン。</li>
+<li>行レベルのロックでエスカレーションやノン<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%ED%A5%C3%A5%AD%A5%F3%A5%B0">ブロッキング</a>選択は無い。高い平行性が保てる。</li>
+<li>マルチバージョンの平行性を制御するので古いデータが読み取られる可能性がある。マニュアルをよく読む必要がある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/InnoDB">InnoDB</a>では主キーによる<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AF%A5%E9%A5%B9%A5%BF">クラスタ</a>化ができる。</li>
+<li>インデックスを主キーで参照するため主キーを短く保つ事。</li>
+<li>データとメモリの両方をバッファプールにキャッシュする。行の取得を高速化するためにハッシュインデックスを自動で作成する。</li>
+<li>インデックスが圧縮されないので大きくなる。</li>
+<li>インデックスをソートに基づいて構築するのではなく行ごとである。データ読み込みがかなり時間かかることがある。</li>
+<li>新しいAUTO_INCREMENT値を生成する度にテーブルロックを必要とする。</li>
+<li>テーブル内の行の数を保持しない。よってCOUNT(*)Queryを最適化することは不可能で、フルテーブルスキャンやフルインデックススキャンが必要になる。</li>
+</ul></li>
+</ul>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201201200831/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201201200831/">RSSより便利なAtomデータの詳細と利用方法について簡単にまとめてみた</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201201240753/">PHPにおける時間表記のISO-8061、DATE_ATOM、DATE_RFC3309、DATE_W3Cの違いは何か</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201201240753/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

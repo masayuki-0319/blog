@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20110828/1314488010" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>モバイルサイトを構築するための文字コード知識 &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>モバイルサイトを構築するための文字コード知識</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2011 Aug 28, 08:33</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="web-モバイルサイトを構築するための文字コード知識">[Web] : モバイルサイトを構築するための文字コード知識</h2>
+
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">はじめに</span></h4>
+<p>携帯キャリア向けのサイトを作っている時に必ず発生する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>問題(主に文字化けやByte数問題)。この記事では<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>(<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%BD%B8%B9%E7">文字集合</a>、符号化)に対する内容についても触れつつ、モバイルサイト作りで注意すべき点について詳しく記述する。<br />
+<br />
+</p>
+
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">そもそも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>とは</span></h4>
+<p>以下では簡単に説明する。</p>
+
+<ul>
+<li>一つずつの文字を表すためのByte列表現であり、Byte列表現と文字の対応関係でもある。</li>
+<li>別の言い方をすると<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>とは各種文字についての符号の番号を独自の順序と計算式で示したByte列表現。</li>
+<li>言語の文化と密接な関係を持っており、例えば<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B1%D1%B8%EC%B7%F7">英語圏</a>、アジア圏でそれぞれ固有の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>が制定されるが、コンピュータ上で正常に表現できない言語も多い。</li>
+<li>日本語を表現する有名な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>としては<a class="keyword" href="http://d.hatena.ne.jp/keyword/ISO-2022-JP">ISO-2022-JP</a>(JIS)、<a class="keyword" href="http://d.hatena.ne.jp/keyword/EUC">EUC</a>-JP、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>などである。</li>
+<li>1バイト系<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>(シングルバイト、半角文字)と2バイト系<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>(マルチバイト、全角文字)</li>
+<li>色々な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>が存在するため、システムで変換するときには様々な問題が起こる。変換には処理コストも掛かるし、対応が正確でないこともある。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>は上の互換性の問題に対応するために作られ、全ての言語を表現する。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>は<span class="deco" style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%BD%B8%B9%E7">文字集合</a></span>(coded character set)と<span class="deco" style="color:#FF0000;">符号化方式</span>(character encoding <a class="keyword" href="http://d.hatena.ne.jp/keyword/scheme">scheme</a>)という区別がされる。
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%BD%B8%B9%E7">文字集合</a>JISX0208に対して<a class="keyword" href="http://d.hatena.ne.jp/keyword/ISO-2022-JP">ISO-2022-JP</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/EUC">EUC</a>-JP、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>などの符号化方式が存在。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%BD%B8%B9%E7">文字集合</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>に対して<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-7">UTF-7</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-16">UTF-16</a>などが存在する。</li>
+</ul></li>
+</ul>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">各キャリアサイトの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a></span></h4>
+<p>各キャリアの技術サイトを見てみる。</p>
+
+<ul>
+<li><a href="http://www.nttdocomo.co.jp/service/imode/make/content/browser/html/index.html">DoCoMo imode browser html</a></li>
+<li><a href="http://www.nttdocomo.co.jp/service/imode/make/content/browser/browser2/index.html">DoCoMo imode browser xhtml</a></li>
+<li><a href="http://www.au.kddi.com/ezfactory/tec/spec/4_2.html">au</a></li>
+<li><a href="http://creation.mb.softbank.jp/column/column_01_01.html">SoftBank</a></li>
+<li><a href="http://www.willcom-inc.com/ja/service/contents_service/common/pdf/contents_function.pdf">willcom</a></li>
+<li><a href="http://developer.emnet.ne.jp/browser.html">emobile</a></li>
+</ul><p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DE%A5%C8%A5%EA%A5%C3%A5%AF%A5%B9">マトリックス</a>でまとめると以下のようになる。</p>
+
+<table>
+<tr>
+<th> キャリア </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a> </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/ISO-2022-JP">ISO-2022-JP</a> </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/EUC">EUC</a>-JP </th>
+<th> <a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a> </th>
+<th> 備考 </th>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/DoCoMo">DoCoMo</a>  </td>
+<td> ○ </td>
+<td> × </td>
+<td> × </td>
+<td> ○ </td>
+<td> htmlだと<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>が使用不可 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Au">Au</a> </td>
+<td> ○ </td>
+<td> × </td>
+<td> × </td>
+<td> × </td>
+<td> formのデータ送信がページ<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>によらず<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>になる </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/SoftBank">SoftBank</a>  </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> △ </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>のサポートは機種による </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Willcom">Willcom</a> </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> △ </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/JRC">JRC</a>の端末は一部<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>未対応 </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/emobile">emobile</a> </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> </td>
+</tr>
+<tr>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a> </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ○ </td>
+<td> ほとんどPCと同じだが、タグの指定とOSのバージョンで一部文字化けすることも </td>
+</tr>
+</table>
+<ul>
+<li><span class="deco" style="color:#FF0000;">この結果からキャリアのサイトを作る場合は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>で作る事が望ましい。<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>は完全に対応できてはいない。<a class="keyword" href="http://d.hatena.ne.jp/keyword/DoCoMo">DoCoMo</a>,<a class="keyword" href="http://d.hatena.ne.jp/keyword/Au">Au</a>の制約が厳しい。</span></li>
+<li><span class="deco" style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>制約は特にないので適切なサーバサイドから渡す<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>とクライアントのContent-Typeの設定を一致させる(<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>が一般的か)</span></li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/xhtml">xhtml</a>のContent-Type指定のサンプルは次のように設定。</li>
+</ul><pre class="hljs xml" data-lang="xml" data-unlink><span class="synComment"><?</span><span class="synType">xml version</span>=<span class="synConstant">"1.0"</span><span class="synType"> encoding</span>=<span class="synConstant">"Shift_JIS"</span><span class="synComment">?></span>
+<span class="synIdentifier"><!</span><span class="synStatement">DOCTYPE</span> html <span class="synStatement">PUBLIC</span> <span class="synConstant">"-//WAPFORUM//DTD XHTML Mobile 1.0//EN"</span> <span class="synConstant">"http://www.wapforum.org/DTD/xhtml-mobile10.dtd"</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><html </span><span class="synType">xmlns</span>=<span class="synConstant">"http://www.w3.org/1999/xhtml"</span><span class="synIdentifier"> </span><span class="synType">xml</span><span class="synComment">:</span><span class="synType">lang</span>=<span class="synConstant">"ja"</span><span class="synIdentifier">></span>
+<span class="synIdentifier"><meta </span><span class="synType">http-equiv</span>=<span class="synConstant">"Content-Type"</span><span class="synIdentifier"> </span><span class="synType">content</span>=<span class="synConstant">"text/html; charset=Shift_JIS"</span><span class="synIdentifier"> /></span>
+</pre>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">クライアント/サーバ間で起きる問題</span></h4>
+<p>上の内容から<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%DE%A1%BC%A5%C8%A5%D5%A5%A9%A5%F3">スマートフォン</a>サイト以外は基本的に表示するサイトの<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>で統一して構築することが望ましいが(charsetを<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>に設定)、サーバサイドの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>(<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>)で構築されることが多く、クライアント/サーバ間の違いにより色々な問題が起きる。以下には注意すべき事を記述する。</p>
+
+</div>
+<div class="section">
+<h4>その1. サーバサイドの各種<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>の設定</h4>
+
+<ol>
+<li><span class="deco" style="color:#FF0000;">DBの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定/調査</span></li>
+<li><span class="deco" style="color:#FF0000;">各種プログラムファイルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定</span></li>
+<li><span class="deco" style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定</span></li>
+<li><span class="deco" style="color:#FF0000;">その他</span></li>
+</ol><p>1.DBの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定</p>
+
+<ul>
+<li>/etc/my.cnfに<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>を指定する。(<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>の指定例)　設定後<a class="keyword" href="http://d.hatena.ne.jp/keyword/mysql">mysql</a>の再起動が必要。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ vi /etc/my.cnf
+[client]
+default-character-set=utf8
+
+[mysqld]
+default-character-set = utf8
+skip-character-set-client-handshake
+character-set-server = utf8
+collation-server = utf8_general_ci
+init-connect = SET NAMES utf8</pre>
+<ul>
+<li>データベース全体の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定を調べる。</li>
+</ul><pre class="code" data-lang="" data-unlink>mysql> show variables like 'character_set%';</pre>
+<ul>
+<li>データベースごとの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定を調べる。</li>
+</ul><pre class="code" data-lang="" data-unlink>mysql> show create database データベース名;</pre>
+<ul>
+<li>テーブルごとの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定を調べる。</li>
+</ul><pre class="code" data-lang="" data-unlink>mysql> show create table データベース名;</pre><p><br />
+2. 各種プログラムファイルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定</p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/nkf">nkf</a>コマンドを使用してファイルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>を確認する。<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>に変換したい場合のコマンドも記述する。</li>
+</ul><pre class="code" data-lang="" data-unlink>$ nkf --guess <file>     <-- 文字コード調査
+EUC-JP (LF)
+$ nkf -w --overwrite <file>   <-- UTF-8変換してfileを上書き</pre><p><br />
+3.<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>設定</p>
+
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/.htaccess">.htaccess</a>に以下のような設定をして、<a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a>を扱う時の入出力<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>を切り替える方法。以下の例はサーバの内部処理は<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>、クライアントへの出力を<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>としている。この記述により<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>が自動的に変換してくれる。</li>
+</ul><pre class="code" data-lang="" data-unlink>php_flag  output_buffering              On
+php_value output_handler                mb_output_handler
+php_value default_charset               Shift_JIS
+php_value mbstring.language             japanese
+php_flag  mbstring.encoding_translation On
+php_value mbstring.http_input           auto
+php_value mbstring.http_output          SJIS
+php_value mbstring.internal_encoding    UTF-8
+php_value mbstring.substitute_character none</pre><p>説明表</p>
+
+<table>
+<tr>
+<th> 表記 </th>
+<th> 説明 </th>
+</tr>
+<tr>
+<td> output_buffering   </td>
+<td> 出力バッファリングの有無 </td>
+</tr>
+<tr>
+<td> output_handler </td>
+<td> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B9%A5%AF%A5%EA%A5%D7%A5%C8">スクリプト</a>の全ての出力を関数にリダイレクトすることがでる ここにmb_output_handlerを設定すると自動変換してくれる </td>
+</tr>
+<tr>
+<td> default_charset </td>
+<td> HTTPのContent-typeヘッダで出力する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a> </td>
+</tr>
+<tr>
+<td> mbstring.language  </td>
+<td> mbstringで使用される言語のデフォルト値 </td>
+</tr>
+<tr>
+<td> mbstring.encoding_translation </td>
+<td> HTTP入力文字<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C7%A5%A3%A5%F3%A5%B0">エンコーディング</a>検出および内部文字<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C7%A5%A3%A5%F3%A5%B0">エンコーディング</a>への変換を行うか </td>
+</tr>
+<tr>
+<td> mbstring.http_input </td>
+<td> HTTP入力文字<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C7%A5%A3%A5%F3%A5%B0">エンコーディング</a>のデフォルト値 </td>
+</tr>
+<tr>
+<td> mbstring.http_output </td>
+<td> HTTP出力文字<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C7%A5%A3%A5%F3%A5%B0">エンコーディング</a>のデフォルト値 </td>
+</tr>
+<tr>
+<td> mbstring.internal_encoding </td>
+<td> 内部文字<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%F3%A5%B3%A1%BC%A5%C7%A5%A3%A5%F3%A5%B0">エンコーディング</a>のデフォルト値 </td>
+</tr>
+<tr>
+<td> mbstring.substitute_character </td>
+<td> 無効な文字を代替する文字 </td>
+</tr>
+</table>
+<ul>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のバージョン次第ではAddDefaultCharsetというオプションにより文字化けが発生してしまうので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/httpd">httpd</a>.confの記述に注意する。これは強制的に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>を指定してしまうのでOffにしてしまうのが良さそう。<a href="http://httpd.apache.org/docs/2.2/ja/mod/core.html">AddDefaultCharsetディレクティブ</a></li>
+</ul><pre class="code" data-lang="" data-unlink>AddDefaultCharset Off</pre><p><br />
+4.その他<br />
+サーバサイドの各<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>の設定がバラバラでも言語上である程度吸収が可能。</p>
+
+<ul>
+<li>言語上で内部encodingを指定する事が可能。</li>
+<li>データベースの接続<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>を設定する事も可能。</li>
+<li>言語上で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>の変更が可能。</li>
+</ul><p>以下の例は<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>での場合</p>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">//内部encodingの決定</span>
+<span class="synIdentifier">mb_internal_encoding</span><span class="synSpecial">(</span> '<span class="synConstant">UTF-8</span>' <span class="synSpecial">)</span>;
+
+<span class="synComment">//データベースの接続文字コードを指定</span>
+<span class="synStatement">$</span><span class="synIdentifier">sql</span> <span class="synStatement">=</span> '<span class="synConstant">SET NAMES utf8</span>';
+<span class="synStatement">if</span><span class="synSpecial">(</span> <span class="synStatement">!</span><span class="synIdentifier">mysql_query</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">query</span> <span class="synSpecial">)</span>  <span class="synSpecial">)</span> <span class="synSpecial">{</span>
+<span class="synPreProc">echo</span> '<span class="synConstant">invalid query</span>';
+<span class="synSpecial">}</span>
+
+<span class="synComment">//パラメータの文字コードを変換 UTF-8→Shift_JIS</span>
+<span class="synStatement">$</span><span class="synIdentifier">name</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">_GET</span><span class="synSpecial">[</span> '<span class="synConstant">name</span>' <span class="synSpecial">]</span>;
+<span class="synStatement">$</span><span class="synIdentifier">convert_name</span> <span class="synStatement">=</span> <span class="synIdentifier">mb_convert_encoding</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">name</span>, '<span class="synConstant">Shift_JIS</span>', '<span class="synConstant">UTF-8</span>'  <span class="synSpecial">)</span>;
+</pre>
+</div>
+<div class="section">
+<h4>その2. <a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>変換の問題</h4>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>の差異がいくつかあるので注意する必要がある。</p>
+
+<ol>
+<li><span class="deco" style="color:#FF0000;">Byte数の違い</span></li>
+<li><span class="deco" style="color:#FF0000;">変換結果が変わる問題</span></li>
+</ol><p>1.Byte数の違い。</p>
+
+<ul>
+<li>モバイルサイトを作る時にデータの入力や表示にByte数で制限を設けることがある。</li>
+<li>制限をかける基準をクライアント/サーバのどちらに置くかにもよるが、クライアントを基準にByte数を計算する場合はサーバサイドのByte数処理で気をつけなければならない。(<span class="deco" style="color:#FF0000;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>のマルチバイト文字は2Byteでの計算になるが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>系(<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>など)は0x0800〜0xFFFFの範囲で3Byteとなる</span>)</li>
+<li>サーバサイドの文字設定が<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>の場合、クライアントのByte数に基準を置く時は一度<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>に変換して文字のByte数を計る。</li>
+</ul><p>以下は<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>での例を考える</p>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">_GET</span><span class="synSpecial">[</span> '<span class="synConstant">data</span>' <span class="synSpecial">]</span>;  
+
+<span class="synComment">//文字コードを変更 Shift_JISを基準にして計るため一度変換 </span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synIdentifier">mb_convert_encoding</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span>, '<span class="synConstant">Shift_JIS</span>', '<span class="synConstant">UTF-8</span>' <span class="synSpecial">)</span>;
+
+<span class="synComment">//Byte数を計る</span>
+<span class="synStatement">$</span><span class="synIdentifier">len</span> <span class="synStatement">=</span> <span class="synIdentifier">strlen</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span>;
+<span class="synPreProc">echo</span> <span class="synStatement">$</span><span class="synIdentifier">len</span>;
+
+<span class="synComment">//8Byte以下の制限を設ける場合</span>
+<span class="synStatement">if</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">len</span> <span class="synStatement">></span> <span class="synConstant">8</span>  <span class="synSpecial">)</span> <span class="synSpecial">{</span> 
+<span class="synPreProc">echo</span> "<span class="synConstant">byte error</span>";
+<span class="synSpecial">}</span>
+
+<span class="synComment">//元に戻す</span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synIdentifier">mb_convert_encoding</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span>, '<span class="synConstant">UTF-8</span>', '<span class="synConstant">Shift_JIS</span>' <span class="synSpecial">)</span>;
+</pre><p><br />
+2.変換結果が変わる問題</p>
+
+<ul>
+<li>上の<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>→<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>→<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>での変換では問題が起きるケースがある。それは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>ではサポートされない文字列がうまく変換されないという事である。(例えば①のような文字)</li>
+<li>2回<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>を変換しているが2回目の戻した時に元のデータとして表示されない。</li>
+<li>似たような内容としてWAVE DASH問題、FULLWIDTH TILDE問題といったものもある。</li>
+</ul><p>問題となる点を<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>のサンプルコードで見てみる。</p>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">// &#9312;の定義 </span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> '<span class="synConstant">&#9312;</span>';
+<span class="synComment">//dataとascii値の出力</span>
+<span class="synPreProc">echo</span> "<span class="synConstant">data = </span><span class="synStatement">$</span><span class="synIdentifier">data</span><span class="synConstant">, ascii = </span>" <span class="synStatement">.</span> <span class="synIdentifier">ord</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>";  
+<span class="synComment">//UTF-8→Shift_JISに変換 </span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synIdentifier">mb_convert_encoding</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span>, '<span class="synConstant">Shift_JIS</span>', '<span class="synConstant">UTF-8</span>' <span class="synSpecial">)</span>;
+<span class="synComment">//Shift_JIS→UTF-8に変換 </span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synIdentifier">mb_convert_encoding</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span>, '<span class="synConstant">UTF-8</span>', '<span class="synConstant">Shift_JIS</span>' <span class="synSpecial">)</span>;
+<span class="synPreProc">echo</span> "<span class="synConstant">data = </span><span class="synStatement">$</span><span class="synIdentifier">data</span><span class="synConstant">, ascii = </span>" <span class="synStatement">.</span> <span class="synIdentifier">ord</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span>;  
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>data = &#9312;, ascii = 226
+data = ?, ascii = 63</pre>
+<ul>
+<li><span class="deco" style="color:#FF0000;">上の問題を防ぐ方法として<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>の拡張<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>であるcp932を利用する。</span>cp932は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>に比べてサポートしている文字種が多い。</li>
+</ul><p>問題を解決したコードは次の通り</p>
+<pre class="hljs php" data-lang="php" data-unlink><span class="synSpecial"><?php</span>
+
+<span class="synComment">//&#9312;の定義 </span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> '<span class="synConstant">&#9312;</span>'
+<span class="synComment">//dataとascii値の出力</span>
+<span class="synPreProc">echo</span> "<span class="synConstant">data = </span><span class="synStatement">$</span><span class="synIdentifier">data</span><span class="synConstant">, ascii = </span>" <span class="synStatement">.</span> <span class="synIdentifier">ord</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span> <span class="synStatement">.</span> "<span class="synSpecial">\n</span>"; 
+<span class="synComment">//UTF-8→Shift_ISに変換 </span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synIdentifier">mb_convert_encoding</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span>, '<span class="synConstant">cp932</span>', '<span class="synConstant">UTF-8</span>' <span class="synSpecial">)</span>;
+<span class="synComment">//Shift_JIS→UTF-8に変換 </span>
+<span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synStatement">=</span> <span class="synIdentifier">mb_convert_encoding</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span>, '<span class="synConstant">UTF-8</span>', '<span class="synConstant">cp932</span>' <span class="synSpecial">)</span>;
+<span class="synPreProc">echo</span> "<span class="synConstant">data = </span><span class="synStatement">$</span><span class="synIdentifier">data</span><span class="synConstant">, ascii = </span>" <span class="synStatement">.</span> <span class="synIdentifier">ord</span><span class="synSpecial">(</span> <span class="synStatement">$</span><span class="synIdentifier">data</span> <span class="synSpecial">)</span>;  
+</pre><p>実行結果</p>
+<pre class="code" data-lang="" data-unlink>data = &#9312;, ascii = 226
+data = &#9312;, ascii = 226</pre>
+</div>
+<div class="section">
+<h4><span class="deco" style="font-weight:bold;font-size:large;">まとめ</span></h4>
+<p>本サイトのまとめ内容を以下に記す。</p>
+
+<ul>
+<li>キャリアのサイト構築をする場合クライアント側の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>で行うと良い。</li>
+<li>サーバサイドは<a class="keyword" href="http://d.hatena.ne.jp/keyword/Unicode">Unicode</a>系(<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a>など)で構築するのが一般的になっている。</li>
+<li>言語上での設定も可能だが、DB、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>、ファイルの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>は適切に行う。</li>
+<li>各<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>によってByte数のカウントが違うためByte数に寄る制限がある場合、クライアント/サーバのどちらに基準を合わせるかによって処理が異なる。</li>
+<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a> <=> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Shift_JIS">Shift_JIS</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%B8%BB%FA%A5%B3%A1%BC%A5%C9">文字コード</a>変換は適切に行われない事があるので、代替方法として<a class="keyword" href="http://d.hatena.ne.jp/keyword/UTF-8">UTF-8</a><=>cp932を利用する。</li>
+</ul>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201108250824/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201108250824/">Pythonでbase64エンコード・デコードする方法</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201109041203/">SpiderMonkeyでのコマンドラインJavascript</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201109041203/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+

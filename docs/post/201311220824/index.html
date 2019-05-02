@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="canonical" href="http://yut.hatenablog.com/entry/20131122/1385076280" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.55.4" />
+
+  <title>Apache ModuleでRequest ParameterをParseしてDBからデータを取得する &middot; Y&#39;s note</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://yutakikuchi.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://yutakikuchi.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://yutakikuchi.github.io/css/my.css">
+    
+  
+  
+    
+        <script src="https://yutakikuchi.github.io/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://yutakikuchi.github.io/">Y's note</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://yutakikuchi.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/yutakikuchi_" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/yuta.kikuchi.007" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://slideshare.net/https://www.slideshare.net/yutakikuchi58/" target="_blank"><i class="fa fa-slideshare fa-fw"></i>SlideShare</a>
+    </li>
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://linkedin.com/in/https://www.linkedin.com/in/%E4%BD%91%E5%A4%AA-%E8%8F%8A%E6%B1%A0-36291a44/" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/yutakikuchi" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2019. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Apache ModuleでRequest ParameterをParseしてDBからデータを取得する</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2013 Nov 22, 08:24</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  
+
+<h2 id="c-apache-moduleでrequest-parameterをparseしてdbからデータを取得する">[C++] : Apache ModuleでRequest ParameterをParseしてDBからデータを取得する</h2>
+
+<p><div class="amazlet-box"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113814/yutakikuchi-22/"><img src="http://ecx.images-amazon.com/images/I/515t-Vj3AAL._SL160_.jpg" class="hatena-asin-detail-image" alt="Apacheクックブック 第2版 ―Webサーバ管理者のためのレシピ集" title="Apacheクックブック 第2版 ―Webサーバ管理者のためのレシピ集"></a><div class="hatena-asin-detail-info"><p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113814/yutakikuchi-22/">Apacheクックブック 第2版 ―Webサーバ管理者のためのレシピ集</a></p><ul><li><span class="hatena-asin-detail-label">作者:</span> Ken Coar,Rich Bowen,笹井崇司</li><li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A5%E9%A5%A4%A5%EA%A1%BC%A5%B8%A5%E3%A5%D1%A5%F3">オライリージャパン</a></li><li><span class="hatena-asin-detail-label">発売日:</span> 2008/09/26</li><li><span class="hatena-asin-detail-label">メディア:</span> 大型本</li><li><span class="hatena-asin-detail-label">購入</span>: 6人 <span class="hatena-asin-detail-label">クリック</span>: 144回</li><li><a href="http://d.hatena.ne.jp/asin/4873113814/yutakikuchi-22" target="_blank">この商品を含むブログ (32件) を見る</a></li></ul></div><div class="hatena-asin-detail-foot"></div></div></p>
+
+<div class="section">
+<h4>Request Parameter取得とDB接続</h4>
+
+<blockquote>
+    <p>母校の同窓会幹事代表を務めています<a href='https://twitter.com/yutakikuc'>@yutakikuc</a>です。<br />
+最近<a class="keyword" href="http://d.hatena.ne.jp/keyword/C%2B%2B">C++</a>のエントリーを書く事が多いですが、今日も<span class="deco" style="font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a> Module</span>について書きます。</p><br />
+<p><span class="deco" style="font-weight:bold;"><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a> ModuleでRequest Parameterを取得する際は<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のVersionに気をつけましょう。</span>Versionによって使える関数が異なるようです。基本的には上位互換が保たれているようですが、最新Versionのドキュメントを参照している時に、実際には古いVersionを使ってしまっていると実装時に長い時間嵌る可能性があります。また単にRequest Paramterを取得しただけでは面白くないので、Parameterに従ってDB上のデータを参照する事を行いたいと思います。<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a> ModuleやCのPreparedStatementに関する日本語ドキュメントは少ないので少しでも開発者の方々へ貢献できるように今後も頑張ります。</p>
+
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/GitHub">GitHub</a></h4>
+
+<blockquote>
+    
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/GitHub">GitHub</a> Path</h5>
+<p>このエントリーで使用する<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/GitHub">GitHub</a>に置きました。<br />
+<a href="https://github.com/yutakikuchi/CPlus/blob/master/apache_module/ps/mod_db.c">CPlus/apache_module/ps/mod_db.c at master · yutakikuchi/CPlus</a> <a href="http://b.hatena.ne.jp/entry/s/github.com/yutakikuchi/CPlus/blob/master/apache_module/ps/mod_db.c"><img src="http://b.hatena.ne.jp/entry/image/https://github.com/yutakikuchi/CPlus/blob/master/apache_module/ps/mod_db.c" alt="はてなブックマーク - CPlus/apache_module/ps/mod_db.c at master · yutakikuchi/CPlus" border="0" /></a></p>
+
+</div>
+<div class="section">
+<h5>Compile & Install</h5>
+<p>以下のコマンドでcompile & installしてくれます。installが完了したら<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>を再起動します。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ sudo yum <span class="synStatement">install</span> httpd-devel mysql-devel <span class="synSpecial">-y</span>
+$ git clone git@github.com:yutakikuchi/CPlus.git
+$ <span class="synStatement">cd</span> CPlus/apache_module/ps/ 
+$ sudo apxs <span class="synSpecial">-i</span> <span class="synSpecial">-a</span> <span class="synSpecial">-c</span> <span class="synSpecial">-I</span> /usr/include/mysql <span class="synSpecial">-L</span> /usr/lib64/mysql <span class="synSpecial">-lmysqlclient</span> mod_db.c
+$ sudo /etc/init.d/httpd <span class="synStatement">restart</span>
+</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a> VersionとParameter取得方法</h4>
+
+<blockquote>
+    
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のVersion確認</h5>
+<p>開発作業前にご自身の<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a> Versionを確認しておきましょう。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ httpd <span class="synSpecial">-v</span>
+Server version: Apache/2.2.15 <span class="synPreProc">(</span><span class="synSpecial">Unix</span><span class="synPreProc">)</span>
+Server built:   Aug <span class="synConstant">13</span> <span class="synConstant">2013</span> <span class="synConstant">17</span>:<span class="synConstant">29</span>:<span class="synConstant">28</span>
+</pre>
+</div>
+<div class="section">
+<h5>1.3系〜2.2系</h5>
+<p><a href="http://ci.apache.org/projects/httpd/trunk/doxygen/group__APACHE__CORE__DAEMON.html">Apache2: HTTP Daemon Routine</a> <a href="http://b.hatena.ne.jp/entry/ci.apache.org/projects/httpd/trunk/doxygen/group__APACHE__CORE__DAEMON.html"><img src="http://b.hatena.ne.jp/entry/image/http://ci.apache.org/projects/httpd/trunk/doxygen/group__APACHE__CORE__DAEMON.html" alt="はてなブックマーク - Apache2: HTTP Daemon Routine" border="0" /></a><br />
+<a href="http://httpd.apache.org/docs/2.0/developer/modules.html">モジュールの Apache 1.3 から Apache 2.0 への移植 - Apache HTTP サーバ</a> <a href="http://b.hatena.ne.jp/entry/httpd.apache.org/docs/2.0/developer/modules.html"><img src="http://b.hatena.ne.jp/entry/image/http://httpd.apache.org/docs/2.0/developer/modules.html" alt="はてなブックマーク - モジュールの Apache 1.3 から Apache 2.0 への移植 - Apache HTTP サーバ" border="0" /></a><br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>の1系はドキュメントさえあまり残っていない状況なので、1系で開発することはお勧めしませんが念のために書いておきます。2.2系までの場合<span class="deco" style="font-weight:bold;">ap_getword,ap_getword_nc,apr_pstrdup</span>のいずれかの関数を使って取得します。下の例ではapr_pstrdupを使っています。これらの関数は上位互換なので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>のVersionをアップしても書き換えなくそのまま利用できそうです。( 1.3系から2.2系への移行は特に何も問題無いように思います。 )</p><br />
+<p>その他の手段としては<span class="deco" style="font-weight:bold;">ap_add_<a class="keyword" href="http://d.hatena.ne.jp/keyword/cgi">cgi</a>_vars(r);</span>と<span class="deco" style="font-weight:bold;">apr_table_get(r->subprocess_env, "<a class="keyword" href="http://d.hatena.ne.jp/keyword/QUERY_STRING">QUERY_STRING</a>");</span>を組み合わせてParameterを取得する方法がありますが、上と同じようにParse処理は自前で書かないといけないので、大差は無いかと思っています。</p><br />
+<p>下のサンプルの処理としてはとても単純でパラメータを&で区切ってhashにkey,valueとして入れ、それを後から参照しているだけです。使い易いようにparse_parameterとget_parameterに分けました。Validationは特にやっていないので適宜加えてください。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synComment">/* parse parameter */</span>
+<span class="synType">static</span> apr_hash_t *parse_parameter(request_rec *r) {
+<span class="synType">char</span> *str = apr_pstrdup(r->pool, r->args);
+<span class="synStatement">if</span>( str == <span class="synConstant">NULL</span> ) {
+    <span class="synStatement">return</span> <span class="synConstant">NULL</span>;
+}
+
+apr_hash_t *hash = <span class="synConstant">NULL</span>;
+<span class="synType">const</span> <span class="synType">char</span> *del = <span class="synConstant">"&"</span>;
+<span class="synType">char</span> *items, *last, *st;
+hash = apr_hash_make(r->pool);
+
+<span class="synComment">// set hash</span>
+<span class="synStatement">for</span> ( items = apr_strtok(str, del, &last); items != <span class="synConstant">NULL</span>; items = apr_strtok(<span class="synConstant">NULL</span>, del, &last) ){
+    st = strchr(items, <span class="synConstant">'='</span>);
+    <span class="synStatement">if</span> (st) {
+        *st++ = <span class="synSpecial">'\0'</span>;
+        ap_unescape_url(items);
+        ap_unescape_url(st);
+    } <span class="synStatement">else</span> {
+        st = <span class="synConstant">""</span>;
+        ap_unescape_url(items);
+    }
+    apr_hash_set( hash, items, APR_HASH_KEY_STRING, st );
+}
+<span class="synStatement">return</span> hash;
+}
+
+<span class="synComment">/* get parameter */</span>
+<span class="synType">static</span> <span class="synType">char</span> *get_parameter(request_rec *r, apr_hash_t *hash, <span class="synType">char</span> *find_key) {
+apr_hash_index_t *hash_index;
+<span class="synType">char</span> *key, *val;
+hash_index = apr_hash_first(r->pool, hash);
+<span class="synStatement">while</span> (hash_index) {
+    apr_hash_this(hash_index, (<span class="synType">const</span> <span class="synType">void</span> **)&key, <span class="synConstant">NULL</span>, (<span class="synType">void</span> **)&val);
+    <span class="synStatement">if</span>( strcmp(key, find_key) == <span class="synConstant">0</span> ) {
+        <span class="synStatement">return</span> (<span class="synType">char</span>*)val;
+    }
+    hash_index = apr_hash_next(hash_index);
+}
+<span class="synStatement">return</span> <span class="synConstant">NULL</span>;
+}
+
+<span class="synComment">// mainで使う</span>
+apr_hash_t *hash = parse_parameter(r);
+<span class="synType">char</span> *id = get_parameter(r, hash, <span class="synConstant">"id"</span>);
+ap_rprintf(r, <span class="synConstant">"id = [</span><span class="synSpecial">%d</span><span class="synConstant">]</span><span class="synSpecial">\n</span><span class="synConstant">"</span>, atoi(id));
+</pre>
+</div>
+<div class="section">
+<h5>2.4系</h5>
+<p><a href="http://httpd.apache.org/docs/2.4/developer/modguide.html">Developing modules for the Apache HTTP Server 2.4 - Apache HTTP Server</a> <a href="http://b.hatena.ne.jp/entry/httpd.apache.org/docs/2.4/developer/modguide.html"><img src="http://b.hatena.ne.jp/entry/image/http://httpd.apache.org/docs/2.4/developer/modguide.html" alt="はてなブックマーク - Developing modules for the Apache HTTP Server 2.4 - Apache HTTP Server" border="0" /></a><br />
+2.4になるとParameterのParseを便利な<span class="deco" style="font-weight:bold;">ap_args_to_table</span>関数の中でやってくれます。Parseされたデータを<span class="deco" style="font-weight:bold;">apr_table_ge</span>tで参照するだけです。2.2まででやっていたような面倒な処理は一切不要になります。ap_args_to_tableは2.2以前は存在しないので気をつけてください。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink>apr_table_t *GET; 
+ap_args_to_table(r, &GET);
+<span class="synType">const</span> <span class="synType">char</span> *id = apr_table_get(GET, <span class="synConstant">"id"</span>);
+ap_rprintf(r, <span class="synConstant">"id = [</span><span class="synSpecial">%d</span><span class="synConstant">]</span><span class="synSpecial">\n</span><span class="synConstant">"</span>, atoi(id));
+</pre>
+</div>
+</blockquote>
+
+</div>
+<div class="section">
+<h4>DB上のデータを参照</h4>
+
+<blockquote>
+    <p>上で取得したParameterの内容と一致するデータをDBから参照できるようにします。<br />
+参照時にはPreparedStatementを利用します。</p>
+
+<div class="section">
+<h5><a class="keyword" href="http://d.hatena.ne.jp/keyword/apache">apache</a>の設定ファイルを用意する</h5>
+<p>DBへの接続設定は<a class="keyword" href="http://d.hatena.ne.jp/keyword/apache">apache</a>のconfファイルに記述します。設定が完了したら<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>が認識する必要があるので再起動します。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ sudo vim /etc/httpd/conf.d/db.conf
+
+<span class="synComment"># 以下を追記</span>
+DBHost localhost
+DBPort <span class="synConstant">3306</span>
+DBUser root
+<span class="synComment">#DBPass</span>
+DBName <span class="synStatement">test</span>
+DBTableName sample
+
+$ sudo /etc/init.d/httpd <span class="synStatement">restart</span>
+</pre><p>上の定義を<a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a> Moduleのcmd_recで呼び出します。</p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink>
+<span class="synComment">/*</span>
+<span class="synComment"> * Set the value for the 'DBHost' attribute.</span>
+<span class="synComment"> */</span>
+<span class="synType">static</span> <span class="synType">const</span> <span class="synType">char</span> *set_db_host(cmd_parms *cmd, <span class="synType">void</span> *mconfig, <span class="synType">const</span> <span class="synType">char</span> *name)
+{
+db_env *db;
+db = (db_env *) mconfig;
+db->host = ap_getword_conf(cmd->pool, &name);
+<span class="synStatement">return</span> <span class="synConstant">NULL</span>;
+}
+
+(略)
+
+<span class="synType">static</span> <span class="synType">const</span> command_rec db_conf_cmds[] = {
+AP_INIT_TAKE1(<span class="synConstant">"DBHost"</span>, set_db_host, <span class="synConstant">NULL</span>, OR_FILEINFO, <span class="synConstant">"db hostname"</span>),
+AP_INIT_TAKE1(<span class="synConstant">"DBPort"</span>, set_db_port, <span class="synConstant">NULL</span>, OR_FILEINFO, <span class="synConstant">"db port"</span>),
+AP_INIT_TAKE1(<span class="synConstant">"DBUser"</span>, set_db_user, <span class="synConstant">NULL</span>, OR_FILEINFO, <span class="synConstant">"db username"</span>),
+AP_INIT_TAKE1(<span class="synConstant">"DBPass"</span>, set_db_pass, <span class="synConstant">NULL</span>, OR_FILEINFO, <span class="synConstant">"db password"</span>),
+AP_INIT_TAKE1(<span class="synConstant">"DBName"</span>, set_db_name, <span class="synConstant">NULL</span>, OR_FILEINFO, <span class="synConstant">"db name"</span>),
+AP_INIT_TAKE1(<span class="synConstant">"DBTableName"</span>, set_db_table, <span class="synConstant">NULL</span>, OR_FILEINFO, <span class="synConstant">"db tablename"</span>),
+{<span class="synConstant">NULL</span>}
+};
+</pre>
+</div>
+<div class="section">
+<h5>参照するTable</h5>
+<p>以下のようなTableを参照します。</p>
+<pre class="hljs sql" data-lang="sql" data-unlink>mysql> <span class="synStatement">SELECT</span> * <span class="synSpecial">FROM</span> test.sample;
++<span class="synComment">----+---------------------+</span>
+| id | created_at          |
++<span class="synComment">----+---------------------+</span>
+|  <span class="synConstant">1</span> | <span class="synConstant">2013-11-21</span> <span class="synConstant">22</span>:<span class="synConstant">05</span>:<span class="synConstant">43</span> |
+|  <span class="synConstant">2</span> | <span class="synConstant">2013-11-21</span> <span class="synConstant">22</span>:<span class="synConstant">05</span>:<span class="synConstant">45</span> |
+|  <span class="synConstant">3</span> | <span class="synConstant">2013-11-21</span> <span class="synConstant">22</span>:<span class="synConstant">05</span>:<span class="synConstant">49</span> |
+|  <span class="synConstant">4</span> | <span class="synConstant">2013-11-21</span> <span class="synConstant">22</span>:<span class="synConstant">05</span>:<span class="synConstant">51</span> |
++<span class="synComment">----+---------------------+</span>
+<span class="synConstant">4</span> <span class="synSpecial">rows</span> <span class="synStatement">in</span> <span class="synStatement">set</span> (<span class="synConstant">0</span>.<span class="synConstant">00</span> sec)
+</pre>
+</div>
+<div class="section">
+<h5>PreparedStatement</h5>
+<p>CのPreparedStatementはちょっと複雑です。以下に大まかな処理の流れを書いておきます。</p>
+<pre class="code" data-lang="" data-unlink>1. StatementのInit
+2. StatementのPrepare
+3. ParameterのBind
+4. StatementのExecute
+5. ResultのBind
+6. ResultのStore
+7. ResultのFetch</pre><p>これをコードに置き換えると以下のような感じになります。僕もついついやってしまう例としては<a class="keyword" href="http://d.hatena.ne.jp/keyword/MYSQL">MYSQL</a>_BINDのbuffer_typeの指定やresultの領域確保の数値を間違えてsegfaultを起こしたりします。buffer_typeについては以下のマニュアルを参考にすると良いと思います。 <a href="http://dev.mysql.com/doc/refman/5.1/ja/c-api-prepared-statement-datatypes.html">MySQL :: MySQL 5.1 リファレンスマニュアル :: 23.2.5 準備されたC APIステートメントデータタイプ</a> <a href="http://b.hatena.ne.jp/entry/dev.mysql.com/doc/refman/5.1/ja/c-api-prepared-statement-datatypes.html"><img src="http://b.hatena.ne.jp/entry/image/http://dev.mysql.com/doc/refman/5.1/ja/c-api-prepared-statement-datatypes.html" alt="はてなブックマーク - MySQL :: MySQL 5.1 リファレンスマニュアル :: 23.2.5 準備されたC APIステートメントデータタイプ" border="0" /></a></p>
+<pre class="hljs cpp" data-lang="cpp" data-unlink><span class="synType">static</span> <span class="synType">int</span> getDBContents(request_rec *r, <span class="synType">int</span> id) {
+<span class="synComment">// connect</span>
+MYSQL *conn;
+conn = mysql_init(<span class="synConstant">NULL</span>);
+db_env *db = ap_get_module_config(r->per_dir_config, &db_module);
+<span class="synType">int</span> rid;
+MYSQL_TIME ts;
+
+<span class="synStatement">if</span> (!mysql_real_connect(conn, db->host, db->user, db->pass, db->name, db->port, <span class="synConstant">NULL</span>, <span class="synConstant">0</span>)) {
+    ap_log_rerror(APLOG_MARK, APLOG_ERR, <span class="synConstant">0</span>, r, <span class="synConstant">"Mysql Connection Error : </span><span class="synSpecial">%s</span><span class="synConstant">"</span>, mysql_error(conn));
+    mysql_close(conn);  
+    <span class="synStatement">return</span> DECLINED;
+}
+
+<span class="synComment">// issue query</span>
+<span class="synType">char</span> query[<span class="synConstant">100</span>];
+sprintf(query, <span class="synConstant">"SELECT id, created_at FROM </span><span class="synSpecial">%s</span><span class="synConstant">.</span><span class="synSpecial">%s</span><span class="synConstant"> where id = ?"</span>, db->name, db->table_name);
+
+<span class="synComment">// stmt</span>
+MYSQL_STMT *stmt = mysql_stmt_init(conn);
+<span class="synStatement">if</span> (mysql_stmt_prepare(stmt, query, strlen(query)) != <span class="synConstant">0</span>) {
+    ap_log_rerror(APLOG_MARK, APLOG_ERR, <span class="synConstant">0</span>, r, <span class="synConstant">"Mysql Prepare Error : </span><span class="synSpecial">%s</span><span class="synConstant">"</span>, mysql_stmt_error(stmt));
+    mysql_close(conn);  
+    <span class="synStatement">return</span> DECLINED;
+}
+
+<span class="synComment">// bind</span>
+MYSQL_BIND bind[<span class="synConstant">1</span>];
+memset(bind, <span class="synConstant">0</span>, <span class="synStatement">sizeof</span>(id));
+
+bind[<span class="synConstant">0</span>].buffer = &id;
+bind[<span class="synConstant">0</span>].buffer_type = MYSQL_TYPE_LONG;
+bind[<span class="synConstant">0</span>].buffer_length = <span class="synStatement">sizeof</span>(id);
+bind[<span class="synConstant">0</span>].is_null = <span class="synConstant">0</span>;
+
+<span class="synComment">// bind_param</span>
+<span class="synStatement">if</span> (mysql_stmt_bind_param(stmt,bind) != <span class="synConstant">0</span>) {
+    ap_log_rerror(APLOG_MARK, APLOG_ERR, <span class="synConstant">0</span>, r, <span class="synConstant">"Mysql Bind Param Error : </span><span class="synSpecial">%s</span><span class="synConstant">"</span>, mysql_stmt_error(stmt));
+    mysql_stmt_close(stmt);
+    mysql_close(conn);
+    <span class="synStatement">return</span> DECLINED;
+}
+
+<span class="synComment">// execute</span>
+<span class="synStatement">if</span> (mysql_stmt_execute(stmt) != <span class="synConstant">0</span>) {
+    ap_log_rerror(APLOG_MARK, APLOG_ERR, <span class="synConstant">0</span>, r, <span class="synConstant">"Mysql Execute Error : </span><span class="synSpecial">%s</span><span class="synConstant">"</span>, mysql_stmt_error(stmt));
+    mysql_close(conn);  
+    <span class="synStatement">return</span> DECLINED;      
+}  
+
+<span class="synComment">// bind_result</span>
+MYSQL_BIND result[<span class="synConstant">2</span>];
+memset(result, <span class="synConstant">0</span>, <span class="synStatement">sizeof</span>(result));
+
+result[<span class="synConstant">0</span>].buffer = &rid;
+result[<span class="synConstant">0</span>].buffer_type = MYSQL_TYPE_LONG;
+result[<span class="synConstant">0</span>].buffer_length = <span class="synStatement">sizeof</span>(rid);
+result[<span class="synConstant">0</span>].is_null = <span class="synConstant">0</span>;
+
+result[<span class="synConstant">1</span>].buffer = &ts;
+result[<span class="synConstant">1</span>].buffer_type = MYSQL_TYPE_DATETIME;
+result[<span class="synConstant">1</span>].buffer_length = <span class="synStatement">sizeof</span>(ts);
+result[<span class="synConstant">1</span>].is_null = <span class="synConstant">0</span>;
+
+<span class="synComment">// bind_result</span>
+<span class="synStatement">if</span> (mysql_stmt_bind_result(stmt,result) != <span class="synConstant">0</span>) {
+    ap_log_rerror(APLOG_MARK, APLOG_ERR, <span class="synConstant">0</span>, r, <span class="synConstant">"Mysql Bind Result Error : </span><span class="synSpecial">%s</span><span class="synConstant">"</span>, mysql_stmt_error(stmt));
+    mysql_stmt_close(stmt);
+    mysql_close(conn);
+    <span class="synStatement">return</span> DECLINED;
+}
+
+<span class="synComment">// store_result</span>
+<span class="synStatement">if</span> (mysql_stmt_store_result(stmt) != <span class="synConstant">0</span>) {
+    ap_log_rerror(APLOG_MARK, APLOG_ERR, <span class="synConstant">0</span>, r, <span class="synConstant">"Mysql Store Result Error : </span><span class="synSpecial">%s</span><span class="synConstant">"</span>, mysql_stmt_error(stmt));
+    mysql_stmt_close(stmt);
+    mysql_close(conn);
+    <span class="synStatement">return</span> DECLINED;
+}
+
+<span class="synComment">// stmt_fetch</span>
+<span class="synStatement">while</span> (!mysql_stmt_fetch(stmt)) {
+    ap_rprintf(r, <span class="synConstant">"id = [</span><span class="synSpecial">%d</span><span class="synConstant">]</span><span class="synSpecial">\n</span><span class="synConstant">"</span>, rid);
+    <span class="synType">char</span> str[<span class="synConstant">30</span>];
+    sprintf(str, <span class="synConstant">"</span><span class="synSpecial">%04d</span><span class="synConstant">-</span><span class="synSpecial">%02d</span><span class="synConstant">-</span><span class="synSpecial">%02d</span><span class="synConstant"> </span><span class="synSpecial">%02d</span><span class="synConstant">:</span><span class="synSpecial">%02d</span><span class="synConstant">:</span><span class="synSpecial">%02d</span><span class="synConstant">"</span>, ts.year, ts.month, ts.day, ts.hour, ts.minute, ts.second);
+    ap_rprintf(r, <span class="synConstant">"datetime = [</span><span class="synSpecial">%s</span><span class="synConstant">]</span><span class="synSpecial">\n</span><span class="synConstant">"</span>, str);
+}
+
+<span class="synComment">// close</span>
+mysql_stmt_close(stmt);
+mysql_close(conn);
+<span class="synStatement">return</span> OK;
+}
+</pre>
+</div>
+<div class="section">
+<h5>データ取得のテスト</h5>
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/curl">curl</a>をする際にid=2, id=3のように指定して、データが取得できる事を確認します。</p>
+<pre class="hljs sh" data-lang="sh" data-unlink>$ curl <span class="synSpecial">-i</span> <span class="synStatement">"</span><span class="synConstant">http://localhost/getid?id=2</span><span class="synStatement">"</span>
+HTTP/1.1 <span class="synConstant">200</span> OK
+Date: Thu, <span class="synConstant">21</span> Nov <span class="synConstant">2013</span> <span class="synConstant">16</span>:<span class="synConstant">47</span>:<span class="synConstant">39</span> GMT
+Server: Apache/2.2.15 <span class="synPreProc">(</span><span class="synSpecial">CentOS</span><span class="synPreProc">)</span>
+Content-Length: <span class="synConstant">42</span>
+Connection: close
+Content-Type: text/plain; <span class="synIdentifier">charset</span>=UTF<span class="synConstant">-8</span>
+
+id <span class="synStatement">=</span> <span class="synStatement">[</span><span class="synConstant">2</span><span class="synStatement">]</span>
+datetime <span class="synStatement">=</span> <span class="synStatement">[</span><span class="synConstant">2013-11-21</span> <span class="synConstant">22</span>:<span class="synConstant">05</span>:<span class="synConstant">45</span><span class="synStatement">]</span>
+
+$ curl <span class="synSpecial">-i</span> <span class="synStatement">"</span><span class="synConstant">http://localhost/getid?id=3</span><span class="synStatement">"</span>
+HTTP/1.1 <span class="synConstant">200</span> OK
+Date: Thu, <span class="synConstant">21</span> Nov <span class="synConstant">2013</span> <span class="synConstant">16</span>:<span class="synConstant">48</span>:<span class="synConstant">19</span> GMT
+Server: Apache/2.2.15 <span class="synPreProc">(</span><span class="synSpecial">CentOS</span><span class="synPreProc">)</span>
+Content-Length: <span class="synConstant">42</span>
+Connection: close
+Content-Type: text/plain; <span class="synIdentifier">charset</span>=UTF<span class="synConstant">-8</span>
+
+id <span class="synStatement">=</span> <span class="synStatement">[</span><span class="synConstant">3</span><span class="synStatement">]</span>
+datetime <span class="synStatement">=</span> <span class="synStatement">[</span><span class="synConstant">2013-11-21</span> <span class="synConstant">22</span>:<span class="synConstant">05</span>:<span class="synConstant">49</span><span class="synStatement">]</span>
+</pre>
+</div>
+</blockquote>
+
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://yutakikuchi.github.io/post/201311150820/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://yutakikuchi.github.io/post/201311150820/">crypto&#43;&#43;でのお手軽暗号</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://yutakikuchi.github.io/post/201312060824/">Redisにマルチプロセスで接続する時に気をつけたい事</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://yutakikuchi.github.io/post/201312060824/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://yutakikuchi.github.io/js/ui.js"></script>
+<script src="https://yutakikuchi.github.io/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20616165-3', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+
+</body>
+</html>
+
