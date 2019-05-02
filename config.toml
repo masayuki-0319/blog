@@ -39,19 +39,19 @@ publishDir="docs"
     pre = "<i class='fa fa-home fa-fw'></i>"
     weight = 1
     identifier = "home"
-    url = "/"
+    url = "/blog/"
   [[menu.main]]
     name = "Posts"
     pre = "<i class='fa fa-list fa-fw'></i>"
     weight = 2
     identifier = "post"
-    url = "/post/"
+    url = "/blog/post/"
   [[menu.main]]
     name = "About"
     pre = "<i class='fa fa-user fa-fw'></i>"
     weight = 3
     identifier = "about"
-    url = "/about/"
+    url = "/blog/about/"
   #[[menu.main]]
   #  name = "Contact"
   #  pre = "<i class='fa fa-phone fa-fw'></i>"
