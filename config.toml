@@ -16,6 +16,7 @@ publishDir="docs"
   # Shown in the home page
   brand = "Y's note"
   googleAnalytics = "UA-20616165-3"
+  googleSearchConsole = "haibt4AEKoLJlBFYmXsLiGTEe4PSc23sIiAIeez8nJM"
   # CSS name for highlight.js
   highlightjs = "androidstudio"
   highlightjs_extra_languages = ["yaml"]
